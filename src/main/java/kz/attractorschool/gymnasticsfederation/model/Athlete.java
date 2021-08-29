@@ -14,6 +14,7 @@ import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Table(name = "men")
@@ -34,7 +35,7 @@ public class Athlete {
 
     @Column
     @NotNull
-    private Integer registryNumber;
+    private String registryNumber;
 
     @OneToOne
     private RegistryFile registryFile;
@@ -64,9 +65,8 @@ public class Athlete {
     private RankFile rankFile;
 
     @ManyToMany
+    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
     private List<Coach> coaches;
 
     //гос награды?
-
-
 }

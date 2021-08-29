@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "schools")
@@ -45,14 +46,14 @@ public class School {
 
     @Column
     @NotNull
-    private String phoneNumber;
+    private String phone;
 
     @ManyToOne
     private Federation federation;
 
-//    @OneToMany
-//    private List<Athlete> athletes;
+    @OneToMany
+    private List<Athlete> athletes;
 
-//    @OneToMany
-//    private List<Coach> coaches;
+    @OneToMany
+    private List<Coach> coaches;
 }

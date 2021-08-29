@@ -1,6 +1,6 @@
 use `gymnastics_federation`;
 
-CREATE TABLE `trainer_categories`
+CREATE TABLE `coach_categories`
 (
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,

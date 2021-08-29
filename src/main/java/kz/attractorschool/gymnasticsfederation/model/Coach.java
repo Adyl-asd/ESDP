@@ -2,7 +2,6 @@ package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
-import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
 import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,16 +30,16 @@ public class Coach {
 
     @Column
     @NotNull
-    private Integer registryNumber;
-
-    @OneToOne
-    private RegistryFile registryFile;
+    private String registryNumber;
 
     @OneToOne
     private DopingFile dopingFile;
 
     @ManyToOne
     private CoachCategory category;
+
+    @ManyToOne
+    private Discipline discipline;
 
     @ManyToMany
     @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "coach_id"), inverseJoinColumns = @JoinColumn(name = "athlete_id"))

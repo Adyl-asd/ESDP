@@ -47,7 +47,7 @@ public class Federation {
 
     @Column
     @NotNull
-    private String phoneNumber;
+    private String phone;
 
     @ManyToOne
     private Federation federation;

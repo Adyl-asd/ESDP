@@ -30,7 +30,7 @@ public class Person {
 
     @Column
     @NotNull
-    private String patronymic;
+    private String middleName;
 
     @Column
     @NotNull
@@ -46,6 +46,10 @@ public class Person {
 
     @Column
     @NotNull
+    private String gender;
+
+    @Column
+    @NotNull
     private String city;
 
     @Column
@@ -54,7 +58,7 @@ public class Person {
 
     @Column
     @NotNull
-    private String phoneNumber;
+    private String phone;
 
     @Column
     @NotNull

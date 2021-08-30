@@ -1,12 +1,13 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-
 import kz.attractorschool.gymnasticsfederation.dto.FederationDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.Federation;
 import kz.attractorschool.gymnasticsfederation.repository.FederationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -51,5 +52,9 @@ public class FederationService {
         federation.setPhone(dto.getPhone());
         repository.save(federation);
         return FederationDTO.from(federation);
+    }
+
+    public List<Federation> all(){
+        return repository.findAll();
     }
 }

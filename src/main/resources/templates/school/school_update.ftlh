@@ -8,24 +8,27 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/federation/${federation.id}/update" method="post">
+<form action="/school/${school.id}/update" method="post">
     <label for="">name
-        <input type="text" name="name" value="${federation.name}">
+        <input type="text" name="name" value="${school.name}">
     </label>
     <label for="">director
-        <input type="text" name="director" value="${federation.director}">
+        <input type="text" name="director" value="${school.director}">
     </label>
     <label for="">address
-        <input type="text" name="address" value="${federation.address}">
+        <input type="text" name="address" value="${school.address}">
     </label>
     <label for="">phone
-        <input type="text" name="phone"value="${federation.phone}">
+        <input type="text" name="phone"value="${school.phone}">
     </label>
     <label for="">email
-        <input type="text" name="email" value="${federation.email}" disabled>
+        <input type="text" name="email" value="${school.email}" disabled>
     </label>
     <label for="">
-        <input type="text" name="password" value="${federation.password}" style="display: none">
+        <input type="text" name="password" value="${school.password}" style="display: none">
+    </label>
+    <label for="">
+        Федерация ${school.federation.name}
     </label>
     <button type="submit">Изменить</button>
 </form>

@@ -51,9 +51,9 @@ public class School {
     @ManyToOne
     private Federation federation;
 
-    @OneToMany
-    private List<Athlete> athletes;
-
-    @OneToMany
-    private List<Coach> coaches;
+//    @OneToMany
+//    private List<Athlete> athletes;
+//
+//    @OneToMany
+//    private List<Coach> coaches;
 }

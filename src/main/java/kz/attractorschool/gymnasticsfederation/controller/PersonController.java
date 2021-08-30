@@ -30,7 +30,7 @@ public class PersonController {
 
     @GetMapping
     public String add(){
-        return "add_person";
+        return "person/add_person";
     }
 
     @PostMapping
@@ -41,18 +41,18 @@ public class PersonController {
         attributes.addFlashAttribute("personDTO", personDTO);
         if (validationResult.hasFieldErrors()) {
             attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
-        } else {
-            PersonPhoto newFile = new PersonPhoto(file.getOriginalFilename());
-            fileSystemStorageService.store(file);
-            service.add(newFile, personDTO);
+            return "redirect:/person";
         }
-        return "redirect:/person";
+        PersonPhoto newFile = new PersonPhoto(file.getOriginalFilename());
+        fileSystemStorageService.store(file);
+        PersonDTO dto = service.add(newFile, personDTO);
+        return "redirect:/person/" + dto.getId();
     }
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
         model.addAttribute("person", service.getOne(id));
-        return "person";
+        return "person/person";
     }
 
     @PostMapping("/{id}")
@@ -64,7 +64,7 @@ public class PersonController {
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model){
         model.addAttribute("person", service.getOne(id));
-        return "person_update";
+        return "person/person_update";
     }
 
     @PostMapping("/{id}/update")
@@ -75,6 +75,7 @@ public class PersonController {
                          RedirectAttributes attributes){
         if (validationResult.hasFieldErrors()){
             attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
+            return "redirect:/person/" + id + "/update";
         }
         if (file != null && !file.isEmpty()) {
             PersonPhoto newFile = new PersonPhoto(file.getOriginalFilename());

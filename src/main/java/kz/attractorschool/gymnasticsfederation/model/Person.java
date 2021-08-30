@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
+import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,9 +33,8 @@ public class Person {
     @NotNull
     private String middleName;
 
-    @Column
-    @NotNull
-    private String photo;
+    @OneToOne
+    private PersonPhoto photo;
 
     @Column
     @NotNull

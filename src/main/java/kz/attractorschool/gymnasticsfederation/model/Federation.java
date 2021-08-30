@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "schools")
+@Table(name = "federations")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,10 +48,6 @@ public class Federation {
     @Column
     @NotNull
     private String phone;
-
-    @ManyToOne
-    private Federation federation;
-
 
     @OneToMany(fetch = FetchType.LAZY)
     List<School> schools;

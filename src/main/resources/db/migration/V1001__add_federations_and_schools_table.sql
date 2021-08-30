@@ -1,4 +1,4 @@
-use `gymnastics_federation`;
+use `esdp`;
 
 create table `federations`(
       `id` int auto_increment not null,

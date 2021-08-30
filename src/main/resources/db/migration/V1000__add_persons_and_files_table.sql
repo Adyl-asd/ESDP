@@ -1,4 +1,4 @@
-use `gymnastics_federation`;
+use `esdp`;
 
 create table `photos`(
      `id` int auto_increment not null,
@@ -49,7 +49,7 @@ CREATE TABLE `persons`
     `name`    varchar(128)       NOT NULL,
     `middle_name`    varchar(128)       NOT NULL,
     `photo_id` int NOT NULL references `photos`(`id`),
-    `iin` INT NOT NULL,
+    `iin` varchar(12) NOT NULL,
     `gender` varchar(128) NOT NULL,
     `birthday` date NOT NULL,
     `city` varchar(128) NOT NULL,

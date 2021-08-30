@@ -1,4 +1,4 @@
-use `gymnastics_federation`;
+use `esdp`;
 
 CREATE TABLE `athletes`
 (

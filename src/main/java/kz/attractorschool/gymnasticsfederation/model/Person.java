@@ -6,12 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Table(name = "men")
+@Table(name = "persons")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,6 +39,7 @@ public class Person {
 
     @Column
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     @Column

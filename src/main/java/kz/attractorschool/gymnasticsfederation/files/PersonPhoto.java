@@ -28,5 +28,4 @@ public class PersonPhoto {
     public PersonPhoto(String filePath) {
         this.filePath = filePath;
     }
-
 }

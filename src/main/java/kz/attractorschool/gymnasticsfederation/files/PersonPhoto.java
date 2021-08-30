@@ -1,19 +1,18 @@
 package kz.attractorschool.gymnasticsfederation.files;
 
-
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.Athlete;
+import kz.attractorschool.gymnasticsfederation.model.Person;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Data
-@Table(name = "registry_files")
+@Table(name = "photos")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RegistryFile {
+public class PersonPhoto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,9 +23,10 @@ public class RegistryFile {
 
     @OneToOne
     @ToString.Exclude
-    private Athlete athlete;
+    private Person person;
 
-    public RegistryFile(String filePath) {
+    public PersonPhoto(String filePath) {
         this.filePath = filePath;
     }
+
 }

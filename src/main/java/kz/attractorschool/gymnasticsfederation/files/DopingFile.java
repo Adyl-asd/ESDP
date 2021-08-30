@@ -19,9 +19,13 @@ public class DopingFile {
 
     @Column
     @NotNull
-    private String file_path;
+    private String filePath;
 
     @OneToOne
     @ToString.Exclude
     private Athlete athlete;
+
+    public DopingFile(String filePath) {
+        this.filePath = filePath;
+    }
 }

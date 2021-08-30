@@ -21,9 +21,14 @@ public class RankFile {
 
     @Column
     @NotNull
-    private String file_path;
+    private String filePath;
 
     @OneToOne
     @ToString.Exclude
     private Athlete athlete;
+
+    public RankFile(String filePath) {
+        this.filePath = filePath;
+    }
+
 }

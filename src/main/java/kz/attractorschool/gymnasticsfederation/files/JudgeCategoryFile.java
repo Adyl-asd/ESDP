@@ -20,9 +20,13 @@ public class JudgeCategoryFile {
 
     @Column
     @NotNull
-    private String file_path;
+    private String filePath;
 
     @OneToOne
     @ToString.Exclude
     private Judge judge;
+
+    public JudgeCategoryFile(String filePath) {
+        this.filePath = filePath;
+    }
 }

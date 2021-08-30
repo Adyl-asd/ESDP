@@ -19,9 +19,14 @@ public class MedicalFile {
 
     @Column
     @NotNull
-    private String file_path;
+    private String filePath;
 
     @OneToOne
     @ToString.Exclude
     private Athlete athlete;
+
+    public MedicalFile(String filePath) {
+        this.filePath = filePath;
+    }
+
 }

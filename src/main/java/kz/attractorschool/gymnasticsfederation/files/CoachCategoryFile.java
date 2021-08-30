@@ -19,10 +19,13 @@ public class CoachCategoryFile {
     private Integer id;
 
     @Column
-    @NotNull
-    private String file_path;
+    private String filePath;
 
     @OneToOne
     @ToString.Exclude
     private Coach coach;
+
+    public CoachCategoryFile(String filePath) {
+        this.filePath = filePath;
+    }
 }

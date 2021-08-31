@@ -21,10 +21,6 @@ public class DopingFile {
     @NotNull
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Athlete athlete;
-
     public DopingFile(String filePath) {
         this.filePath = filePath;
     }

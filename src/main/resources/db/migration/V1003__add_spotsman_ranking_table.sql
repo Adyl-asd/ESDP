@@ -1,6 +1,6 @@
 use `esdp`;
 
-CREATE TABLE `rank`
+CREATE TABLE `ranks`
 (
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,

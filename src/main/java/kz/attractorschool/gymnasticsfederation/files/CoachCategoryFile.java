@@ -21,10 +21,6 @@ public class CoachCategoryFile {
     @Column
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Coach coach;
-
     public CoachCategoryFile(String filePath) {
         this.filePath = filePath;
     }

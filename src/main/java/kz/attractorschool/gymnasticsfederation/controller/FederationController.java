@@ -40,6 +40,7 @@ public class FederationController {
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
         model.addAttribute("federation", service.getOne(id));
+        model.addAttribute("schools", service.findOne(id).getSchools());
         return "federation/federation";
     }
 

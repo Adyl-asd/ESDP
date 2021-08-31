@@ -9,6 +9,8 @@ import kz.attractorschool.gymnasticsfederation.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class PersonService {
@@ -23,6 +25,26 @@ public class PersonService {
 
     public PersonDTO getOne(Integer id){
         return PersonDTO.from(findOne(id));
+    }
+
+    public PersonDTO addTest(PersonPhoto personPhoto, PersonDTO personDTO) {
+        Person person = Person.builder()
+                .surname(personDTO.getSurname())
+                .name(personDTO.getName())
+                .middleName(personDTO.getMiddleName())
+                .photo(personPhoto)
+                .birthday(personDTO.getBirthday())
+                .iin(personDTO.getIin())
+                .gender(personDTO.getGender())
+                .city(personDTO.getCity())
+                .address(personDTO.getAddress())
+                .phone(personDTO.getPhone())
+                .email(personDTO.getEmail())
+                .education(personDTO.getEducation())
+                .comment(personDTO.getComment())
+                .build();
+        System.out.println("ok");
+        return PersonDTO.from(person);
     }
 
     public PersonDTO add(PersonPhoto personPhoto, PersonDTO personDTO){
@@ -75,5 +97,9 @@ public class PersonService {
         person.setPhoto(photo);
         repository.save(person);
         return PersonDTO.from(person);
+    }
+
+    public List<Person> all(){
+        return repository.findAll();
     }
 }

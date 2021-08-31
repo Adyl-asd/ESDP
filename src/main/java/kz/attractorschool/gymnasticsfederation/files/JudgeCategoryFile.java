@@ -22,10 +22,6 @@ public class JudgeCategoryFile {
     @NotNull
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Judge judge;
-
     public JudgeCategoryFile(String filePath) {
         this.filePath = filePath;
     }

@@ -21,10 +21,6 @@ public class PersonPhoto {
     @NotNull
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Person person;
-
     public PersonPhoto(String filePath) {
         this.filePath = filePath;
     }

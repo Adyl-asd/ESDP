@@ -11,6 +11,7 @@ import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
 import kz.attractorschool.gymnasticsfederation.files.RankFile;
 import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -53,6 +54,7 @@ public class Athlete {
 
     @Column
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registryDate;
 
     @ManyToOne

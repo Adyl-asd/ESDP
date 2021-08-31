@@ -14,5 +14,9 @@
     <form action="/federation/${federation.id}" method="post">
         <button type="submit">Удалить</button>
     </form>
+<h2>Школы</h2>
+    <#list schools as s>
+        ${s.name}
+    </#list>
 </body>
 </html>

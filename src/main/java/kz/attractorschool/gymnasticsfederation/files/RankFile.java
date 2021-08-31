@@ -23,10 +23,6 @@ public class RankFile {
     @NotNull
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Athlete athlete;
-
     public RankFile(String filePath) {
         this.filePath = filePath;
     }

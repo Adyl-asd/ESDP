@@ -1,3 +1,5 @@
+<#import "navbar.ftlh" as navbar/>
+
 <#macro renderWith title="" scripts=[]>
 
     <!doctype html>
@@ -12,7 +14,9 @@
         <title>${title}</title>
     </head>
     <body>
+    <@navbar.navbar>
 
+    </@navbar.navbar>
     <#nested>
 
     <script src="js/jquery-3.6.0.js"></script>

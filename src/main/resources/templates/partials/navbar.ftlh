@@ -11,13 +11,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Спортсмены</a>
+                        <a class="nav-link" href="#">Новости</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Тренеры</a>
+                        <a class="nav-link" href="#">Календарь</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Судьи</a>
+                        <a class="nav-link" href="#">Результаты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/disciplines">Дисциплины</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/athletes">Спортсмены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/coaches">Тренеры</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/judges">Судьи</a>
                     </li>
                 </ul>
                 <div class="d-flex">

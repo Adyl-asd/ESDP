@@ -1,4 +1,4 @@
-package kz.attractorschool.gymnasticsfederation.domain.frontend;
+package kz.attractorschool.gymnasticsfederation.frontend;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,4 +14,5 @@ public class FrontendController {
     public String index() {
         return "index";
     }
+
 }

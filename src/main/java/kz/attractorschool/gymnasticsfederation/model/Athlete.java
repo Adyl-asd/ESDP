@@ -66,9 +66,9 @@ public class Athlete {
     @OneToOne
     private RankFile rankFile;
 
-    @ManyToMany
-    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
-    private List<Coach> coaches;
+//    @ManyToMany
+//    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
+//    private List<Coach> coaches;
 
     //гос награды?
 }

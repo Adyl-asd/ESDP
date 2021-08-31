@@ -63,7 +63,7 @@ public class PersonDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 10, message = "Слишком короткий ввод, введите полное название")
+    @Size(min = 7, message = "Слишком короткий ввод, введите полное название")
     private String education;
 
     private String comment;

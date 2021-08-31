@@ -3,6 +3,6 @@ use `esdp`;
 CREATE TABLE `judge_categories`
 (
     `id`      INT auto_increment NOT NULL,
-    `name`    varchar(128)       NOT NULL,
+    `number`    integer     NOT NULL,
     PRIMARY KEY (`id`)
 );

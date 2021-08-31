@@ -22,10 +22,6 @@ public class RegistryFile {
     @NotNull
     private String filePath;
 
-    @OneToOne
-    @ToString.Exclude
-    private Athlete athlete;
-
     public RegistryFile(String filePath) {
         this.filePath = filePath;
     }

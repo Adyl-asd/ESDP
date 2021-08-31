@@ -8,10 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="/person/photo/${person.photo.filePath}" alt="">
-    <h1>${person.name}</h1>
-    <form action="/person/${person.id}" method="post">
-        <button type="submit">Удалить</button>
-    </form>
+    <h1>${athlete.person.name}</h1>
+<p>${athlete.discipline}</p>
+<p>${athlete.rank}</p>
 </body>
 </html>

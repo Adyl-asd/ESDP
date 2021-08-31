@@ -26,8 +26,12 @@
     <label for="">iin
         <input type="text" name="iin" value="980908405689">
     </label>
-    <label for="">gender
-        <input type="text" name="gender"  value="test">
+    <label for="">
+        Пол
+        <select name="gender" id="gender">
+            <option value="Женский">Женский</option>
+            <option value="Мужской">Мужской</option>
+        </select>
     </label>
     <label for="">city
         <input type="text" name="city"  value="test">

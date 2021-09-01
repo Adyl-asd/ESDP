@@ -41,7 +41,6 @@
                             <option value="${f.id}">${f.name}</option>
                         </#list>
                     </select>
-
                 </div>
             </div>
 

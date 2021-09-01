@@ -1,6 +1,6 @@
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Федерация Гимнастики">
+<@main.renderWith title="Дисциплины">
     <div class="container">
         <#--        Форма для добавления новой дисциплины-->
         <form action="" method="post">

@@ -2,10 +2,10 @@
 
 <@main.renderWith title="Дисциплины">
     <div class="container">
-        <#--        Форма для добавления новой дисциплины-->
+        <#--Форма для добавления новой дисциплины-->
         <form action="" method="post">
             <div class="mb-3">
-                <label for="disciplineNameInput" class="form-label">Название новой дисциплины</label>
+                <label for="disciplineNameInput" class="form-label fs-4">Название новой дисциплины</label>
                 <input type="text" name="name" class="form-control" id="disciplineNameInput">
             </div>
             <button type="submit" class="btn btn-primary">Добавить</button>
@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="row">${d.id}</th>
                     <td>${d.name}</td>
-                    <#--                    Форма для изменения одной дисциплины-->
+                    <#--Форма для изменения текущей дисциплины-->
                     <td>
                         <form action="" method="post">
                             <button class="btn btn-primary">
@@ -32,7 +32,7 @@
                             </button>
                         </form>
                     </td>
-                    <#--                    Форма удаления одной дисциплины-->
+                    <#--Форма удаления текущей дисциплины-->
                     <td>
                         <form action="" method="post">
                             <button class="btn btn-danger">

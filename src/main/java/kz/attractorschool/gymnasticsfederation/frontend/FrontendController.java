@@ -3,9 +3,11 @@ package kz.attractorschool.gymnasticsfederation.frontend;
 import kz.attractorschool.gymnasticsfederation.model.CoachCategory;
 import kz.attractorschool.gymnasticsfederation.model.Discipline;
 import kz.attractorschool.gymnasticsfederation.model.JudgeCategory;
+import kz.attractorschool.gymnasticsfederation.model.Rank;
 import kz.attractorschool.gymnasticsfederation.service.CoachCategoryService;
 import kz.attractorschool.gymnasticsfederation.service.DisciplineService;
 import kz.attractorschool.gymnasticsfederation.service.JudgeCategoryService;
+import kz.attractorschool.gymnasticsfederation.service.RankService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ public class FrontendController {
     DisciplineService disciplineService;
     JudgeCategoryService judgeCategoryService;
     CoachCategoryService coachCategoryService;
+    RankService rankService;
 
 
     @GetMapping
@@ -48,5 +51,12 @@ public class FrontendController {
         List<CoachCategory> categories = coachCategoryService.all();
         model.addAttribute("categories", categories);
         return "coach_category/coach_categories";
+    }
+
+    @GetMapping("/athletes/ranks")
+    public String getRanks(Model model) {
+        List<Rank> ranks = rankService.all();
+        model.addAttribute("ranks", ranks);
+        return "athlete_rank/ranks";
     }
 }

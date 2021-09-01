@@ -69,8 +69,8 @@ public class PersonService {
 
     public String delete(Integer id){
         Person person = findOne(id);
-        repository.delete(person);
-        System.out.println("deleted");
+        person.setDel(true);
+        repository.save(person);
         return "ok";
     }
 
@@ -101,5 +101,9 @@ public class PersonService {
 
     public List<Person> all(){
         return repository.findAll();
+    }
+
+    public boolean isUnique(String iin){
+        return repository.existsByIin(iin);
     }
 }

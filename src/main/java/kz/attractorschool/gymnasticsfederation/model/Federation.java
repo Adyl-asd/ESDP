@@ -49,6 +49,11 @@ public class Federation {
     @NotNull
     private String phone;
 
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
+
     @OneToMany(fetch = FetchType.LAZY)
     List<School> schools;
 }

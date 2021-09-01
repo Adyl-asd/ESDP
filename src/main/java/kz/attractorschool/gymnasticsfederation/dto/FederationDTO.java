@@ -46,6 +46,8 @@ public class FederationDTO {
     @NotNull
     private String phone;
 
+    private boolean isDel;
+
     public static FederationDTO from(Federation federation){
         return FederationDTO.builder()
                 .id(federation.getId())
@@ -55,6 +57,7 @@ public class FederationDTO {
                 .email(federation.getEmail())
                 .password(federation.getPassword())
                 .phone(federation.getPhone())
+                .isDel(federation.isDel())
                 .build();
     }
 }

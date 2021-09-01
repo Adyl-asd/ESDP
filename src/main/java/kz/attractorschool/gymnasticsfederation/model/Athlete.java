@@ -65,6 +65,11 @@ public class Athlete {
     @OneToOne
     private RankFile rankFile;
 
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
+
 //    @ManyToMany
 //    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
 //    private List<Coach> coaches;

@@ -58,5 +58,6 @@ CREATE TABLE `persons`
     `phone` varchar(128) NOT NULL,
     `email` varchar(128) NOT NULL,
     `comment` varchar(400) not null,
+    `is_del` boolean default false,
     PRIMARY KEY (`id`)
 );

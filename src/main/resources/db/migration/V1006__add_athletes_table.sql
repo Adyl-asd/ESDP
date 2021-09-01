@@ -14,5 +14,6 @@ CREATE TABLE `athletes`
     `discipline_id` int not null references `disciplines` (`id`),
     `rank_id` int not null references `ranks`(`id`),
     `rank_file_id` int not null references `rank_files`(`id`),
+    `is_del` boolean default false,
     primary key (`id`)
 );

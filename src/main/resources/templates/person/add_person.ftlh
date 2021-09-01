@@ -85,7 +85,8 @@
             <#list errors as e>
                 <h2>${e}</h2>
             </#list>
-            <h2></h2>
+        <#elseif iinError??>
+            <h2>${iinError}</h2>
         </#if>
     </div>
 </@main.renderWith>

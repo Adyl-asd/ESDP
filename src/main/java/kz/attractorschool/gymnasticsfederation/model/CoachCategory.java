@@ -23,4 +23,9 @@ public class CoachCategory {
     @Column
     @NotNull
     private String name;
+
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
 }

@@ -73,4 +73,9 @@ public class Person {
     @Column
     @NotNull
     private String comment;
+
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
 }

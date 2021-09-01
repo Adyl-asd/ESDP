@@ -68,6 +68,8 @@ public class PersonDTO {
 
     private String comment;
 
+    private boolean isDel;
+
     public static PersonDTO from(Person person){
         return PersonDTO.builder()
                 .id(person.getId())
@@ -84,6 +86,7 @@ public class PersonDTO {
                 .email(person.getEmail())
                 .education(person.getEducation())
                 .comment(person.getComment())
+                .isDel(person.isDel())
                 .build();
     }
 }

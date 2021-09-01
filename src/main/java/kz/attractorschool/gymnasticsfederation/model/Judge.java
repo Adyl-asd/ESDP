@@ -43,4 +43,9 @@ public class Judge {
 
     @OneToOne
     private JudgeCategoryFile categoryFile;
+
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
 }

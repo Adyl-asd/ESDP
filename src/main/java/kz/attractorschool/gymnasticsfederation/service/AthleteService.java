@@ -12,6 +12,9 @@ import kz.attractorschool.gymnasticsfederation.model.*;
 import kz.attractorschool.gymnasticsfederation.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +28,10 @@ public class AthleteService {
     private final RankFileRepository rankFileRepository;
     private final MedicalFileRepository medicalFileRepository;
     private final RegistryFileRepository registryFileRepository;
+
+    public List<Athlete> all(){
+        return repository.findAll();
+    }
 
     public Athlete findOne(Integer id){
         return repository.findById(id).orElseThrow(() -> {
@@ -67,11 +74,8 @@ public class AthleteService {
 
     public String delete(Integer id){
         Athlete athlete = findOne(id);
-        dopingFileRepository.delete(athlete.getDopingFile());
-        medicalFileRepository.delete(athlete.getMedicalFile());
-        rankFileRepository.delete(athlete.getRankFile());
-        registryFileRepository.delete(athlete.getRegistryFile());
-        repository.delete(athlete);
+        athlete.setDel(true);
+        repository.save(athlete);
         return "ok";
     }
 
@@ -113,5 +117,11 @@ public class AthleteService {
         DopingFile doping = dopingFileRepository.save(dopingFile);
         athlete.setDopingFile(doping);
         return athlete;
+    }
+
+    public boolean isPdf(MultipartFile multipartFile){
+        String name = multipartFile.getOriginalFilename();
+        String format = name.split(".")[1];
+        return format.equals("pdf");
     }
 }

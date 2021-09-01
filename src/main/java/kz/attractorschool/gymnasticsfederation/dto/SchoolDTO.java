@@ -56,6 +56,7 @@ public class SchoolDTO {
     @ManyToOne
     private FederationDTO federation;
 
+    private boolean isDel;
 //    @OneToMany
 //    private List<Athlete> athletes;
 //
@@ -72,6 +73,7 @@ public class SchoolDTO {
                 .password(school.getPassword())
                 .phone(school.getPhone())
                 .federation(FederationDTO.from(school.getFederation()))
+                .isDel(school.isDel())
                 .build();
     }
 }

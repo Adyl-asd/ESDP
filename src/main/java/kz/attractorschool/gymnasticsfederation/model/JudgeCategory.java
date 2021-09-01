@@ -22,4 +22,9 @@ public class JudgeCategory {
     @Column
     @NotNull
     private Integer number;
+
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
 }

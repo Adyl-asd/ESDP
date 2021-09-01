@@ -87,6 +87,7 @@
         <#list errors as e>
             <h2>${e}</h2>
         </#list>
-        <h2></h2>
+    <#elseif fileError??>
+        <h2>${fileError}</h2>
     </#if>
 </@main.renderWith>

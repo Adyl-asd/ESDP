@@ -1,6 +1,6 @@
 <#import "navbar.ftlh" as navbar/>
 
-<#macro renderWith title="" scripts=[]>
+<#macro renderWith title="" scripts=[] styles=[]>
 
     <!doctype html>
     <html lang="en">
@@ -12,6 +12,9 @@
         <base href="/">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <#list styles as styles>
+            <link rel="stylesheet" href="${styles}">
+        </#list>
         <title>${title}</title>
     </head>
     <body>

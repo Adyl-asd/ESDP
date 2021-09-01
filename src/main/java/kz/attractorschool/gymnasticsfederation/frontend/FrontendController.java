@@ -1,7 +1,9 @@
 package kz.attractorschool.gymnasticsfederation.frontend;
 
+import kz.attractorschool.gymnasticsfederation.model.CoachCategory;
 import kz.attractorschool.gymnasticsfederation.model.Discipline;
 import kz.attractorschool.gymnasticsfederation.model.JudgeCategory;
+import kz.attractorschool.gymnasticsfederation.service.CoachCategoryService;
 import kz.attractorschool.gymnasticsfederation.service.DisciplineService;
 import kz.attractorschool.gymnasticsfederation.service.JudgeCategoryService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class FrontendController {
 
     DisciplineService disciplineService;
     JudgeCategoryService judgeCategoryService;
+    CoachCategoryService coachCategoryService;
 
 
     @GetMapping
@@ -38,5 +41,12 @@ public class FrontendController {
         List<JudgeCategory> categories = judgeCategoryService.all();
         model.addAttribute("categories", categories);
         return "judge_category/judge_categories";
+    }
+
+    @GetMapping("/coaches/categories")
+    public String getCoachCategories(Model model) {
+        List<CoachCategory> categories = coachCategoryService.all();
+        model.addAttribute("categories", categories);
+        return "coach_category/coach_categories";
     }
 }

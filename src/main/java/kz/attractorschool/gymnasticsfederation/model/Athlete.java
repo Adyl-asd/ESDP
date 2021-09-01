@@ -15,10 +15,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
-@Table(name = "men")
+@Table(name = "athletes")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

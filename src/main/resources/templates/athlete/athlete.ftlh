@@ -15,9 +15,10 @@
                                     <h4>${athlete.person.surname} ${athlete.person.name}</h4>
                                     <p class="text-secondary mb-1">${athlete.person.phone}</p>
                                     <p class="text-muted font-size-sm">${athlete.person.email}</p>
-                                    <form action="" method="post">
-                                        <button class="btn btn-outline-primary">Изменить профиль спортсмена</button>
-                                    </form>
+
+                                    <a href="/athlete/${athlete.id}/update" class="btn btn-outline-primary">Изменить
+                                        профиль спортсмена</a>
+
                                     <form action="/athlete/${athlete.id}" method="post">
                                         <button class="btn btn-outline-danger mt-1">Удалить спортсмена</button>
                                     </form>
@@ -211,7 +212,8 @@
                         <div class="col mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="d-flex align-items-center mb-3">Результаты, достигнутые на соревнованиях</h5>
+                                    <h5 class="d-flex align-items-center mb-3">Результаты, достигнутые на
+                                        соревнованиях</h5>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-2">

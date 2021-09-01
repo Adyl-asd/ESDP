@@ -49,6 +49,6 @@ public class Federation {
     @NotNull
     private String phone;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    List<School> schools;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    List<School> schools;
 }

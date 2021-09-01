@@ -3,7 +3,7 @@
 <@main.renderWith title="Добавить школу">
     <div class="container">
 
-        <h1>Добавить федерацию</h1>
+        <h1>Добавить спортивную школу</h1>
 
         <form action="/federation" method="post">
 

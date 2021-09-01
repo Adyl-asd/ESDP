@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.dto.AthleteAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
+import kz.attractorschool.gymnasticsfederation.dto.AthleteUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
@@ -62,5 +63,55 @@ public class AthleteService {
                 .rankFile(rankFile2)
                 .build());
         return AthleteDTO.from(athlete);
+    }
+
+    public String delete(Integer id){
+        Athlete athlete = findOne(id);
+        dopingFileRepository.delete(athlete.getDopingFile());
+        medicalFileRepository.delete(athlete.getMedicalFile());
+        rankFileRepository.delete(athlete.getRankFile());
+        registryFileRepository.delete(athlete.getRegistryFile());
+        repository.delete(athlete);
+        return "ok";
+    }
+
+    public AthleteDTO update(Integer id, AthleteUpdateDTO athleteDTO){
+        Athlete athlete = findOne(id);
+        School school = schoolService.findOne(athleteDTO.getSchoolId());
+        Rank rank = rankService.findOne(athleteDTO.getRankId());
+        Discipline discipline = disciplineService.findOne(athleteDTO.getDisciplineId());
+        athlete.setDiscipline(discipline);
+        athlete.setSchool(school);
+        athlete.setRank(rank);
+        repository.save(athlete);
+        return AthleteDTO.from(athlete);
+    }
+
+    public Athlete updateFile(Integer id, RegistryFile registryFile){
+        Athlete athlete = findOne(id);
+        RegistryFile registry = registryFileRepository.save(registryFile);
+        athlete.setRegistryFile(registry);
+        return athlete;
+    }
+
+    public Athlete updateFile(Integer id, MedicalFile medicalFile){
+        Athlete athlete = findOne(id);
+        MedicalFile medical = medicalFileRepository.save(medicalFile);
+        athlete.setMedicalFile(medical);
+        return athlete;
+    }
+
+    public Athlete updateFile(Integer id, RankFile rankFile){
+        Athlete athlete = findOne(id);
+        RankFile rankFile2 = rankFileRepository.save(rankFile);
+        athlete.setRankFile(rankFile2);
+        return athlete;
+    }
+
+    public Athlete updateFile(Integer id, DopingFile dopingFile){
+        Athlete athlete = findOne(id);
+        DopingFile doping = dopingFileRepository.save(dopingFile);
+        athlete.setDopingFile(doping);
+        return athlete;
     }
 }

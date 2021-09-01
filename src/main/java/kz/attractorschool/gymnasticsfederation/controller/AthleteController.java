@@ -3,6 +3,7 @@ package kz.attractorschool.gymnasticsfederation.controller;
 
 import kz.attractorschool.gymnasticsfederation.dto.AthleteAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
+import kz.attractorschool.gymnasticsfederation.dto.AthleteUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.exception.StorageException;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
@@ -70,6 +71,60 @@ public class AthleteController {
     public String one(@PathVariable Integer id, Model model){
         model.addAttribute("athlete", service.getOne(id));
         return "athlete/athlete";
+    }
+
+    @PostMapping("/{id}")
+    public String delete(@PathVariable Integer id){
+        service.delete(id);
+        return "redirect:/athlete";
+    }
+
+    @GetMapping("/{id}/update")
+    public String update(@PathVariable Integer id, Model model){
+        model.addAttribute("schools", schoolService.all());
+        model.addAttribute("ranks", rankService.all());
+        model.addAttribute("disciplines", disciplineService.all());
+        model.addAttribute("persons", personService.all());
+        model.addAttribute("athlete", service.findOne(id));
+        return "athlete/athlete_update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable Integer id,
+                         @Valid AthleteUpdateDTO athleteDTO,
+                         BindingResult result,
+                         RedirectAttributes attributes,
+                         @RequestParam("registryFile")MultipartFile registryFile,
+                         @RequestParam("medicalFile")MultipartFile medicalFile,
+                         @RequestParam("dopingFile")MultipartFile dopingFile,
+                         @RequestParam("rankFile")MultipartFile rankFile){
+        attributes.addFlashAttribute("athleteDTO", athleteDTO);
+//        if (result.hasFieldErrors()){
+//            attributes.addFlashAttribute("errors", result.getFieldErrors());
+//            return "redirect:/athlete/" + id + "/update";
+//        }
+        if (registryFile != null && !registryFile.isEmpty()) {
+            RegistryFile registry = new RegistryFile(registryFile.getOriginalFilename());
+            fileSystemStorageService.store(registryFile);
+            service.updateFile(id, registry);
+        }
+        else if(medicalFile != null && !medicalFile.isEmpty()){
+            MedicalFile medical = new MedicalFile(medicalFile.getOriginalFilename());
+            fileSystemStorageService.store(medicalFile);
+            service.updateFile(id, medical);
+        }
+        else if(dopingFile != null && !dopingFile.isEmpty()){
+            DopingFile doping = new DopingFile(dopingFile.getOriginalFilename());
+            fileSystemStorageService.store(dopingFile);
+            service.updateFile(id, doping);
+        }
+        else if (rankFile != null && !rankFile.isEmpty()){
+            RankFile rank = new RankFile(rankFile.getOriginalFilename());
+            fileSystemStorageService.store(rankFile);
+            service.updateFile(id, rank);
+        }
+        AthleteDTO dto = service.update(id, athleteDTO);
+        return "redirect:/athlete/" + dto.getId();
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

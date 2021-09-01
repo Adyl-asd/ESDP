@@ -1,46 +1,71 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<form action="/school" method="post">
-    <label for="">name
-        <input type="text" name="name" value="test">
-    </label>
-    <label for="">director
-        <input type="text" name="director" value="test">
-    </label>
-    <label for="">address
-        <input type="text" name="address" value="testtesttesttest">
-    </label>
-    <label for="">phone
-        <input type="text" name="phone"value="testtesttesttest">
-    </label>
-    <label for="">email
-        <input type="text" name="email" value="jane@mail.ru">
-    </label>
-    <label for="">password
-        <input type="text" name="password" value="testtesttesttest">
-    </label>
-    <label for="">
-        Федерация
-        <select name="federationId" id="federation">
-            <#list federations as f>
-                <option value="${f.id}">${f.name}</option>
+<#import "../partials/main.ftlh" as main/>
+
+<@main.renderWith title="Добавить школу">
+    <div class="container">
+
+        <h1>Добавить федерацию</h1>
+
+        <form action="/federation" method="post">
+
+            <#--Название, ФИО директора-->
+            <div class="row">
+                <div class="col">
+                    <label for="name" class="form-label fs-4">Название</label>
+                    <input type="text" name="name" value="test" class="form-control" id="name">
+                </div>
+                <div class="col">
+                    <label for="director" class="form-label fs-4">ФИО директора</label>
+                    <input type="text" name="director" value="test" class="form-control" id="director">
+                </div>
+            </div>
+
+            <#--Адрес, телефон-->
+            <div class="row">
+                <div class="col">
+                    <label for="address" class="form-label fs-4">Адрес</label>
+                    <input type="text" name="address" value="testtesttesttest" class="form-control" id="address">
+                </div>
+                <div class="col">
+                    <label for="phone" class="form-label fs-4">Телефон</label>
+                    <input type="text" name="phone" value="testtesttesttest" class="form-control" id="phone">
+                </div>
+            </div>
+
+            <#--Выбор федерации-->
+            <div class="row">
+                <div class="col">
+                    <label for="federation" class="form-label fs-4">Федерация</label>
+                    <select name="federationId" class="form-select" id="federation">
+                        <option selected>Выберите федерацию</option>
+                        <#list federations as f>
+                            <option value="${f.id}">${f.name}</option>
+                        </#list>
+                    </select>
+
+                </div>
+            </div>
+
+            <#--email, пароль-->
+            <div class="row">
+
+                <div class="col">
+                    <label for="email" class="form-label fs-4">email</label>
+                    <input type="email" name="email" value="jane@mail.ru" class="form-control" id="email">
+                </div>
+                <div class="col">
+                    <label for="password" class="form-label fs-4">Пароль</label>
+                    <input type="password" name="password" class="form-control" id="password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-1">Добавить</button>
+        </form>
+
+        <#if errors??>
+            <#list errors as e>
+                <h2>${e}</h2>
             </#list>
-        </select>
-    </label>
-    <button type="submit">Добавить</button>
-</form>
-<#if errors??>
-    <#list errors as e>
-        <h2>${e}</h2>
-    </#list>
-</#if>
-</body>
-</html>
+            <h2></h2>
+        </#if>
+    </div>
+</@main.renderWith>

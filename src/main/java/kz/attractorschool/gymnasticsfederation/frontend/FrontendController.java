@@ -68,6 +68,6 @@ public class FrontendController {
 
     @GetMapping("/test")
     public String test() {
-        return "test";
+        return "partials/templates";
     }
 }

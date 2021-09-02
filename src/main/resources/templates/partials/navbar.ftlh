@@ -1,8 +1,8 @@
 <#macro navbar>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
-            <a class="navbar-brand" href="#">Федерация Гимнастики</a>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" width="33%"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -11,39 +11,52 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Новости</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#">Календарь</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Результаты</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/disciplines">Дисциплины</a>
-                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/persons" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Персона
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/persons">Список персон</a></li>
                             <li><a class="dropdown-item" href="/person">Добавить персону</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="/athletes" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Спортсмены
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/athletes">Список спортсменов</a></li>
                             <li><a class="dropdown-item" href="/athlete">Добавить спортсмена</a></li>
-                            <li><a class="dropdown-item" href="/athlete/1">Профиль спортсмена</a></li>
+                            <li><a class="dropdown-item" href="/athletes/ranks">Разряды спортсменов</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/coaches" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Тренеры
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/coaches">Список тренеров</a></li>
+                            <li><a class="dropdown-item" href="/coach">Добавить тренера</a></li>
+                            <li><a class="dropdown-item" href="/coaches/categories">Категории тренеров</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/judges" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Судьи
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/judges">Список судей</a></li>
+                            <li><a class="dropdown-item" href="/judge">Добавить судей</a></li>
+                            <li><a class="dropdown-item" href="/judges/categories">Категории судей</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/coaches">Тренеры</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/judges">Судьи</a>
+                        <a class="nav-link" href="/disciplines">Дисциплины</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

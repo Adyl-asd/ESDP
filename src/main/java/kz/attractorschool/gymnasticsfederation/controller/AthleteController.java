@@ -33,6 +33,13 @@ public class AthleteController {
     private final PersonService personService;
     private final FileSystemStorageService fileSystemStorageService;
 
+
+    @GetMapping("/all")
+    public String all(Model model){
+        model.addAttribute("athletes", service.all());
+        return "athlete/all";
+    }
+
     @GetMapping
     public String add(Model model){
         model.addAttribute("schools", schoolService.all());
@@ -55,6 +62,11 @@ public class AthleteController {
 //            attributes.addFlashAttribute("errors", result.getFieldErrors());
 //            return "redirect:/athlete";
 //        }
+        if (!service.isPdf(registryFile) || !service.isPdf(medicalFile) ||
+        !service.isPdf(dopingFile) || !service.isPdf(rankFile)){
+            attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+            return "redirect:/athlete";
+        }
         RegistryFile registry = new RegistryFile(registryFile.getOriginalFilename());
         fileSystemStorageService.store(registryFile);
         MedicalFile medical = new MedicalFile(medicalFile.getOriginalFilename());
@@ -104,25 +116,42 @@ public class AthleteController {
 //            return "redirect:/athlete/" + id + "/update";
 //        }
         if (registryFile != null && !registryFile.isEmpty()) {
+            if (!service.isPdf(registryFile)){
+                attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+                return "redirect:/athlete";
+            }
             RegistryFile registry = new RegistryFile(registryFile.getOriginalFilename());
             fileSystemStorageService.store(registryFile);
             service.updateFile(id, registry);
         }
         else if(medicalFile != null && !medicalFile.isEmpty()){
+            if (!service.isPdf(medicalFile)){
+                attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+                return "redirect:/athlete";
+            }
             MedicalFile medical = new MedicalFile(medicalFile.getOriginalFilename());
             fileSystemStorageService.store(medicalFile);
             service.updateFile(id, medical);
         }
         else if(dopingFile != null && !dopingFile.isEmpty()){
+            if (!service.isPdf(dopingFile)){
+                attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+                return "redirect:/athlete";
+            }
             DopingFile doping = new DopingFile(dopingFile.getOriginalFilename());
             fileSystemStorageService.store(dopingFile);
             service.updateFile(id, doping);
         }
         else if (rankFile != null && !rankFile.isEmpty()){
+            if (!service.isPdf(rankFile)){
+                attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+                return "redirect:/athlete";
+            }
             RankFile rank = new RankFile(rankFile.getOriginalFilename());
             fileSystemStorageService.store(rankFile);
             service.updateFile(id, rank);
         }
+
         AthleteDTO dto = service.update(id, athleteDTO);
         return "redirect:/athlete/" + dto.getId();
     }

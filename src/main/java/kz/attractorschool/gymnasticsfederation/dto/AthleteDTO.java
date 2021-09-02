@@ -23,6 +23,7 @@ public class AthleteDTO {
     private LocalDate registryDate;
     private DisciplineDTO discipline;
     private RankDTO rank;
+    private boolean isDel;
 
 
     public static AthleteDTO from(Athlete athlete){
@@ -35,6 +36,7 @@ public class AthleteDTO {
                 .registryDate(athlete.getRegistryDate())
                 .discipline(DisciplineDTO.from(athlete.getDiscipline()))
                 .rank(RankDTO.from(athlete.getRank()))
+                .isDel(athlete.isDel())
                 .build();
     }
 }

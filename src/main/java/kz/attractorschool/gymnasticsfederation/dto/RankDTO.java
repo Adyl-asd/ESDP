@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 public class RankDTO {
     private Integer id;
     private String name;
+    private boolean isDel;
 
     public static RankDTO from(Rank rank){
         return RankDTO.builder()
                 .id(rank.getId())
                 .name(rank.getName())
+                .isDel(rank.isDel())
                 .build();
     }
 }

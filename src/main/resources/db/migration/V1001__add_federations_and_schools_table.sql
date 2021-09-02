@@ -8,6 +8,7 @@ create table `federations`(
       `password` varchar(128) not null,
       `address` varchar(128) not null,
       `phone` varchar(128) not null,
+      `is_del` boolean default false,
       primary key (`id`)
 );
 
@@ -19,6 +20,7 @@ create table `schools`(
       `password` varchar(128) not null,
       `address` varchar(128) not null,
       `phone` varchar(128) not null,
+      `is_del` boolean default false,
       `federation_id` int not null references `federations` (`id`),
       primary key (`id`)
 );

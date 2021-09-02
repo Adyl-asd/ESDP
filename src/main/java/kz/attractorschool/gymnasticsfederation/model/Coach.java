@@ -41,6 +41,11 @@ public class Coach {
     @ManyToOne
     private Discipline discipline;
 
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
+
     @ManyToMany
     @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "coach_id"), inverseJoinColumns = @JoinColumn(name = "athlete_id"))
     private List<Athlete> athletes;

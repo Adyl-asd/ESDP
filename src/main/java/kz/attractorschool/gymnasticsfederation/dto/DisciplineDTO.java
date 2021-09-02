@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 public class DisciplineDTO {
     private Integer id;
     private String name;
+    private boolean isDel;
 
     public static DisciplineDTO from(Discipline discipline){
         return DisciplineDTO.builder()
                 .id(discipline.getId())
                 .name(discipline.getName())
+                .isDel(discipline.isDel())
                 .build();
     }
 }

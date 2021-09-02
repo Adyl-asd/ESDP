@@ -51,6 +51,11 @@ public class School {
     @ManyToOne
     private Federation federation;
 
+    @Column
+    @NotNull
+    @Builder.Default
+    private boolean isDel = false;
+
 //    @OneToMany
 //    private List<Athlete> athletes;
 //

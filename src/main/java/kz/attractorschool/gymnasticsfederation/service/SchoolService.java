@@ -44,7 +44,8 @@ public class SchoolService {
 
     public String delete(Integer id){
         School school = findOne(id);
-        repository.delete(school);
+        school.setDel(true);
+        repository.save(school);
         return "ok";
     }
 

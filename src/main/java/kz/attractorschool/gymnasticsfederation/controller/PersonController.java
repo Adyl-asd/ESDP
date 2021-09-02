@@ -43,6 +43,9 @@ public class PersonController {
             attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
             return "redirect:/person";
         }
+        else if(!service.isUnique(personDTO.getIin())){
+            attributes.addFlashAttribute("iinError", "Пользователь с ИИН " + personDTO.getIin() + " уже существует");
+        }
         PersonPhoto newFile = new PersonPhoto(file.getOriginalFilename());
         fileSystemStorageService.store(file);
         PersonDTO dto = service.add(newFile, personDTO);

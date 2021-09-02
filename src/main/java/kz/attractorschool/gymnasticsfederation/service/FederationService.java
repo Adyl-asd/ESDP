@@ -40,7 +40,8 @@ public class FederationService {
 
     public String delete(Integer id){
         Federation federation = findOne(id);
-        repository.delete(federation);
+        federation.setDel(true);
+        repository.save(federation);
         return "ok";
     }
 

@@ -3,6 +3,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteUpdateDTO;
+import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -30,7 +32,8 @@ public class AthleteService {
     private final RegistryFileRepository registryFileRepository;
 
     public List<Athlete> all(){
-        return repository.findAll();
+        List<Athlete> athletes = repository.findAll();
+        return checkStatus(athletes);
     }
 
     public Athlete findOne(Integer id){
@@ -44,7 +47,6 @@ public class AthleteService {
             return new ResourceNotFoundException("Спортсмен", id);
         }));
     }
-
 
     public AthleteDTO add(AthleteAddDTO athleteDTO, RegistryFile registryFile,
                           MedicalFile medicalFile, RankFile rankFile,
@@ -123,5 +125,25 @@ public class AthleteService {
         String name = multipartFile.getOriginalFilename();
         String format = name.split(".")[1];
         return format.equals("pdf");
+    }
+
+    public AthleteDTO confirm(Integer id){
+        Athlete athlete = findOne(id);
+        athlete.setStatus(Status.АКТИВНЫЙ.toString());
+        return AthleteDTO.from(athlete);
+    }
+
+    private List<Athlete> checkStatus (List<Athlete> athletes){
+        for (int i = 0; i < athletes.size(); i++) {
+            if (athletes.get(i).getRegistryDate().plusYears(1).isAfter(LocalDate.now())){
+                athletes.get(i).setStatus(Status.ИСТЕК.toString());
+                repository.save(athletes.get(i));
+            }
+            else if (athletes.get(i).getRegistryDate().plusMonths(14).isAfter(LocalDate.now())) {
+                athletes.get(i).setStatus(Status.НЕАКТИВНЫЙ.toString());
+                repository.save(athletes.get(i));
+            }
+        }
+        return athletes;
     }
 }

@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.model;
 
 
 import com.sun.istack.NotNull;
+import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,7 +50,7 @@ public class Athlete {
     @Column
     @NotNull
     @Builder.Default
-    private String status = "active";
+    private String status = Status.НА_РАССМОТРЕНИИ.toString();
 
     @Column
     @NotNull

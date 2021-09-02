@@ -9,7 +9,7 @@ CREATE TABLE `athletes`
     `registry_file_id` int not null references `registry_files`(`id`),
     `medical_file_id` int not null references `medical_files`(`id`),
     `doping_file_id` int not null references `doping_files`(`id`),
-    `status` varchar(128) not null default 'active',
+    `status` varchar(128) not null,
     `registry_date` date not null,
     `discipline_id` int not null references `disciplines` (`id`),
     `rank_id` int not null references `ranks`(`id`),

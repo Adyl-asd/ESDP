@@ -17,16 +17,18 @@
                 <input type="text" class="form-control" id="inputName" placeholder="Имя">
             </div>
             <div class="col-md-4">
-                <label for="inputDiscipline" class="form-label">Дисциплина</label>
+                <label for="inputDiscipline" class="form-label"></label>
                 <select id="inputDiscipline" class="form-select">
+                    <option>Выберите дисциплину</option>
                     <#list disciplines as d>
                         <option value="${d.name}">${d.name}</option>
                     </#list>
                 </select>
             </div>
             <div class="col-md-4">
-                <label for="inputCategory" class="form-label">Разряд</label>
+                <label for="inputCategory" class="form-label"></label>
                 <select id="inputCategory" class="form-select">
+                    <option selected>Выберите разряд</option>
                     <#list ranks as r>
                         <option value="${r.name}">${r.name}</option>
                     </#list>
@@ -34,42 +36,48 @@
             </div>
             <#--Нужно добавить список городов-->
             <div class="col-md-4">
-                <label for="inputCity" class="form-label">Город</label>
+                <label for="inputCity" class="form-label"></label>
                 <select id="inputCity" class="form-select">
-                    <option selected>Алматы</option>
+                    <option selected>Выберите город</option>
+                    <option>Алматы</option>
                     <option>Нур-Султан</option>
                 </select>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Поиск</button>
+                <button type="submit" class="btn btn-primary mb-2">Поиск</button>
             </div>
         </form>
 
-        <table class="table text-uppercase text-center">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Фамлилия</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Дисцплина</th>
-                <th scope="col">Город</th>
-                <th scope="col">Пол</th>
-                <th scope="col">Категория</th>
-            </tr>
-            </thead>
-            <tbody>
-            <#list athletes as a>
-                <tr>
-                    <th scope="row">${a.id}</th>
-                    <td>${a.person.surname}</td>
-                    <td>${a.person.name}</td>
-                    <td>${a.discipline.name}</td>
-                    <td>${a.person.city}</td>
-                    <td>${a.person.gender}</td>
-                    <td>${a.rank.name}</td>
-                </tr>
-            </#list>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-body">
+                <table class="table text-uppercase text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Фамлилия</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Дисцплина</th>
+                        <th scope="col">Город</th>
+                        <th scope="col">Пол</th>
+                        <th scope="col">Категория</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list athletes as a>
+                        <tr class='clickable-row' data-href='/athlete/${a.id}'>
+                            <th scope="row">${a.id}</th>
+                            <td>${a.person.surname}</td>
+                            <td>${a.person.name}</td>
+                            <td>${a.discipline.name}</td>
+                            <td>${a.person.city}</td>
+                            <td>${a.person.gender}</td>
+                            <td>${a.rank.name}</td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </@main.renderWith>

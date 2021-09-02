@@ -121,7 +121,7 @@ public class AthleteService {
 
     public boolean isPdf(MultipartFile multipartFile){
         String name = multipartFile.getOriginalFilename();
-        String format = name.split(".")[1];
+        String format = name.split("\\.")[1];
         return format.equals("pdf");
     }
 }

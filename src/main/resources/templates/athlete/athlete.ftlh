@@ -16,11 +16,11 @@
                                     <p class="text-secondary mb-1">${athlete.person.phone}</p>
                                     <p class="text-muted font-size-sm">${athlete.person.email}</p>
 
-                                    <a href="/athlete/${athlete.id}/update" class="btn btn-outline-primary">Изменить
+                                    <a href="/athlete/${athlete.id}/update" class="btn btn-primary">Изменить
                                         профиль спортсмена</a>
 
                                     <form action="/athlete/${athlete.id}" method="post">
-                                        <button class="btn btn-outline-danger mt-1">Удалить спортсмена</button>
+                                        <button class="btn btn-danger mt-1">Удалить спортсмена</button>
                                     </form>
                                 </div>
                             </div>
@@ -61,22 +61,22 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#">Подтверждение регистрации спортсмена</a>
+                                    <a href="#" class="link-dark">Подтверждение регистрации спортсмена</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#">Прохождение медосмотра</a>
+                                    <a href="#" class="link-dark">Прохождение медосмотра</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#">Прохождение допинга</a>
+                                    <a href="#" class="link-dark">Прохождение допинга</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#">Подтверждение разряда спортсмена</a>
+                                    <a href="#" class="link-dark">Подтверждение разряда спортсмена</a>
                                 </h6>
                             </li>
                         </ul>

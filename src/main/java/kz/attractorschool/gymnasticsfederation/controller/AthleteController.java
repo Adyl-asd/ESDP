@@ -156,6 +156,12 @@ public class AthleteController {
         return "redirect:/athlete/" + dto.getId();
     }
 
+    @PostMapping("/athlete/{id}/confirm")
+    public String confirm(@PathVariable Integer id){
+        service.confirm(id);
+        return "redirect:/athlete/" + id;
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     private String handleRNF(ResourceNotFoundException ex, Model model) {

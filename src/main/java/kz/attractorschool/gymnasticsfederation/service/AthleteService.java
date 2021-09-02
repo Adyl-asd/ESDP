@@ -16,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class AthleteService {
@@ -39,10 +37,6 @@ public class AthleteService {
         return repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Спортсмен", id);
         });
-    }
-
-    public List<Athlete> all() {
-        return repository.findAll();
     }
 
     public AthleteDTO getOne(Integer id){

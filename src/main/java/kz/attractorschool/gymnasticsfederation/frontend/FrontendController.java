@@ -1,13 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.frontend;
 
-import kz.attractorschool.gymnasticsfederation.model.CoachCategory;
-import kz.attractorschool.gymnasticsfederation.model.Discipline;
-import kz.attractorschool.gymnasticsfederation.model.JudgeCategory;
-import kz.attractorschool.gymnasticsfederation.model.Rank;
-import kz.attractorschool.gymnasticsfederation.service.CoachCategoryService;
-import kz.attractorschool.gymnasticsfederation.service.DisciplineService;
-import kz.attractorschool.gymnasticsfederation.service.JudgeCategoryService;
-import kz.attractorschool.gymnasticsfederation.service.RankService;
+import kz.attractorschool.gymnasticsfederation.model.*;
+import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +19,7 @@ public class FrontendController {
     JudgeCategoryService judgeCategoryService;
     CoachCategoryService coachCategoryService;
     RankService rankService;
+    AthleteService athleteService;
 
 
     @GetMapping
@@ -58,5 +53,16 @@ public class FrontendController {
         List<Rank> ranks = rankService.all();
         model.addAttribute("ranks", ranks);
         return "athlete_rank/ranks";
+    }
+
+    @GetMapping("/athletes")
+    public String getAthletes(Model model) {
+        List<Athlete> athletes = athleteService.all();
+        List<Discipline> disciplines = disciplineService.all();
+        List<Rank> ranks = rankService.all();
+        model.addAttribute("athletes", athletes);
+        model.addAttribute("disciplines", disciplines);
+        model.addAttribute("ranks", ranks);
+        return "athlete/athletes";
     }
 }

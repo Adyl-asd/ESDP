@@ -27,12 +27,12 @@ public class FrontendController {
         return "index";
     }
 
-    @GetMapping("/disciplines")
-    public String getDisciplines(Model model) {
-        List<Discipline> disciplines = disciplineService.all();
-        model.addAttribute("disciplines", disciplines);
-        return "disciplines/disciplines";
-    }
+//    @GetMapping("/disciplines")
+//    public String getDisciplines(Model model) {
+//        List<Discipline> disciplines = disciplineService.all();
+//        model.addAttribute("disciplines", disciplines);
+//        return "disciplines/disciplines";
+//    }
 
     @GetMapping("/judges/categories")
     public String getJudgeCategories(Model model) {

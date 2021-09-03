@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
 import kz.attractorschool.gymnasticsfederation.model.Athlete;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -15,13 +12,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AthleteDTO {
     private Integer id;
+    @ToString.Exclude
     private PersonDTO person;
+    @ToString.Exclude
     private SchoolDTO school;
     private String registryNumber;
     private String status;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registryDate;
+    @ToString.Exclude
     private DisciplineDTO discipline;
+    @ToString.Exclude
     private RankDTO rank;
     private boolean isDel;
 

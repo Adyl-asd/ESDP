@@ -1,12 +1,12 @@
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Категории тренера">
+<@main.renderWith title="Разряды спортсмена">
     <div class="container">
-        <#--Форма для добавления новой категории-->
-        <form action="/coach_categories" method="post">
+        <#--Форма для добавления нового разряда-->
+        <form action="/ranks" method="post">
             <div class="mb-3">
-                <label for="categoryNameInput" class="form-label fs-4">Название новой категории</label>
-                <input type="text" name="name" class="form-control" id="categoryNameInput">
+                <label for="rankNameInput" class="form-label fs-4">Название нового разряда</label>
+                <input type="text" name="name" class="form-control" id="rankNameInput">
             </div>
             <button type="submit" class="btn btn-primary">Добавить</button>
         </form>
@@ -14,28 +14,28 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Наименование категории</th>
+                <th scope="col">Наименование разряда</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <#list categories as c>
-                <#if c.isDel() == false>
+            <#list ranks as r>
+                <#if r.isDel() == false>
                     <tr>
-                        <th scope="row">${c.id}</th>
-                        <td>${c.name}</td>
-                        <#--Форма для изменения текущей категории-->
+                        <th scope="row">${r?counter}</th>
+                        <td>${r.name}</td>
+                        <#--Форма для изменения текущего разряда-->
                         <td>
-                            <form action="/coach_categories/${c.id}/update" method="post">
+                            <form action="/ranks/${r.id}/update" method="post">
                                 <button class="btn btn-primary">
                                     Изменить
                                 </button>
                             </form>
                         </td>
-                        <#--Форма удаления текущей категории-->
+                        <#--Форма удаления текущего разряда-->
                         <td>
-                            <form action="/coach_categories/${c.id}/delete" method="post">
+                            <form action="/ranks/${r.id}/delete" method="post">
                                 <button class="btn btn-danger">
                                     Удалить
                                 </button>

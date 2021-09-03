@@ -1,8 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
-import kz.attractorschool.gymnasticsfederation.dto.FederationDTO;
+import kz.attractorschool.gymnasticsfederation.dto.DisciplineDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
-import kz.attractorschool.gymnasticsfederation.service.FederationService;
+import kz.attractorschool.gymnasticsfederation.service.DisciplineService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,59 +15,53 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/federation")
-public class FederationController {
-    private final FederationService service;
+@RequestMapping("/disciplines")
+public class DisciplineController {
+    private final DisciplineService service;
 
     @GetMapping
-    public String add(){
-        return "federation/federation_add";
+    public String getCategoryList(Model model){
+        model.addAttribute("disciplines", service.all());
+        return "disciplines/disciplines";
     }
 
     @PostMapping
-    public String add(@Valid FederationDTO federationDTO,
+    public String add(@Valid DisciplineDTO disciplineDTO,
                       BindingResult bindingResult,
                       RedirectAttributes attributes){
-        attributes.addFlashAttribute("federationDTO", federationDTO);
+        attributes.addFlashAttribute("disciplineDTO", disciplineDTO);
         if (bindingResult.hasFieldErrors()){
             attributes.addFlashAttribute("errors", bindingResult.getFieldErrors());
-            return "redirect:/federation";
+            return "redirect:/disciplines";
         }
-        FederationDTO dto = service.add(federationDTO);
-        return "redirect:/federation/" + dto.getId();
+        service.add(disciplineDTO);
+        return "redirect:/disciplines";
     }
 
-    @GetMapping("/{id}")
-    public String one(@PathVariable Integer id, Model model){
-        model.addAttribute("federation", service.getOne(id));
-//        model.addAttribute("schools", service.findOne(id).getSchools());
-        return "federation/federation";
-    }
-
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String delete(@PathVariable Integer id){
         service.delete(id);
-        return "redirect:/federation";
+        return "redirect:/disciplines";
     }
 
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model){
-        model.addAttribute("federation", service.getOne(id));
-        return "federation/federation_update";
+        model.addAttribute("discipline", service.getOne(id));
+        return "disciplines/discipline_update";
     }
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable Integer id,
-                         @Valid FederationDTO federationDTO,
+                         @Valid DisciplineDTO disciplineDTO,
                          BindingResult bindingResult,
                          RedirectAttributes attributes){
-        attributes.addFlashAttribute("federationDTO", federationDTO);
+        attributes.addFlashAttribute("disciplineDTO", disciplineDTO);
         if (bindingResult.hasFieldErrors()){
             attributes.addFlashAttribute("errors", bindingResult.getFieldErrors());
-            return "redirect:/federation/" + id + "/update";
+            return "redirect:/disciplines/" + id + "/update";
         }
-        service.update(federationDTO, id);
-        return "redirect:/federation/" + id;
+        service.update(disciplineDTO, id);
+        return "redirect:/disciplines";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

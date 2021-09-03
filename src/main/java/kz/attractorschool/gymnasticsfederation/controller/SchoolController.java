@@ -78,6 +78,6 @@ public class SchoolController {
     private String handleRNF(ResourceNotFoundException ex, Model model) {
         model.addAttribute("resource", ex.getResource());
         model.addAttribute("id", ex.getId());
-        return "resource-not-found";
+        return "exception/resource-not-found";
     }
 }

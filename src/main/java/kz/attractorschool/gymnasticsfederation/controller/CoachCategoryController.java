@@ -1,8 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
-import kz.attractorschool.gymnasticsfederation.dto.FederationDTO;
+import kz.attractorschool.gymnasticsfederation.dto.CoachCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
-import kz.attractorschool.gymnasticsfederation.service.FederationService;
+import kz.attractorschool.gymnasticsfederation.service.CoachCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,59 +15,53 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/federation")
-public class FederationController {
-    private final FederationService service;
+@RequestMapping("/coach_categories")
+public class CoachCategoryController {
+    private final CoachCategoryService service;
 
     @GetMapping
-    public String add(){
-        return "federation/federation_add";
+    public String getCategoryList(Model model){
+        model.addAttribute("categories", service.all());
+        return "coach_category/coach_categories";
     }
 
     @PostMapping
-    public String add(@Valid FederationDTO federationDTO,
+    public String add(@Valid CoachCategoryDTO coachCategoryDTO,
                       BindingResult bindingResult,
                       RedirectAttributes attributes){
-        attributes.addFlashAttribute("federationDTO", federationDTO);
+        attributes.addFlashAttribute("coachCategoryDTO", coachCategoryDTO);
         if (bindingResult.hasFieldErrors()){
             attributes.addFlashAttribute("errors", bindingResult.getFieldErrors());
-            return "redirect:/federation";
+            return "redirect:/coach_categories";
         }
-        FederationDTO dto = service.add(federationDTO);
-        return "redirect:/federation/" + dto.getId();
+        service.add(coachCategoryDTO);
+        return "redirect:/coach_categories";
     }
 
-    @GetMapping("/{id}")
-    public String one(@PathVariable Integer id, Model model){
-        model.addAttribute("federation", service.getOne(id));
-//        model.addAttribute("schools", service.findOne(id).getSchools());
-        return "federation/federation";
-    }
-
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String delete(@PathVariable Integer id){
         service.delete(id);
-        return "redirect:/federation";
+        return "redirect:/coach_categories";
     }
 
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model){
-        model.addAttribute("federation", service.getOne(id));
-        return "federation/federation_update";
+        model.addAttribute("category", service.getOne(id));
+        return "coach_category/coach_category_update";
     }
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable Integer id,
-                         @Valid FederationDTO federationDTO,
+                         @Valid CoachCategoryDTO coachCategoryDTO,
                          BindingResult bindingResult,
                          RedirectAttributes attributes){
-        attributes.addFlashAttribute("federationDTO", federationDTO);
+        attributes.addFlashAttribute("coachCategoryDTO", coachCategoryDTO);
         if (bindingResult.hasFieldErrors()){
             attributes.addFlashAttribute("errors", bindingResult.getFieldErrors());
-            return "redirect:/federation/" + id + "/update";
+            return "redirect:/coach_categories/" + id + "/update";
         }
-        service.update(federationDTO, id);
-        return "redirect:/federation/" + id;
+        service.update(coachCategoryDTO, id);
+        return "redirect:/coach_categories";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -75,6 +69,6 @@ public class FederationController {
     private String handleRNF(ResourceNotFoundException ex, Model model) {
         model.addAttribute("resource", ex.getResource());
         model.addAttribute("id", ex.getId());
-        return "exception/resource-not-found";
+        return "resource-not-found";
     }
 }

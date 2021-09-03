@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.dto.AthleteAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
+import kz.attractorschool.gymnasticsfederation.dto.AthleteRegisterDTO;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
@@ -130,20 +131,53 @@ public class AthleteService {
     public AthleteDTO confirm(Integer id){
         Athlete athlete = findOne(id);
         athlete.setStatus(Status.АКТИВНЫЙ.toString());
+        repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
 
-    private List<Athlete> checkStatus (List<Athlete> athletes){
+    public List<Athlete> checkStatus (List<Athlete> athletes){
         for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getRegistryDate().plusYears(1).isAfter(LocalDate.now())){
+            if (athletes.get(i).getRegistryDate().plusYears(1).isBefore(LocalDate.now())){
                 athletes.get(i).setStatus(Status.ИСТЕК.toString());
                 repository.save(athletes.get(i));
             }
-            else if (athletes.get(i).getRegistryDate().plusMonths(14).isAfter(LocalDate.now())) {
+            else if (athletes.get(i).getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
                 athletes.get(i).setStatus(Status.НЕАКТИВНЫЙ.toString());
                 repository.save(athletes.get(i));
             }
         }
         return athletes;
+    }
+
+    public AthleteDTO checkStatus (Athlete athlete){
+        System.out.println(athlete.getRegistryDate().plusMonths(12));
+        if (athlete.getRegistryDate().plusMonths(12).isBefore(LocalDate.now())) {
+            athlete.setStatus(Status.ИСТЕК.toString());
+            repository.save(athlete);
+        }
+        else if (athlete.getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
+            athlete.setStatus(Status.НЕАКТИВНЫЙ.toString());
+            repository.save(athlete);
+        }
+        return AthleteDTO.from(athlete);
+    }
+
+    public AthleteDTO register(Integer id, AthleteRegisterDTO athleteDTO, MedicalFile medicalFile,
+                               RankFile rankFile, DopingFile dopingFile){
+        Athlete athlete = findOne(id);
+        Rank rank = rankService.findOne(athleteDTO.getRankId());
+        athlete.setRank(rank);
+        School school = schoolService.findOne(athleteDTO.getSchoolId());
+        athlete.setSchool(school);
+        athlete.setStatus(athleteDTO.getStatus());
+        athlete.setRegistryDate(athleteDTO.getRegistryDate());
+        MedicalFile medical = medicalFileRepository.save(medicalFile);
+        RankFile rankFile2 = rankFileRepository.save(rankFile);
+        DopingFile doping = dopingFileRepository.save(dopingFile);
+        athlete.setDopingFile(doping);
+        athlete.setMedicalFile(medical);
+        athlete.setRankFile(rankFile2);
+        repository.save(athlete);
+        return AthleteDTO.from(athlete);
     }
 }

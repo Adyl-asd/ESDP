@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
+import kz.attractorschool.gymnasticsfederation.model.CoachCategory;
 import kz.attractorschool.gymnasticsfederation.model.Rank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RankDTO {
+public class CoachCategoryDTO {
     private Integer id;
 
     @org.hibernate.validator.constraints.NotBlank
@@ -21,11 +22,11 @@ public class RankDTO {
 
     private boolean isDel;
 
-    public static RankDTO from(Rank rank){
-        return RankDTO.builder()
-                .id(rank.getId())
-                .name(rank.getName())
-                .isDel(rank.isDel())
+    public static CoachCategoryDTO from(CoachCategory coachCategory){
+        return CoachCategoryDTO.builder()
+                .id(coachCategory.getId())
+                .name(coachCategory.getName())
+                .isDel(coachCategory.isDel())
                 .build();
     }
 }

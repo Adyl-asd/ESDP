@@ -3,10 +3,7 @@ package kz.attractorschool.gymnasticsfederation.dto;
 
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.model.School;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -54,6 +51,7 @@ public class SchoolDTO {
     private Integer federationId;
 
     @ManyToOne
+    @ToString.Exclude
     private FederationDTO federation;
 
     private boolean isDel;

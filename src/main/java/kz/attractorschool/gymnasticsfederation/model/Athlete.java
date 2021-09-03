@@ -3,10 +3,7 @@ package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.Status;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
@@ -28,9 +25,11 @@ public class Athlete {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ToString.Exclude
     @ManyToOne
     private Person person;
 
+    @ToString.Exclude
     @ManyToOne
     private School school;
 
@@ -38,12 +37,15 @@ public class Athlete {
     @NotNull
     private String registryNumber;
 
+    @ToString.Exclude
     @OneToOne
     private RegistryFile registryFile;
 
+    @ToString.Exclude
     @OneToOne
     private MedicalFile medicalFile;
 
+    @ToString.Exclude
     @OneToOne
     private DopingFile dopingFile;
 
@@ -57,12 +59,15 @@ public class Athlete {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registryDate;
 
+    @ToString.Exclude
     @ManyToOne
     private Discipline discipline;
 
+    @ToString.Exclude
     @ManyToOne
     private Rank rank;
 
+    @ToString.Exclude
     @OneToOne
     private RankFile rankFile;
 

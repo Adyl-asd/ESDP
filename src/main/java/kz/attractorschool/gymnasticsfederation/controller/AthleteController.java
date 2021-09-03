@@ -10,6 +10,7 @@ import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
 import kz.attractorschool.gymnasticsfederation.files.RankFile;
 import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
+import kz.attractorschool.gymnasticsfederation.dto.AthleteRegisterDTO;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -81,7 +82,8 @@ public class AthleteController {
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
-        model.addAttribute("athlete", service.getOne(id));
+        AthleteDTO athleteDTO = service.checkStatus(service.findOne(id));
+        model.addAttribute("athlete", athleteDTO);
         return "athlete/athlete";
     }
 
@@ -161,6 +163,53 @@ public class AthleteController {
         service.confirm(id);
         return "redirect:/athlete/" + id;
     }
+
+    @GetMapping("/{id}/register")
+    public String register(@PathVariable Integer id, Model model){
+        model.addAttribute("athlete", service.getOne(id));
+        model.addAttribute("schools", schoolService.all());
+        model.addAttribute("ranks", rankService.all());
+        return "athlete/register";
+    }
+
+    @PostMapping("/{id}/register")
+    public String register(@PathVariable Integer id, @Valid AthleteRegisterDTO athleteDTO,
+                           @RequestParam("medicalFile")MultipartFile medicalFile,
+                           @RequestParam("dopingFile")MultipartFile dopingFile,
+                           @RequestParam("rankFile")MultipartFile rankFile,
+                           BindingResult result, RedirectAttributes attributes){
+        attributes.addFlashAttribute("athleteDTO", athleteDTO);
+//        if (result.hasFieldErrors()){
+//            attributes.addFlashAttribute("errors", result.getFieldErrors());
+//            return "redirect:/athlete";
+//        }
+        if (!service.isPdf(medicalFile) || !service.isPdf(dopingFile) || !service.isPdf(rankFile)){
+            attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
+            return "redirect:/athlete/" + id + "/register";
+        }
+        MedicalFile medical = new MedicalFile(medicalFile.getOriginalFilename());
+        fileSystemStorageService.store(medicalFile);
+        DopingFile doping = new DopingFile(dopingFile.getOriginalFilename());
+        fileSystemStorageService.store(dopingFile);
+        RankFile rank = new RankFile(rankFile.getOriginalFilename());
+        fileSystemStorageService.store(rankFile);
+        AthleteDTO dto = service.register(id, athleteDTO, medical, rank, doping);
+        return "redirect:/athlete/" + id;
+    }
+
+    //    @GetMapping("/{id}/coach")
+//    public String addCoach(@PathVariable Integer id, Model model){
+//        AthleteDTO athleteDTO = service.getOne(id);
+//        model.addAttribute("athlete", athleteDTO);
+////        model.addAttribute("coaches", coachService.getByDisciplineAndSchool(athleteDTO));
+//        return "athlete/add_coach";
+//    }
+//
+//    @PostMapping("/{id}/coach")
+//    public String addCoach(@PathVariable Integer id, @RequestParam Integer coachId){
+//        service.addCoach(id, coachId);
+//        return "athlete/add_coach";
+//    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)

@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -54,6 +51,7 @@ public class Federation {
     @Builder.Default
     private boolean isDel = false;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "federation")
     List<School> schools;
 }

@@ -241,9 +241,15 @@
             </div>
 
             <#--Метод для подвтерждения регистрации спортсмена-->
-            <form action="/athlete/${athlete.id}/confirm" method="post">
-                <button type="submit" class="btn btn-primary mt-1">Подвердить регистрацию</button>
-            </form>
+            <#if athlete.status.equals("НА_РАССМОТРЕНИИ")>
+                <form action="/athlete/${athlete.id}/confirm" method="post">
+                    <button type="submit" class="btn btn-primary mt-1">Подтвердить регистрацию</button>
+                </form>
+            <#elseif athlete.status.equals("ИСТЕК") || athlete.status.equals("НЕАКТИВНЫЙ")>
+                <form action="/athlete/${athlete.id}/register" method="post">
+                    <button type="submit" class="btn btn-primary mt-1">Продлить регистрацию</button>
+                </form>
+            </#if>
 
         </div>
     </div>

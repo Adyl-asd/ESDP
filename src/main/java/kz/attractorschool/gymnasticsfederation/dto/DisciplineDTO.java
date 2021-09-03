@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
 public class DisciplineDTO {
     private Integer id;
 
-    @org.hibernate.validator.constraints.NotBlank
+    @NotBlank
     @Size(min = 1, message = "Вы ввели пустое значение")
     private String name;
     private boolean isDel;

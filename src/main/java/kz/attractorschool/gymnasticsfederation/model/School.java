@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -48,6 +45,7 @@ public class School {
     @NotNull
     private String phone;
 
+    @ToString.Exclude
     @ManyToOne
     private Federation federation;
 

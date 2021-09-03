@@ -1,6 +1,5 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
-import kz.attractorschool.gymnasticsfederation.dto.CoachCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.dto.JudgeCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.service.JudgeCategoryService;
@@ -70,6 +69,6 @@ public class JudgeCategoryController {
     private String handleRNF(ResourceNotFoundException ex, Model model) {
         model.addAttribute("resource", ex.getResource());
         model.addAttribute("id", ex.getId());
-        return "resource-not-found";
+        return "exception/resource-not-found";
     }
 }

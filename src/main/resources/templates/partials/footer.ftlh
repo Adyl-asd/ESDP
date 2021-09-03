@@ -2,7 +2,7 @@
 
     <#nested>
     <!-- Footer -->
-    <footer class=" text-center text-white mt-3" style="background-color:#77a6f6;">
+    <footer class=" text-center text-white mt-3" style="background-color:#476393;">
         <!-- Grid container -->
         <div class="container p-4">
 

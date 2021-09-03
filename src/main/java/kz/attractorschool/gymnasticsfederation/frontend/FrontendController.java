@@ -66,6 +66,11 @@ public class FrontendController {
         return "athlete/athletes";
     }
 
+    @GetMapping("/competition-form")
+    public String getCompForm() {
+        return "competition/competition-form";
+    }
+
     @GetMapping("/test")
     public String test() {
         return "partials/templates";

@@ -21,7 +21,7 @@ public class JudgeCategory {
 
     @Column
     @NotNull
-    private Integer number;
+    private String name;
 
     @Column
     @NotNull

@@ -130,6 +130,7 @@ public class AthleteService {
     public AthleteDTO confirm(Integer id){
         Athlete athlete = findOne(id);
         athlete.setStatus(Status.АКТИВНЫЙ.toString());
+        repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
 

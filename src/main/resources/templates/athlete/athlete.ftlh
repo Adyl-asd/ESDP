@@ -16,6 +16,7 @@
                                     <h4>${athlete.person.surname} ${athlete.person.name}</h4>
                                     <p class="text-secondary mb-1">${athlete.person.phone}</p>
                                     <p class="text-muted font-size-sm">${athlete.person.email}</p>
+                                    <p class="text-muted font-size-sm">Статус: ${athlete.status}</p>
 
                                     <a href="/athlete/${athlete.id}/update" class="btn btn-primary">Изменить
                                         профиль спортсмена</a>

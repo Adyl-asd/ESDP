@@ -167,7 +167,7 @@ public class AthleteController {
     private String handleRNF(ResourceNotFoundException ex, Model model) {
         model.addAttribute("resource", ex.getResource());
         model.addAttribute("id", ex.getId());
-        return "resource-not-found";
+        return "exception/resource-not-found";
     }
 
     @ExceptionHandler(StorageException.class)
@@ -175,6 +175,6 @@ public class AthleteController {
     private String handleRNF(StorageException ex, Model model) {
         model.addAttribute("message", ex.getMessage());
         model.addAttribute("cause", ex.getCause());
-        return "empty_file";
+        return "exception/empty_file";
     }
 }

@@ -1,7 +1,7 @@
 <#--Код для вставки основного шаблона в страницу-->
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Шаблоны">
+<@main.renderWith title="Добавить соревнование">
 
     <div class="container">
         <div class="card my-3">
@@ -290,7 +290,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn btn-primary">Подать заявку</div>
+            <a href="/competitions/1" class="btn btn-primary">Подать заявку</a>
         </div>
 
 

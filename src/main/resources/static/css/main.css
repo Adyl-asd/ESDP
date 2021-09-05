@@ -1606,4 +1606,10 @@ section {
     text-decoration: none;
 }
 
+#hero-img {
+    border: solid thick white;
+    border-radius: 1em;
+    box-shadow: 0 0 5px 10px white;
+}
+
 

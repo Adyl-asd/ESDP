@@ -7,7 +7,7 @@
         <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
             <h1>Федерация Гимнастики</h1>
             <h2>города Алматы</h2>
-            <img src="images/hero-img.jpg" class="img-fluid hero-img" alt="" data-aos="zoom-in" data-aos-delay="150">
+            <img src="images/hero-img.jpg" class="img-fluid hero-img" alt="hero" data-aos="zoom-in" data-aos-delay="150" id="hero-img">
         </div>
 
     </section><!-- End Hero -->
@@ -105,7 +105,7 @@
 
                 <div class="row content">
                     <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
-                        <img src="assets/img/features-1.png" class="img-fluid" alt="">
+                        <img src="images/stock-1.jpg" class="img-fluid" alt="stock-1">
                     </div>
                     <div class="col-md-7 pt-4" data-aos="fade-left" data-aos-delay="100">
                         <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -123,7 +123,7 @@
 
                 <div class="row content">
                     <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
-                        <img src="assets/img/features-2.png" class="img-fluid" alt="">
+                        <img src="images/stock-2.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-md-7 pt-5 order-2 order-md-1" data-aos="fade-right">
                         <h3>Corporis temporibus maiores provident</h3>
@@ -141,7 +141,7 @@
 
                 <div class="row content">
                     <div class="col-md-5" data-aos="fade-right">
-                        <img src="assets/img/features-3.png" class="img-fluid" alt="">
+                        <img src="images/stock-3.jpg" class="img-fluid" alt="stock-3">
                     </div>
                     <div class="col-md-7 pt-5" data-aos="fade-left">
                         <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
@@ -156,7 +156,7 @@
 
                 <div class="row content">
                     <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
-                        <img src="assets/img/features-4.png" class="img-fluid" alt="">
+                        <img src="images/stock-4.jpg" class="img-fluid" alt="stock-4">
                     </div>
                     <div class="col-md-7 pt-5 order-2 order-md-1" data-aos="fade-right">
                         <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
@@ -293,7 +293,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-5.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>App 1</h4>
                                 <p>App</p>
@@ -307,7 +307,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-6.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Web 3</h4>
                                 <p>Web</p>
@@ -321,7 +321,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-7.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>App 2</h4>
                                 <p>App</p>
@@ -335,7 +335,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-8.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Card 2</h4>
                                 <p>Card</p>
@@ -349,7 +349,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-9.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Web 2</h4>
                                 <p>Web</p>
@@ -363,7 +363,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-10.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>App 3</h4>
                                 <p>App</p>
@@ -377,7 +377,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-1.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Card 1</h4>
                                 <p>Card</p>
@@ -391,7 +391,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-card">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-2.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Card 3</h4>
                                 <p>Card</p>
@@ -405,7 +405,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                         <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                            <img src="images/stock-3.jpg" class="img-fluid" alt="">
                             <div class="portfolio-info">
                                 <h4>Web 3</h4>
                                 <p>Web</p>

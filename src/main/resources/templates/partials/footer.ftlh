@@ -24,7 +24,7 @@
                 <div class="row">
                     <!--Grid column-->
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <img src="images/logo.png" alt="logo" width="50%">
+                        <img src="images/logo.png" alt="logo" width="70%">
                     </div>
                     <!--Grid column-->
 

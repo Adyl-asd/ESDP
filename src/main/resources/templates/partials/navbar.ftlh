@@ -44,7 +44,7 @@
                             Тренеры
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/coaches">Список тренеров</a></li>
+                            <li><a class="dropdown-item" href="/coach/all">Список тренеров</a></li>
                             <li><a class="dropdown-item" href="/coach">Добавить тренера</a></li>
                             <li><a class="dropdown-item" href="/coaches/categories">Категории тренеров</a></li>
                         </ul>

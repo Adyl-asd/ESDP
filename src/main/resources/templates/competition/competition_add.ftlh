@@ -55,6 +55,17 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <label for="sport-name" class="form-label fs-5">Вид спорта</label>
+                        <select name="sport-name" id="sport-name" class="form-select">
+                            <option selected value="">Выберите вид спорта</option>
+                            <option value="">Спортивная гимнастика</option>
+                            <option value="">Художественная гимнастика</option>
+                        </select>
+                    </div>
+                </div>
+
                 <#--Вид спорта и дисциплина-->
                 <#--                <div class="row">-->
                 <#--                    <div class="col">-->
@@ -70,7 +81,7 @@
                 <table class="table text-uppercase text-center table-bordered mt-3">
                     <thead>
                     <tr>
-                        <th scope="col" class="my-2">Вид спорта и дисциплина</th>
+                        <th scope="col" class="my-2">Дисциплина</th>
                         <th scope="col" class="my-2">Вид соревновательной программы</th>
                     </tr>
                     </thead>
@@ -79,11 +90,6 @@
                         <td>
                             <div class="row">
                                 <div class="col">
-                                    <select name="rank" id="rank" class="form-select">
-                                        <option selected value="">Выберите вид спорта</option>
-                                        <option value="">Спортивная гимнастика</option>
-                                        <option value="">Художественная гимнастика</option>
-                                    </select>
                                     <select name="age-start" id="age-end" class="form-select">
                                         <option selected value="">Выберите дисциплину</option>
                                         <option value="">Индивидуальная программа</option>
@@ -131,11 +137,6 @@
                         <td>
                             <div class="row">
                                 <div class="col">
-                                    <select name="rank" id="rank" class="form-select">
-                                        <option selected value="">Выберите вид спорта</option>
-                                        <option value="">Спортивная гимнастика</option>
-                                        <option value="">Художественная гимнастика</option>
-                                    </select>
                                     <select name="age-start" id="age-end" class="form-select">
                                         <option selected value="">Выберите дисциплину</option>
                                         <option value="">Индивидуальная программа</option>

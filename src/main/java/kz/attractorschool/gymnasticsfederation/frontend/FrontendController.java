@@ -68,7 +68,7 @@ public class FrontendController {
 
     @GetMapping("/competitions/add")
     public String getCompForm() {
-        return "competition/competition-form";
+        return "competition/competition_add";
     }
 
     @GetMapping("/competitions/1")

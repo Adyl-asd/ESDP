@@ -1,8 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.files;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.Athlete;
-import kz.attractorschool.gymnasticsfederation.model.Coach;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +17,7 @@ public class CoachCategoryFile {
     private Integer id;
 
     @Column
+    @NotNull
     private String filePath;
 
     public CoachCategoryFile(String filePath) {

@@ -1,8 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.files.DopingFile;
-import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
+import kz.attractorschool.gymnasticsfederation.files.CoachCategoryFile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,7 +32,7 @@ public class Coach {
 
     @ToString.Exclude
     @OneToOne
-    private DopingFile dopingFile;
+    private CoachCategoryFile categoryFile;
 
     @ToString.Exclude
     @ManyToOne

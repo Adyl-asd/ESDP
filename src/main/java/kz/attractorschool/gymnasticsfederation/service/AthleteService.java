@@ -127,7 +127,7 @@ public class AthleteService {
 
     public boolean isPdf(MultipartFile multipartFile){
         String name = multipartFile.getOriginalFilename();
-        String format = name.split("\\.")[1];
+        String format = name.split("\\.")[2];
         return format.equals("pdf");
     }
 
@@ -197,7 +197,7 @@ public class AthleteService {
 
     public List<Coach> coaches(Integer id){
         Athlete athlete = findOne(id);
-        List<AthletesCoaches> coachesAthletes = athletesCoachesRepository.findAllByAthleteIdAAndSchoolId(id, athlete.getSchool().getId());
+        List<AthletesCoaches> coachesAthletes = athletesCoachesRepository.findAllByAthleteIdAndSchoolId(id, athlete.getSchool().getId());
         List<Coach> coaches = new ArrayList<>();
         for (int i = 0; i < coachesAthletes.size(); i++) {
             if (coachesAthletes.get(i).getFinishDate() == null){
@@ -226,6 +226,20 @@ public class AthleteService {
         athletesCoaches.setFinishDate(LocalDate.now());
         athletesCoachesRepository.save(athletesCoaches);
         return AthleteDTO.from(athlete);
+    }
+
+    public List<Coach> universalCoaches(AthleteDTO athleteDTO){
+        Athlete athlete = findOne(athleteDTO.getId());
+        List<Coach> coaches = coachService.getByDisciplineAndSchool(athleteDTO);
+        List<Coach> universalCoaches = new ArrayList<>();
+        for (int i = 0; i < coaches.size(); i++) {
+            for (int j = 0; j < athlete.getCoaches().size(); j++) {
+                if (!athlete.getCoaches().get(j).equals(coaches.get(i))){
+                    universalCoaches.add(coaches.get(i));
+                }
+            }
+        }
+        return universalCoaches;
     }
 
 }

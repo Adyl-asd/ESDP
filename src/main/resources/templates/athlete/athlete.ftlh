@@ -199,17 +199,19 @@
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Дата начала - дата окончания</h6>
                                             <#list dates as d>
-                                                <p>#{d.registerDate} - #{d.finishDate}</p>
+                                                <p>${d.registerDate} - <#if d.finishDate??>${d.finishDate}</#if></p>
                                             </#list>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <#list coaches as c>
-                                                <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
-                                                <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
-                                                    <button class="btn btn-danger mt-1">Удалить тренера</button>
-                                                </form>
-                                                <a href="/athlete/${athlete.id}/coach"><div class="btn btn-primary">Добавить тренера</div></a>
-                                            </#list>
+                                            <#if coaches??>
+                                                <#list coaches as c>
+                                                    <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
+                                                    <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
+                                                        <button class="btn btn-danger mt-1">Удалить тренера</button>
+                                                    </form>
+                                                </#list>
+                                            </#if>
+                                            <a href="/athlete/${athlete.id}/coach"><div class="btn btn-primary">Добавить тренера</div></a>
                                         </div>
                                     </div>
                                     <hr>
@@ -249,11 +251,11 @@
             </div>
 
             <#--Метод для подвтерждения регистрации спортсмена-->
-            <#if athlete.status.equals("НА_РАССМОТРЕНИИ")>
+            <#if athlete.status == "НА_РАССМОТРЕНИИ">
                 <form action="/athlete/${athlete.id}/confirm" method="post">
                     <button type="submit" class="btn btn-primary mt-1">Подтвердить регистрацию</button>
                 </form>
-            <#elseif athlete.status.equals("ИСТЕК") || athlete.status.equals("НЕАКТИВНЫЙ")>
+            <#elseif athlete.status == "ИСТЕК" || athlete.status == "НЕАКТИВНЫЙ">
                 <form action="/athlete/${athlete.id}/register" method="post">
                     <button type="submit" class="btn btn-primary mt-1">Продлить регистрацию</button>
                 </form>

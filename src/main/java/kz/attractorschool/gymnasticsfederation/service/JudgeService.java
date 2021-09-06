@@ -90,7 +90,7 @@ public class JudgeService {
 
     public boolean isPdf(MultipartFile multipartFile){
         String name = multipartFile.getOriginalFilename();
-        String format = name.split("\\.")[1];
+        String format = name.split("\\.")[2];
         return format.equals("pdf");
     }
 

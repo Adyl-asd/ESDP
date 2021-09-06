@@ -60,10 +60,10 @@ public class AthleteController {
                       @RequestParam("dopingFile")MultipartFile dopingFile,
                       @RequestParam("rankFile")MultipartFile rankFile){
         attributes.addFlashAttribute("athleteDTO", athleteDTO);
-//        if (result.hasFieldErrors()){
-//            attributes.addFlashAttribute("errors", result.getFieldErrors());
-//            return "redirect:/athlete";
-//        }
+        if (result.hasFieldErrors()){
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/athlete";
+        }
         if (!service.isPdf(registryFile) || !service.isPdf(medicalFile) ||
         !service.isPdf(dopingFile) || !service.isPdf(rankFile)){
             attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
@@ -161,7 +161,7 @@ public class AthleteController {
         return "redirect:/athlete/" + dto.getId();
     }
 
-    @PostMapping("/athlete/{id}/confirm")
+    @PostMapping("/{id}/confirm")
     public String confirm(@PathVariable Integer id){
         service.confirm(id);
         return "redirect:/athlete/" + id;
@@ -182,10 +182,10 @@ public class AthleteController {
                            @RequestParam("rankFile")MultipartFile rankFile,
                            BindingResult result, RedirectAttributes attributes){
         attributes.addFlashAttribute("athleteDTO", athleteDTO);
-//        if (result.hasFieldErrors()){
-//            attributes.addFlashAttribute("errors", result.getFieldErrors());
-//            return "redirect:/athlete";
-//        }
+        if (result.hasFieldErrors()){
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/athlete";
+        }
         if (!service.isPdf(medicalFile) || !service.isPdf(dopingFile) || !service.isPdf(rankFile)){
             attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
             return "redirect:/athlete/" + id + "/register";
@@ -204,14 +204,14 @@ public class AthleteController {
     public String addCoach(@PathVariable Integer id, Model model){
         AthleteDTO athleteDTO = service.getOne(id);
         model.addAttribute("athlete", athleteDTO);
-        model.addAttribute("coaches", coachService.getByDisciplineAndSchool(athleteDTO));
+        model.addAttribute("coaches", service.universalCoaches(athleteDTO));
         return "athlete/add_coach";
     }
 
     @PostMapping("/{id}/coach")
     public String addCoach(@PathVariable Integer id, @RequestParam Integer coachId){
         service.addCoach(id, coachId);
-        return "athlete/add_coach";
+        return "redirect:/athlete/" + id;
     }
 
     @PostMapping("/{id}/coach/{coachId}/delete")

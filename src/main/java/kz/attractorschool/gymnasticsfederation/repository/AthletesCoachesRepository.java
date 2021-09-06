@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface AthletesCoachesRepository extends JpaRepository<AthletesCoaches, Integer> {
-    List<AthletesCoaches> findAllByAthleteIdAAndSchoolId(Integer athleteId, Integer schoolId);
+    List<AthletesCoaches> findAllByAthleteIdAndSchoolId(Integer athleteId, Integer schoolId);
     Optional<AthletesCoaches> findByAthleteIdAndCoachIdAndSchoolId(Integer athleteId, Integer coachId, Integer schoolId);
 }

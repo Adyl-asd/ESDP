@@ -20,6 +20,7 @@ public class FrontendController {
     JudgeCategoryService judgeCategoryService;
     CoachCategoryService coachCategoryService;
     RankService rankService;
+    private PersonService personService;
 
 
     @GetMapping
@@ -64,6 +65,12 @@ public class FrontendController {
         model.addAttribute("ranks", ranks);
         model.addAttribute("disciplines", disciplines);
         return "athlete/athletes";
+    }
+
+    @GetMapping("/persons")
+    public String persons(Model model){
+        model.addAttribute("persons", personService.all());
+        return "person/all";
     }
 
     @GetMapping("/competitions/add")

@@ -54,6 +54,7 @@
 
         <button type="submit" class="btn btn-primary mt-1">Изменить</button>
     </form>
+    </div>
 
     <#if errors??>
         <#list errors as e>

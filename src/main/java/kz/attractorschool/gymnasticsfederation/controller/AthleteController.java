@@ -116,10 +116,10 @@ public class AthleteController {
                          @RequestParam("dopingFile")MultipartFile dopingFile,
                          @RequestParam("rankFile")MultipartFile rankFile){
         attributes.addFlashAttribute("athleteDTO", athleteDTO);
-//        if (result.hasFieldErrors()){
-//            attributes.addFlashAttribute("errors", result.getFieldErrors());
-//            return "redirect:/athlete/" + id + "/update";
-//        }
+        if (result.hasFieldErrors()){
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/athlete/" + id + "/update";
+        }
         if (registryFile != null && !registryFile.isEmpty()) {
             if (!service.isPdf(registryFile)){
                 attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");

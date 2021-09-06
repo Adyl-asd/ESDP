@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @Builder
@@ -16,16 +18,16 @@ import javax.validation.constraints.NotNull;
 public class JudgeCategoryDTO {
     private Integer id;
 
-    @NotNull
-    @Min(1)
-    private Integer number;
+    @NotBlank
+    @Size(min = 1, message = "Вы ввели пустое значение")
+    private String name;
 
     private boolean isDel;
 
     public static JudgeCategoryDTO from(JudgeCategory judgeCategory){
         return JudgeCategoryDTO.builder()
                 .id(judgeCategory.getId())
-                .number(judgeCategory.getNumber())
+                .name(judgeCategory.getName())
                 .isDel(judgeCategory.isDel())
                 .build();
     }

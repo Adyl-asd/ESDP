@@ -33,7 +33,7 @@ public class JudgeCategoryService {
 
     public JudgeCategoryDTO add(JudgeCategoryDTO judgeCategoryDTO){
         JudgeCategory judgeCategory = repository.save(JudgeCategory.builder()
-                .number(judgeCategoryDTO.getNumber())
+                .name(judgeCategoryDTO.getName())
                 .build());
         return JudgeCategoryDTO.from(judgeCategory);
     }
@@ -47,7 +47,7 @@ public class JudgeCategoryService {
 
     public JudgeCategoryDTO update(JudgeCategoryDTO judgeCategoryDTO, Integer id){
         JudgeCategory judgeCategory = findOne(id);
-        judgeCategory.setNumber(judgeCategoryDTO.getNumber());
+        judgeCategory.setName(judgeCategoryDTO.getName());
         repository.save(judgeCategory);
         return JudgeCategoryDTO.from(judgeCategory);
     }

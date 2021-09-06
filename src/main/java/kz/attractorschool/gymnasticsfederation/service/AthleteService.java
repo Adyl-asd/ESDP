@@ -232,6 +232,9 @@ public class AthleteService {
         Athlete athlete = findOne(athleteDTO.getId());
         List<Coach> coaches = coachService.getByDisciplineAndSchool(athleteDTO);
         List<Coach> universalCoaches = new ArrayList<>();
+        if (athlete.getCoaches().size() == 0){
+            universalCoaches.addAll(coaches);
+        }
         for (int i = 0; i < coaches.size(); i++) {
             for (int j = 0; j < athlete.getCoaches().size(); j++) {
                 if (!athlete.getCoaches().get(j).equals(coaches.get(i))){

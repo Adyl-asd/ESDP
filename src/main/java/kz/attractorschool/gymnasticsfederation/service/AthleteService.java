@@ -127,7 +127,8 @@ public class AthleteService {
 
     public boolean isPdf(MultipartFile multipartFile){
         String name = multipartFile.getOriginalFilename();
-        String format = name.split("\\.")[2];
+        String [] words = name.split("\\.");
+        String format = words[words.length - 1];
         return format.equals("pdf");
     }
 
@@ -153,7 +154,6 @@ public class AthleteService {
     }
 
     public AthleteDTO checkStatus (Athlete athlete){
-        System.out.println(athlete.getRegistryDate().plusMonths(12));
         if (athlete.getRegistryDate().plusMonths(12).isBefore(LocalDate.now())) {
             athlete.setStatus(Status.ИСТЕК.toString());
             repository.save(athlete);

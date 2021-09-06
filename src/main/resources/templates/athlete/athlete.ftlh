@@ -198,9 +198,18 @@
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Дата начала - дата окончания</h6>
+                                            <#list dates as d>
+                                                <p>#{d.registerDate} - #{d.finishDate}</p>
+                                            </#list>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            ФИО тренера, ФИО тренера, ФИО тренера
+                                            <#list coaches as c>
+                                                <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
+                                                <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
+                                                    <button class="btn btn-danger mt-1">Удалить тренера</button>
+                                                </form>
+                                                <a href="/athlete/${athlete.id}/coach"><div class="btn btn-primary">Добавить тренера</div></a>
+                                            </#list>
                                         </div>
                                     </div>
                                     <hr>

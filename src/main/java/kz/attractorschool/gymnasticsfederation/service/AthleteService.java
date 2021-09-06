@@ -207,6 +207,16 @@ public class AthleteService {
         return coaches;
     }
 
+    public List<AthletesCoaches> coachesHistory(Integer id){
+        Athlete athlete = findOne(id);
+        List<AthletesCoaches> coaches = new ArrayList<>();
+        List<Coach> all = coaches(id);
+        for (int i = 0; i < all.size(); i++) {
+            coaches.add(athletesCoachesRepository.findByAthleteIdAndCoachIdAndSchoolId(id, all.get(i).getId(), athlete.getSchool().getId()).orElseThrow());
+        }
+        return coaches;
+    }
+
     public AthleteDTO deleteCoach(Integer id, Integer coachId){
         Athlete athlete = findOne(id);
         Coach coach = coachService.findOne(coachId);

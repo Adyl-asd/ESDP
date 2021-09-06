@@ -86,6 +86,7 @@ public class AthleteController {
         AthleteDTO athleteDTO = service.checkStatus(service.findOne(id));
         model.addAttribute("athlete", athleteDTO);
         model.addAttribute("coaches", service.coaches(id));
+        model.addAttribute("dates", service.coachesHistory(id));
         return "athlete/athlete";
     }
 

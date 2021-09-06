@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class AthleteService {
     private final RankFileRepository rankFileRepository;
     private final MedicalFileRepository medicalFileRepository;
     private final RegistryFileRepository registryFileRepository;
+    private final CoachService coachService;
+    private final AthletesCoachesRepository athletesCoachesRepository;
 
     public List<Athlete> all(){
         List<Athlete> athletes = repository.findAll();
@@ -180,4 +183,39 @@ public class AthleteService {
         repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
+
+    public AthleteDTO addCoach(Integer id, Integer coachId){
+        Athlete athlete = findOne(id);
+        Coach coach = coachService.findOne(coachId);
+        athletesCoachesRepository.save(AthletesCoaches.builder()
+                        .athlete(athlete)
+                        .coach(coach)
+                        .school(athlete.getSchool())
+                .build());
+        return AthleteDTO.from(athlete);
+    }
+
+    public List<Coach> coaches(Integer id){
+        Athlete athlete = findOne(id);
+        List<AthletesCoaches> coachesAthletes = athletesCoachesRepository.findAllByAthleteIdAAndSchoolId(id, athlete.getSchool().getId());
+        List<Coach> coaches = new ArrayList<>();
+        for (int i = 0; i < coachesAthletes.size(); i++) {
+            if (coachesAthletes.get(i).getFinishDate() == null){
+                coaches.add(coachesAthletes.get(i).getCoach());
+            }
+        }
+        return coaches;
+    }
+
+    public AthleteDTO deleteCoach(Integer id, Integer coachId){
+        Athlete athlete = findOne(id);
+        Coach coach = coachService.findOne(coachId);
+        AthletesCoaches athletesCoaches = athletesCoachesRepository.findByAthleteIdAndCoachIdAndSchoolId(id, coachId, athlete.getSchool().getId()).orElseThrow(()->{
+            return new ResourceNotFoundException("Запись о тренере и спортсмене", 0);
+        });
+        athletesCoaches.setFinishDate(LocalDate.now());
+        athletesCoachesRepository.save(athletesCoaches);
+        return AthleteDTO.from(athlete);
+    }
+
 }

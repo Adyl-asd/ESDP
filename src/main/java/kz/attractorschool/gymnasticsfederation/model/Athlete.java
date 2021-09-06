@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Table(name = "athletes")
@@ -76,9 +77,9 @@ public class Athlete {
     @Builder.Default
     private boolean isDel = false;
 
-//    @ManyToMany
-//    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
-//    private List<Coach> coaches;
+    @ManyToMany
+    @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
+    private List<Coach> coaches;
 
     //гос награды?
 }

@@ -1,38 +1,36 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
-
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
-@Table(name = "athletes_coaches")
+@Table(name = "competition_programs")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AthletesCoaches {
+public class CompetitionProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    private Athlete athlete;
-
-    @OneToOne
-    private Coach coach;
-
-    @OneToOne
-    private School school;
+    @Column
+    @NotNull
+    private String name;
 
     @Column
+    @NotNull
     @Builder.Default
-    private LocalDate registerDate = LocalDate.now();
+    private boolean isDel = false;
 
     @Column
-    private LocalDate finishDate;
+    private String type;
+
+    @ManyToOne
+    private Discipline discipline;
 }

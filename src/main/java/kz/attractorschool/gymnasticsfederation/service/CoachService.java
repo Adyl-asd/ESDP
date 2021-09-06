@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
+import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CoachAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CoachDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CoachUpdateDTO;
@@ -94,5 +95,10 @@ public class CoachService {
         String name = multipartFile.getOriginalFilename();
         String format = name.split("\\.")[1];
         return format.equals("pdf");
+    }
+
+    public List<Coach> getByDisciplineAndSchool(AthleteDTO athleteDTO){
+        return coachRepository.findAllBySchoolIdAndDisciplineId(athleteDTO.getSchool().getId(),
+                athleteDTO.getDiscipline().getId());
     }
 }

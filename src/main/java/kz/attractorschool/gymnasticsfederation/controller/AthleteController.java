@@ -33,6 +33,7 @@ public class AthleteController {
     private final DisciplineService disciplineService;
     private final PersonService personService;
     private final FileSystemStorageService fileSystemStorageService;
+    private final CoachService coachService;
 
 
     @GetMapping("/all")
@@ -84,6 +85,7 @@ public class AthleteController {
     public String one(@PathVariable Integer id, Model model){
         AthleteDTO athleteDTO = service.checkStatus(service.findOne(id));
         model.addAttribute("athlete", athleteDTO);
+        model.addAttribute("coaches", service.coaches(id));
         return "athlete/athlete";
     }
 
@@ -197,19 +199,25 @@ public class AthleteController {
         return "redirect:/athlete/" + id;
     }
 
-    //    @GetMapping("/{id}/coach")
-//    public String addCoach(@PathVariable Integer id, Model model){
-//        AthleteDTO athleteDTO = service.getOne(id);
-//        model.addAttribute("athlete", athleteDTO);
-////        model.addAttribute("coaches", coachService.getByDisciplineAndSchool(athleteDTO));
-//        return "athlete/add_coach";
-//    }
-//
-//    @PostMapping("/{id}/coach")
-//    public String addCoach(@PathVariable Integer id, @RequestParam Integer coachId){
-//        service.addCoach(id, coachId);
-//        return "athlete/add_coach";
-//    }
+    @GetMapping("/{id}/coach")
+    public String addCoach(@PathVariable Integer id, Model model){
+        AthleteDTO athleteDTO = service.getOne(id);
+        model.addAttribute("athlete", athleteDTO);
+        model.addAttribute("coaches", coachService.getByDisciplineAndSchool(athleteDTO));
+        return "athlete/add_coach";
+    }
+
+    @PostMapping("/{id}/coach")
+    public String addCoach(@PathVariable Integer id, @RequestParam Integer coachId){
+        service.addCoach(id, coachId);
+        return "athlete/add_coach";
+    }
+
+    @PostMapping("/{id}/coach/{coachId}/delete")
+    public String deleteCoach(@PathVariable Integer id, @PathVariable Integer coachId){
+        AthleteDTO athleteDTO = service.deleteCoach(id, coachId);
+        return "redirect:/athlete/" + id;
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)

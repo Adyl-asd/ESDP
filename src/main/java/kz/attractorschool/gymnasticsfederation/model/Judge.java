@@ -3,11 +3,7 @@ package kz.attractorschool.gymnasticsfederation.model;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.JudgeCategoryFile;
-import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -22,9 +18,11 @@ public class Judge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ToString.Exclude
     @ManyToOne
     private Person person;
 
+    @ToString.Exclude
     @ManyToOne
     private School school;
 
@@ -32,15 +30,19 @@ public class Judge {
     @NotNull
     private String registryNumber;
 
+    @ToString.Exclude
     @OneToOne
     private DopingFile dopingFile;
 
+    @ToString.Exclude
     @ManyToOne
     private Discipline discipline;
 
+    @ToString.Exclude
     @ManyToOne
     private JudgeCategory category;
 
+    @ToString.Exclude
     @OneToOne
     private JudgeCategoryFile categoryFile;
 

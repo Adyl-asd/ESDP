@@ -54,7 +54,7 @@
                             Судьи
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/judges">Список судей</a></li>
+                            <li><a class="dropdown-item" href="/judge/all">Список судей</a></li>
                             <li><a class="dropdown-item" href="/judge">Добавить судей</a></li>
                             <li><a class="dropdown-item" href="/judges/categories">Категории судей</a></li>
                         </ul>

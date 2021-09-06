@@ -5,7 +5,7 @@
 
     <h1>Изменить тренера</h1>
 
-    <form action="/judges/${judge.id}/update" method="post" enctype="multipart/form-data">
+    <form action="/judge/${judge.id}/update" method="post" enctype="multipart/form-data">
 
         <#--Выбор школы-->
         <div class="row">

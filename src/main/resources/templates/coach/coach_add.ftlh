@@ -65,10 +65,10 @@
     </form>
 
     <#if errors??>
-        <#list errors as e>
-            <h2>${e}</h2>
+        <#list errors as fieldError>
+            <h2>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</h2>
         </#list>
-    <#elseif fileError??>
-        <h2>${fileError}</h2>
+    <#elseif filesError??>
+        <h2>${filesError}</h2>
     </#if>
 </@main.renderWith>

@@ -6,6 +6,7 @@ import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,9 +37,13 @@ public class CoachController {
     @PostMapping
     public String add(@Valid CoachAddDTO coachAddDTO,
                       RedirectAttributes attributes,
+                      BindingResult result,
                       @RequestParam("categoryFile") MultipartFile categoryFile) {
         attributes.addFlashAttribute("coachDTO", coachAddDTO);
-
+        if (result.hasFieldErrors()){
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/coach";
+        }
         if (!coachService.isPdf(categoryFile)) {
             attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
             return "redirect:/coach";

@@ -54,6 +54,10 @@ public class JudgeController {
                       @RequestParam("dopingFile")MultipartFile dopingFile,
                       @RequestParam("categoryFile")MultipartFile categoryFile){
         attributes.addFlashAttribute("judgeDTO", judgeAddDTO);
+        if (result.hasFieldErrors()){
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/judge";
+        }
         if (!service.isPdf(dopingFile) || !service.isPdf(categoryFile)){
             attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
             return "redirect:/judge";

@@ -63,6 +63,7 @@
 
         <button type="submit" class="btn btn-primary mt-1">Добавить</button>
     </form>
+    </div>
 
     <#if errors??>
         <#list errors as fieldError>

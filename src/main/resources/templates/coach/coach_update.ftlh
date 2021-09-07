@@ -12,7 +12,7 @@
             <div class="col">
                 <label for="school" class="form-label fs-4">Школа</label>
                 <select name="schoolId" class="form-select" id="school">
-                    <option selected>Выберите школу</option>
+                    <option selected value="${coach.school.id}">${coach.school.name}</option>
                     <#list schools as s>
                         <option value="${s.id}">${s.name}</option>
                     </#list>
@@ -25,7 +25,7 @@
             <div class="col">
                 <label for="discipline" class="form-label fs-4">Дисциплина</label>
                 <select name="disciplineId" class="form-select" id="discipline">
-                    <option selected>Выберите дисциплину</option>
+                    <option selected value="${coach.discipline.id}">${coach.discipline.name}</option>
                     <#list disciplines as d>
                         <option value="${d.id}">${d.name}</option>
                     </#list>
@@ -34,7 +34,7 @@
             <div class="col">
                 <label for="category" class="form-label fs-4">Категория</label>
                 <select name="categoryId" class="form-select" id="category">
-                    <option selected>Выберите категорию</option>
+                    <option selected value="${coach.category.id}">${coach.category.name}</option>
                     <#list categories as c>
                         <option value="${c.id}">${c.name}</option>
                     </#list>
@@ -58,9 +58,9 @@
 
     <#if errors??>
         <#list errors as e>
-            <h2>${e}</h2>
+            <h2>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</h2>
         </#list>
-    <#elseif fileError??>
-        <h2>${fileError}</h2>
+    <#elseif filesError??>
+        <h2>${filesError}</h2>
     </#if>
 </@main.renderWith>

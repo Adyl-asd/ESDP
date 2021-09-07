@@ -94,5 +94,4 @@ public class JudgeService {
         String format = words[words.length - 1];
         return format.equals("pdf");
     }
-
 }

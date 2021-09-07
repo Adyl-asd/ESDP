@@ -98,6 +98,7 @@ public class AthleteController {
 
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model){
+        model.addAttribute("athlete", service.getOne(id));
         model.addAttribute("schools", schoolService.all());
         model.addAttribute("ranks", rankService.all());
         model.addAttribute("disciplines", disciplineService.all());

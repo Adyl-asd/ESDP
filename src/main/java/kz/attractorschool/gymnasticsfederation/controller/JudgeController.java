@@ -54,10 +54,10 @@ public class JudgeController {
                       @RequestParam("dopingFile")MultipartFile dopingFile,
                       @RequestParam("categoryFile")MultipartFile categoryFile){
         attributes.addFlashAttribute("judgeDTO", judgeAddDTO);
-        if (result.hasFieldErrors()){
-            attributes.addFlashAttribute("errors", result.getFieldErrors());
-            return "redirect:/judge";
-        }
+//        if (result.hasFieldErrors()){
+//            attributes.addFlashAttribute("errors", result.getFieldErrors());
+//            return "redirect:/judge";
+//        }
         if (!service.isPdf(dopingFile) || !service.isPdf(categoryFile)){
             attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
             return "redirect:/judge";
@@ -85,6 +85,7 @@ public class JudgeController {
 
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model model){
+        model.addAttribute("judge", service.getOne(id));
         model.addAttribute("schools", schoolService.all());
         model.addAttribute("categories", categoryService.all());
         model.addAttribute("disciplines", disciplineService.all());
@@ -98,19 +99,9 @@ public class JudgeController {
                          @Valid JudgeUpdateDTO judgeUpdateDTO,
                          BindingResult result,
                          RedirectAttributes attributes,
-                         @RequestParam("dopingFile")MultipartFile dopingFile,
                          @RequestParam("categoryFile")MultipartFile categoryFile){
         attributes.addFlashAttribute("judgeDTO", judgeUpdateDTO);
-        if(dopingFile != null && !dopingFile.isEmpty()){
-            if (!service.isPdf(dopingFile)){
-                attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
-                return "redirect:/judge/" + id + "/update";
-            }
-            DopingFile doping = new DopingFile(dopingFile.getOriginalFilename());
-            fileSystemStorageService.store(dopingFile);
-            service.updateFile(id, doping);
-        }
-        else if (categoryFile != null && !categoryFile.isEmpty()){
+        if (categoryFile != null && !categoryFile.isEmpty()){
             if (!service.isPdf(categoryFile)){
                 attributes.addFlashAttribute("filesError", "Все файлы должны быть в формате PDF");
                 return "redirect:/judge/" + id + "/update";
@@ -121,7 +112,7 @@ public class JudgeController {
         }
 
         JudgeDTO dto = service.update(id, judgeUpdateDTO);
-        return "redirect:/judges/" + dto.getId();
+        return "redirect:/judge/" + dto.getId();
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

@@ -42,8 +42,7 @@ create table `judge_category_files`(
    primary key (`id`)
 );
 
-CREATE TABLE `persons`
-(
+CREATE TABLE `persons`(
     `id`      INT auto_increment NOT NULL,
     `surname`    varchar(128)       NOT NULL,
     `name`    varchar(128)       NOT NULL,

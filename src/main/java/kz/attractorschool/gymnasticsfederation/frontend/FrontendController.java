@@ -15,11 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class FrontendController {
 
-    DisciplineService disciplineService;
-    AthleteService athleteService;
-    JudgeCategoryService judgeCategoryService;
-    CoachCategoryService coachCategoryService;
-    RankService rankService;
+    private DisciplineService disciplineService;
+    private AthleteService athleteService;
+    private JudgeCategoryService judgeCategoryService;
+    private CoachCategoryService coachCategoryService;
+    private RankService rankService;
     private PersonService personService;
 
 

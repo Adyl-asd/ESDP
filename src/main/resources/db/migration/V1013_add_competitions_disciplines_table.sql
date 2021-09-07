@@ -1,7 +1,6 @@
 use `esdp`;
 
-CREATE TABLE `competitions_disciplines`
-(
+CREATE TABLE `competitions_disciplines`(
     `id`      INT auto_increment NOT NULL,
     `competition_id` int not null references `competitions` (`id`),
     `discipline_id` int not null references `disciplines`(`id`),

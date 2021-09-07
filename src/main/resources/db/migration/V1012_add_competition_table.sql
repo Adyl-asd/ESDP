@@ -7,8 +7,7 @@ create table `competition_position_files`(
     primary key (`id`)
 );
 
-CREATE TABLE `competitions`
-(
+CREATE TABLE `competitions`(
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,
     `creation_date` date not null,

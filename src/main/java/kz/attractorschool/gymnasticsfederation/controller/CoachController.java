@@ -17,7 +17,6 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RequestMapping("/coach")
 public class CoachController {
-
     private final CoachService coachService;
     private final SchoolService schoolService;
     private final CoachCategoryService coachCategoryService;
@@ -79,6 +78,7 @@ public class CoachController {
     @GetMapping("/{id}/update")
     public String update(@PathVariable Integer id,
                          Model model) {
+        model.addAttribute("coach", coachService.getOne(id));
         model.addAttribute("schools", schoolService.all());
         model.addAttribute("categories", coachCategoryService.all());
         model.addAttribute("disciplines", disciplineService.all());

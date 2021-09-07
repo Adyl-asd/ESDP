@@ -1,7 +1,6 @@
 use `esdp`;
 
-CREATE TABLE `athletes`
-(
+CREATE TABLE `athletes`(
     `id` int auto_increment not null,
     `person_id` int not null references `persons` (`id`),
     `school_id` int not null references `schools` (`id`),

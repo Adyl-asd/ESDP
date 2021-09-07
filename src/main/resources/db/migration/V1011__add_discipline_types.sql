@@ -1,7 +1,6 @@
 use `esdp`;
 
-CREATE TABLE `discipline_types`
-(
+CREATE TABLE `discipline_types`(
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,
     `is_del` boolean default false,
@@ -28,8 +27,7 @@ insert into `discipline_types` (name, discipline_id) values
     ('Группы', 5),
     ('Гимнастическая платформа', 5);
 
-CREATE TABLE `competition_programs`
-(
+CREATE TABLE `competition_programs`(
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,
     `is_del` boolean default false,
@@ -79,8 +77,7 @@ insert into `competition_programs` (name, discipline_id) values
     ('Многоборье', 4),
     ('Финал в отдельных видах', 4);
 
-CREATE TABLE `age_categories`
-(
+CREATE TABLE `age_categories`(
     `id`      INT auto_increment NOT NULL,
     `min_year` integer,
     `max_year` integer,

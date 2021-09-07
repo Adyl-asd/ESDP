@@ -58,7 +58,6 @@ insert into `judge_categories` (name) values
 insert into `federations` (name, director, address, email, password, phone) values
     ('Федерация гимнастики г. Алматы', 'Токарева Анна', 'г. Алматы, ул. Сатпаева', 'federation1@gym.kz', '12345678', '87077078787');
 
-
 insert into `schools` (name, director, address, email, password, phone, federation_id) values
     ('Школа гимнастики №1', 'Кутушова Гульшат', 'г. Алматы, ул. Сатпаева', 'school1@gym.kz', '12345678', '87077078787', 1),
     ('Школа гимнастики №2', 'Смирнова Наталья', 'г. Алматы, ул. Абая', 'school2@gym.kz', '12345678', '87077078787', 1),

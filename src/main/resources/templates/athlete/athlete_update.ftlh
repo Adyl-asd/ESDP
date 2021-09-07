@@ -14,7 +14,7 @@
                     <div class="col">
                         <label for="school" class="form-label fs-4">Школа</label>
                         <select name="schoolId" class="form-select" id="school">
-                            <option selected>Выберите школу</option>
+                            <option selected value="${athlete.school.id}">${athlete.school.name}</option>
                             <#list schools as s>
                                 <option value="${s.id}">${s.name}</option>
                             </#list>
@@ -27,7 +27,7 @@
                     <div class="col">
                         <label for="discipline" class="form-label fs-4">Дисциплина</label>
                         <select name="disciplineId" class="form-select" id="discipline">
-                            <option selected>Выберите дисциплину</option>
+                            <option selected value="${athlete.discipline.id}">${athlete.discipline.name}</option>
                             <#list disciplines as d>
                                 <option value="${d.id}">${d.name}</option>
                             </#list>
@@ -36,7 +36,7 @@
                     <div class="col">
                         <label for="rank" class="form-label fs-4">Разряд</label>
                         <select name="rankId" class="form-select" id="rank">
-                            <option selected>Выберите разряд</option>
+                            <option selected value="${athlete.rank.id}">${athlete.rank.name}</option>
                             <#list ranks as r>
                                 <option value="${r.id}">${r.name}</option>
                             </#list>
@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-4">
                         <label for="registryDate" class="form-label fs-4">Дата регистрации спортсмена</label>
-                        <input type="date" name="registryDate" value="test" class="form-control" id="registryDate">
+                        <input type="date" name="registryDate" value="${athlete.registryDate}" class="form-control" id="registryDate">
                     </div>
                     <div class="col">
                         <label for="registryFile" class="form-label fs-4">Файл подтверждения регистрации спортсмена</label>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-1">Добавить</button>
+                <button type="submit" class="btn btn-primary mt-1">Изменить</button>
             </form>
         </div>
     </div>
@@ -82,7 +82,7 @@
 
     <#if errors??>
         <#list errors as e>
-            <h2>${e}</h2>
+            <h2>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</h2>
         </#list>
         <h2></h2>
     </#if>

@@ -1,7 +1,6 @@
 use `esdp`;
 
-CREATE TABLE `athletes_coaches`
-(
+CREATE TABLE `athletes_coaches`(
     `id`      INT auto_increment NOT NULL,
     `coach_id` INT NOT NULL,
     `athlete_id` INT NOT NULL ,

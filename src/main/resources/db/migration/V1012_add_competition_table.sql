@@ -20,6 +20,7 @@ CREATE TABLE `competitions`
     `area_name`    varchar(128)       NOT NULL,
     `contact`    varchar(128)       NOT NULL,
     `phone`    varchar(128)       NOT NULL,
+    `discipline_id` int not null references `disciplines`(`id`),
     `status`    varchar(128)       NOT NULL,
     `competition_position_file_id` int not null references `competition_position_files` (`id`),
     `is_del` boolean default false,

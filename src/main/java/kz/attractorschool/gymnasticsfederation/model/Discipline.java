@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "disciplines")
@@ -27,4 +29,16 @@ public class Discipline {
     @NotNull
     @Builder.Default
     private boolean isDel = false;
+
+    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+    @Builder.Default
+    List<DisciplineType> disciplineTypes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+    @Builder.Default
+    List<CompetitionProgram> competitionPrograms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+    @Builder.Default
+    List<AgeCategories> ageCategories = new ArrayList<>();
 }

@@ -63,6 +63,9 @@ public class Competition {
     @NotNull
     private String phone;
 
+    @OneToOne
+    private Discipline discipline;
+
     @Column
     @NotNull
     @Builder.Default

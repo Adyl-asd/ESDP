@@ -16,7 +16,6 @@ import javax.validation.constraints.Size;
 public class CoachCategoryDTO {
     private Integer id;
 
-    @NotBlank
     @Size(min = 1, message = "Вы ввели пустое значение")
     private String name;
 

@@ -197,10 +197,14 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Дата начала - дата окончания</h6>
-                                            <#list dates as d>
-                                                <p>${d.registerDate} - <#if d.finishDate??>${d.finishDate}</#if></p>
-                                            </#list>
+<#--                                            <h6 class="mb-0">Дата начала - дата окончания</h6>-->
+<#--                                            <#list dates as d>-->
+<#--                                                <p>${d.registerDate} - <#if d.finishDate??>${d.finishDate}</#if></p>-->
+<#--                                                <a href="/coach/${d.coach.id}">${d.coach.person.name} ${d.coach.person.surname}</a>-->
+<#--                                                <form action="/athlete/${athlete.id}/coach/${d.coach.id}/delete" method="post">-->
+<#--                                                    <button class="btn btn-danger mt-1">Удалить тренера</button>-->
+<#--                                                </form>-->
+<#--                                            </#list>-->
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <#if coaches??>

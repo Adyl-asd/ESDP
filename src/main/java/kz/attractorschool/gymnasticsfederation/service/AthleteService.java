@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -228,10 +230,10 @@ public class AthleteService {
         return AthleteDTO.from(athlete);
     }
 
-    public List<Coach> universalCoaches(AthleteDTO athleteDTO){
+    public Set<Coach> universalCoaches(AthleteDTO athleteDTO){
         Athlete athlete = findOne(athleteDTO.getId());
         List<Coach> coaches = coachService.getByDisciplineAndSchool(athleteDTO);
-        List<Coach> universalCoaches = new ArrayList<>();
+        Set<Coach> universalCoaches = new HashSet<>();
         if (athlete.getCoaches().size() == 0){
             universalCoaches.addAll(coaches);
         }

@@ -85,8 +85,8 @@ public class AthleteController {
     public String one(@PathVariable Integer id, Model model){
         AthleteDTO athleteDTO = service.checkStatus(service.findOne(id));
         model.addAttribute("athlete", athleteDTO);
-        model.addAttribute("coaches", service.coaches(id));
-        model.addAttribute("dates", service.coachesHistory(id));
+        model.addAttribute("coaches", service.universalCoaches(athleteDTO));
+//        model.addAttribute("dates", service.coachesHistory(id));
         return "athlete/athlete";
     }
 

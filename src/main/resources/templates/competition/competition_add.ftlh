@@ -149,7 +149,7 @@
                                    type="button" value="Добавить" hidden>
 
                             <#--Разряд и возрастная категория-->
-                            <table class="table text-uppercase text-center table-bordered mt-3">
+                            <table class="table text-capitalize text-center table-bordered mt-3">
                                 <thead>
                                 <tr>
                                     <th scope="col">Разряд</th>

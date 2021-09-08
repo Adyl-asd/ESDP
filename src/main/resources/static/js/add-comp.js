@@ -25,7 +25,7 @@ function save_program() {
 
 
     const firstTable = `
-                                <tr>
+                                <tr class="first-table-row">
                                     <td>
                                         <div class="row">
                                             <div class="col">
@@ -41,12 +41,19 @@ function save_program() {
                                         </div>
 
                                     </td>
+                                    <td>
+                                        <div class="btn btn-danger delete-discipline-program-btn">Удалить</div>
+                                    </td>
                                 </tr>
 `
     $('#program_table_body').prepend(firstTable)
     typeAndProgramInput.attr("hidden", true)
     $("#save_program_btn").attr("hidden", true)
     $("#add_program_btn").removeAttr("hidden")
+
+    $('.delete-discipline-program-btn').on('click', function () {
+        $(this).closest('.first-table-row').remove();
+    })
 
 }
 
@@ -63,12 +70,15 @@ function save_age() {
     let compEndAge = $("#comp-end-age").val()
 
     const secondTable = `
-                                <tr>
+                                <tr class="second-table-row">
                                     <td>
                                         ${rank}
                                     </td>
                                     <td>
                                         ${compStartAge} - ${compEndAge}
+                                    </td>
+                                    <td>
+                                        <div class="btn btn-danger delete-rank-age-btn">Удалить</div>
                                     </td>
                                 </tr>
     `
@@ -77,6 +87,10 @@ function save_age() {
     ageAndRankInput.attr("hidden", true)
     $("#save_age_btn").attr("hidden", true)
     $("#add_age_btn").removeAttr("hidden")
+
+    $('.delete-rank-age-btn').on('click', function () {
+        $(this).closest('.second-table-row').remove();
+    })
 }
 
 function add_age() {

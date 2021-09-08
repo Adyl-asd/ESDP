@@ -49,6 +49,7 @@ function save_program() {
     $('#program_table_body').prepend(firstTable)
     typeAndProgramInput.attr("hidden", true)
     $("#save_program_btn").attr("hidden", true)
+    $("#cancel_program_btn").attr("hidden", true)
     $("#add_program_btn").removeAttr("hidden")
 
     $('.delete-discipline-program-btn').on('click', function () {
@@ -60,7 +61,16 @@ function save_program() {
 function add_program() {
     $("#add_program_btn").attr("hidden", true)
     $("#save_program_btn").removeAttr("hidden")
+    $("#cancel_program_btn").removeAttr("hidden")
     typeAndProgramInput.removeAttr("hidden")
+
+}
+
+function cancel_program() {
+    typeAndProgramInput.attr("hidden", true)
+    $("#save_program_btn").attr("hidden", true)
+    $("#add_program_btn").removeAttr("hidden")
+    $("#cancel_program_btn").attr("hidden", true)
 
 }
 
@@ -87,6 +97,7 @@ function save_age() {
     ageAndRankInput.attr("hidden", true)
     $("#save_age_btn").attr("hidden", true)
     $("#add_age_btn").removeAttr("hidden")
+    $("#cancel_age_btn").attr("hidden", true)
 
     $('.delete-rank-age-btn').on('click', function () {
         $(this).closest('.second-table-row').remove();
@@ -97,6 +108,14 @@ function add_age() {
     $("#add_age_btn").attr("hidden", true)
     $("#save_age_btn").removeAttr("hidden")
     ageAndRankInput.removeAttr("hidden")
+    $("#cancel_age_btn").removeAttr("hidden")
+}
+
+function cancel_age() {
+    ageAndRankInput.attr("hidden", true)
+    $("#save_age_btn").attr("hidden", true)
+    $("#add_age_btn").removeAttr("hidden")
+    $("#cancel_age_btn").attr("hidden", true)
 }
 
 

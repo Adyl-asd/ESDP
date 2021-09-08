@@ -145,6 +145,8 @@
                             </table>
                             <input id="save_program_btn" class="btn btn-primary mt-3" onclick="save_program()"
                                    type="button" value="Сохранить">
+                            <input id="cancel_program_btn" class="btn btn-danger mt-3" onclick="cancel_program()"
+                                   type="button" value="Отмена" hidden>
                             <input id="add_program_btn" class="btn btn-primary mt-3" onclick="add_program()"
                                    type="button" value="Добавить" hidden>
 
@@ -183,6 +185,8 @@
                             </table>
                             <input id="save_age_btn" class="btn btn-primary mt-3" onclick="save_age()"
                                    type="button" value="Сохранить">
+                            <input id="cancel_age_btn" class="btn btn-danger mt-3" onclick="cancel_age()"
+                                   type="button" value="Отмена" hidden>
                             <input id="add_age_btn" class="btn btn-primary mt-3" onclick="add_age()"
                                    type="button" value="Добавить" hidden>
                         </fieldset>

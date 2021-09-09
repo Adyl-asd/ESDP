@@ -15,12 +15,15 @@ import java.util.List;
 @AllArgsConstructor
 public class FrontendController {
 
-    private DisciplineService disciplineService;
-    private AthleteService athleteService;
-    private JudgeCategoryService judgeCategoryService;
-    private CoachCategoryService coachCategoryService;
-    private RankService rankService;
-    private PersonService personService;
+    private final DisciplineService disciplineService;
+    private final AthleteService athleteService;
+    private final JudgeCategoryService judgeCategoryService;
+    private final CoachCategoryService coachCategoryService;
+    private final RankService rankService;
+    private final PersonService personService;
+    private final DisciplineTypeService disciplineTypeService;
+    private final CompetitionProgramService competitionProgramService;
+
 
 
     @GetMapping
@@ -74,7 +77,11 @@ public class FrontendController {
     }
 
     @GetMapping("/competitions/add")
-    public String getCompForm() {
+    public String getCompForm(Model model) {
+        model.addAttribute("disciplines", disciplineService.all());
+        model.addAttribute("disciplineTypes", disciplineTypeService.all());
+        model.addAttribute("competitionPrograms", competitionProgramService.all());
+        model.addAttribute("ranks", rankService.all());
         return "competition/competition_add";
     }
 

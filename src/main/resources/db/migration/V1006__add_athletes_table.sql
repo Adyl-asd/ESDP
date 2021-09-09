@@ -10,6 +10,8 @@ CREATE TABLE `athletes`(
     `doping_file_id` int not null references `doping_files`(`id`),
     `status` varchar(128) not null,
     `registry_date` date not null,
+    `is_city_team` boolean not null,
+    `is_national_team` boolean not null,
     `discipline_id` int not null references `disciplines` (`id`),
     `rank_id` int not null references `ranks`(`id`),
     `rank_file_id` int not null references `rank_files`(`id`),

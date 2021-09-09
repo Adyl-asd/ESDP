@@ -36,4 +36,10 @@ public class AthleteAddDTO {
     @NotNull
     @Min(1)
     private Integer rankId;
+
+    @NotNull
+    private String isNationalTeam;
+
+    @NotNull
+    private String isCityTeam;
 }

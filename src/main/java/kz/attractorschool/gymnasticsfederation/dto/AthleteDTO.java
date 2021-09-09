@@ -25,6 +25,8 @@ public class AthleteDTO {
     @ToString.Exclude
     private RankDTO rank;
     private boolean isDel;
+    private boolean isNationalTeam;
+    private boolean isCityTeam;
 
 
     public static AthleteDTO from(Athlete athlete){
@@ -38,6 +40,8 @@ public class AthleteDTO {
                 .discipline(DisciplineDTO.from(athlete.getDiscipline()))
                 .rank(RankDTO.from(athlete.getRank()))
                 .isDel(athlete.isDel())
+                .isCityTeam(athlete.isCityTeam())
+                .isNationalTeam(athlete.isNationalTeam())
                 .build();
     }
 }

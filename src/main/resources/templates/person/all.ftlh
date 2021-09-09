@@ -18,7 +18,7 @@
                     </thead>
                     <tbody>
                     <#list persons as a>
-                        <tr class='clickable-row' data-href='/athlete/${a.id}'>
+                        <tr class='clickable-row' data-href='/person/${a.id}'>
                             <th scope="row">${a.id}</th>
                             <td>${a.surname}</td>
                             <td>${a.name}</td>

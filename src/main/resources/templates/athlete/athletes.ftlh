@@ -69,15 +69,17 @@
                     </thead>
                     <tbody>
                     <#list athletes as a>
-                        <tr class='clickable-row' data-href='/athlete/${a.id}'>
-                            <th scope="row">${a.id}</th>
-                            <td>${a.person.surname}</td>
-                            <td>${a.person.name}</td>
-                            <td>${a.discipline.name}</td>
-                            <td>${a.person.city}</td>
-                            <td>${a.person.gender}</td>
-                            <td>${a.rank.name}</td>
-                        </tr>
+                        <#if !a.isDel()>
+                            <tr class='clickable-row' data-href='/athlete/${a.id}'>
+                                <th scope="row">${a.id}</th>
+                                <td>${a.person.surname}</td>
+                                <td>${a.person.name}</td>
+                                <td>${a.discipline.name}</td>
+                                <td>${a.person.city}</td>
+                                <td>${a.person.gender}</td>
+                                <td>${a.rank.name}</td>
+                            </tr>
+                        </#if>
                     </#list>
                     </tbody>
                 </table>

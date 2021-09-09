@@ -3,6 +3,7 @@ package kz.attractorschool.gymnasticsfederation.controller;
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
+import kz.attractorschool.gymnasticsfederation.model.Person;
 import kz.attractorschool.gymnasticsfederation.service.FileSystemStorageService;
 import kz.attractorschool.gymnasticsfederation.service.PersonService;
 import kz.attractorschool.gymnasticsfederation.service.StorageService;
@@ -54,7 +55,11 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
+        Person person = service.findOne(id);
         model.addAttribute("person", service.getOne(id));
+        model.addAttribute("athletes", person.getAthletes());
+        model.addAttribute("coaches", person.getCoaches());
+        model.addAttribute("judges", person.getJudges());
         return "person/person";
     }
 

@@ -124,8 +124,8 @@
                                                         <a href="/judge/${a.id}">${a.discipline.name} ${a.category.name}</a>
                                                     </#if>
                                                 </#list>
+                                            </div>
                                         </div>
-                                    </div>
                                     <hr>
                                 </div>
                             </div>

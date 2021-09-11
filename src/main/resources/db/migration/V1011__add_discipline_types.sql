@@ -21,7 +21,8 @@ CREATE TABLE `discipline_types`(
 CREATE TABLE `genders`(
     `id`      INT auto_increment NOT NULL,
     `name`    varchar(128)       NOT NULL,
-    `is_del` boolean not null default false
+    `is_del` boolean not null default false,
+    PRIMARY KEY (`id`)
 );
 
 INSERT INTO `genders`(name) VALUES
@@ -106,7 +107,7 @@ insert into `age_categories` (min_year, max_year, rank_id, discipline_type_id) v
     (2012, 2010, 7, 2);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, discipline_id) values
+insert into `age_categories` (min_year, max_year, discipline_type_id) values
     (2006, 2013, 3),
     (2006, 2013, 4);
 
@@ -116,24 +117,24 @@ insert into `age_categories` (min_year, rank_id, discipline_type_id) values
     (2005, 3, 4);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id) values
+insert into `age_categories` (min_year, max_year, rank_id, discipline_type_id) values
     (2008, 2006, 4, 3),
     (2008, 2006, 4, 4);
 
 #худ инд и групп
-insert into `age_categories` (max_year, rank_id, discipline_id) values
+insert into `age_categories` (max_year, rank_id, discipline_type_id) values
     (2009, 5, 3),
     (2009, 5, 4);
 
 #батут гимн
-insert into `age_categories` (max_year, discipline_id) values
+insert into `age_categories` (max_year, discipline_type_id) values
     (2009, 5),
     (2009, 6),
     (2009, 7),
     (2009, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, max_year, discipline_id) values
+insert into `age_categories` (min_year, max_year, discipline_type_id) values
     (2008, 2007, 5),
     (2008, 2007, 6),
     (2008, 2007, 7),
@@ -148,14 +149,14 @@ insert into `age_categories` (min_year, max_year, discipline_id) values
     (2004, 2000, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, discipline_id) values
+insert into `age_categories` (min_year, discipline_type_id) values
     (2009, 5),
     (2009, 6),
     (2009, 7),
     (2009, 8);
 
 #спорт акроб
-insert into `age_categories` (max_year, discipline_id) values
+insert into `age_categories` (max_year, discipline_type_id) values
     (2006, 9),
     (2006, 10),
     (2006, 11),
@@ -168,7 +169,7 @@ insert into `age_categories` (max_year, discipline_id) values
     (2004, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, discipline_id) values
+insert into `age_categories` (min_year, discipline_type_id) values
     (2009, 9),
     (2009, 10),
     (2009, 11),
@@ -176,7 +177,7 @@ insert into `age_categories` (min_year, discipline_id) values
     (2009, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, max_year, discipline_id) values
+insert into `age_categories` (min_year, max_year, discipline_type_id) values
     (2009, 2003, 9),
     (2009, 2003, 10),
     (2009, 2003, 11),
@@ -189,7 +190,7 @@ insert into `age_categories` (min_year, max_year, discipline_id) values
     (2008, 2002, 13);
 
 #аэроб гимн
-insert into `age_categories` (min_year, discipline_id) values
+insert into `age_categories` (min_year, discipline_type_id) values
     (2002, 14),
     (2002, 15),
     (2002, 16),
@@ -199,7 +200,7 @@ insert into `age_categories` (min_year, discipline_id) values
     (2002, 20);
 
 #аэроб гимн
-insert into `age_categories` (min_year, max_year, discipline_id) values
+insert into `age_categories` (min_year, max_year, discipline_type_id) values
     (2003, 2005, 14),
     (2003, 2005, 15),
     (2003, 2005, 16),

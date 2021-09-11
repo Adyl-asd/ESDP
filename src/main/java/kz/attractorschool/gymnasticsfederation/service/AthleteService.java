@@ -69,6 +69,8 @@ public class AthleteService {
                 .person(person)
                 .school(school)
                 .registryNumber("001")
+                .isCityTeam(isTeam(athleteDTO.getIsCityTeam()))
+                .isNationalTeam(isTeam(athleteDTO.getIsNationalTeam()))
                 .registryFile(registry)
                 .medicalFile(medical)
                 .dopingFile(doping)
@@ -95,6 +97,8 @@ public class AthleteService {
         athlete.setDiscipline(discipline);
         athlete.setSchool(school);
         athlete.setRank(rank);
+        athlete.setNationalTeam(isTeam(athleteDTO.getIsNationalTeam()));
+        athlete.setCityTeam(isTeam(athleteDTO.getIsCityTeam()));
         repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
@@ -247,4 +251,7 @@ public class AthleteService {
         return universalCoaches;
     }
 
+    private boolean isTeam(String result){
+        return result.equals("да");
+    }
 }

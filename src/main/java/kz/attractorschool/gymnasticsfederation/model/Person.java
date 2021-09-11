@@ -2,14 +2,13 @@ package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "persons")
@@ -78,4 +77,19 @@ public class Person {
     @NotNull
     @Builder.Default
     private boolean isDel = false;
+
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @Builder.Default
+    List<Athlete> athletes = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @Builder.Default
+    List<Judge> judges = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    @Builder.Default
+    List<Coach> coaches = new ArrayList<>();
 }

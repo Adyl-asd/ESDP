@@ -73,6 +73,33 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <label for="national_team" class="form-label fs-4">Является членом национальной сборной</label>
+                        <select name="isNationalTeam" class="form-select" id="national_team">
+                            <#if athlete.isNationalTeam()>
+                                <option selected value="да">Да</option>
+                                <option value="нет">Нет</option>
+                            <#else>
+                                <option selected value="нет">Нет</option>
+                                <option value="да">Да</option>
+                            </#if>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="city_team" class="form-label fs-4">Является членом сборной города</label>
+                        <select name="isCityTeam" class="form-select" id="city_team">
+                            <#if athlete.isCityTeam()>
+                                <option selected value="да">Да</option>
+                                <option value="нет">Нет</option>
+                            <#else>
+                                <option selected value="нет">Нет</option>
+                                <option value="да">Да</option>
+                            </#if>
+                        </select>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary mt-1">Изменить</button>
             </form>
         </div>

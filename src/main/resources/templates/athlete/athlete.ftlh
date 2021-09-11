@@ -184,6 +184,20 @@
                                             ${athlete.rank.name}
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Членство в сборных</h6>
+                                        </div>
+                                        <#if athlete.isNationalTeam()>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${athlete.rank.name}
+                                            </div>
+                                        <#elseif athlete.isCityTeam()>
+                                            <div class="col-sm-9 text-secondary">
+                                                <h6 class="mb-0">Член сборной города</h6>
+                                            </div>
+                                        </#if>
+                                    </div>
                                 </div>
                             </div>
                         </div>

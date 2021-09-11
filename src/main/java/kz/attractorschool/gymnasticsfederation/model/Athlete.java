@@ -60,6 +60,14 @@ public class Athlete {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registryDate;
 
+    @Column
+    @NotNull
+    private boolean isCityTeam;
+
+    @Column
+    @NotNull
+    private boolean isNationalTeam;
+
     @ToString.Exclude
     @ManyToOne
     private Discipline discipline;

@@ -80,6 +80,24 @@
             </div>
         </div>
 
+        <#--Член национальной или городской сборной-->
+        <div class="row">
+            <div class="col">
+                <label for="national_team" class="form-label fs-4">Является членом национальной сборной</label>
+                <select name="isNationalTeam" class="form-select" id="national_team">
+                    <option value="да">Да</option>
+                    <option value="нет">Нет</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="city_team" class="form-label fs-4">Является членом сборной города</label>
+                <select name="isCityTeam" class="form-select" id="city_team">
+                    <option value="да">Да</option>
+                    <option value="нет">Нет</option>
+                </select>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary mt-1">Добавить</button>
     </form>
     </div>

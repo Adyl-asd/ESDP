@@ -22,7 +22,7 @@ public class DisciplineTypeDTO {
 
     private DisciplineDTO discipline;
 
-    public DisciplineTypeDTO from(DisciplineType disciplineType) {
+    public static DisciplineTypeDTO from(DisciplineType disciplineType) {
         return DisciplineTypeDTO.builder()
                 .id(disciplineType.getId())
                 .name(disciplineType.getName())

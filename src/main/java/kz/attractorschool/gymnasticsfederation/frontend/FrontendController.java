@@ -76,19 +76,19 @@ public class FrontendController {
         return "person/all";
     }
 
-    @GetMapping("/competitions/add")
-    public String getCompForm(Model model) {
-        model.addAttribute("disciplines", disciplineService.all());
-        model.addAttribute("disciplineTypes", disciplineTypeService.all());
-        model.addAttribute("competitionPrograms", competitionProgramService.all());
-        model.addAttribute("ranks", rankService.all());
-        return "competition/competition_add";
-    }
-
-    @GetMapping("/competitions/1")
-    public String getComp() {
-        return "competition/competition";
-    }
+//    @GetMapping("/competitions/add")
+//    public String getCompForm(Model model) {
+//        model.addAttribute("disciplines", disciplineService.all());
+//        model.addAttribute("disciplineTypes", disciplineTypeService.all());
+//        model.addAttribute("competitionPrograms", competitionProgramService.all());
+//        model.addAttribute("ranks", rankService.all());
+//        return "competition/competition_add";
+//    }
+//
+//    @GetMapping("/competitions/1")
+//    public String getComp() {
+//        return "competition/competition";
+//    }
 
     @GetMapping("/test")
     public String test() {

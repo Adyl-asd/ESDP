@@ -6,9 +6,12 @@ import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundExcepti
 import kz.attractorschool.gymnasticsfederation.model.Discipline;
 import kz.attractorschool.gymnasticsfederation.repository.DisciplineRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -48,5 +51,9 @@ public class DisciplineService {
         discipline.setName(disciplineDTO.getName());
         repository.save(discipline);
         return DisciplineDTO.from(discipline);
+    }
+
+    public List<DisciplineDTO> getAll(){
+        return repository.findAll().stream().map(DisciplineDTO::from).collect(Collectors.toList());
     }
 }

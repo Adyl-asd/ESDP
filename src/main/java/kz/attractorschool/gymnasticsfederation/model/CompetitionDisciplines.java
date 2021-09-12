@@ -21,9 +21,6 @@ public class CompetitionDisciplines {
     @ManyToOne
     private Competition competition;
 
-    @OneToOne
-    private Discipline discipline;
-
     @ManyToOne
     private DisciplineType disciplineType;
 

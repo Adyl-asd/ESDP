@@ -23,7 +23,7 @@ public class CompetitionRestController {
 
     @GetMapping("/{id}")
     public Competition one(@PathVariable int id){
-        return competitionService.getOne(id);
+        return competitionService.findOne(id);
     }
 
     @GetMapping("/all")
@@ -46,6 +46,11 @@ public class CompetitionRestController {
         CompetitionPositionFile pFile = new CompetitionPositionFile(positionFile.getOriginalFilename());
         fileSystemStorageService.store(positionFile);
         return competitionService.update(id, competitionUpdateDTO, pFile);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        return competitionService.delete(id);
     }
 
 //    @GetMapping("/competitions/{id}")

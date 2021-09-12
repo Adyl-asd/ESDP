@@ -24,7 +24,7 @@ public class CompetitionService {
     private final SchoolService schoolService;
     private final CompetitionFileRepository competitionFileRepository;
 
-    public Competition getOne(int id) {
+    public Competition findOne(int id) {
         return competitionRepository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Соревнование", id);
         });
@@ -59,7 +59,7 @@ public class CompetitionService {
         Discipline discipline = disciplineService.findOne(competitionUpdateDTO.getDisciplineId());
         School school = schoolService.findOne(competitionUpdateDTO.getSchoolId());
         CompetitionPositionFile competitionPositionFile = competitionFileRepository.save(positionFile);
-        Competition competition = getOne(id);
+        Competition competition = findOne(id);
         competition.setName(competitionUpdateDTO.getName());
         competition.setStartDate(competitionUpdateDTO.getStartDate());
         competition.setFinishDate(competitionUpdateDTO.getFinishDate());
@@ -74,6 +74,13 @@ public class CompetitionService {
         competition.setSchool(school);
         competitionRepository.save(competition);
         return CompetitionDTO.from(competition);
+    }
+
+    public String delete(Integer id){
+        Competition competition = findOne(id);
+        competition.setDel(true);
+        competitionRepository.save(competition);
+        return "ok";
     }
 
     public boolean isPdf(MultipartFile multipartFile) {

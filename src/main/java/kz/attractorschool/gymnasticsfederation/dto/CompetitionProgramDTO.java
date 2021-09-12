@@ -27,7 +27,7 @@ public class CompetitionProgramDTO {
 
     private DisciplineTypeDTO disciplineType;
 
-    public CompetitionProgramDTO from(CompetitionProgram competitionProgram) {
+    public static CompetitionProgramDTO from(CompetitionProgram competitionProgram) {
         return builder()
                 .id(competitionProgram.getId())
                 .name(competitionProgram.getName())

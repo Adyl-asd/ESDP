@@ -24,6 +24,7 @@ public class FrontendController {
     private final DisciplineTypeService disciplineTypeService;
     private final CompetitionProgramService competitionProgramService;
     private final SchoolService schoolService;
+    private final AgeCategoryService ageCategoryService;
 
 
 
@@ -84,6 +85,7 @@ public class FrontendController {
         model.addAttribute("competitionPrograms", competitionProgramService.all());
         model.addAttribute("ranks", rankService.all());
         model.addAttribute("school", schoolService.findOne(1));
+        model.addAttribute("ageCategories", ageCategoryService.all());
         return "competition/competition_add";
     }
 //

@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

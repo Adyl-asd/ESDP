@@ -19,6 +19,10 @@ public class DisciplineTypeService {
         return disciplineTypeRepository.findAll();
     }
 
+    public DisciplineType findOne(int id){
+        return disciplineTypeRepository.findById(id).orElseThrow();
+    }
+
     public DisciplineTypeDTO getOne(int id){
         var disciplineType = disciplineTypeRepository.findById(id).orElseThrow();
         return DisciplineTypeDTO.from(disciplineType);

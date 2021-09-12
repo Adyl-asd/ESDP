@@ -16,4 +16,8 @@ public class CompetitionProgramService {
     public List<CompetitionProgram> all() {
         return competitionProgramRepository.findAll();
     }
+
+    public CompetitionProgram findOne(Integer id) {
+        return competitionProgramRepository.findById(id).orElseThrow();
+    }
 }

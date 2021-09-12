@@ -55,11 +55,11 @@
                                     <label for="comp-address" class="form-label fs-5">Адрес</label>
                                     <input type="text" name="address" class="form-control" id="comp-address">
                                 </div>
-<#--                                <div class="col">-->
-<#--                                    <label for="comp-place-name" class="form-label fs-5">Название спортивного-->
-<#--                                        объекта</label>-->
-<#--                                    <input type="text" name="comp-place-name" class="form-control" id="comp-place-name">-->
-<#--                                </div>-->
+                                <#--                                <div class="col">-->
+                                <#--                                    <label for="comp-place-name" class="form-label fs-5">Название спортивного-->
+                                <#--                                        объекта</label>-->
+                                <#--                                    <input type="text" name="comp-place-name" class="form-control" id="comp-place-name">-->
+                                <#--                                </div>-->
                             </div>
 
                             <#--Вид спорта-->
@@ -87,17 +87,18 @@
                                     <label for="contact-phone" class="form-label fs-5">Номер телефона</label>
                                     <input type="text" name="contactPhone" class="form-control" id="contact-phone">
                                 </div>
-<#--                                <div class="col-3">-->
-<#--                                    <label for="comp-city" class="form-label fs-5">Электронный адрес</label>-->
-<#--                                    <input type="text" name="comp-city" class="form-control" id="comp-city">-->
-<#--                                </div>-->
+                                <#--                                <div class="col-3">-->
+                                <#--                                    <label for="comp-city" class="form-label fs-5">Электронный адрес</label>-->
+                                <#--                                    <input type="text" name="comp-city" class="form-control" id="comp-city">-->
+                                <#--                                </div>-->
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <label for="position-file" class="form-label fs-5">Положение о проведении
                                         соревнований</label>
-                                    <input type="file" name="competitionPositionFile" class="form-control" id="position-file">
+                                    <input type="file" name="competitionPositionFile" class="form-control"
+                                           id="position-file">
                                 </div>
                             </div>
                             <input id="next_btn" class="btn btn-primary mt-3" onclick="next_step()" type="button"
@@ -111,11 +112,12 @@
                     <form id="second-form" method="post">
                         <fieldset id="second" hidden>
                             <#--Дисциплина и вид программы-->
-                            <table class="table text-capitalize text-center table-bordered mt-3">
+                            <table class="table text-center table-bordered mt-3">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="my-2">Дисциплина</th>
                                     <th scope="col" class="my-2">Вид соревновательной программы</th>
+                                    <th scope="col" class="my-2">Разряд и возрастная категория</th>
                                 </tr>
                                 </thead>
                                 <tbody id="program_table_body">
@@ -123,7 +125,7 @@
                                     <td>
                                         <div class="row">
                                             <div class="col">
-                                                <select name="disciplineType" id="disciplineType" class="form-select">
+                                                <select name="disciplineTypeId" id="disciplineType" class="form-select">
                                                     <option>Выберите дисциплину</option>
                                                     <#list disciplineTypes as dt>
                                                         <option value="${dt.id}">${dt.name}</option>
@@ -135,7 +137,7 @@
                                     <td class="text-center text-capitalize">
                                         <div class="row">
                                             <div class="col">
-                                                <select name="competitionProgram" id="competitionProgram"
+                                                <select name="competitionProgramId" id="competitionProgram"
                                                         class="form-select">
                                                     <option>Выберите вид программы</option>
                                                     <#list competitionPrograms as cp>
@@ -144,7 +146,29 @@
                                                 </select>
                                             </div>
                                         </div>
-
+                                    </td>
+                                    <td>
+                                        <select name="ageCategoryId" id="rank" class="form-select">
+                                            <option selected value="">Выберите разряд и возрастную категорию</option>
+                                            <#list ageCategories as a>
+                                                <#if a.maxYear?? && a.minYear?? && a.rank??>
+                                                    <option value="${a.id}">${a.maxYear} - ${a.minYear}
+                                                        : ${a.rank.name}</option>
+                                                <#elseif a.maxYear?? && !a.minYear?? && a.rank??>
+                                                    <option value="${a.id}">${a.maxYear} : ${a.rank.name}</option>
+                                                <#elseif a.maxYear?? && a.minYear?? && !a.rank??>
+                                                    <option value="${a.id}">${a.maxYear} - ${a.minYear}</option>
+                                                <#elseif !a.maxYear?? && a.minYear?? && a.rank??>
+                                                    <option value="${a.id}">${a.minYear} : ${a.rank.name}</option>
+                                                <#elseif !a.maxYear?? && a.minYear?? && !a.rank??>
+                                                    <option value="${a.id}">${a.minYear}</option>
+                                                <#elseif a.maxYear?? && !a.minYear?? && !a.rank??>
+                                                    <option value="${a.id}">${a.maxYear}</option>
+                                                <#elseif !a.maxYear?? !&& a.minYear?? && a.rank??>
+                                                    <option value="${a.id}">${a.rank.name}</option>
+                                                </#if>
+                                            </#list>
+                                        </select>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -155,53 +179,13 @@
                                    type="button" value="Отмена" hidden>
                             <input id="add_program_btn" class="btn btn-primary mt-3" onclick="add_program()"
                                    type="button" value="Добавить" hidden>
-
-                            <#--Разряд и возрастная категория-->
-                            <table class="table text-capitalize text-center table-bordered mt-3">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Разряд</th>
-                                    <th scope="col">Возрастная категория</th>
-                                </tr>
-                                </thead>
-                                <tbody id="age_rank_table_body">
-                                <tr id="ageAndRankInput">
-                                    <td>
-                                        <select name="rank" id="rank" class="form-select">
-                                            <option selected value="">Выберите разряд</option>
-                                            <#list ranks as r>
-                                                <option value="${r.id}">${r.name}</option>
-                                            </#list>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="number" name="comp-start-age" class="form-control"
-                                                       id="comp-start-age" placeholder="возраст от">
-                                            </div>
-                                            <div class="col">
-                                                <input type="number" name="comp-end-age" class="form-control"
-                                                       id="comp-end-age" placeholder="возраст до">
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <input id="save_age_btn" class="btn btn-primary mt-3" onclick="save_age()"
-                                   type="button" value="Сохранить">
-                            <input id="cancel_age_btn" class="btn btn-danger mt-3" onclick="cancel_age()"
-                                   type="button" value="Отмена" hidden>
-                            <input id="add_age_btn" class="btn btn-primary mt-3" onclick="add_age()"
-                                   type="button" value="Добавить" hidden>
                         </fieldset>
                     </form>
 
 
                 </div>
                 <input id="pre_btn" onclick="prev_step()" class="btn btn-primary" type="button" value="Назад" hidden>
-                <a href="/competitions/1" class="btn btn-primary" hidden id="send-form-btn">Подать заявку</a>
+                <input class="btn btn-primary" hidden id="send-form-btn" onclick="send_form()" type="button" value="Подать заявку">
             </div>
         </div>
     </div>

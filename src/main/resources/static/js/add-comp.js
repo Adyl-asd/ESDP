@@ -52,20 +52,24 @@ function update_comp() {
 
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
-const ageAndRankInput = $("#ageAndRankInput")
 
 
 function save_program() {
     let disciplineType = $("#disciplineType option:selected").text()
+    let disciplineTypeId = $("#disciplineType option:selected").val()
     let competitionProgram = $("#competitionProgram option:selected").text()
+    let competitionProgramId = $("#competitionProgram option:selected").val()
+    let rankAndAge = $("#rank option:selected").text()
+    let rankAndAgeId = $("#rank option:selected").val()
 
 
-    const firstTable = `
+    const inputResult = `
                                 <tr class="first-table-row">
                                     <td>
                                         <div class="row">
                                             <div class="col">
                                                 ${disciplineType}
+                                                <input type="hidden" value="${disciplineTypeId}" class="disciplineTypeId">
                                             </div>
                                         </div>
                                     </td>
@@ -73,16 +77,24 @@ function save_program() {
                                         <div class="row">
                                             <div class="col">
                                                 ${competitionProgram}
+                                                <input type="hidden" value="${competitionProgramId}" class="competitionProgramId">
                                             </div>
                                         </div>
-
+                                    </td>
+                                    <td class="text-center text-capitalize">
+                                        <div class="row">
+                                            <div class="col">
+                                                ${rankAndAge}
+                                                <input type="hidden" value="${rankAndAgeId}" class="rankAndAgeId">
+                                            </div>
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="btn btn-danger delete-discipline-program-btn">Удалить</div>
                                     </td>
                                 </tr>
 `
-    $('#program_table_body').prepend(firstTable)
+    $('#program_table_body').prepend(inputResult)
     typeAndProgramInput.attr("hidden", true)
     $("#save_program_btn").attr("hidden", true)
     $("#cancel_program_btn").attr("hidden", true)
@@ -92,6 +104,23 @@ function save_program() {
         $(this).closest('.first-table-row').remove();
     })
 
+}
+
+function send_form() {
+    for (let i = 0; i < $('.first-table-row').length; i++) {
+
+        $.ajax({
+            url : "http://localhost:8080/api/competition/disciplines",
+            type : "POST",
+            data : {
+                competitionId : competitionId,
+                disciplineTypeId : $($('.disciplineTypeId'))[i].value,
+                ageCategoryId : $($('.competitionProgramId'))[i].value,
+                competitionProgramId : $($('.rankAndAgeId'))[i].value
+            }
+        })
+    }
+    window.location.replace(`http://localhost:8080/competition/${competitionId}`)
 }
 
 function add_program() {
@@ -107,51 +136,8 @@ function cancel_program() {
     $("#save_program_btn").attr("hidden", true)
     $("#add_program_btn").removeAttr("hidden")
     $("#cancel_program_btn").attr("hidden", true)
-
 }
 
-function save_age() {
-    let rank = $("#rank option:selected").text()
-    let compStartAge = $("#comp-start-age").val()
-    let compEndAge = $("#comp-end-age").val()
 
-    const secondTable = `
-                                <tr class="second-table-row">
-                                    <td>
-                                        ${rank}
-                                    </td>
-                                    <td>
-                                        ${compStartAge} - ${compEndAge}
-                                    </td>
-                                    <td>
-                                        <div class="btn btn-danger delete-rank-age-btn">Удалить</div>
-                                    </td>
-                                </tr>
-    `
-
-    $('#age_rank_table_body').prepend(secondTable)
-    ageAndRankInput.attr("hidden", true)
-    $("#save_age_btn").attr("hidden", true)
-    $("#add_age_btn").removeAttr("hidden")
-    $("#cancel_age_btn").attr("hidden", true)
-
-    $('.delete-rank-age-btn').on('click', function () {
-        $(this).closest('.second-table-row').remove();
-    })
-}
-
-function add_age() {
-    $("#add_age_btn").attr("hidden", true)
-    $("#save_age_btn").removeAttr("hidden")
-    ageAndRankInput.removeAttr("hidden")
-    $("#cancel_age_btn").removeAttr("hidden")
-}
-
-function cancel_age() {
-    ageAndRankInput.attr("hidden", true)
-    $("#save_age_btn").attr("hidden", true)
-    $("#add_age_btn").removeAttr("hidden")
-    $("#cancel_age_btn").attr("hidden", true)
-}
 
 

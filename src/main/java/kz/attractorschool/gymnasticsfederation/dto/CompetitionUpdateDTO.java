@@ -15,9 +15,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionAddDTO {
-
-    private Integer id;
+public class CompetitionUpdateDTO {
 
     @NotNull
     private String name;

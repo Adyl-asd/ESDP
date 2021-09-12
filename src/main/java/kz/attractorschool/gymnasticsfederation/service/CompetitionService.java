@@ -3,6 +3,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDTO;
+import kz.attractorschool.gymnasticsfederation.dto.CompetitionUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
 import kz.attractorschool.gymnasticsfederation.model.Competition;
@@ -40,7 +41,7 @@ public class CompetitionService {
         Competition competition = competitionRepository.save(Competition.builder()
                 .name(competitionAddDTO.getName())
                 .startDate(competitionAddDTO.getStartDate())
-                .finishDate(competitionAddDTO.getEndDate())
+                .finishDate(competitionAddDTO.getFinishDate())
                 .country(competitionAddDTO.getCountry())
                 .city(competitionAddDTO.getCity())
                 .address(competitionAddDTO.getAddress())
@@ -51,6 +52,27 @@ public class CompetitionService {
                 .competitionPositionFile(competitionPositionFile)
                 .school(school)
                 .build());
+        return CompetitionDTO.from(competition);
+    }
+
+    public CompetitionDTO update(Integer id, CompetitionUpdateDTO competitionUpdateDTO, CompetitionPositionFile positionFile) {
+        Discipline discipline = disciplineService.findOne(competitionUpdateDTO.getDisciplineId());
+        School school = schoolService.findOne(competitionUpdateDTO.getSchoolId());
+        CompetitionPositionFile competitionPositionFile = competitionFileRepository.save(positionFile);
+        Competition competition = getOne(id);
+        competition.setName(competitionUpdateDTO.getName());
+        competition.setStartDate(competitionUpdateDTO.getStartDate());
+        competition.setFinishDate(competitionUpdateDTO.getFinishDate());
+        competition.setCountry(competitionUpdateDTO.getCountry());
+        competition.setCity(competitionUpdateDTO.getCity());
+        competition.setAddress(competitionUpdateDTO.getAddress());
+        competition.setAreaName(competitionUpdateDTO.getAreaName());
+        competition.setContact(competitionUpdateDTO.getContactName());
+        competition.setPhone(competitionUpdateDTO.getContactPhone());
+        competition.setDiscipline(discipline);
+        competition.setCompetitionPositionFile(competitionPositionFile);
+        competition.setSchool(school);
+        competitionRepository.save(competition);
         return CompetitionDTO.from(competition);
     }
 

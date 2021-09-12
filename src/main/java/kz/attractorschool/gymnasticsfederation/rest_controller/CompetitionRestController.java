@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.rest_controller;
 
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDTO;
+import kz.attractorschool.gymnasticsfederation.dto.CompetitionUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
 import kz.attractorschool.gymnasticsfederation.model.Competition;
 import kz.attractorschool.gymnasticsfederation.service.*;
@@ -36,6 +37,15 @@ public class CompetitionRestController {
         CompetitionPositionFile pFile = new CompetitionPositionFile(positionFile.getOriginalFilename());
         fileSystemStorageService.store(positionFile);
         return competitionService.add(competitionAddDTO, pFile);
+    }
+
+    @PutMapping("/{id}/update")
+    public CompetitionDTO update(@Valid CompetitionUpdateDTO competitionUpdateDTO,
+                                 @PathVariable Integer id,
+                                 @RequestParam("competitionPositionFile")MultipartFile positionFile) {
+        CompetitionPositionFile pFile = new CompetitionPositionFile(positionFile.getOriginalFilename());
+        fileSystemStorageService.store(positionFile);
+        return competitionService.update(id, competitionUpdateDTO, pFile);
     }
 
 //    @GetMapping("/competitions/{id}")

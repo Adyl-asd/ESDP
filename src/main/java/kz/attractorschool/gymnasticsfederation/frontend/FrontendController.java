@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class FrontendController {
     private final CompetitionProgramService competitionProgramService;
     private final SchoolService schoolService;
     private final AgeCategoryService ageCategoryService;
-
-
+    private final CompetitionService competitionService;
+    private final CompetitionDisciplinesService competitionDisciplinesService;
 
     @GetMapping
     public String index() {
@@ -88,11 +89,14 @@ public class FrontendController {
         model.addAttribute("ageCategories", ageCategoryService.all());
         return "competition/competition_add";
     }
-//
-//    @GetMapping("/competitions/1")
-//    public String getComp() {
-//        return "competition/competition";
-//    }
+
+    @GetMapping("/competitions/{id}")
+    public String getComp(@PathVariable Integer id,
+                          Model model) {
+        model.addAttribute("competition", competitionService.findOne(id));
+        model.addAttribute("competitionDisciplines", competitionDisciplinesService.findByCompetitionId(id));
+        return "competition/competition";
+    }
 
     @GetMapping("/test")
     public String test() {

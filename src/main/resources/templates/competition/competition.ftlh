@@ -10,7 +10,7 @@
                         Наименование:
                     </div>
                     <div class="col-9 fs-6">
-                        Соревнование #1
+                        ${competition.name}
                     </div>
                 </div>
                 <hr>
@@ -19,7 +19,7 @@
                         Даты проведения:
                     </div>
                     <div class="col-9 fs-6">
-                        13.09.21 - 19.09.21
+                        ${competition.startDate} - ${competition.finishDate}
                     </div>
                 </div>
                 <hr>
@@ -28,7 +28,7 @@
                         Место проведения:
                     </div>
                     <div class="col-9 fs-6">
-                        Казахстан, Алматинская обл., г. Алматы
+                        ${competition.country}, ${competition.areaName}, ${competition.city}
                     </div>
                 </div>
                 <hr>
@@ -37,7 +37,7 @@
                         Адрес:
                     </div>
                     <div class="col-9 fs-6">
-                        Адрес #1, Объект #1
+                        ${competition.address}
                     </div>
                 </div>
                 <hr>
@@ -46,7 +46,7 @@
                         Контактное лицо:
                     </div>
                     <div class="col-9 fs-6">
-                        Иванов Иван, +77771234567, test@test.com
+                        ${competition.contact} (${competition.phone})
                     </div>
                 </div>
             </div>
@@ -54,36 +54,48 @@
         <div class="card">
             <div class="card-body">
                 <div class="fs-4">Программа соревнования</div>
-                <div class="fs-5">Художественная гимнастика</div>
+                <div class="fs-5">${competition.discipline.name}</div>
                 <table class="table text-center text-capitalize table-bordered mt-3">
                     <thead>
                     <tr>
                         <th scope="col" class="my-2">Дисциплина</th>
                         <th scope="col" class="my-2">Вид соревновательной программы</th>
-                        <th scope="col" class="my-2">Разряд</th>
-                        <th scope="col" class="my-2">Возрастная группа</th>
+                        <th scope="col" class="my-2">Разряд и возрастная группа</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="fs-6">
-                            Индивидуальная программа
-                        </td>
-                        <td>
-                            <div class="fs-6">
-                                Многоборье
-                            </div>
-                            <div class="fs-6">
-                                Командное первенство
-                            </div>
-                        </td>
-                        <td class="fs-6">
-                            1 разряд
-                        </td>
-                        <td class="fs-6">
-                            2012 - 2009
-                        </td>
-                    </tr>
+                    <#list competitionDisciplines as cd>
+                        <tr>
+                            <td class="fs-6">
+                                ${cd.disciplineType.name}
+                            </td>
+                            <td>
+                                <div class="fs-6">
+                                    ${cd.competitionProgram.name}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fs-6">
+                                    <#if cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && cd.ageCategory.rank??>
+                                        ${cd.ageCategory.maxYear} - ${cd.ageCategory.minYear}
+                                        : ${cd.ageCategory.rank.name}
+                                    <#elseif cd.ageCategory.maxYear?? && !cd.ageCategory.minYear?? && cd.ageCategory.rank??>
+                                        ${cd.ageCategory.maxYear} : ${cd.ageCategory.rank.name}
+                                    <#elseif cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && !cd.ageCategory.rank??>
+                                        ${cd.ageCategory.maxYear} - ${cd.ageCategory.minYear}
+                                    <#elseif !cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && cd.ageCategory.rank??>
+                                        ${cd.ageCategory.minYear} : ${cd.ageCategory.rank.name}
+                                    <#elseif !cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && !cd.ageCategory.rank??>
+                                        ${cd.ageCategory.minYear}
+                                    <#elseif cd.ageCategory.maxYear?? && !cd.ageCategory.minYear?? && !cd.ageCategory.rank??>
+                                        ${cd.ageCategory.maxYear}
+                                    <#elseif !cd.ageCategory.maxYear?? !&& cd.ageCategory.minYear?? && cd.ageCategory.rank??>
+                                        ${cd.ageCategory.rank.name}
+                                    </#if>
+                                </div>
+                            </td>
+                        </tr>
+                    </#list>
                     </tbody>
                 </table>
             </div>

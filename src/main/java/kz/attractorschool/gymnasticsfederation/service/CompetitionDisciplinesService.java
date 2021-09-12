@@ -30,6 +30,10 @@ public class CompetitionDisciplinesService {
         });
     }
 
+    public List<CompetitionDisciplines> findByCompetitionId(Integer id) {
+        return repository.findAllByCompetitionId(id);
+    }
+
     public CompetitionDisciplinesDTO add(CompetitionDisciplinesAddDTO dto) {
         Competition competition = competitionService.findOne(dto.getCompetitionId());
         DisciplineType disciplineType = disciplineTypeService.findOne(dto.getDisciplineTypeId());

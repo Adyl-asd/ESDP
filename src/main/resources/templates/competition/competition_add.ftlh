@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="comp-end" class="form-label fs-5">Окончание мероприятия</label>
-                                    <input type="date" name="endDate" class="form-control" id="comp-end">
+                                    <input type="date" name="finishDate" class="form-control" id="comp-end">
                                 </div>
                             </div>
 
@@ -100,8 +100,10 @@
                                     <input type="file" name="competitionPositionFile" class="form-control" id="position-file">
                                 </div>
                             </div>
-                            <input id="next_btn1" class="btn btn-primary mt-3" onclick="next_step()" type="button"
+                            <input id="next_btn" class="btn btn-primary mt-3" onclick="next_step()" type="button"
                                    value="Далее">
+                            <input id="update_btn" class="btn btn-primary mt-3" onclick="update_comp()" type="button"
+                                   value="Далее" hidden>
                         </fieldset>
                     </form>
 

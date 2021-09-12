@@ -1,3 +1,5 @@
+let competitionId
+
 // Function that executes on click of first next button.
 function next_step() {
 
@@ -11,7 +13,7 @@ function next_step() {
         processData : false,
         contentType : false,
         success : function (result) {
-            alert(result)
+            competitionId = result.id
         }
     })
 
@@ -19,7 +21,6 @@ function next_step() {
     $('#second').removeAttr('hidden')
     $('#pre_btn').removeAttr('hidden')
     $('#send-form-btn').removeAttr('hidden')
-
 }
 // Function that executes on click of first previous button.
 function prev_step() {
@@ -27,8 +28,28 @@ function prev_step() {
     $('#second').attr('hidden', true)
     $('#pre_btn').attr('hidden', true)
     $('#send-form-btn').attr('hidden', true)
+    $('#next_btn').attr('hidden', true)
+    $('#update_btn').removeAttr('hidden')
 
 }
+
+function update_comp() {
+    var formData = new FormData(document.getElementById('first-form'))
+
+    $.ajax({
+        url : `http://localhost:8080/api/competition/${competitionId}/update`,
+        type : "PUT",
+        data : formData,
+        processData : false,
+        contentType : false
+    })
+
+    $('#first').attr('hidden', true)
+    $('#second').removeAttr('hidden')
+    $('#pre_btn').removeAttr('hidden')
+    $('#send-form-btn').removeAttr('hidden')
+}
+
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
 const ageAndRankInput = $("#ageAndRankInput")

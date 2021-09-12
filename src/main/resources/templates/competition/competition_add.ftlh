@@ -8,7 +8,7 @@
             <div class="main">
 
                 <div class="card-body">
-                    <form action="#" class="first-form" method="post">
+                    <form class="first-form" enctype="multipart/form-data" id="first-form">
 
                         <!-- Fieldsets -->
                         <fieldset id="first">
@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="comp-name" class="form-label fs-5">Наименование соревнования</label>
-                                    <input type="text" name="comp-name" class="form-control" id="comp-name">
+                                    <input type="text" name="name" class="form-control" id="comp-name">
                                 </div>
                             </div>
 
@@ -25,11 +25,11 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="comp-start" class="form-label fs-5">Начало мероприятия</label>
-                                    <input type="date" name="comp-start" class="form-control" id="comp-start">
+                                    <input type="date" name="startDate" class="form-control" id="comp-start">
                                 </div>
                                 <div class="col">
                                     <label for="comp-end" class="form-label fs-5">Окончание мероприятия</label>
-                                    <input type="date" name="comp-end" class="form-control" id="comp-end">
+                                    <input type="date" name="endDate" class="form-control" id="comp-end">
                                 </div>
                             </div>
 
@@ -37,15 +37,15 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="comp-country" class="form-label fs-5">Страна</label>
-                                    <input type="text" name="comp-country" class="form-control" id="comp-country">
+                                    <input type="text" name="country" class="form-control" id="comp-country">
                                 </div>
                                 <div class="col">
                                     <label for="comp-region" class="form-label fs-5">Область</label>
-                                    <input type="text" name="comp-region" class="form-control" id="comp-region">
+                                    <input type="text" name="areaName" class="form-control" id="comp-region">
                                 </div>
                                 <div class="col">
                                     <label for="comp-city" class="form-label fs-5">Город</label>
-                                    <input type="text" name="comp-city" class="form-control" id="comp-city">
+                                    <input type="text" name="city" class="form-control" id="comp-city">
                                 </div>
                             </div>
 
@@ -53,20 +53,20 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="comp-address" class="form-label fs-5">Адрес</label>
-                                    <input type="text" name="comp-address" class="form-control" id="comp-address">
+                                    <input type="text" name="address" class="form-control" id="comp-address">
                                 </div>
-                                <div class="col">
-                                    <label for="comp-place-name" class="form-label fs-5">Название спортивного
-                                        объекта</label>
-                                    <input type="text" name="comp-place-name" class="form-control" id="comp-place-name">
-                                </div>
+<#--                                <div class="col">-->
+<#--                                    <label for="comp-place-name" class="form-label fs-5">Название спортивного-->
+<#--                                        объекта</label>-->
+<#--                                    <input type="text" name="comp-place-name" class="form-control" id="comp-place-name">-->
+<#--                                </div>-->
                             </div>
 
                             <#--Вид спорта-->
                             <div class="row">
                                 <div class="col">
-                                    <label for="sport-name" class="form-label fs-5">Вид спорта</label>
-                                    <select name="sport-name" id="sport-name" class="form-select">
+                                    <label for="discipline" class="form-label fs-5">Вид спорта</label>
+                                    <select name="disciplineId" id="discipline" class="form-select">
                                         <option selected value="">Выберите вид спорта</option>
                                         <#list disciplines as d>
                                             <option value="${d.id}">${d.name}</option>
@@ -74,26 +74,30 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <#--Id школы-->
+                            <input type="hidden" name="schoolId" value="${school.id}">
+
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="comp-region" class="form-label fs-5">Контактное лицо</label>
-                                    <input type="text" name="comp-region" class="form-control" id="comp-region">
+                                    <label for="contact-name" class="form-label fs-5">Контактное лицо</label>
+                                    <input type="text" name="contactName" class="form-control" id="contact-name">
                                 </div>
                                 <div class="col-3">
-                                    <label for="comp-city" class="form-label fs-5">Номер телефона</label>
-                                    <input type="text" name="comp-city" class="form-control" id="comp-city">
+                                    <label for="contact-phone" class="form-label fs-5">Номер телефона</label>
+                                    <input type="text" name="contactPhone" class="form-control" id="contact-phone">
                                 </div>
-                                <div class="col-3">
-                                    <label for="comp-city" class="form-label fs-5">Электронный адрес</label>
-                                    <input type="text" name="comp-city" class="form-control" id="comp-city">
-                                </div>
+<#--                                <div class="col-3">-->
+<#--                                    <label for="comp-city" class="form-label fs-5">Электронный адрес</label>-->
+<#--                                    <input type="text" name="comp-city" class="form-control" id="comp-city">-->
+<#--                                </div>-->
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <label for="comp-region" class="form-label fs-5">Положение о проведении
+                                    <label for="position-file" class="form-label fs-5">Положение о проведении
                                         соревнований</label>
-                                    <input type="file" name="comp-region" class="form-control" id="comp-region">
+                                    <input type="file" name="competitionPositionFile" class="form-control" id="position-file">
                                 </div>
                             </div>
                             <input id="next_btn1" class="btn btn-primary mt-3" onclick="next_step()" type="button"

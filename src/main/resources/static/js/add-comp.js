@@ -1,5 +1,20 @@
 // Function that executes on click of first next button.
 function next_step() {
+
+    const firstForm = $('#first-form')
+    var formData = new FormData(document.getElementById('first-form'))
+
+    $.ajax({
+        url : "http://localhost:8080/api/competition",
+        type : "POST",
+        data : formData,
+        processData : false,
+        contentType : false,
+        success : function (result) {
+            alert(result)
+        }
+    })
+
     $('#first').attr('hidden', true)
     $('#second').removeAttr('hidden')
     $('#pre_btn').removeAttr('hidden')

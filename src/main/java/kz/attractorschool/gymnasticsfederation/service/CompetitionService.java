@@ -1,64 +1,62 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
+
+import kz.attractorschool.gymnasticsfederation.dto.CompetitionAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDTO;
-import kz.attractorschool.gymnasticsfederation.dto.DisciplineTypeDTO;
+import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
 import kz.attractorschool.gymnasticsfederation.model.Competition;
 import kz.attractorschool.gymnasticsfederation.model.Discipline;
-import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.model.School;
 import kz.attractorschool.gymnasticsfederation.repository.*;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class    CompetitionService {
-    private final CompetitionRepository repository;
-    private final DisciplineRepository disciplineRepository;
-    private final SchoolRepository schoolRepository;
-    private final CompetitionFileRepository fileRepository;
-    private final DisciplineTypeRepository disciplineTypeRepository;
+public class CompetitionService {
+    private final CompetitionRepository competitionRepository;
+    private final DisciplineService disciplineService;
+    private final SchoolService schoolService;
+    private final CompetitionFileRepository competitionFileRepository;
 
-    public CompetitionDTO getOne(int id){
-        Competition competition = repository.findById(id).orElseThrow();
-        return CompetitionDTO.from(competition);
+    public Competition getOne(int id) {
+        return competitionRepository.findById(id).orElseThrow(() -> {
+            return new ResourceNotFoundException("Соревнование", id);
+        });
     }
 
-    public List<CompetitionDTO> getAll(){
-        return repository.findAll().stream().map(CompetitionDTO::from).collect(Collectors.toList());
+    public List<Competition> all() {
+        return competitionRepository.findAll();
     }
 
-    public Competition create(Competition competition, CompetitionPositionFile positionFile ){
-        Discipline discipline = disciplineRepository.getById(competition.getDiscipline().getId());
-        School school = schoolRepository.getById(competition.getSchool().getId());
-        CompetitionPositionFile competitionPositionFile = fileRepository.save(positionFile);
-        return repository.save(Competition.builder()
-                .name(competition.getName())
-                .startDate(competition.getStartDate())
-                .finishDate(competition.getFinishDate())
-                .country(competition.getCountry())
-                .city(competition.getCity())
-                .address(competition.getAddress())
-                .areaName(competition.getAreaName())
-                .contact(competition.getContact())
-                .phone(competition.getPhone())
+    public CompetitionDTO add(CompetitionAddDTO competitionAddDTO, CompetitionPositionFile positionFile) {
+        Discipline discipline = disciplineService.findOne(competitionAddDTO.getDisciplineId());
+        School school = schoolService.findOne(competitionAddDTO.getSchoolId());
+        CompetitionPositionFile competitionPositionFile = competitionFileRepository.save(positionFile);
+        Competition competition = competitionRepository.save(Competition.builder()
+                .name(competitionAddDTO.getName())
+                .startDate(competitionAddDTO.getStartDate())
+                .finishDate(competitionAddDTO.getEndDate())
+                .country(competitionAddDTO.getCountry())
+                .city(competitionAddDTO.getCity())
+                .address(competitionAddDTO.getAddress())
+                .areaName(competitionAddDTO.getAreaName())
+                .contact(competitionAddDTO.getContactName())
+                .phone(competitionAddDTO.getContactPhone())
                 .discipline(discipline)
                 .competitionPositionFile(competitionPositionFile)
                 .school(school)
                 .build());
+        return CompetitionDTO.from(competition);
     }
 
-    public boolean isPdf(MultipartFile multipartFile){
+    public boolean isPdf(MultipartFile multipartFile) {
         String name = multipartFile.getOriginalFilename();
-        String [] words = name.split("\\.");
+        String[] words = name.split("\\.");
         String format = words[words.length - 1];
         return format.equals("pdf");
     }

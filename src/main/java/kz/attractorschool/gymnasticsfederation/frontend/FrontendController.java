@@ -23,6 +23,7 @@ public class FrontendController {
     private final PersonService personService;
     private final DisciplineTypeService disciplineTypeService;
     private final CompetitionProgramService competitionProgramService;
+    private final SchoolService schoolService;
 
 
 
@@ -76,14 +77,15 @@ public class FrontendController {
         return "person/all";
     }
 
-//    @GetMapping("/competitions/add")
-//    public String getCompForm(Model model) {
-//        model.addAttribute("disciplines", disciplineService.all());
-//        model.addAttribute("disciplineTypes", disciplineTypeService.all());
-//        model.addAttribute("competitionPrograms", competitionProgramService.all());
-//        model.addAttribute("ranks", rankService.all());
-//        return "competition/competition_add";
-//    }
+    @GetMapping("/competitions/add")
+    public String getCompForm(Model model) {
+        model.addAttribute("disciplines", disciplineService.all());
+        model.addAttribute("disciplineTypes", disciplineTypeService.all());
+        model.addAttribute("competitionPrograms", competitionProgramService.all());
+        model.addAttribute("ranks", rankService.all());
+        model.addAttribute("school", schoolService.findOne(1));
+        return "competition/competition_add";
+    }
 //
 //    @GetMapping("/competitions/1")
 //    public String getComp() {

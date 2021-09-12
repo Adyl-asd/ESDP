@@ -28,9 +28,12 @@ public class CompetitionProgram {
     @Builder.Default
     private boolean isDel = false;
 
-    @Column
-    private String type;
+    @ManyToOne
+    private AgeCategory ageCategory;
 
     @ManyToOne
-    private Discipline discipline;
+    private DisciplineType disciplineType;
+
+    @Column
+    private String type;
 }

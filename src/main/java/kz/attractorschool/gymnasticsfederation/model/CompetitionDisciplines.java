@@ -28,7 +28,7 @@ public class CompetitionDisciplines {
     private DisciplineType disciplineType;
 
     @ManyToOne
-    private AgeCategories ageCategories;
+    private AgeCategory ageCategory;
 
     @ManyToOne
     private CompetitionProgram competitionProgram;

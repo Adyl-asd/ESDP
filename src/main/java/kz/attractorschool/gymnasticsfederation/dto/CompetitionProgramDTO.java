@@ -25,7 +25,7 @@ public class CompetitionProgramDTO {
 
     private String type;
 
-    private DisciplineDTO discipline;
+    private DisciplineTypeDTO disciplineType;
 
     public CompetitionProgramDTO from(CompetitionProgram competitionProgram) {
         return builder()
@@ -33,7 +33,7 @@ public class CompetitionProgramDTO {
                 .name(competitionProgram.getName())
                 .isDel(competitionProgram.isDel())
                 .type(competitionProgram.getType())
-                .discipline(DisciplineDTO.from(competitionProgram.getDiscipline()))
+                .disciplineType(DisciplineTypeDTO.from(competitionProgram.getDisciplineType()))
                 .build();
     }
 

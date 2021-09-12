@@ -26,25 +26,19 @@ public class Discipline {
     private String name;
 
     @Column
-    private Integer participantsAmountMin;
-
-    @Column
-    private Integer participantsAmountMax;
-
-    @Column
     @NotNull
     @Builder.Default
     private boolean isDel = false;
 
-    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-    @Builder.Default
-    List<DisciplineType> disciplineTypes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-    @Builder.Default
-    List<CompetitionProgram> competitionPrograms = new ArrayList<>();
-
-    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-    @Builder.Default
-    List<AgeCategories> ageCategories = new ArrayList<>();
+//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+//    @Builder.Default
+//    List<DisciplineType> disciplineTypes = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+//    @Builder.Default
+//    List<CompetitionProgram> competitionPrograms = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+//    @Builder.Default
+//    List<AgeCategories> ageCategories = new ArrayList<>();
 }

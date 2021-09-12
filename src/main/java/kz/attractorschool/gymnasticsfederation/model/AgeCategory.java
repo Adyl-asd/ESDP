@@ -14,16 +14,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AgeCategories {
+public class AgeCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    private int minYear;
+    private Integer minYear;
 
     @Column
-    private int maxYear;
+    private Integer maxYear;
 
     @Column
     @NotNull
@@ -31,7 +31,7 @@ public class AgeCategories {
     private boolean isDel = false;
 
     @ManyToOne
-    private Discipline discipline;
+    private DisciplineType disciplineType;
 
     @ManyToOne
     private Rank rank;

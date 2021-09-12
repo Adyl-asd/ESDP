@@ -51,7 +51,7 @@ public class Federation {
     @Builder.Default
     private boolean isDel = false;
 
-    @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "federation")
-    List<School> schools;
+//    @ToString.Exclude
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "federation")
+//    List<School> schools;
 }

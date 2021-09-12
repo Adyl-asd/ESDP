@@ -66,7 +66,7 @@ public class Competition {
     @NotNull
     private String phone;
 
-    @OneToOne
+    @ManyToOne
     private Discipline discipline;
 
     @Column

@@ -24,6 +24,15 @@ public class DisciplineType {
     private String name;
 
     @Column
+    private Integer participantsAmountMin;
+
+    @Column
+    private Integer participantsAmountMax;
+
+    @ManyToOne
+    private Gender gender;
+
+    @Column
     @NotNull
     @Builder.Default
     private boolean isDel = false;

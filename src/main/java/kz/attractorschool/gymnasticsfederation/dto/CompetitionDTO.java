@@ -22,8 +22,8 @@ public class CompetitionDTO {
     private String city;
     private String address;
     private String areaName;
-    private String contact;
-    private String phone;
+    private String contactName;
+    private String contactPhone;
     @ToString.Exclude
     private DisciplineDTO discipline;
     @ToString.Exclude
@@ -39,8 +39,8 @@ public class CompetitionDTO {
                 .city(competition.getCity())
                 .address(competition.getAddress())
                 .areaName(competition.getAreaName())
-                .contact(competition.getContact())
-                .phone(competition.getPhone())
+                .contactName(competition.getContact())
+                .contactPhone(competition.getPhone())
                 .discipline(DisciplineDTO.from(competition.getDiscipline()))
                 .school(SchoolDTO.from(competition.getSchool()))
                 .build();

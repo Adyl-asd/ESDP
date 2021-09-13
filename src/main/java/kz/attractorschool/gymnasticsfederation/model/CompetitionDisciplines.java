@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,11 @@ public class CompetitionDisciplines {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    //тип командного первенства - (0 - нет, 1 - общее, 2 - отдельное)
+    @Column
+    @NotNull
+    private int teamChampionship;
 
     @ManyToOne
     private Competition competition;

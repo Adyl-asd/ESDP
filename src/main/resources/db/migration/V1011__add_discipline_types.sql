@@ -2,10 +2,15 @@ use `esdp`;
 
 insert into `disciplines` (name)
 values ('Спортивная гимнастика'),
-       ('Художественная гимнастика'),
-       ('Спортивная акробатика'),
-       ('Аэробная гимнастика'),
-       ('Батутная гимнастика');
+       ('Художественная гимнастика');
+
+insert into `disciplines` (name, is_team_champ_by_discipline_type)
+values ('Спортивная акробатика', false);
+
+insert into `disciplines` (name)
+values
+    ('Аэробная гимнастика'),
+    ('Батутная гимнастика');
 
 CREATE TABLE `discipline_types`
 (

@@ -25,6 +25,11 @@ public class Discipline {
     @NotNull
     private String name;
 
+    //тип командного первенства, тру - по дисциплине, фолс - по виду спорта
+    @Column
+    @NotNull
+    private boolean isTeamChampByDisciplineType;
+
     @Column
     @NotNull
     @Builder.Default

@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -25,14 +22,18 @@ public class CompetitionDisciplines {
     private int teamChampionship;
 
     @ManyToOne
+    @ToString.Exclude
     private Competition competition;
 
     @ManyToOne
+    @ToString.Exclude
     private DisciplineType disciplineType;
 
     @ManyToOne
+    @ToString.Exclude
     private AgeCategory ageCategory;
 
     @ManyToOne
+    @ToString.Exclude
     private CompetitionProgram competitionProgram;
 }

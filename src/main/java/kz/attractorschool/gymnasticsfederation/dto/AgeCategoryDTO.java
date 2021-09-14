@@ -38,7 +38,7 @@ public class AgeCategoryDTO {
                 .minYear(ageCategory.getMinYear())
                 .maxYear(ageCategory.getMaxYear())
                 .isDel(ageCategory.isDel())
-                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDisciplineType()))
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
                 .rank(RankDTO.from(ageCategory.getRank()))
                 .build();
     }

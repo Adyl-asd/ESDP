@@ -1,6 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
+import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
 import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
+import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.repository.CompetitionProgramRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CompetitionProgramService {
-
+    private final DisciplineTypeService disciplineTypeService;
     private final CompetitionProgramRepository competitionProgramRepository;
 
     public List<CompetitionProgram> all() {
@@ -19,5 +21,10 @@ public class CompetitionProgramService {
 
     public CompetitionProgram findOne(Integer id) {
         return competitionProgramRepository.findById(id).orElseThrow();
+    }
+
+    public List<CompetitionProgram> allByDisciplineType(Integer id){
+//        DisciplineType discipline = disciplineTypeService.findOne(id);
+        return competitionProgramRepository.findAllByDisciplineId(id);
     }
 }

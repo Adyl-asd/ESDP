@@ -33,7 +33,7 @@ public class CompetitionProgramDTO {
                 .name(competitionProgram.getName())
                 .isDel(competitionProgram.isDel())
                 .type(competitionProgram.getType())
-                .disciplineType(DisciplineTypeDTO.from(competitionProgram.getDisciplineType()))
+                .disciplineType(DisciplineTypeDTO.from(competitionProgram.getDiscipline()))
                 .build();
     }
 

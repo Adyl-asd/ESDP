@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
+import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.repository.AgeCategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AgeCategoryService {
-
+    private final DisciplineTypeService disciplineTypeService;
     private final AgeCategoryRepository ageCategoryRepository;
 
     public List<AgeCategory> all() {
@@ -22,5 +23,10 @@ public class AgeCategoryService {
         return ageCategoryRepository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Разряд и возраст", id);
         });
+    }
+
+    public List<AgeCategory> allByDisciplineType(Integer id){
+//        DisciplineType discipline = disciplineTypeService.findOne(id);
+        return ageCategoryRepository.findAllByDisciplineId(id);
     }
 }

@@ -1,10 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -31,8 +29,10 @@ public class AgeCategory {
     private boolean isDel = false;
 
     @ManyToOne
-    private DisciplineType disciplineType;
+    @ToString.Exclude
+    private DisciplineType discipline;
 
     @ManyToOne
+    @ToString.Exclude
     private Rank rank;
 }

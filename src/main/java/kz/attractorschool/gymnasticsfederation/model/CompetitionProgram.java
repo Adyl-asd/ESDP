@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -29,10 +26,12 @@ public class CompetitionProgram {
     private boolean isDel = false;
 
     @ManyToOne
+    @ToString.Exclude
     private AgeCategory ageCategory;
 
     @ManyToOne
-    private DisciplineType disciplineType;
+    @ToString.Exclude
+    private DisciplineType discipline;
 
     @Column
     private String type;

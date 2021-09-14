@@ -88,61 +88,61 @@ CREATE TABLE `age_categories`
     `max_year`           integer,
     `is_del`             boolean default false,
     `rank_id`            int references `ranks` (`id`),
-    `discipline_type_id` int references `discipline_types` (`id`),
+    `discipline_id` int references `discipline_types` (`id`),
     PRIMARY KEY (`id`)
 );
 
 #спорт гимнастика жен
-insert into `age_categories` (min_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, rank_id, discipline_id)
 values (2008, 3, 1),
        (2010, 4, 1);
 
 #спорт гимнастика жен
-insert into `age_categories` (min_year, max_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
 values (2009, 2011, 5, 1),
        (2010, 2013, 6, 1),
        (2012, 2014, 7, 1);
 
 #спорт гимнастика муж
-insert into `age_categories` (min_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, rank_id, discipline_id)
 values (2005, 3, 2);
 
 #спорт гимнастика муж
-insert into `age_categories` (min_year, max_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
 values (2007, 2004, 4, 2),
        (2009, 2006, 5, 2),
        (2011, 2008, 6, 2),
        (2012, 2010, 7, 2);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, discipline_type_id)
+insert into `age_categories` (min_year, max_year, discipline_id)
 values (2006, 2013, 3),
        (2006, 2013, 4);
 
 #худ инд и групп
-insert into `age_categories` (min_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, rank_id, discipline_id)
 values (2005, 3, 3),
        (2005, 3, 4);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, rank_id, discipline_type_id)
+insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
 values (2008, 2006, 4, 3),
        (2008, 2006, 4, 4);
 
 #худ инд и групп
-insert into `age_categories` (max_year, rank_id, discipline_type_id)
+insert into `age_categories` (max_year, rank_id, discipline_id)
 values (2009, 5, 3),
        (2009, 5, 4);
 
 #батут гимн
-insert into `age_categories` (max_year, discipline_type_id)
+insert into `age_categories` (max_year, discipline_id)
 values (2009, 5),
        (2009, 6),
        (2009, 7),
        (2009, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, max_year, discipline_type_id)
+insert into `age_categories` (min_year, max_year, discipline_id)
 values (2008, 2007, 5),
        (2008, 2007, 6),
        (2008, 2007, 7),
@@ -157,14 +157,14 @@ values (2008, 2007, 5),
        (2004, 2000, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, discipline_type_id)
+insert into `age_categories` (min_year, discipline_id)
 values (2009, 5),
        (2009, 6),
        (2009, 7),
        (2009, 8);
 
 #спорт акроб
-insert into `age_categories` (max_year, discipline_type_id)
+insert into `age_categories` (max_year, discipline_id)
 values (2006, 9),
        (2006, 10),
        (2006, 11),
@@ -177,7 +177,7 @@ values (2006, 9),
        (2004, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, discipline_type_id)
+insert into `age_categories` (min_year, discipline_id)
 values (2009, 9),
        (2009, 10),
        (2009, 11),
@@ -185,7 +185,7 @@ values (2009, 9),
        (2009, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, max_year, discipline_type_id)
+insert into `age_categories` (min_year, max_year, discipline_id)
 values (2009, 2003, 9),
        (2009, 2003, 10),
        (2009, 2003, 11),
@@ -198,7 +198,7 @@ values (2009, 2003, 9),
        (2008, 2002, 13);
 
 #аэроб гимн
-insert into `age_categories` (min_year, discipline_type_id)
+insert into `age_categories` (min_year, discipline_id)
 values (2002, 14),
        (2002, 15),
        (2002, 16),
@@ -208,7 +208,7 @@ values (2002, 14),
        (2002, 20);
 
 #аэроб гимн
-insert into `age_categories` (min_year, max_year, discipline_type_id)
+insert into `age_categories` (min_year, max_year, discipline_id)
 values (2003, 2005, 14),
        (2003, 2005, 15),
        (2003, 2005, 16),
@@ -230,232 +230,60 @@ CREATE TABLE `competition_programs`
     `name`               varchar(128)       NOT NULL,
     `is_del`             boolean default false,
     `age_category_id`    int references `age_categories` (`id`),
-    `discipline_type_id` integer references `discipline_types` (`id`),
+    `discipline_id` integer references `discipline_types` (`id`),
     `type`               varchar(127),
     PRIMARY KEY (`id`)
 );
 
 #спорт гимн женщ
-insert into `competition_programs` (name, discipline_type_id, age_category_id)
+insert into `competition_programs` (name, discipline_id)
 values
-       ('Вольные упражнения', 1, 1),
-       ('Вольные упражнения', 1, 2),
-       ('Вольные упражнения', 1, 3),
-       ('Вольные упражнения', 1, 4),
-       ('Вольные упражнения', 1, 5),
-       ('Брусья', 1, 1),
-       ('Брусья', 1, 2),
-       ('Брусья', 1, 3),
-       ('Брусья', 1, 4),
-       ('Брусья', 1, 5),
-       ('Бревно', 1, 1),
-       ('Бревно', 1, 2),
-       ('Бревно', 1, 3),
-       ('Бревно', 1, 4),
-       ('Бревно', 1, 5),
-       ('Опорный прыжок', 1, 1),
-       ('Опорный прыжок', 1, 2),
-       ('Опорный прыжок', 1, 3),
-       ('Опорный прыжок', 1, 4),
-       ('Опорный прыжок', 1, 5);
+       ('Вольные упражнения', 1),
+       ('Брусья', 1),
+       ('Бревно', 1),
+       ('Опорный прыжок', 1);
 
 
-#спорт гимн женщ
-insert into `competition_programs` (name, discipline_type_id, age_category_id)
+#спорт гимн муж
+insert into `competition_programs` (name, discipline_id)
 values
-       ('Вольные упражнения', 2, 6),
-       ('Вольные упражнения', 2, 7),
-       ('Вольные упражнения', 2, 8),
-       ('Вольные упражнения', 2, 9),
-       ('Вольные упражнения', 2, 10),
-       ('Брусья', 2, 6),
-       ('Брусья', 2, 7),
-       ('Брусья', 2, 8),
-       ('Брусья', 2, 9),
-       ('Брусья', 2, 10),
-       ('Бревно', 2, 6),
-       ('Бревно', 2, 7),
-       ('Бревно', 2, 8),
-       ('Бревно', 2, 9),
-       ('Бревно', 2, 10),
-       ('Опорный прыжок', 2, 6),
-       ('Опорный прыжок', 2, 7),
-       ('Опорный прыжок', 2, 8),
-       ('Опорный прыжок', 2, 9),
-       ('Опорный прыжок', 2, 10);
+       ('Вольные упражнения', 2),
+       ('Брусья', 2),
+       ('Кольца', 2),
+       ('Конь', 2),
+       ('Перекладина', 2),
+       ('Опорный прыжок', 2);
 
 #худ гимн инд
-insert into `competition_programs` (name, discipline_type_id, age_category_id)
+insert into `competition_programs` (name, discipline_id)
 values
-       ('Без предмета', 3, 11),
-       ('Без предмета', 3, 13),
-       ('Без предмета', 3, 15),
-       ('Без предмета', 3, 17),
-       ('Скакалка', 3, 11),
-       ('Скакалка', 3, 13),
-       ('Скакалка', 3, 15),
-       ('Скакалка', 3, 17),
-       ('Обруч', 3, 11),
-       ('Обруч', 3, 13),
-       ('Обруч', 3, 15),
-       ('Обруч', 3, 17),
-       ('Мяч', 3, 11),
-       ('Мяч', 3, 13),
-       ('Мяч', 3, 15),
-       ('Мяч', 3, 17),
-       ('Булавы', 3, 11),
-       ('Булавы', 3, 13),
-       ('Булавы', 3, 15),
-       ('Булавы', 3, 17),
-       ('Лента', 3, 11),
-       ('Лента', 3, 13),
-       ('Лента', 3, 15),
-       ('Лента', 3, 17);
+       ('Без предмета', 3),
+       ('Скакалка', 3),
+       ('Обруч', 3),
+       ('Мяч', 3),
+       ('Булавы', 3),
+       ('Лента', 3);
 
 #худ гимн групп
-insert into `competition_programs` (name, discipline_type_id, age_category_id)
+insert into `competition_programs` (name, discipline_id)
 values
-       ('5 предметов', 3, 12),
-       ('5 предметов', 3, 14),
-       ('5 предметов', 3, 16),
-       ('5 предметов', 3, 18),
-       ('2+3 предмета', 3, 12),
-       ('2+3 предмета', 3, 14),
-       ('2+3 предмета', 3, 16),
-       ('2+3 предмета', 3, 18);
+       ('5 предметов', 4),
+       ('2+3 предмета', 4);
 
 #бабут гимн
-insert into `competition_programs` (name, discipline_type_id, age_category_id)
+insert into `competition_programs` (name, discipline_id)
 values
-       ('1 упражнение', 5, 19),
-       ('1 упражнение', 5, 20),
-       ('1 упражнение', 5, 21),
-       ('1 упражнение', 5, 22),
-       ('1 упражнение', 5, 23),
-       ('1 упражнение', 5, 24),
-       ('1 упражнение', 5, 25),
-       ('1 упражнение', 5, 26),
-       ('1 упражнение', 5, 27),
-       ('1 упражнение', 5, 28),
-       ('1 упражнение', 5, 29),
-       ('1 упражнение', 5, 30),
-       ('1 упражнение', 5, 31),
-       ('1 упражнение', 5, 32),
-       ('1 упражнение', 5, 33),
-       ('1 упражнение', 5, 34),
-       ('1 упражнение', 6, 19),
-       ('1 упражнение', 6, 20),
-       ('1 упражнение', 6, 21),
-       ('1 упражнение', 6, 22),
-       ('1 упражнение', 6, 23),
-       ('1 упражнение', 6, 24),
-       ('1 упражнение', 6, 25),
-       ('1 упражнение', 6, 26),
-       ('1 упражнение', 6, 27),
-       ('1 упражнение', 6, 28),
-       ('1 упражнение', 6, 29),
-       ('1 упражнение', 6, 30),
-       ('1 упражнение', 6, 31),
-       ('1 упражнение', 6, 32),
-       ('1 упражнение', 6, 33),
-       ('1 упражнение', 6, 34),
-       ('1 упражнение', 7, 19),
-       ('1 упражнение', 7, 20),
-       ('1 упражнение', 7, 21),
-       ('1 упражнение', 7, 22),
-       ('1 упражнение', 7, 23),
-       ('1 упражнение', 7, 24),
-       ('1 упражнение', 7, 25),
-       ('1 упражнение', 7, 26),
-       ('1 упражнение', 7, 27),
-       ('1 упражнение', 7, 28),
-       ('1 упражнение', 7, 29),
-       ('1 упражнение', 7, 30),
-       ('1 упражнение', 7, 31),
-       ('1 упражнение', 7, 32),
-       ('1 упражнение', 7, 33),
-       ('1 упражнение', 7, 34),
-       ('1 упражнение', 8, 19),
-       ('1 упражнение', 8, 20),
-       ('1 упражнение', 8, 21),
-       ('1 упражнение', 8, 22),
-       ('1 упражнение', 8, 23),
-       ('1 упражнение', 8, 24),
-       ('1 упражнение', 8, 25),
-       ('1 упражнение', 8, 26),
-       ('1 упражнение', 8, 27),
-       ('1 упражнение', 8, 28),
-       ('1 упражнение', 8, 29),
-       ('1 упражнение', 8, 30),
-       ('1 упражнение', 8, 33),
-       ('1 упражнение', 8, 34),
-       ('2 упражнение', 5, 19),
-       ('2 упражнение', 5, 20),
-       ('2 упражнение', 5, 21),
-       ('2 упражнение', 5, 22),
-       ('2 упражнение', 5, 23),
-       ('2 упражнение', 5, 24),
-       ('2 упражнение', 5, 25),
-       ('2 упражнение', 5, 26),
-       ('2 упражнение', 5, 27),
-       ('2 упражнение', 5, 28),
-       ('2 упражнение', 5, 29),
-       ('2 упражнение', 5, 30),
-       ('2 упражнение', 5, 31),
-       ('2 упражнение', 5, 32),
-       ('2 упражнение', 5, 33),
-       ('2 упражнение', 5, 34),
-       ('2 упражнение', 6, 19),
-       ('2 упражнение', 6, 20),
-       ('2 упражнение', 6, 21),
-       ('2 упражнение', 6, 22),
-       ('2 упражнение', 6, 23),
-       ('2 упражнение', 6, 24),
-       ('2 упражнение', 6, 25),
-       ('2 упражнение', 6, 26),
-       ('2 упражнение', 6, 27),
-       ('2 упражнение', 6, 28),
-       ('2 упражнение', 6, 29),
-       ('2 упражнение', 6, 30),
-       ('2 упражнение', 6, 31),
-       ('2 упражнение', 6, 32),
-       ('2 упражнение', 6, 33),
-       ('2 упражнение', 6, 34),
-       ('2 упражнение', 7, 19),
-       ('2 упражнение', 7, 20),
-       ('2 упражнение', 7, 21),
-       ('2 упражнение', 7, 22),
-       ('2 упражнение', 7, 23),
-       ('2 упражнение', 7, 24),
-       ('2 упражнение', 7, 25),
-       ('2 упражнение', 7, 26),
-       ('2 упражнение', 7, 27),
-       ('2 упражнение', 7, 28),
-       ('2 упражнение', 7, 29),
-       ('2 упражнение', 7, 30),
-       ('2 упражнение', 7, 31),
-       ('2 упражнение', 7, 32),
-       ('2 упражнение', 7, 33),
-       ('2 упражнение', 7, 34),
-       ('2 упражнение', 8, 19),
-       ('2 упражнение', 8, 20),
-       ('2 упражнение', 8, 21),
-       ('2 упражнение', 8, 22),
-       ('2 упражнение', 8, 23),
-       ('2 упражнение', 8, 24),
-       ('2 упражнение', 8, 25),
-       ('2 упражнение', 8, 26),
-       ('2 упражнение', 8, 27),
-       ('2 упражнение', 8, 28),
-       ('2 упражнение', 8, 29),
-       ('2 упражнение', 8, 30),
-       ('2 упражнение', 8, 31),
-       ('2 упражнение', 8, 32),
-       ('2 упражнение', 8, 33),
-       ('2 упражнение', 8, 34);
+       ('1 упражнение', 5),
+       ('1 упражнение', 6),
+       ('1 упражнение', 7),
+       ('1 упражнение', 8),
+       ('2 упражнение', 5),
+       ('2 упражнение', 6),
+       ('2 упражнение', 7),
+       ('2 упражнение', 8);
 
 #спорт акр
-insert into `competition_programs` (name, discipline_type_id)
+insert into `competition_programs` (name, discipline_id)
 values
        ('1 упражнение', 9),
        ('1 упражнение', 10),
@@ -474,7 +302,7 @@ values
        ('3 упражнение', 13);
 
 #аэроб гимн
-insert into `competition_programs` (name, discipline_type_id)
+insert into `competition_programs` (name, discipline_id)
 values
        ('Индивидуальные выступление', 14),
        ('Индивидуальные выступление', 15),

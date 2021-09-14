@@ -3,10 +3,7 @@ package kz.attractorschool.gymnasticsfederation.model;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.CompetitionStatus;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -67,6 +64,7 @@ public class Competition {
     private String phone;
 
     @ManyToOne
+    @ToString.Exclude
     private Discipline discipline;
 
     @Column
@@ -80,8 +78,10 @@ public class Competition {
     private String status = CompetitionStatus.СОЗДАНО.name();
 
     @OneToOne
+    @ToString.Exclude
     private CompetitionPositionFile competitionPositionFile;
 
     @ManyToOne
+    @ToString.Exclude
     private School school;
 }

@@ -1,10 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,15 +32,8 @@ public class Discipline {
     @Builder.Default
     private boolean isDel = false;
 
-//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-//    @Builder.Default
-//    List<DisciplineType> disciplineTypes = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-//    @Builder.Default
-//    List<CompetitionProgram> competitionPrograms = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-//    @Builder.Default
-//    List<AgeCategories> ageCategories = new ArrayList<>();
+    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @Builder.Default
+    List<DisciplineType> disciplineTypes = new ArrayList<>();
 }

@@ -5,6 +5,7 @@ import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
 import kz.attractorschool.gymnasticsfederation.service.AgeCategoryService;
 import kz.attractorschool.gymnasticsfederation.service.CompetitionProgramService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,20 @@ public class CompetitionDisciplineTypesRestController {
     private final CompetitionProgramService competitionProgramService;
 
     @GetMapping("/{id}/ages")
-    public List<AgeCategory> allAgesByDisciplineType(@PathVariable Integer id){
-        return ageCategoryService.allByDisciplineType(id);
+    public ResponseEntity allAgesByDisciplineType(@PathVariable Integer id){
+        try {
+            return ResponseEntity.ok(ageCategoryService.allByDisciplineType(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
     }
 
     @GetMapping("/{id}/programs")
-    public List<CompetitionProgram> allProgramsByDisciplineType(@PathVariable Integer id){
-        return competitionProgramService.allByDisciplineType(id);
+    public ResponseEntity allProgramsByDisciplineType(@PathVariable Integer id){
+        try {
+            return ResponseEntity.ok(competitionProgramService.allByDisciplineType(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
     }
 }

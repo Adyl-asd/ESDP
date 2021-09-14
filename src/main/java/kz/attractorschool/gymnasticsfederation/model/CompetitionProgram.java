@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -29,6 +30,7 @@ public class CompetitionProgram {
     @ToString.Exclude
     private AgeCategory ageCategory;
 
+    @JsonBackReference
     @ManyToOne
     @ToString.Exclude
     private DisciplineType discipline;

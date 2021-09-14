@@ -5,9 +5,14 @@ import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
 import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.repository.AgeCategoryRepository;
 import lombok.AllArgsConstructor;
+import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,7 +31,7 @@ public class AgeCategoryService {
     }
 
     public List<AgeCategory> allByDisciplineType(Integer id){
-//        DisciplineType discipline = disciplineTypeService.findOne(id);
-        return ageCategoryRepository.findAllByDisciplineId(id);
+        DisciplineType discipline = disciplineTypeService.findOne(id);
+        return discipline.getAgeCategories();
     }
 }

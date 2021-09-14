@@ -7,7 +7,10 @@ import kz.attractorschool.gymnasticsfederation.repository.CompetitionProgramRepo
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +27,7 @@ public class CompetitionProgramService {
     }
 
     public List<CompetitionProgram> allByDisciplineType(Integer id){
-//        DisciplineType discipline = disciplineTypeService.findOne(id);
-        return competitionProgramRepository.findAllByDisciplineId(id);
+        DisciplineType discipline = disciplineTypeService.findOne(id);
+        return discipline.getPrograms();
     }
 }

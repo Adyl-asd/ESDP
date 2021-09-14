@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.model;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class AgeCategory {
     @Builder.Default
     private boolean isDel = false;
 
+    @JsonBackReference
     @ManyToOne
     @ToString.Exclude
     private DisciplineType discipline;

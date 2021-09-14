@@ -7,12 +7,12 @@ function next_step() {
     var formData = new FormData(document.getElementById('first-form'))
 
     $.ajax({
-        url : "http://localhost:8080/api/competition",
-        type : "POST",
-        data : formData,
-        processData : false,
-        contentType : false,
-        success : function (result) {
+        url: "http://localhost:8080/api/competition",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (result) {
             competitionId = result.id
         }
     })
@@ -22,6 +22,7 @@ function next_step() {
     $('#pre_btn').removeAttr('hidden')
     $('#send-form-btn').removeAttr('hidden')
 }
+
 // Function that executes on click of first previous button.
 function prev_step() {
     $('#first').removeAttr('hidden')
@@ -37,11 +38,11 @@ function update_comp() {
     var formData = new FormData(document.getElementById('first-form'))
 
     $.ajax({
-        url : `http://localhost:8080/api/competition/${competitionId}/update`,
-        type : "PUT",
-        data : formData,
-        processData : false,
-        contentType : false
+        url: `http://localhost:8080/api/competition/${competitionId}/update`,
+        type: "PUT",
+        data: formData,
+        processData: false,
+        contentType: false
     })
 
     $('#first').attr('hidden', true)
@@ -53,47 +54,100 @@ function update_comp() {
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
 
+$('.form-check-input').change(function () {
+    $(this).prop("checked", true)
+})
+
+
+function check_state() {
+    this.prop("checked", true)
+}
+
+$("#teamChampionship").change(function () {
+    if (this.checked) {
+        $("#teamChampionshipGeneral").removeAttr("disabled")
+        $("#teamChampionshipSeparate").removeAttr("disabled")
+    } else {
+        $("#teamChampionshipGeneral").attr("disabled", true)
+        $("#teamChampionshipSeparate").attr("disabled", true)
+    }
+});
+
+$("#allAround").change(function () {
+    for (let i = 0; i < $('.competition-program-input').length; i++) {
+        if (this.checked) {
+            $(".competition-program-input").eq(i).attr("disabled", true)
+        } else {
+            $(".competition-program-input").eq(i).removeAttr("disabled")
+        }
+    }
+
+});
 
 function save_program() {
     let disciplineType = $("#disciplineType option:selected").text()
     let disciplineTypeId = $("#disciplineType option:selected").val()
     let competitionProgram = $("#competitionProgram option:selected").text()
     let competitionProgramId = $("#competitionProgram option:selected").val()
-    let rankAndAge = $("#rank option:selected").text()
-    let rankAndAgeId = $("#rank option:selected").val()
+    let rankAndAge = $("#ageCategory option:selected").text()
+    let rankAndAgeId = $("#ageCategory option:selected").val()
 
+    let teamChampionship
+    let teamChampionshipText = ""
+
+    if ($('#teamChampionshipGeneral').prop("checked", true) && $('#teamChampionshipGeneral').prop("disabled", false)) {
+        teamChampionship = 1
+        teamChampionshipText = "Командное первенство (Общее)"
+    } else if ($('#teamChampionshipSeparate').prop("checked", true) && $('#teamChampionshipSeparate').prop("disabled", false)) {
+        teamChampionship = 2
+        teamChampionshipText = "Командное первенство (Отдельное)"
+    } else teamChampionship = 0
+
+    let allAround
+    let allAroundText = ""
+
+    allAround = !!$('#allAround').prop("checked", true);
+    if (allAround) {
+        allAroundText = "Многоборье"
+    }
 
     const inputResult = `
-                                <tr class="first-table-row">
-                                    <td>
-                                        <div class="row">
-                                            <div class="col">
-                                                ${disciplineType}
-                                                <input type="hidden" value="${disciplineTypeId}" class="disciplineTypeId">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center text-capitalize">
-                                        <div class="row">
-                                            <div class="col">
-                                                ${competitionProgram}
-                                                <input type="hidden" value="${competitionProgramId}" class="competitionProgramId">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center text-capitalize">
-                                        <div class="row">
-                                            <div class="col">
-                                                ${rankAndAge}
-                                                <input type="hidden" value="${rankAndAgeId}" class="rankAndAgeId">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="btn btn-danger delete-discipline-program-btn">Удалить</div>
-                                    </td>
-                                </tr>
-`
+        <div class="input-result">
+            <div class="row">
+                <div class="col">
+                    ${disciplineType}
+                    <input type="hidden" value="${disciplineTypeId}" class="disciplineTypeId">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    ${teamChampionshipText}
+                    <input type="hidden" value="${teamChampionship}" class="teamChampionship">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    ${allAroundText}
+                    <input type="hidden" value="${allAround}" class="allAround">
+                </div>
+            </div>
+        </div>
+        <div class="competition-programs-block"></div>
+    `
+    console.log(teamChampionshipText)
+    console.log(teamChampionship)
+    console.log(allAroundText)
+    let competitionProgramsBlock = $('.competition-program-block')
+    let competitionProgramsChecked = $('.competition-program-input:checkbox:checked')
+    $.each($("input[class='competition-program-input']:checked"), function(){
+        let programText = $(this).text()
+        let programValue = $(this).value
+        console.log(programText)
+        console.log(programValue)
+        competitionProgramsBlock.append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
+    })
+
+
     $('#program_table_body').prepend(inputResult)
     typeAndProgramInput.attr("hidden", true)
     $("#save_program_btn").attr("hidden", true)
@@ -107,16 +161,16 @@ function save_program() {
 }
 
 function send_form() {
-    for (let i = 0; i < $('.first-table-row').length; i++) {
+    for (let i = 0; i < $('.input-result').length; i++) {
 
         $.ajax({
-            url : "http://localhost:8080/api/competition/disciplines",
-            type : "POST",
-            data : {
-                competitionId : competitionId,
-                disciplineTypeId : $($('.disciplineTypeId'))[i].value,
-                ageCategoryId : $($('.competitionProgramId'))[i].value,
-                competitionProgramId : $($('.rankAndAgeId'))[i].value
+            url: "http://localhost:8080/api/competition/disciplines",
+            type: "POST",
+            data: {
+                competitionId: competitionId,
+                disciplineTypeId: $($('.disciplineTypeId'))[i].value,
+                ageCategoryId: $($('.competitionProgramId'))[i].value,
+                competitionProgramId: $($('.rankAndAgeId'))[i].value
             }
         })
     }

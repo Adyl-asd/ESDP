@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.CompetitionStatus;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
@@ -8,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "competitions")
@@ -84,4 +87,25 @@ public class Competition {
     @ManyToOne
     @ToString.Exclude
     private School school;
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "competitions_discipline_ages", joinColumns = @JoinColumn(name = "competition_id"), inverseJoinColumns = @JoinColumn(name = "discipline_id"))
+    @ToString.Exclude
+    @Builder.Default
+    List<DisciplineType> disciplineTypes = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "competitions_discipline_ages", joinColumns = @JoinColumn(name = "competition_id"), inverseJoinColumns = @JoinColumn(name = "age_category_id"))
+    @ToString.Exclude
+    @Builder.Default
+    List<AgeCategory> ageCategories = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "competitions_discipline_programs", joinColumns = @JoinColumn(name = "competition_id"), inverseJoinColumns = @JoinColumn(name = "competition_program_id"))
+    @ToString.Exclude
+    @Builder.Default
+    List<CompetitionProgram> competitionPrograms = new ArrayList<>();
 }

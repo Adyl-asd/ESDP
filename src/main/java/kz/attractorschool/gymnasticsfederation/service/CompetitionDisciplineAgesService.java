@@ -1,10 +1,10 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplinesAddDTO;
-import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplinesDTO;
+import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplineAgesAddDTO;
+import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplineAgesDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.*;
-import kz.attractorschool.gymnasticsfederation.repository.CompetitionDisciplinesRepository;
+import kz.attractorschool.gymnasticsfederation.repository.CompetitionDisciplineAgesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,40 +12,38 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CompetitionDisciplinesService {
+public class CompetitionDisciplineAgesService {
 
-    private final CompetitionDisciplinesRepository repository;
+    private final CompetitionDisciplineAgesRepository repository;
     private final CompetitionService competitionService;
     private final DisciplineTypeService disciplineTypeService;
     private final AgeCategoryService ageCategoryService;
     private final CompetitionProgramService competitionProgramService;
 
-    public List<CompetitionDisciplines> all() {
+    public List<CompetitionDisciplineAges> all() {
         return repository.findAll();
     }
 
-    public CompetitionDisciplines findOne(Integer id) {
+    public CompetitionDisciplineAges findOne(Integer id) {
         return repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Соревнование", id);
         });
     }
 
-    public List<CompetitionDisciplines> findByCompetitionId(Integer id) {
+    public List<CompetitionDisciplineAges> findByCompetitionId(Integer id) {
         return repository.findAllByCompetitionId(id);
     }
 
-    public CompetitionDisciplinesDTO add(CompetitionDisciplinesAddDTO dto) {
+    public CompetitionDisciplineAgesDTO add(CompetitionDisciplineAgesAddDTO dto) {
         Competition competition = competitionService.findOne(dto.getCompetitionId());
         DisciplineType disciplineType = disciplineTypeService.findOne(dto.getDisciplineTypeId());
         AgeCategory ageCategory = ageCategoryService.findOne(dto.getAgeCategoryId());
-        CompetitionProgram competitionProgram = competitionProgramService.findOne(dto.getCompetitionProgramId());
-        CompetitionDisciplines competitionDisciplines = repository.save(CompetitionDisciplines.builder()
+        CompetitionDisciplineAges competitionDisciplines = repository.save(CompetitionDisciplineAges.builder()
                 .competition(competition)
-                .disciplineType(disciplineType)
+                .discipline(disciplineType)
                 .ageCategory(ageCategory)
-                .competitionProgram(competitionProgram)
                 .build());
-        return CompetitionDisciplinesDTO.from(competitionDisciplines);
+        return CompetitionDisciplineAgesDTO.from(competitionDisciplines);
     }
 
     public void delete (Integer id) {

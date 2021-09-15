@@ -27,7 +27,7 @@ public class FrontendController {
     private final SchoolService schoolService;
     private final AgeCategoryService ageCategoryService;
     private final CompetitionService competitionService;
-    private final CompetitionDisciplinesService competitionDisciplinesService;
+    private final CompetitionDisciplineAgesService competitionDisciplineAgesService;
 
     @GetMapping
     public String index() {
@@ -94,7 +94,7 @@ public class FrontendController {
     public String getComp(@PathVariable Integer id,
                           Model model) {
         model.addAttribute("competition", competitionService.findOne(id));
-        model.addAttribute("competitionDisciplines", competitionDisciplinesService.findByCompetitionId(id));
+        model.addAttribute("competitionDisciplines", competitionDisciplineAgesService.findByCompetitionId(id));
         return "competition/competition";
     }
 

@@ -85,15 +85,18 @@ function save_program() {
     let rankAndAgeId = $("#ageCategory option:selected").val()
 
     let teamChampionship
-    let teamChampionshipText = ""
+    let teamChampionshipText
 
     if ($('#teamChampionshipGeneral').prop("checked") === true && $('#teamChampionshipGeneral').prop("disabled") === false) {
         teamChampionship = 1
         teamChampionshipText = "Командное первенство (Общее)"
-    } else if ($('#teamChampionshipSeparate').prop("checked", true) && $('#teamChampionshipSeparate').prop("disabled", false)) {
+    } else if ($('#teamChampionshipSeparate').prop("checked") === true && $('#teamChampionshipSeparate').prop("disabled") === false) {
         teamChampionship = 2
         teamChampionshipText = "Командное первенство (Отдельное)"
-    } else teamChampionship = 0
+    } else {
+        teamChampionship = 0
+        teamChampionshipText = ""
+    }
 
     let allAround
     let allAroundText = ""

@@ -54,14 +54,6 @@ function update_comp() {
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
 
-$('.form-check-input').change(function () {
-    $(this).prop("checked", true)
-})
-
-
-function check_state() {
-    this.prop("checked", true)
-}
 
 $("#teamChampionship").change(function () {
     if (this.checked) {
@@ -95,7 +87,7 @@ function save_program() {
     let teamChampionship
     let teamChampionshipText = ""
 
-    if ($('#teamChampionshipGeneral').prop("checked", true) && $('#teamChampionshipGeneral').prop("disabled", false)) {
+    if ($('#teamChampionshipGeneral').prop("checked") === true && $('#teamChampionshipGeneral').prop("disabled") === false) {
         teamChampionship = 1
         teamChampionshipText = "Командное первенство (Общее)"
     } else if ($('#teamChampionshipSeparate').prop("checked", true) && $('#teamChampionshipSeparate').prop("disabled", false)) {
@@ -106,56 +98,60 @@ function save_program() {
     let allAround
     let allAroundText = ""
 
-    allAround = !!$('#allAround').prop("checked", true);
+    allAround = !!$('#allAround').prop("checked") === true;
     if (allAround) {
         allAroundText = "Многоборье"
     }
 
     const inputResult = `
-        <div class="input-result">
-            <div class="row">
-                <div class="col">
-                    ${disciplineType}
-                    <input type="hidden" value="${disciplineTypeId}" class="disciplineTypeId">
-                </div>
+    <tr class="input-row">
+        <td>
+            <div>
+                ${disciplineType}
+                <input type="hidden" value="${disciplineTypeId}" class="disciplineTypeId">
             </div>
-            <div class="row">
-                <div class="col">
-                    ${teamChampionshipText}
-                    <input type="hidden" value="${teamChampionship}" class="teamChampionship">
-                </div>
+            <div>
+                ${teamChampionshipText}
+                <input type="hidden" value="${teamChampionship}" class="teamChampionship">
             </div>
-            <div class="row">
-                <div class="col">
-                    ${allAroundText}
-                    <input type="hidden" value="${allAround}" class="allAround">
-                </div>
+        </td>
+        <td class="program-body">
+            <div class="col">
+                ${allAroundText}
+                <input type="hidden" value="${allAround}" class="allAround">
             </div>
-        </div>
-        <div class="competition-programs-block"></div>
+        </td>
+        <td class="age-body">
+            
+        </td>
+        <td>
+            <input type="button" class="btn btn-danger delete-discipline-program-btn" value="Удалить">
+        </td>
+    </tr>
     `
-    console.log(teamChampionshipText)
-    console.log(teamChampionship)
-    console.log(allAroundText)
-    let competitionProgramsBlock = $('.competition-program-block')
-    let competitionProgramsChecked = $('.competition-program-input:checkbox:checked')
-    $.each($("input[class='competition-program-input']:checked"), function(){
-        let programText = $(this).text()
-        let programValue = $(this).value
-        console.log(programText)
-        console.log(programValue)
-        competitionProgramsBlock.append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
+
+    $('#program_table_body').append(inputResult)
+    $.each($("input[name='disciplineTypeId']:checked"), function () {
+        let programText = $(this).next('label').text()
+        let programValue = $(this).val()
+        $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
+    })
+
+    $.each($("input[name='ageCategory']:checked"), function () {
+        let ageText = $(this).next('label').text()
+        let ageValue = $(this).val()
+        $($('.age-body')).eq(($('.age-body').length-1)).append(`<div>${ageText}</div><input type="hidden" value="${ageValue}">`)
     })
 
 
-    $('#program_table_body').prepend(inputResult)
     typeAndProgramInput.attr("hidden", true)
+    $('#table-body').removeAttr("hidden")
     $("#save_program_btn").attr("hidden", true)
     $("#cancel_program_btn").attr("hidden", true)
     $("#add_program_btn").removeAttr("hidden")
 
     $('.delete-discipline-program-btn').on('click', function () {
-        $(this).closest('.first-table-row').remove();
+        $(this).closest('.input-row').remove();
     })
 
 }

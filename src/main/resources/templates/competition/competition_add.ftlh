@@ -109,118 +109,134 @@
                     </form>
 
                     <#--SECOND-->
-                    <div class="competition-programs-block"></div>
                     <form id="second-form" method="post">
                         <fieldset id="second" hidden>
-                            <div id="program_table_body"></div>
+                            <table class="table" id="table-body" hidden>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Дисциплина</th>
+                                    <th scope="col">Программы</th>
+                                    <th scope="col">Возрастные категории</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody id="program_table_body">
+
+                                </tbody>
+                            </table>
                             <#--Дисциплина и вид программы-->
-                            <div class="row">
-                                <div class="col">
-                                    <label for="disciplineType" class="form-label"><h5>Дисциплина</h5></label>
-                                    <select name="disciplineTypeId" id="disciplineType" class="form-select">
-                                        <option>Выберите дисциплину</option>
-                                        <#list disciplineTypes as dt>
-                                            <option value="${dt.id}">${dt.name}</option>
+                            <div id="disciplineTypeAndProgramInput">
+
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="disciplineType" class="form-label"><h5>Дисциплина</h5></label>
+                                        <select name="disciplineTypeId" id="disciplineType" class="form-select">
+                                            <option>Выберите дисциплину</option>
+                                            <#list disciplineTypes as dt>
+                                                <option value="${dt.id}">${dt.name}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-check my-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="teamChampionship">
+                                    <label class="form-check-label" for="teamChampionship">
+                                        Командное первенство
+                                    </label>
+                                    <div class="form-check ms-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                               id="teamChampionshipGeneral" checked disabled>
+                                        <label class="form-check-label" for="teamChampionshipGeneral">
+                                            Общее
+                                        </label>
+                                    </div>
+                                    <div class="form-check ms-3">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                               id="teamChampionshipSeparate" disabled>
+                                        <label class="form-check-label" for="teamChampionshipSeparate">
+                                            Отдельное
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="allAround">
+                                    <label class="form-check-label" for="allAround">
+                                        Многоборье
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Вид соревновательной программы</h5>
+                                        <#list competitionPrograms as competitionProgram>
+                                            <div class="form-check">
+                                                <input class="form-check-input competition-program-input"
+                                                       type="checkbox"
+                                                       name="disciplineTypeId" value="${competitionProgram.id}"
+                                                       id="disciplineType">
+                                                <label class="form-check-label" for="disciplineType">
+                                                    ${competitionProgram.name}
+                                                </label>
+                                            </div>
                                         </#list>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" value="" id="teamChampionship">
-                                <label class="form-check-label" for="teamChampionship">
-                                    Командное первенство
-                                </label>
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                           id="teamChampionshipGeneral" checked disabled>
-                                    <label class="form-check-label" for="teamChampionshipGeneral">
-                                        Общее
-                                    </label>
-                                </div>
-                                <div class="form-check ms-3">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                           id="teamChampionshipSeparate" disabled>
-                                    <label class="form-check-label" for="teamChampionshipSeparate">
-                                        Отдельное
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="allAround">
-                                <label class="form-check-label" for="allAround">
-                                    Многоборье
-                                </label>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <h5>Вид соревновательной программы</h5>
-                                    <#list competitionPrograms as competitionProgram>
-                                        <div class="form-check">
-                                            <input class="form-check-input competition-program-input" type="checkbox"
-                                                   name="disciplineTypeId" value="${competitionProgram.id}"
-                                                   id="disciplineType" onclick="check_state()">
-                                            <label class="form-check-label" for="disciplineType">
-                                                ${competitionProgram.name}
-                                            </label>
-                                        </div>
-                                    </#list>
-                                </div>
-                                <div class="col">
-                                    <h5>Разряд и возрастная категория</h5>
-                                    <#list ageCategories as ageCategory>
-                                        <div class="form-check">
-                                            <#if ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.maxYear} - ${ageCategory.minYear}
-                                                    : ${ageCategory.rank.name}
-                                                </label>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Разряд и возрастная категория</h5>
+                                        <#list ageCategories as ageCategory>
+                                            <div class="form-check">
+                                                <#if ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.maxYear} - ${ageCategory.minYear}
+                                                        : ${ageCategory.rank.name}
+                                                    </label>
 
-                                            <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.maxYear} : ${ageCategory.rank.name}
-                                                </label>
+                                                <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.maxYear} : ${ageCategory.rank.name}
+                                                    </label>
 
-                                            <#elseif ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.maxYear} - ${ageCategory.minYear}
-                                                </label>
+                                                <#elseif ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.maxYear} - ${ageCategory.minYear}
+                                                    </label>
 
-                                            <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.minYear} : ${ageCategory.rank.name}
-                                                </label>
+                                                <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.minYear} : ${ageCategory.rank.name}
+                                                    </label>
 
-                                            <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.minYear}
-                                                </label>
+                                                <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.minYear}
+                                                    </label>
 
-                                            <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && !ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.maxYear}
-                                                </label>
+                                                <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && !ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.maxYear}
+                                                    </label>
 
-                                            <#elseif !ageCategory.maxYear?? !&& ageCategory.minYear?? && ageCategory.rank??>
-                                                <input class="form-check-input age-category" type="checkbox"
-                                                       value="${ageCategory.id}" id="ageCategory">
-                                                <label class="form-check-label" for="ageCategory">
-                                                    ${ageCategory.rank.name}
-                                                </label>
-                                            </#if>
-                                        </div>
-                                    </#list>
+                                                <#elseif !ageCategory.maxYear?? !&& ageCategory.minYear?? && ageCategory.rank??>
+                                                    <input class="form-check-input age-category" type="checkbox"
+                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                    <label class="form-check-label" for="ageCategory">
+                                                        ${ageCategory.rank.name}
+                                                    </label>
+                                                </#if>
+                                            </div>
+                                        </#list>
+                                    </div>
                                 </div>
                             </div>
                             <input id="save_program_btn" class="btn btn-primary mt-3" onclick="save_program()"
@@ -229,6 +245,7 @@
                                    type="button" value="Отмена" hidden>
                             <input id="add_program_btn" class="btn btn-primary mt-3" onclick="add_program()"
                                    type="button" value="Добавить" hidden>
+
                         </fieldset>
                     </form>
 

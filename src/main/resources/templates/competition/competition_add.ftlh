@@ -111,12 +111,12 @@
                     <#--SECOND-->
                     <form id="second-form" method="post">
                         <fieldset id="second" hidden>
-                            <table class="table" id="table-body" hidden>
+                            <table class="table table-bordered text-center" id="table-body" hidden>
                                 <thead>
                                 <tr>
                                     <th scope="col">Дисциплина</th>
                                     <th scope="col">Программы</th>
-                                    <th scope="col">Возрастные категории</th>
+                                    <th scope="col">Возрастные категории / Ограничение по количеству</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>

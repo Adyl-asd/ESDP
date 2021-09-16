@@ -127,6 +127,7 @@ function save_program() {
         <td class="age-body">
             
         </td>
+
         <td>
             <input type="button" class="btn btn-danger delete-discipline-program-btn" value="Удалить">
         </td>
@@ -139,11 +140,28 @@ function save_program() {
         let programValue = $(this).val()
         $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
     })
+    let maxAthletesText
+    if (teamChampionship === 0) {
+        maxAthletesText = "спортсменов"
+    } else maxAthletesText = "команд"
 
     $.each($("input[name='ageCategory']:checked"), function () {
         let ageText = $(this).next('label').text()
         let ageValue = $(this).val()
-        $($('.age-body')).eq(($('.age-body').length-1)).append(`<div>${ageText}</div><input type="hidden" value="${ageValue}">`)
+        $($('.age-body')).eq(($('.age-body').length-1)).append(`
+    <div class="row my-1">
+        <div class="col-8">
+            <div>${ageText}</div><input type="hidden" value="${ageValue}">
+        </div>
+        <div class="col-2">
+            <input type="number" class="form-control form-control-sm">
+        </div>
+        <div class="col-2">
+            <label for="" class="form-label">${maxAthletesText}</label>
+        </div>
+    </div>
+    <hr>
+`)
     })
 
 

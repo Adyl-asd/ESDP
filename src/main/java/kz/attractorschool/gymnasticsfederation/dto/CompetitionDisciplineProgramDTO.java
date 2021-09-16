@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.CompetitionDisciplinePrograms;
+import kz.attractorschool.gymnasticsfederation.model.CompetitionDisciplineProgram;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionDisciplineProgramsDTO {
+public class CompetitionDisciplineProgramDTO {
     @NotNull
     private Integer id;
 
@@ -20,7 +20,7 @@ public class CompetitionDisciplineProgramsDTO {
 
     private CompetitionProgramDTO competitionProgram;
 
-    public static CompetitionDisciplineProgramsDTO from(CompetitionDisciplinePrograms competitionDisciplines) {
+    public static CompetitionDisciplineProgramDTO from(CompetitionDisciplineProgram competitionDisciplines) {
         return builder()
                 .id(competitionDisciplines.getId())
                 .competition(CompetitionDTO.from(competitionDisciplines.getCompetition()))

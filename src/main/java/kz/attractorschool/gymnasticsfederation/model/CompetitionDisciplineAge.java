@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CompetitionDisciplineAges {
+public class CompetitionDisciplineAge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,4 +35,10 @@ public class CompetitionDisciplineAges {
     @ToString.Exclude
     @JsonBackReference
     private AgeCategory ageCategory;
+
+    @Column
+    private Integer maxTeams;
+
+    @Column
+    private Integer maxAthletes;
 }

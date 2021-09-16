@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionDisciplineAgesAddDTO {
+public class CompetitionDisciplineAgeAddDTO {
 
     private Integer id;
 
@@ -21,4 +21,8 @@ public class CompetitionDisciplineAgesAddDTO {
     private Integer disciplineTypeId;
 
     private Integer ageCategoryId;
+
+    private Integer maxTeams;
+
+    private Integer maxAthletes;
 }

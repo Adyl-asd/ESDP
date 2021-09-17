@@ -22,13 +22,14 @@ public class CompetitionUpdateDTO {
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDate startDate;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDate finishDate;
+
+    @NotNull
+    private String level;
 
     @NotNull
     private String country;

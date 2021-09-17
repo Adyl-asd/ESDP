@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.frontend;
 
+import kz.attractorschool.gymnasticsfederation.enumm.CompetitionLevel;
 import kz.attractorschool.gymnasticsfederation.model.*;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
@@ -87,6 +88,7 @@ public class FrontendController {
         model.addAttribute("ranks", rankService.all());
         model.addAttribute("school", schoolService.findOne(1));
         model.addAttribute("ageCategories", ageCategoryService.all());
+        model.addAttribute("levels", competitionService.getLevels());
         return "competition/competition_add";
     }
 

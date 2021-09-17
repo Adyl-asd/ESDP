@@ -16,7 +16,7 @@
                             <#--Наименование соревнования-->
                             <div class="row">
                                 <div class="col">
-                                    <label for="comp-name" class="form-label fs-5">Наименование соревнования</label>
+                                    <label for="comp-name" class="form-label fs-6">Наименование соревнования</label>
                                     <input type="text" name="name" class="form-control" id="comp-name">
                                 </div>
                             </div>
@@ -30,6 +30,15 @@
                                 <div class="col">
                                     <label for="comp-end" class="form-label fs-5">Окончание мероприятия</label>
                                     <input type="date" name="finishDate" class="form-control" id="comp-end">
+                                </div>
+                                <div class="col">
+                                    <label for="level" class="form-label fs-5">Уровень соревнования</label>
+                                    <select name="level" id="level" class="form-select">
+                                        <option selected value="" class="option">Выберите уровень</option>
+                                        <#list levels as level>
+                                            <option value="${level}">${level}</option>
+                                        </#list>
+                                    </select>
                                 </div>
                             </div>
 
@@ -186,7 +195,8 @@
                                             <div class="form-check">
                                                 <#if ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.maxYear} - ${ageCategory.minYear}
                                                         : ${ageCategory.rank.name}
@@ -194,42 +204,48 @@
 
                                                 <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.maxYear} : ${ageCategory.rank.name}
                                                     </label>
 
                                                 <#elseif ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.maxYear} - ${ageCategory.minYear}
                                                     </label>
 
                                                 <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.minYear} : ${ageCategory.rank.name}
                                                     </label>
 
                                                 <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.minYear}
                                                     </label>
 
                                                 <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && !ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.maxYear}
                                                     </label>
 
                                                 <#elseif !ageCategory.maxYear?? !&& ageCategory.minYear?? && ageCategory.rank??>
                                                     <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory" name="ageCategory">
+                                                           value="${ageCategory.id}" id="ageCategory"
+                                                           name="ageCategory">
                                                     <label class="form-check-label" for="ageCategory">
                                                         ${ageCategory.rank.name}
                                                     </label>

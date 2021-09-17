@@ -44,6 +44,10 @@ public class Competition {
 
     @Column
     @NotNull
+    private String level;
+
+    @Column
+    @NotNull
     private String country;
 
     @Column

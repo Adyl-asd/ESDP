@@ -4,6 +4,7 @@ package kz.attractorschool.gymnasticsfederation.service;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionUpdateDTO;
+import kz.attractorschool.gymnasticsfederation.enumm.CompetitionLevel;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
 import kz.attractorschool.gymnasticsfederation.model.Competition;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,6 +48,7 @@ public class CompetitionService {
                 .city(competitionAddDTO.getCity())
                 .address(competitionAddDTO.getAddress())
                 .areaName(competitionAddDTO.getAreaName())
+                .level(competitionAddDTO.getLevel())
                 .contact(competitionAddDTO.getContactName())
                 .phone(competitionAddDTO.getContactPhone())
                 .discipline(discipline)
@@ -63,6 +66,7 @@ public class CompetitionService {
         competition.setName(competitionUpdateDTO.getName());
         competition.setStartDate(competitionUpdateDTO.getStartDate());
         competition.setFinishDate(competitionUpdateDTO.getFinishDate());
+        competition.setLevel(competitionUpdateDTO.getLevel());
         competition.setCountry(competitionUpdateDTO.getCountry());
         competition.setCity(competitionUpdateDTO.getCity());
         competition.setAddress(competitionUpdateDTO.getAddress());
@@ -81,6 +85,15 @@ public class CompetitionService {
         competition.setDel(true);
         competitionRepository.save(competition);
         return "ok";
+    }
+
+    public List<String> getLevels() {
+        CompetitionLevel[] arr = CompetitionLevel.values();
+        List<String> levels = new ArrayList<>();
+        for (CompetitionLevel competitionLevel : arr) {
+            levels.add(competitionLevel.getName());
+        }
+        return levels;
     }
 
     public boolean isPdf(MultipartFile multipartFile) {

@@ -3,7 +3,9 @@ package kz.attractorschool.gymnasticsfederation.rest_controller;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplineProgramAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplineProgramDTO;
 import kz.attractorschool.gymnasticsfederation.model.CompetitionDisciplineProgram;
+import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
 import kz.attractorschool.gymnasticsfederation.service.CompetitionDisciplineProgramsService;
+import kz.attractorschool.gymnasticsfederation.service.CompetitionProgramService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CompetitionDisciplineProgramRestController {
     private final CompetitionDisciplineProgramsService service;
+    private final CompetitionProgramService competitionProgramService;
 
     @PostMapping
     public CompetitionDisciplineProgramDTO add(@Valid CompetitionDisciplineProgramAddDTO programsAddDTO) {
@@ -26,9 +29,9 @@ public class CompetitionDisciplineProgramRestController {
         return service.all();
     }
 
-    @GetMapping("/{id}")
-    public CompetitionDisciplineProgram one(@PathVariable Integer id) {
-        return service.findOne(id);
+    @GetMapping("{id}")
+    public List<CompetitionProgram> allByDisciplineTypeId(@PathVariable Integer id) {
+        return competitionProgramService.allByDisciplineType(id);
     }
 
 

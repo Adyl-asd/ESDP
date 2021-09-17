@@ -28,6 +28,10 @@ public class DisciplineTypeService {
         return DisciplineTypeDTO.from(disciplineType);
     }
 
+    public List<DisciplineType> getAllByDisciplineId(int id) {
+        return disciplineTypeRepository.findAllByDisciplineId(id);
+    }
+
     public List<DisciplineTypeDTO> getDisciplineTypesByDisciplineId(int id){
         return disciplineTypeRepository.findAllByDisciplineId(id).stream().map(DisciplineTypeDTO::from).collect(Collectors.toList());
     }

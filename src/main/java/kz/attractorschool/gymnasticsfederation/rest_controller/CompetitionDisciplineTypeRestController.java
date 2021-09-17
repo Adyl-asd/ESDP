@@ -2,8 +2,10 @@ package kz.attractorschool.gymnasticsfederation.rest_controller;
 
 import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
 import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
+import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.service.AgeCategoryService;
 import kz.attractorschool.gymnasticsfederation.service.CompetitionProgramService;
+import kz.attractorschool.gymnasticsfederation.service.DisciplineTypeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +18,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/competition/disciplines/types")
 @AllArgsConstructor
-public class CompetitionDisciplineTypesRestController {
+public class CompetitionDisciplineTypeRestController {
     private final AgeCategoryService ageCategoryService;
     private final CompetitionProgramService competitionProgramService;
+    private final DisciplineTypeService disciplineTypeService;
+
+    @GetMapping("{id}")
+    public List<DisciplineType> allByDisciplineId(@PathVariable Integer id) {
+        return disciplineTypeService.getAllByDisciplineId(id);
+    }
 
     @GetMapping("/{id}/ages")
-    public ResponseEntity allAgesByDisciplineType(@PathVariable Integer id){
+    public ResponseEntity<Object> allAgesByDisciplineType(@PathVariable Integer id){
         try {
             return ResponseEntity.ok(ageCategoryService.allByDisciplineType(id));
         } catch (Exception e) {
@@ -30,7 +38,7 @@ public class CompetitionDisciplineTypesRestController {
     }
 
     @GetMapping("/{id}/programs")
-    public ResponseEntity allProgramsByDisciplineType(@PathVariable Integer id){
+    public ResponseEntity<Object> allProgramsByDisciplineType(@PathVariable Integer id){
         try {
             return ResponseEntity.ok(competitionProgramService.allByDisciplineType(id));
         } catch (Exception e) {

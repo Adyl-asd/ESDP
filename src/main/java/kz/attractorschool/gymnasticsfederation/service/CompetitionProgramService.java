@@ -1,16 +1,12 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
 import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
 import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.repository.CompetitionProgramRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor

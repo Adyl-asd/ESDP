@@ -31,6 +31,7 @@ function prev_step() {
     $('#send-form-btn').attr('hidden', true)
     $('#next_btn').attr('hidden', true)
     $('#update_btn').removeAttr('hidden')
+    $('#competitionProgramDiv').attr("hidden", true)
 
 }
 
@@ -61,6 +62,42 @@ $('#discipline').change(function () {
                 $("#newTeamChampionshipDiv").append($("#teamChampionshipDiv"))
             } else {
                 $("#oldTeamChampionshipDiv").append($("#teamChampionshipDiv"))
+            }
+            $.ajax({
+                url : `http://localhost:8080/api/competition/disciplines/types/${disciplineId}/`,
+                type : "GET",
+                success : function (disciplineTypes) {
+                    $("#disciplineType").empty()
+                    $("#disciplineType").append(`<option selected>Выберите дисциплину</option>`)
+                    for (let i = 0; i < disciplineTypes.length; i++) {
+                        $("#disciplineType").append(`<option value="${disciplineTypes[i].id}">${disciplineTypes[i].name}</option>`)
+                    }
+                }
+            })
+        }
+    })
+})
+
+$('#disciplineType').change(function () {
+    let disciplineTypeId = $(this).val()
+    $.ajax({
+        url : `http://localhost:8080/api/competition/disciplines/programs/${disciplineTypeId}`,
+        type : "GET",
+        success : function (competitionPrograms) {
+            $('#competitionProgramDiv').empty()
+            $('#competitionProgramDiv').removeAttr("hidden")
+            for (let i = 0; i < competitionPrograms.length; i++) {
+                $("#competitionProgramDiv").append(`
+                    <div class="form-check">
+                        <input class="form-check-input competition-program-input"
+                        type="checkbox"
+                        name="disciplineTypeId" value="${competitionPrograms[i].id}"
+                        id="disciplineType">
+                        <label class="form-check-label" for="disciplineType">
+                            ${competitionPrograms[i].name}
+                        </label>
+                    </div>
+                `)
             }
         }
     })

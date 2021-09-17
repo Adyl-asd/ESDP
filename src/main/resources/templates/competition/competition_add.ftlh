@@ -144,10 +144,10 @@
                                     <div class="col">
                                         <label for="disciplineType" class="form-label">Дисциплина</label>
                                         <select name="disciplineTypeId" id="disciplineType" class="form-select">
-                                            <option>Выберите дисциплину</option>
-                                            <#list disciplineTypes as dt>
-                                                <option value="${dt.id}">${dt.name}</option>
-                                            </#list>
+                                            <option selected>Выберите дисциплину</option>
+<#--                                            <#list disciplineTypes as dt>-->
+<#--                                                <option value="${dt.id}">${dt.name}</option>-->
+<#--                                            </#list>-->
                                         </select>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                 <#--                                    </label>-->
                                 <#--                                </div>-->
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col" id="competitionProgramDiv" hidden>
                                         <h5>Вид соревновательной программы</h5>
                                         <#list competitionPrograms as competitionProgram>
                                             <div class="form-check">

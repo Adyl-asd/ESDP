@@ -32,6 +32,7 @@ function prev_step() {
     $('#next_btn').attr('hidden', true)
     $('#update_btn').removeAttr('hidden')
     $('#competitionProgramDiv').attr("hidden", true)
+    $('#ageCategoryDiv').attr("hidden", true)
 
 }
 
@@ -101,7 +102,50 @@ $('#disciplineType').change(function () {
             }
         }
     })
+
+    $.ajax({
+        url : `http://localhost:8080/api/competition/disciplines/ages/${disciplineTypeId}`,
+        type : "GET",
+        success : function (ageCategories) {
+            $('#ageCategoryDiv').empty()
+            $('#ageCategoryDiv').removeAttr("hidden")
+            let ageCategoryText;
+            for (let i = 0; i < ageCategories.length; i++) {
+                if (ageCategories[i].maxYear !== null && ageCategories[i].minYear !== null && ageCategories[i].rank !== null) {
+                    ageCategoryText = ageCategories[i].maxYear + " - " + ageCategories[i].minYear + " : " + ageCategories[i].rank.name
+                }
+                if (ageCategories[i].maxYear !== null && ageCategories[i].minYear === null && ageCategories[i].rank !== null) {
+                    ageCategoryText = "младше " + ageCategories[i].maxYear  + " : " + ageCategories[i].rank.name
+                }
+                if (ageCategories[i].maxYear !== null && ageCategories[i].minYear !== null && ageCategories[i].rank === null) {
+                    ageCategoryText = ageCategories[i].maxYear + " - " + ageCategories[i].minYear
+                }
+                if (ageCategories[i].maxYear === null && ageCategories[i].minYear !== null && ageCategories[i].rank !== null) {
+                    ageCategoryText = "старше " + ageCategories[i].minYear  + " : " + ageCategories[i].rank.name
+                }
+                if (ageCategories[i].maxYear === null && ageCategories[i].minYear !== null && ageCategories[i].rank === null) {
+                    ageCategoryText = "старше " + ageCategories[i].minYear
+                }
+                if (ageCategories[i].maxYear !== null && ageCategories[i].minYear === null && ageCategories[i].rank === null) {
+                    ageCategoryText = "младше " + ageCategories[i].maxYear
+                }
+                if (ageCategories[i].maxYear === null && ageCategories[i].minYear === null && ageCategories[i].rank !== null) {
+                    ageCategoryText = ageCategories[i].rank.name
+                }
+                $('#ageCategoryDiv').append(`
+                    <div class="form-check">
+                        <input class="form-check-input age-category" type="checkbox"
+                            value="${ageCategories[i].id}" id="ageCategory"
+                            name="ageCategory">
+                        <label class="form-check-label" for="ageCategory">${ageCategoryText}</label>
+                    </div>
+                `)
+            }
+        }
+    })
 })
+
+
 
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
@@ -192,9 +236,14 @@ function save_program() {
         $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
     })
     let maxAthletesText
+    let maxClassName
     if (teamChampionship === 0) {
         maxAthletesText = "спортсменов"
-    } else maxAthletesText = "команд"
+        maxClassName = "maxAthletes"
+    } else {
+        maxAthletesText = "команд"
+        maxClassName = "maxTeams"
+    }
 
     $.each($("input[name='ageCategory']:checked"), function () {
         let ageText = $(this).next('label').text()
@@ -205,7 +254,7 @@ function save_program() {
             <div>${ageText}</div><input type="hidden" value="${ageValue}">
         </div>
         <div class="col-2">
-            <input type="number" class="form-control form-control-sm">
+            <input type="number" class="form-control form-control-sm ${maxClassName}">
         </div>
         <div class="col-2">
             <label for="" class="form-label">${maxAthletesText}</label>
@@ -237,8 +286,11 @@ function send_form() {
             data: {
                 competitionId: competitionId,
                 disciplineTypeId: $($('.disciplineTypeId'))[i].value,
+                teamChampionship : $($('.teamChampionship'))[i].value,
                 ageCategoryId: $($('.competitionProgramId'))[i].value,
-                competitionProgramId: $($('.rankAndAgeId'))[i].value
+                competitionProgramId: $($('.rankAndAgeId'))[i].value,
+                maxAthletes : $($('.maxAthletes'))[i].value,
+                maxTeams : $($('.maxTeams'))[i].value
             }
         })
     }

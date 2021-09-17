@@ -145,9 +145,9 @@
                                         <label for="disciplineType" class="form-label">Дисциплина</label>
                                         <select name="disciplineTypeId" id="disciplineType" class="form-select">
                                             <option selected>Выберите дисциплину</option>
-<#--                                            <#list disciplineTypes as dt>-->
-<#--                                                <option value="${dt.id}">${dt.name}</option>-->
-<#--                                            </#list>-->
+                                            <#--                                            <#list disciplineTypes as dt>-->
+                                            <#--                                                <option value="${dt.id}">${dt.name}</option>-->
+                                            <#--                                            </#list>-->
                                         </select>
                                     </div>
                                 </div>
@@ -179,84 +179,15 @@
                                 <#--                                        Многоборье-->
                                 <#--                                    </label>-->
                                 <#--                                </div>-->
-                                <div class="row">
+
+                                <#--Блок чекбоксов для видов программ-->
+                                <div class="row my-2">
                                     <div class="col" id="competitionProgramDiv" hidden>
                                         <h5>Вид соревновательной программы</h5>
-                                        <#list competitionPrograms as competitionProgram>
-                                            <div class="form-check">
-                                                <input class="form-check-input competition-program-input"
-                                                       type="checkbox"
-                                                       name="disciplineTypeId" value="${competitionProgram.id}"
-                                                       id="disciplineType">
-                                                <label class="form-check-label" for="disciplineType">
-                                                    ${competitionProgram.name}
-                                                </label>
-                                            </div>
-                                        </#list>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" id="ageCategoryDiv" hidden>
                                         <h5>Разряд и возрастная категория</h5>
-                                        <#list ageCategories as ageCategory>
-                                            <div class="form-check">
-                                                <#if ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.maxYear} - ${ageCategory.minYear}
-                                                        : ${ageCategory.rank.name}
-                                                    </label>
 
-                                                <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.maxYear} : ${ageCategory.rank.name}
-                                                    </label>
-
-                                                <#elseif ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.maxYear} - ${ageCategory.minYear}
-                                                    </label>
-
-                                                <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.minYear} : ${ageCategory.rank.name}
-                                                    </label>
-
-                                                <#elseif !ageCategory.maxYear?? && ageCategory.minYear?? && !ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.minYear}
-                                                    </label>
-
-                                                <#elseif ageCategory.maxYear?? && !ageCategory.minYear?? && !ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.maxYear}
-                                                    </label>
-
-                                                <#elseif !ageCategory.maxYear?? !&& ageCategory.minYear?? && ageCategory.rank??>
-                                                    <input class="form-check-input age-category" type="checkbox"
-                                                           value="${ageCategory.id}" id="ageCategory"
-                                                           name="ageCategory">
-                                                    <label class="form-check-label" for="ageCategory">
-                                                        ${ageCategory.rank.name}
-                                                    </label>
-                                                </#if>
-                                            </div>
-                                        </#list>
                                     </div>
                                 </div>
                             </div>

@@ -18,8 +18,7 @@ public class CompetitionDisciplineProgramRestController {
 
     @PostMapping
     public CompetitionDisciplineProgramDTO add(@Valid CompetitionDisciplineProgramAddDTO programsAddDTO) {
-        CompetitionDisciplineProgramDTO dto = service.add(programsAddDTO);
-        return dto;
+        return service.add(programsAddDTO);
     }
 
     @GetMapping("/all")

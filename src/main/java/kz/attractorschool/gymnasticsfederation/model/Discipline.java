@@ -32,8 +32,8 @@ public class Discipline {
     @Builder.Default
     private boolean isDel = false;
 
-    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @Builder.Default
-    List<DisciplineType> disciplineTypes = new ArrayList<>();
+//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    @Builder.Default
+//    List<DisciplineType> disciplineTypes = new ArrayList<>();
 }

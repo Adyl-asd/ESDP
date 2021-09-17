@@ -84,6 +84,11 @@
                                 </div>
                             </div>
 
+                            <#--Если выбрана спортивная акробатика, то выбор командного первенства перенесется сюда-->
+                            <div id="newTeamChampionshipDiv">
+
+                            </div>
+
                             <#--Id школы-->
                             <input type="hidden" name="schoolId" value="${school.id}">
 
@@ -135,11 +140,9 @@
                             </table>
                             <#--Дисциплина и вид программы-->
                             <div id="disciplineTypeAndProgramInput">
-
-
                                 <div class="row">
                                     <div class="col">
-                                        <label for="disciplineType" class="form-label"><h5>Дисциплина</h5></label>
+                                        <label for="disciplineType" class="form-label">Дисциплина</label>
                                         <select name="disciplineTypeId" id="disciplineType" class="form-select">
                                             <option>Выберите дисциплину</option>
                                             <#list disciplineTypes as dt>
@@ -148,32 +151,34 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-check my-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="teamChampionship">
-                                    <label class="form-check-label" for="teamChampionship">
-                                        Командное первенство
-                                    </label>
-                                    <div class="form-check ms-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                               id="teamChampionshipGeneral" checked disabled>
-                                        <label class="form-check-label" for="teamChampionshipGeneral">
-                                            Общее
+                                <div id="oldTeamChampionshipDiv">
+                                    <div class="form-check my-3" id="teamChampionshipDiv">
+                                        <input class="form-check-input" type="checkbox" value="" id="teamChampionship">
+                                        <label class="form-check-label" for="teamChampionship">
+                                            Командное первенство
                                         </label>
-                                    </div>
-                                    <div class="form-check ms-3">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                               id="teamChampionshipSeparate" disabled>
-                                        <label class="form-check-label" for="teamChampionshipSeparate">
-                                            Отдельное
-                                        </label>
+                                        <div class="form-check ms-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                   id="teamChampionshipGeneral" checked disabled>
+                                            <label class="form-check-label" for="teamChampionshipGeneral">
+                                                Общее
+                                            </label>
+                                        </div>
+                                        <div class="form-check ms-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                   id="teamChampionshipSeparate" disabled>
+                                            <label class="form-check-label" for="teamChampionshipSeparate">
+                                                Отдельное
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="allAround">
-                                    <label class="form-check-label" for="allAround">
-                                        Многоборье
-                                    </label>
-                                </div>
+                                <#--                                <div class="form-check">-->
+                                <#--                                    <input class="form-check-input" type="checkbox" value="" id="allAround">-->
+                                <#--                                    <label class="form-check-label" for="allAround">-->
+                                <#--                                        Многоборье-->
+                                <#--                                    </label>-->
+                                <#--                                </div>-->
                                 <div class="row">
                                     <div class="col">
                                         <h5>Вид соревновательной программы</h5>

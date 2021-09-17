@@ -51,6 +51,21 @@ function update_comp() {
     $('#send-form-btn').removeAttr('hidden')
 }
 
+$('#discipline').change(function () {
+    let disciplineId = $(this).val()
+    $.ajax({
+        url : `http://localhost:8080/api/competition/disciplines/${disciplineId}/`,
+        type : "GET",
+        success : function (result) {
+            if (result.teamChampByDisciplineType === false) {
+                $("#newTeamChampionshipDiv").append($("#teamChampionshipDiv"))
+            } else {
+                $("#oldTeamChampionshipDiv").append($("#teamChampionshipDiv"))
+            }
+        }
+    })
+})
+
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
 
@@ -65,16 +80,16 @@ $("#teamChampionship").change(function () {
     }
 });
 
-$("#allAround").change(function () {
-    for (let i = 0; i < $('.competition-program-input').length; i++) {
-        if (this.checked) {
-            $(".competition-program-input").eq(i).attr("disabled", true)
-        } else {
-            $(".competition-program-input").eq(i).removeAttr("disabled")
-        }
-    }
-
-});
+// $("#allAround").change(function () {
+//     for (let i = 0; i < $('.competition-program-input').length; i++) {
+//         if (this.checked) {
+//             $(".competition-program-input").eq(i).attr("disabled", true)
+//         } else {
+//             $(".competition-program-input").eq(i).removeAttr("disabled")
+//         }
+//     }
+//
+// });
 
 function save_program() {
     let disciplineType = $("#disciplineType option:selected").text()
@@ -98,13 +113,13 @@ function save_program() {
         teamChampionshipText = ""
     }
 
-    let allAround
-    let allAroundText = ""
-
-    allAround = !!$('#allAround').prop("checked") === true;
-    if (allAround) {
-        allAroundText = "Многоборье"
-    }
+    // let allAround
+    // let allAroundText = ""
+    //
+    // allAround = !!$('#allAround').prop("checked") === true;
+    // if (allAround) {
+    //     allAroundText = "Многоборье"
+    // }
 
     const inputResult = `
     <tr class="input-row">
@@ -120,8 +135,7 @@ function save_program() {
         </td>
         <td class="program-body">
             <div class="col">
-                ${allAroundText}
-                <input type="hidden" value="${allAround}" class="allAround">
+               
             </div>
         </td>
         <td class="age-body">

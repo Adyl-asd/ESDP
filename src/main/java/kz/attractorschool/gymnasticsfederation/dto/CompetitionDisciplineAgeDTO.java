@@ -16,6 +16,8 @@ public class CompetitionDisciplineAgeDTO {
     @NotNull
     private Integer id;
 
+    private int teamChampionship;
+
     private CompetitionDTO competition;
 
     private DisciplineTypeDTO disciplineType;

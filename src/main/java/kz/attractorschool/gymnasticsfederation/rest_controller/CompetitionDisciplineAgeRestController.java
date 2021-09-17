@@ -21,10 +21,8 @@ public class CompetitionDisciplineAgeRestController {
     private final AgeCategoryService ageCategoryService;
 
     @PostMapping
-    public CompetitionDisciplineAgeDTO add(@Valid CompetitionDisciplineAgeAddDTO agesAddDTO,
-                                           @Valid CompetitionDisciplineProgramAddDTO programsAddDTO) {
-        CompetitionDisciplineAgeDTO dto = service.add(agesAddDTO);
-        return dto;
+    public CompetitionDisciplineAgeDTO add(@Valid CompetitionDisciplineAgeAddDTO agesAddDTO) {
+        return service.add(agesAddDTO);
     }
 
     @GetMapping("/all")

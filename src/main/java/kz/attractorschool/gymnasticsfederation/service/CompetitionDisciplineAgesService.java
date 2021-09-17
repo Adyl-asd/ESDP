@@ -39,9 +39,12 @@ public class CompetitionDisciplineAgesService {
         DisciplineType disciplineType = disciplineTypeService.findOne(dto.getDisciplineTypeId());
         AgeCategory ageCategory = ageCategoryService.findOne(dto.getAgeCategoryId());
         CompetitionDisciplineAge competitionDisciplines = repository.save(CompetitionDisciplineAge.builder()
+                .teamChampionship(dto.getTeamChampionship())
                 .competition(competition)
                 .discipline(disciplineType)
                 .ageCategory(ageCategory)
+                .maxTeams(dto.getMaxTeams())
+                .maxAthletes(dto.getMaxAthletes())
                 .build());
         return CompetitionDisciplineAgeDTO.from(competitionDisciplines);
     }

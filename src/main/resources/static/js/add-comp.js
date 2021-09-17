@@ -233,7 +233,7 @@ function save_program() {
     $.each($("input[name='disciplineTypeId']:checked"), function () {
         let programText = $(this).next('label').text()
         let programValue = $(this).val()
-        $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" value="${programValue}">`)
+        $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" class="competitionProgramId" value="${programValue}">`)
     })
     let maxAthletesText
     let maxClassName
@@ -251,7 +251,7 @@ function save_program() {
         $($('.age-body')).eq(($('.age-body').length-1)).append(`
     <div class="row my-1">
         <div class="col-8">
-            <div>${ageText}</div><input type="hidden" value="${ageValue}">
+            <div>${ageText}</div><input type="hidden" class="ageCategoryId" value="${ageValue}">
         </div>
         <div class="col-2">
             <input type="number" class="form-control form-control-sm ${maxClassName}">
@@ -278,24 +278,41 @@ function save_program() {
 }
 
 function send_form() {
-    for (let i = 0; i < $('.input-result').length; i++) {
+    for (let i = 0; i < $('.input-row').length; i++) {
+        let disciplineTypeId = $($('.disciplineTypeId'))[i].value
+        let teamChampionship = $($('.teamChampionship'))[i].value
 
-        $.ajax({
-            url: "http://localhost:8080/api/competition/disciplines",
-            type: "POST",
-            data: {
-                competitionId: competitionId,
-                disciplineTypeId: $($('.disciplineTypeId'))[i].value,
-                teamChampionship : $($('.teamChampionship'))[i].value,
-                ageCategoryId: $($('.competitionProgramId'))[i].value,
-                competitionProgramId: $($('.rankAndAgeId'))[i].value,
-                maxAthletes : $($('.maxAthletes'))[i].value,
-                maxTeams : $($('.maxTeams'))[i].value
-            }
-        })
+        for (let j = 0; j < $('.competitionProgramId').length; j++) {
+            $.ajax({
+                url: "http://localhost:8080/api/competition/disciplines/programs",
+                type: "POST",
+                data: {
+                    competitionId: competitionId,
+                    disciplineTypeId: disciplineTypeId,
+                    competitionProgramId: $($('.competitionProgramId'))[j].value,
+                }
+            })
+        }
+
+        for (let j = 0; j < $('.ageCategoryId').length; j++) {
+            $.ajax({
+                url: "http://localhost:8080/api/competition/disciplines/ages",
+                type: "POST",
+                data: {
+                    teamChampionship : teamChampionship,
+                    competitionId: competitionId,
+                    disciplineTypeId: disciplineTypeId,
+                    ageCategoryId: $($('.ageCategoryId'))[j].value,
+                    maxTeams : $($('.maxTeams'))[j].value,
+                    maxAthletes : $($('.maxAthletes'))[j].value
+                }
+            })
+        }
+
     }
-    window.location.replace(`http://localhost:8080/competition/${competitionId}`)
 }
+
+
 
 function add_program() {
     $("#add_program_btn").attr("hidden", true)

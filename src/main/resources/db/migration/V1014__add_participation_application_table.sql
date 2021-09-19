@@ -5,5 +5,6 @@ CREATE TABLE `participation_applications`(
     `creation_date` DATE NOT NULL,
     `is_del` BOOLEAN NOT NULL,
     `school_id` INT NOT NULL REFERENCES `schools`(`id`),
-    `competition_id` INT NOT NULL REFERENCES `competitions`(`id`)
+    `competition_id` INT NOT NULL REFERENCES `competitions`(`id`),
+    PRIMARY KEY (`id`)
 );

@@ -25,8 +25,6 @@ public class ParticipationApplicationService {
     }
 
     public ParticipationApplicationDTO getOne(Integer id){
-        return ParticipationApplicationDTO.from(repository.findById(id).orElseThrow(() -> {
-            return new ResourceNotFoundException("Заявка", id);
-        }));
+        return ParticipationApplicationDTO.from(findOne(id));
     }
 }

@@ -7,3 +7,22 @@ CREATE TABLE `participation_applications`(
     `school_id` INT NOT NULL REFERENCES `schools`(`id`),
     `competition_id` INT NOT NULL REFERENCES `competitions`(`id`)
 );
+
+CREATE TABLE `participation_applications_athletes`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `participation_application_id` INT NOT NULL REFERENCES `participation_applications`(`id`),
+    `athlete_id` INT NOT NULL REFERENCES  `athletes`(`id`),
+    `competitions_discipline_age_id` INT NOT NULL REFERENCES `competitions_discipline_ages`(`id`)
+);
+
+CREATE TABLE `participation_applications_judges`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `participation_application_id` INT NOT NULL REFERENCES `participation_applications`(`id`),
+    `judge_id` INT NOT NULL REFERENCES  `judges`(`id`)
+);
+
+CREATE TABLE `participation_applications_coaches`(
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `participation_application_id` INT NOT NULL REFERENCES `participation_applications`(`id`),
+    `coach_id` INT NOT NULL REFERENCES  `coaches`(`id`)
+);

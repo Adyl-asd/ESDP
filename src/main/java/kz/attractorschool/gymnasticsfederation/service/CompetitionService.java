@@ -25,7 +25,6 @@ public class CompetitionService {
     private final DisciplineService disciplineService;
     private final SchoolService schoolService;
     private final CompetitionFileRepository competitionFileRepository;
-    private final AllAroundService allAroundService;
 
     public Competition findOne(int id) {
         return competitionRepository.findById(id).orElseThrow(() -> {

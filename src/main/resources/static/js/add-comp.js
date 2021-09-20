@@ -175,10 +175,6 @@ $("#teamChampionship").change(function () {
 function save_program() {
     let disciplineType = $("#disciplineType option:selected").text()
     let disciplineTypeId = $("#disciplineType option:selected").val()
-    let competitionProgram = $("#competitionProgram option:selected").text()
-    let competitionProgramId = $("#competitionProgram option:selected").val()
-    let rankAndAge = $("#ageCategory option:selected").text()
-    let rankAndAgeId = $("#ageCategory option:selected").val()
 
     let teamChampionship
     let teamChampionshipText
@@ -278,23 +274,43 @@ function save_program() {
 }
 
 function send_form() {
-    for (let i = 0; i < $('.input-row').length; i++) {
-        let disciplineTypeId = $($('.disciplineTypeId'))[i].value
-        let teamChampionship = $($('.teamChampionship'))[i].value
 
-        for (let j = 0; j < $('.competitionProgramId').length; j++) {
+    let inputRow = $('.input-row')
+
+    for (let i = 0; i < inputRow.length; i++) {
+        let disciplineTypeId = $($('.disciplineTypeId')).eq(i).val()
+        let teamChampionship = $($('.teamChampionship')).eq(i).val()
+        let inputRowDiv = $($('.input-row')).eq(i)
+        let competitionProgramId = inputRowDiv.find('.competitionProgramId')
+        let ageCategoryId = inputRowDiv.find('.ageCategoryId')
+
+
+        for (let j = 0; j < competitionProgramId.length; j++) {
+            let competitionProgramIdVal = competitionProgramId.eq(j).val()
             $.ajax({
                 url: "http://localhost:8080/api/competition/disciplines/programs",
                 type: "POST",
                 data: {
                     competitionId: competitionId,
                     disciplineTypeId: disciplineTypeId,
-                    competitionProgramId: $($('.competitionProgramId'))[j].value,
+                    competitionProgramId: competitionProgramIdVal,
                 }
             })
         }
 
-        for (let j = 0; j < $('.ageCategoryId').length; j++) {
+
+
+        for (let j = 0; j < ageCategoryId.length; j++) {
+            let ageCategoryIdVal = ageCategoryId.eq(j).val()
+            let maxTeamsVal = inputRowDiv.find('.maxTeams').eq(j).val()
+            if (maxTeamsVal === null && false) {
+                maxTeamsVal = 0
+            }
+
+            let maxAthletesVal = inputRowDiv.find('.maxAthletes').eq(j).val()
+            if (maxAthletesVal === null && false) {
+                maxAthletesVal = 0
+            }
             $.ajax({
                 url: "http://localhost:8080/api/competition/disciplines/ages",
                 type: "POST",
@@ -302,9 +318,9 @@ function send_form() {
                     teamChampionship : teamChampionship,
                     competitionId: competitionId,
                     disciplineTypeId: disciplineTypeId,
-                    ageCategoryId: $($('.ageCategoryId'))[j].value,
-                    maxTeams : $($('.maxTeams'))[j].value,
-                    maxAthletes : $($('.maxAthletes'))[j].value
+                    ageCategoryId: ageCategoryIdVal,
+                    maxTeams : maxTeamsVal,
+                    maxAthletes : maxAthletesVal
                 }
             })
         }

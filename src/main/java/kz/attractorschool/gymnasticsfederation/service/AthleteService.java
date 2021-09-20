@@ -42,6 +42,11 @@ public class AthleteService {
         return checkStatus(athletes);
     }
 
+    public List<Athlete> findAllBySchoolId(Integer id) {
+        List<Athlete> athletes = repository.findAllBySchoolId(id);
+        return checkStatus(athletes);
+    }
+
     public Athlete findOne(Integer id){
         return repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Спортсмен", id);

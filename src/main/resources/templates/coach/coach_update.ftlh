@@ -58,7 +58,7 @@
 
     <#if errors??>
         <#list errors as e>
-            <h2>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</h2>
+            <h2>${e.field} - ${e.defaultMessage!'-- no message --'}</h2>
         </#list>
     <#elseif filesError??>
         <h2>${filesError}</h2>

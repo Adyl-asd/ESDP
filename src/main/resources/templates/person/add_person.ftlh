@@ -12,15 +12,15 @@
                     <div class="row">
                         <div class="col">
                             <label for="surname" class="form-label fs-4">Фамилия</label>
-                            <input type="text" name="surname" value="test" class="form-control" id="surname">
+                            <input type="text" name="surname" <#if personDTO??> value='${personDTO.surname}' </#if> class="form-control" id="surname">
                         </div>
                         <div class="col">
                             <label for="name" class="form-label fs-4">Имя</label>
-                            <input type="text" name="name" value="test" class="form-control" id="name">
+                            <input type="text" name="name" <#if personDTO??> value='${personDTO.name}' </#if> class="form-control" id="name">
                         </div>
                         <div class="col">
                             <label for="middleName" class="form-label fs-4">Отчество</label>
-                            <input type="text" name="middleName" value="test" class="form-control" id="middleName">
+                            <input type="text" name="middleName" <#if personDTO??> value='${personDTO.middleName}' </#if> class="form-control" id="middleName">
                         </div>
                     </div>
 
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col">
                             <label for="iin" class="form-label fs-4">ИИН</label>
-                            <input type="text" name="iin" value="980908405689" class="form-control" id="iin">
+                            <input type="text" name="iin" <#if personDTO??> value='${personDTO.iin}' </#if> class="form-control" id="iin">
                         </div>
                         <div class="col">
                             <label for="gender" class="form-label fs-4">Пол</label>
@@ -47,16 +47,16 @@
                     <div class="row">
                         <div class="col">
                             <label for="city" class="form-label fs-4">Город</label>
-                            <input type="text" name="city" value="test" class="form-control" id="city">
+                            <input type="text" name="city" <#if personDTO??> value='${personDTO.city}' </#if> class="form-control" id="city">
                         </div>
                         <div class="col">
                             <label for="address" class="form-label fs-4">Адрес</label>
-                            <input type="text" name="address" value="testtesttesttest" class="form-control"
+                            <input type="text" name="address" <#if personDTO??> value='${personDTO.address}' </#if> class="form-control"
                                    id="address">
                         </div>
                         <div class="col">
                             <label for="education" class="form-label fs-4">Образование</label>
-                            <input type="text" name="education" value="testtesttesttest" class="form-control"
+                            <input type="text" name="education" <#if personDTO??> value='${personDTO.education}' </#if> class="form-control"
                                    id="education">
                         </div>
                     </div>
@@ -65,11 +65,11 @@
                     <div class="row">
                         <div class="col">
                             <label for="phone" class="form-label fs-4">Телефон</label>
-                            <input type="text" name="phone" value="testtesttesttest" class="form-control" id="phone">
+                            <input type="text" name="phone" <#if personDTO??> value='${personDTO.phone}' </#if> class="form-control" id="phone">
                         </div>
                         <div class="col">
                             <label for="email" class="form-label fs-4">email</label>
-                            <input type="email" name="email" value="jane@mail.ru" class="form-control" id="email">
+                            <input type="email" name="email" <#if personDTO??> value='${personDTO.email}' </#if> class="form-control" id="email">
                         </div>
                         <div class="col">
                             <label for="file" class="form-label fs-4">Фото</label>
@@ -79,7 +79,7 @@
 
                     <#--Поле для примечания-->
                     <label for="comment" class="form-label fs-4">Примечание</label>
-                    <textarea name="comment" placeholder="testtesttesttest" class="form-control" id="comment"
+                    <textarea name="comment" <#if personDTO??> value='${personDTO.comment}' </#if> class="form-control" id="comment"
                               style="height: 200px"></textarea>
 
                     <button type="submit" class="btn btn-primary">Добавить</button>
@@ -89,7 +89,7 @@
 
         <#if errors??>
             <#list errors as e>
-                <h2>${e}</h2>
+                <h2>$${e.field} - ${e.defaultMessage!'__no message__'}</h2>
             </#list>
         <#elseif iinError??>
             <h2>${iinError}</h2>

@@ -1,6 +1,7 @@
 <#import "../partials/main.ftlh" as main/>
 
 <@main.renderWith title="${athlete.person.name}" styles=["css/athlete.css"]>
+
     <div class="container">
         <div class="main-body">
 
@@ -19,6 +20,7 @@
 
                                     <a href="/athlete/${athlete.id}/update" class="btn btn-primary">Изменить
                                         профиль спортсмена</a>
+                                    <a href="/athlete/${athlete.id}/export" class="btn btn-primary mt-2">Данные в ПДФ</a>
 
                                     <form action="/athlete/${athlete.id}" method="post">
                                         <button class="btn btn-danger mt-1">Удалить спортсмена</button>

@@ -1,5 +1,5 @@
 package kz.attractorschool.gymnasticsfederation.enumm;
 
 public enum Status {
-    АКТИВНЫЙ, НА_РАССМОТРЕНИИ, ИСТЕК, НЕАКТИВНЫЙ
+    АКТИВНЫЙ, НА_РАССМОТРЕНИИ, ИСТЕК, НЕАКТИВНЫЙ, ДИСКВАЛИФИЦИРОВАН
 }

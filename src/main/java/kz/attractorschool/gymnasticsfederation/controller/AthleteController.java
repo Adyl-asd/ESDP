@@ -11,6 +11,9 @@ import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
 import kz.attractorschool.gymnasticsfederation.files.RankFile;
 import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteRegisterDTO;
+import kz.attractorschool.gymnasticsfederation.model.Athlete;
+import kz.attractorschool.gymnasticsfederation.model.Person;
+import kz.attractorschool.gymnasticsfederation.pdf_exporter.AthletePdfExporter;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +24,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @AllArgsConstructor
@@ -219,6 +227,23 @@ public class AthleteController {
     public String deleteCoach(@PathVariable Integer id, @PathVariable Integer coachId){
         AthleteDTO athleteDTO = service.deleteCoach(id, coachId);
         return "redirect:/athlete/" + id;
+    }
+
+    @GetMapping("/{id}/export")
+    public void toPdf(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=person_" + currentDateTime + ".pdf";
+
+        response.setHeader(headerKey, headerValue);
+
+        Athlete athlete = service.findOne(id);
+
+        AthletePdfExporter exporter = new AthletePdfExporter(athlete);
+        exporter.export(response);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

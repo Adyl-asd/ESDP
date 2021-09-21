@@ -1,7 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
-import kz.attractorschool.gymnasticsfederation.dto.PersonPdfExporter;
+import kz.attractorschool.gymnasticsfederation.pdf_exporter.AthletePdfExporter;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
 import kz.attractorschool.gymnasticsfederation.model.Person;
@@ -116,22 +116,5 @@ public class PersonController {
                     "attachment; filename=\"" + file.getFilename() + "\"")
                     .body(file);
         }
-    }
-
-    @GetMapping("/{id}/export")
-    public void toPdf(@PathVariable Integer id, HttpServletResponse response) throws IOException {
-        response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=person_" + currentDateTime + ".pdf";
-
-        response.setHeader(headerKey, headerValue);
-
-        Person person = service.findOne(id);
-
-        PersonPdfExporter exporter = new PersonPdfExporter(person);
-        exporter.export(response);
     }
 }

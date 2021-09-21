@@ -1,7 +1,6 @@
 <#import "../partials/main.ftlh" as main/>
 
 <@main.renderWith title="${person.name}" styles=["css/athlete.css"]>
-    <a href="/person/${person.id}/export">ПДФ</a>
     <div class="container">
         <div class="main-body">
 

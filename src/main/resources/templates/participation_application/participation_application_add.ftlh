@@ -11,32 +11,44 @@
                 <#list disciplineTypes as disciplineType>
                     <h5>${disciplineType.discipline.name}</h5>
                     <#list ageCategories as a>
-                        <div>
-                            <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                <input type="hidden"
-                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                                : ${a.ageCategory.rank.name}
-                            <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                <input type="hidden"
-                                       value="${a.ageCategory.id}">младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
-                            <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                <input type="hidden"
-                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                            <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                <input type="hidden"
-                                       value="${a.ageCategory.id}">старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
-                            <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                <input type="hidden" value="${a.ageCategory.id}">старше ${a.ageCategory.minYear}
-                            <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                <input type="hidden" value="${a.ageCategory.id}">младше ${a.ageCategory.maxYear}
-                            <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
-                            </#if>
-                        </div>
-                        <#if (a.teamChampionship!=0) && (a.maxTeams??)>
-                            <#assign x=a.maxTeams>
-                            <#list 1..x as i>
-                                <div>Команда №${i}</div>
+                        <#if a.discipline.id = disciplineType.discipline.id>
+                            <div>
+                                <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                    <input type="hidden"
+                                           value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                    : ${a.ageCategory.rank.name}
+                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                    <input type="hidden"
+                                           value="${a.ageCategory.id}">младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
+                                <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                    <input type="hidden"
+                                           value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                    <input type="hidden"
+                                           value="${a.ageCategory.id}">старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
+                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                    <input type="hidden" value="${a.ageCategory.id}">старше ${a.ageCategory.minYear}
+                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                    <input type="hidden" value="${a.ageCategory.id}">младше ${a.ageCategory.maxYear}
+                                <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                    <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
+                                </#if>
+                            </div>
+                            <#if (a.teamChampionship!=0) && (a.maxTeams??)>
+                                <#assign x=a.maxTeams>
+                                <#list 1..x as i>
+                                    <div>Команда №${i}</div>
+                                        <#list 1..3 as j>
+                                            <div>Спортсмен №${j}</div>
+                                            <select class="form-select" aria-label="Default select example">
+                                                <option selected>Выбрать спортсмена</option>
+                                                <#list athletes as athlete>
+                                                    <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
+                                                </#list>
+                                            </select>
+                                        </#list>
+                                </#list>
+                            <#else>
                                 <#if a.maxAthletes??>
                                     <#assign y=a.maxAthletes>
                                     <#list 1..y as j>
@@ -49,7 +61,7 @@
                                         </select>
                                     </#list>
                                 </#if>
-                            </#list>
+                            </#if>
                         </#if>
                     </#list>
                 </#list>

@@ -18,6 +18,7 @@ public class CompetitionDTO {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate finishDate;
+    private LocalDate participationDate;
     private String level;
     private String country;
     private String city;
@@ -36,6 +37,7 @@ public class CompetitionDTO {
                 .name(competition.getName())
                 .startDate(competition.getStartDate())
                 .finishDate(competition.getFinishDate())
+                .participationDate(competition.getParticipationDate())
                 .level(competition.getLevel())
                 .country(competition.getCountry())
                 .city(competition.getCity())

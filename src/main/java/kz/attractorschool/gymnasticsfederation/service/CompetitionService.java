@@ -44,6 +44,7 @@ public class CompetitionService {
                 .name(competitionAddDTO.getName())
                 .startDate(competitionAddDTO.getStartDate())
                 .finishDate(competitionAddDTO.getFinishDate())
+                .participationDate(competitionAddDTO.getParticipationDate())
                 .country(competitionAddDTO.getCountry())
                 .city(competitionAddDTO.getCity())
                 .address(competitionAddDTO.getAddress())
@@ -66,6 +67,7 @@ public class CompetitionService {
         competition.setName(competitionUpdateDTO.getName());
         competition.setStartDate(competitionUpdateDTO.getStartDate());
         competition.setFinishDate(competitionUpdateDTO.getFinishDate());
+        competition.setParticipationDate(competitionUpdateDTO.getParticipationDate());
         competition.setLevel(competitionUpdateDTO.getLevel());
         competition.setCountry(competitionUpdateDTO.getCountry());
         competition.setCity(competitionUpdateDTO.getCity());

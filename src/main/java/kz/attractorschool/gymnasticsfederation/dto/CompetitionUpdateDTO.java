@@ -29,6 +29,10 @@ public class CompetitionUpdateDTO {
     private LocalDate finishDate;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate participationDate;
+
+    @NotNull
     private String level;
 
     @NotNull

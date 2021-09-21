@@ -15,6 +15,7 @@ CREATE TABLE `competitions`
     `creation_date`                date               not null,
     `start_date`                   date               not null,
     `finish_date`                  date               not null,
+    `participation_date`           date               not null,
     `level`                        varchar(128)       not null,
     `country`                      varchar(128)       NOT NULL,
     `city`                         varchar(128)       NOT NULL,

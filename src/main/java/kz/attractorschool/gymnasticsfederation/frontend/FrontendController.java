@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping
 @AllArgsConstructor
-public class FrontendController {
+public class  FrontendController {
 
     private final DisciplineService disciplineService;
     private final AthleteService athleteService;

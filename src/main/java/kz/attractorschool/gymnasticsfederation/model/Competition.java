@@ -44,6 +44,10 @@ public class Competition {
 
     @Column
     @NotNull
+    private LocalDate participationDate;
+
+    @Column
+    @NotNull
     private String level;
 
     @Column

@@ -32,6 +32,10 @@
                                     <input type="date" name="finishDate" class="form-control" id="comp-end">
                                 </div>
                                 <div class="col">
+                                    <label for="comp-end" class="form-label fs-5">Срок подачи заявки</label>
+                                    <input type="date" name="participationDate" class="form-control" id="comp-end">
+                                </div>
+                                <div class="col">
                                     <label for="level" class="form-label fs-5">Уровень соревнования</label>
                                     <select name="level" id="level" class="form-select">
                                         <option selected value="" class="option">Выберите уровень</option>

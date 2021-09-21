@@ -284,6 +284,14 @@ function send_form() {
         let competitionProgramId = inputRowDiv.find('.competitionProgramId')
         let ageCategoryId = inputRowDiv.find('.ageCategoryId')
 
+        $.ajax({
+            url: "http://localhost:8080//api/competition/disciplines",
+            type: "POST",
+            data: {
+                competitionId: competitionId,
+                disciplineTypeId: disciplineTypeId
+            }
+        })
 
         for (let j = 0; j < competitionProgramId.length; j++) {
             let competitionProgramIdVal = competitionProgramId.eq(j).val()

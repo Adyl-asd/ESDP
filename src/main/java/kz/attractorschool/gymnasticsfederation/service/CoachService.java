@@ -41,6 +41,10 @@ public class CoachService {
         }));
     }
 
+    public List<Coach> allBySchoolId(Integer id) {
+        return coachRepository.findAllBySchoolId(id);
+    }
+
     public CoachDTO add(CoachAddDTO coachDTO, CoachCategoryFile coachCategoryFile) {
         CoachCategoryFile categoryFile = coachCategoryFileRepository.save(coachCategoryFile);
         CoachCategory category = coachCategoryService.findOne(coachDTO.getCategoryId());

@@ -18,6 +18,8 @@ public class ParticipationApplicationController {
     private final CompetitionDisciplineAgesService competitionDisciplineAgesService;
     private final CompetitionDisciplineProgramsService competitionDisciplineProgramsService;
     private final AthleteService athleteService;
+    private final CoachService coachService;
+    private final JudgeService judgeService;
 
     @GetMapping("/apply")
     public String getApplicationForm(@PathVariable Integer id,
@@ -28,6 +30,8 @@ public class ParticipationApplicationController {
         model.addAttribute("programs", competitionDisciplineProgramsService.findByCompetitionId(id));
         // После реализации функционала авторизации, нужно будет добавить логику на хранение id школы в пользователе и изменить запись ниже
         model.addAttribute("athletes", athleteService.findAllBySchoolId(competitionService.findOne(id).getSchool().getId()));
+        model.addAttribute("coaches", coachService.allBySchoolId(competitionService.findOne(id).getSchool().getId()));
+        model.addAttribute("judges", judgeService.allBySchoolId(competitionService.findOne(id).getSchool().getId()));
         return "participation_application/participation_application_add";
     }
 }

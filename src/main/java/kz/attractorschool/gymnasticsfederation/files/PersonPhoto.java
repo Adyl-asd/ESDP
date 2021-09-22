@@ -5,6 +5,9 @@ import kz.attractorschool.gymnasticsfederation.model.Person;
 import lombok.*;
 
 import javax.persistence.*;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 @Data
 @Table(name = "photos")
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PersonPhoto {
+public class PersonPhoto{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -1612,4 +1612,23 @@ section {
     box-shadow: 0 0 5px 10px white;
 }
 
+.exception{
+    text-align: center;
+    color: #950606;
+    margin: 20px 0;
+}
+
+.tables-flex{
+    display: flex;
+}
+
+.tables-flex-65{
+    width: 65%;
+}
+
+.tables-flex-35{
+    width: 35%;
+    margin-left: 25px;
+}
+
 

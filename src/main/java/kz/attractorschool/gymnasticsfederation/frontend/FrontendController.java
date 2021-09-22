@@ -1,14 +1,14 @@
 package kz.attractorschool.gymnasticsfederation.frontend;
 
 import kz.attractorschool.gymnasticsfederation.enumm.CompetitionLevel;
+import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.*;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -92,16 +92,16 @@ public class  FrontendController {
         return "competition/competition_add";
     }
 
-    @GetMapping("/competitions/{id}")
-    public String getComp(@PathVariable Integer id,
-                          Model model) {
-        model.addAttribute("competition", competitionService.findOne(id));
-        model.addAttribute("competitionDisciplines", competitionDisciplineAgesService.findByCompetitionId(id));
-        return "competition/competition";
-    }
-
     @GetMapping("/test")
     public String test() {
         return "partials/templates";
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    private String handleRNF(ResourceNotFoundException ex, Model model) {
+        model.addAttribute("resource", ex.getResource());
+        model.addAttribute("id", ex.getId());
+        return "exception/resource-not-found";
     }
 }

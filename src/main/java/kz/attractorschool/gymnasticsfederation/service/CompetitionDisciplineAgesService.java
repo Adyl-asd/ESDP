@@ -52,4 +52,6 @@ public class CompetitionDisciplineAgesService {
     public void delete (Integer id) {
         repository.deleteById(id);
     }
+
+
 }

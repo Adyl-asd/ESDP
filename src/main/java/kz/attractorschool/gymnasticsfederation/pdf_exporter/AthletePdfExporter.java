@@ -7,20 +7,16 @@ import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import kz.attractorschool.gymnasticsfederation.liberation.Liberation;
 import kz.attractorschool.gymnasticsfederation.model.Athlete;
 import kz.attractorschool.gymnasticsfederation.model.Coach;
-import kz.attractorschool.gymnasticsfederation.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.jdbc.core.SqlReturnType;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.IOException;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 import java.util.List;
 
-
 @AllArgsConstructor
+@NoArgsConstructor
 public class AthletePdfExporter {
     private Athlete athlete;
 
@@ -96,6 +92,9 @@ public class AthletePdfExporter {
 
         Paragraph title = new Paragraph("Свидетельство о регистрации спортсмена", Liberation.SANS_ITALIC.create());
         document.add(new Paragraph(title));
+
+        Paragraph photo = new Paragraph(athlete.getPerson().getPhoto().getFilePath(), Liberation.SANS_ITALIC.create());
+        document.add(new Paragraph(photo));
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);

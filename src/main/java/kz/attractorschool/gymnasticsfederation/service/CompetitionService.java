@@ -32,6 +32,10 @@ public class CompetitionService {
         });
     }
 
+    public CompetitionDTO getOne(int id){
+        return CompetitionDTO.from(findOne(id));
+    }
+
     public List<Competition> all() {
         return competitionRepository.findAll();
     }

@@ -21,11 +21,6 @@ public class CompetitionRestController {
     private final DisciplineService disciplineService;
     private final DisciplineTypeService disciplineTypeService;
 
-    @GetMapping("/{id}")
-    public Competition one(@PathVariable int id){
-        return competitionService.findOne(id);
-    }
-
     @GetMapping("/all")
     public List<Competition> all(){
         return competitionService.all();
@@ -53,14 +48,6 @@ public class CompetitionRestController {
         return competitionService.delete(id);
     }
 
-//    @GetMapping("/competitions/{id}")
-//    public ResponseEntity getCompetition(@PathVariable int id){
-//        try {
-//            return ResponseEntity.ok(service.getOne(id));
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body("Произошла ошибка");
-//        }
-//    }
 //
 //    @GetMapping("/competitions")
 //    public ResponseEntity getCompetitions(){

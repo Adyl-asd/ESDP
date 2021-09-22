@@ -1,7 +1,7 @@
 <#--Код для вставки основного шаблона в страницу-->
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Подать заявку на участие в соревновании">
+<@main.renderWith title="Подать заявку на участие в соревновании" scripts=["js/participation_application_add.js"]>
 
     <div class="container">
         <div class="card my-3">
@@ -53,6 +53,13 @@
                 <div class="card-body">
                     <h5>${disciplineType.discipline.name}</h5>
                     <hr>
+                    <ul class="list-group">
+                        <#list programs as program>
+                            <#if program.discipline.id = disciplineType.discipline.id>
+                                <li class="list-group-item">${program.competitionProgram.name}</li>
+                            </#if>
+                        </#list>
+                    </ul>
                     <#list ageCategories as a>
                         <#if a.discipline.id = disciplineType.discipline.id>
                             <div class="my-3 fs-6"><b>
@@ -77,8 +84,7 @@
                                         <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
                                     </#if>
                                 </b></div>
-                            <ul class="list-group">
-
+                            <ul class="list-group" id="athlete-ul">
                                 <#if (a.teamChampionship!=0) && (a.maxTeams??)>
                                     <#assign x=a.maxTeams>
                                     <#list 1..x as i>
@@ -130,6 +136,15 @@
                                     </#if>
                                 </#if>
                             </ul>
+                            <div class="additional-athletes-div my-3">
+                                <b class="additional-athletes-text" hidden>Доп. спортсмены</b>
+                                <ul class="list-group additional-athletes-ul">
+
+                                </ul>
+                                <div>
+                                    <button class="btn btn-primary add-additional-athlete-btn">Добавить</button>
+                                </div>
+                            </div>
                         </#if>
                     </#list>
                 </div>
@@ -138,7 +153,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="fs-6"><b>Тренеры</b></div>
-                <ul class="list-group">
+                <ul class="list-group my-2">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
                             <div class="col">
@@ -154,6 +169,9 @@
                         </div>
                     </li>
                 </ul>
+                <div>
+                    <button class="btn btn-primary" id="add-additional-coach-btn">Добавить</button>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -175,8 +193,12 @@
                         </div>
                     </li>
                 </ul>
+                <div>
+                    <button class="btn btn-primary" id="add-additional-judge-btn">Добавить</button>
+                </div>
             </div>
         </div>
+        <button class="btn btn-primary">Отправить заявку</button>
     </div>
 
 </@main.renderWith>

@@ -31,6 +31,10 @@ public class JudgeService {
         });
     }
 
+    public List<Judge> allBySchoolId(Integer id) {
+        return repository.findAllBySchoolId(id);
+    }
+
     public JudgeDTO getOne(Integer id){
         return JudgeDTO.from(repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Судья", id);

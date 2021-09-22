@@ -7,7 +7,45 @@
         <div class="card my-3">
             <div class="card-body">
                 <h3>${competition.name}</h3>
+                <hr>
                 <h4>${competition.discipline.name}</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Даты</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        ${competition.startDate} - ${competition.finishDate}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Крайняя дата подачи заявки</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        ${competition.participationDate}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Место проведения</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        г. ${competition.city}, ${competition.address}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Контактное лицо</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        ${competition.contact} (${competition.phone})
+                    </div>
+                </div>
+                <hr>
             </div>
         </div>
         <#list disciplineTypes as disciplineType>
@@ -17,28 +55,28 @@
                     <hr>
                     <#list ageCategories as a>
                         <#if a.discipline.id = disciplineType.discipline.id>
-                            <div class="my-3 fs-6">
-                                <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                    <input type="hidden"
-                                           value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                                    : ${a.ageCategory.rank.name}
-                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                    <input type="hidden"
-                                           value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
-                                <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                    <input type="hidden"
-                                           value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                    <input type="hidden"
-                                           value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
-                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                    <input type="hidden" value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear}
-                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                    <input type="hidden" value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear}
-                                <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                    <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
-                                </#if>
-                            </div>
+                            <div class="my-3 fs-6"><b>
+                                    <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                        <input type="hidden"
+                                               value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                        : ${a.ageCategory.rank.name}
+                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                        <input type="hidden"
+                                               value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
+                                    <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                        <input type="hidden"
+                                               value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                        <input type="hidden"
+                                               value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
+                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                        <input type="hidden" value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear}
+                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                        <input type="hidden" value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear}
+                                    <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                        <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
+                                    </#if>
+                                </b></div>
                             <ul class="list-group">
 
                                 <#if (a.teamChampionship!=0) && (a.maxTeams??)>
@@ -97,6 +135,48 @@
                 </div>
             </div>
         </#list>
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="fs-6"><b>Тренеры</b></div>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="row my-2">
+                            <div class="col">
+                                <select class="form-select"
+                                        aria-label="Default select example"
+                                        id="selectCoach">
+                                    <option selected>Выбрать тренера</option>
+                                    <#list coaches as coach>
+                                        <option value="${coach.id}">${coach.person.surname} ${coach.person.name} ${coach.person.middleName}</option>
+                                    </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="fs-6"><b>Судьи</b></div>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="row my-2">
+                            <div class="col">
+                                <select class="form-select"
+                                        aria-label="Default select example"
+                                        id="selectJudge">
+                                    <option selected>Выбрать судью</option>
+                                    <#list judges as judge>
+                                        <option value="${judge.id}">${judge.person.surname} ${judge.person.name} ${judge.person.middleName}</option>
+                                    </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 </@main.renderWith>

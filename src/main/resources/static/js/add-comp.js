@@ -334,6 +334,7 @@ function send_form() {
         }
 
     }
+    window.location.href = "http://localhost:8080/competitions";
 }
 
 

@@ -47,6 +47,7 @@
                         <th scope="col">Вид спорта</th>
                         <th scope="col">Срок подачи заявки</th>
                         <th scope="col">Просмотр</th>
+                        <th scope="col">Подать</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,7 @@
                                 <td>${c.discipline.name}</td>
                                 <td>${c.participationDate}</td>
                                 <td><a href="/competitions/${c.id}"><div class="btn btn-primary">Просмотр</div></a></td>
+                                <td><a href="/competition/${c.id}/apply"><div class="btn btn-primary">Подать</div></a></td>
                             </tr>
                         </#if>
                     </#list>

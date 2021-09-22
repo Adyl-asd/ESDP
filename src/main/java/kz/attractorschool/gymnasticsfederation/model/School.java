@@ -1,9 +1,11 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -54,9 +56,24 @@ public class School {
     @Builder.Default
     private boolean isDel = false;
 
-//    @OneToMany
-//    private List<Athlete> athletes;
-//
-//    @OneToMany
-//    private List<Coach> coaches;
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "athletes", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "athlete_id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<Athlete> athletes = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "coaches", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<Coach> coaches = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "judges", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "judge_id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<Judge> judges = new ArrayList<>();
 }

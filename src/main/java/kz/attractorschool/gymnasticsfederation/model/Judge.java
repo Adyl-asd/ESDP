@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
 import kz.attractorschool.gymnasticsfederation.files.JudgeCategoryFile;
@@ -24,6 +25,7 @@ public class Judge {
 
     @ToString.Exclude
     @ManyToOne
+    @JsonBackReference
     private School school;
 
     @Column

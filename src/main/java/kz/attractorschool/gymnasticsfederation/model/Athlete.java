@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import lombok.*;
@@ -32,6 +33,7 @@ public class Athlete {
 
     @ToString.Exclude
     @ManyToOne
+    @JsonBackReference
     private School school;
 
     @Column

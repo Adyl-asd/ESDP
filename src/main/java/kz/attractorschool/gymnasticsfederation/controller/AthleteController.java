@@ -243,7 +243,7 @@ public class AthleteController {
         Athlete athlete = service.findOne(id);
 
         AthletePdfExporter exporter = new AthletePdfExporter(athlete);
-        exporter.export(response);
+        exporter.export(response, 3);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

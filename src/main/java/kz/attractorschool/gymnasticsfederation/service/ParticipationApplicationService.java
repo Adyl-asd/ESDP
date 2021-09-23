@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ParticipationApplicationService {
     private final ParticipationApplicationRepository repository;
+    private final SchoolService schoolService;
+    private final CompetitionService competitionService;
 
     public List<ParticipationApplication> all(){
         return repository.findAll();
@@ -26,5 +28,18 @@ public class ParticipationApplicationService {
 
     public ParticipationApplicationDTO getOne(Integer id){
         return ParticipationApplicationDTO.from(findOne(id));
+    }
+
+    public ParticipationApplicationDTO add(int schoolId, int competitionId){
+        ParticipationApplication application = repository.findBySchoolIdAndCompetitionId(schoolId, competitionId).orElse(null);
+        if (application != null){
+            return ParticipationApplicationDTO.from(application);
+        }
+        ParticipationApplication newApplication = repository.save(
+                ParticipationApplication.builder()
+                        .competition(competitionService.findOne(competitionId))
+                        .school(schoolService.findOne(schoolId))
+                        .build());
+        return ParticipationApplicationDTO.from(newApplication);
     }
 }

@@ -1,4 +1,4 @@
-package kz.attractorschool.gymnasticsfederation;
+ package kz.attractorschool.gymnasticsfederation;
 
 import kz.attractorschool.gymnasticsfederation.configuration.StorageProperties;
 import org.springframework.boot.SpringApplication;

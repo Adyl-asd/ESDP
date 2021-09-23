@@ -79,7 +79,7 @@ public class AthletePdfExporter {
 //        table.addCell(person.getPhone());
 //    }
 
-    public void export(HttpServletResponse response) throws IOException {
+    public void export(HttpServletResponse response, int columns) throws IOException {
         Document document = new Document(PageSize.A4);
 
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -96,7 +96,7 @@ public class AthletePdfExporter {
         Paragraph photo = new Paragraph(athlete.getPerson().getPhoto().getFilePath(), Liberation.SANS_ITALIC.create());
         document.add(new Paragraph(photo));
 
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(columns);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
         table.setWidths(new float[]{1f, 5f, 5f});

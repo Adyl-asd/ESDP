@@ -58,21 +58,21 @@ public class School {
 
     @JsonManagedReference
     @OneToMany
-    @JoinTable(name = "athletes", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "athlete_id"))
+    @JoinTable(name = "athletes", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @ToString.Exclude
     @Builder.Default
     private List<Athlete> athletes = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany
-    @JoinTable(name = "coaches", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
+    @JoinTable(name = "coaches", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @ToString.Exclude
     @Builder.Default
     private List<Coach> coaches = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany
-    @JoinTable(name = "judges", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "judge_id"))
+    @JoinTable(name = "judges", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @ToString.Exclude
     @Builder.Default
     private List<Judge> judges = new ArrayList<>();

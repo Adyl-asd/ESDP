@@ -1,12 +1,12 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
+import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
@@ -35,7 +35,15 @@ public class ParticipationApplicationController {
         model.addAttribute("athletes", athleteService.findAllBySchoolId(competitionService.findOne(id).getSchool().getId()));
         model.addAttribute("coaches", coachService.allBySchoolId(competitionService.findOne(id).getSchool().getId()));
         model.addAttribute("judges", judgeService.allBySchoolId(competitionService.findOne(id).getSchool().getId()));
-        service.add(competitionService.findOne(id).getSchool().getId(), id);
+        service.add(2, id);
         return "participation_application/participation_application_add";
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    private String handleRNF(ResourceNotFoundException ex, Model model) {
+        model.addAttribute("resource", ex.getResource());
+        model.addAttribute("id", ex.getId());
+        return "exception/resource-not-found";
     }
 }

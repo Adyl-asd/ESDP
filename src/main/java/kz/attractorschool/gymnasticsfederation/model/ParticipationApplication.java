@@ -1,6 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
 import com.sun.istack.NotNull;
+import kz.attractorschool.gymnasticsfederation.enumm.ParticipationApplicationStatus;
+import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +32,11 @@ public class ParticipationApplication {
     @NotNull
     @Builder.Default
     private boolean isDel = false;
+
+    @Column
+    @NotNull
+    @Builder.Default
+    private String status = ParticipationApplicationStatus.СОЗДАНА.name();
 
     @ManyToOne
     private Competition competition;

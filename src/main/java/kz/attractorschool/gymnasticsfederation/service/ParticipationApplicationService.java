@@ -31,9 +31,10 @@ public class ParticipationApplicationService {
     }
 
     public ParticipationApplicationDTO add(int schoolId, int competitionId){
-        ParticipationApplication application = repository.findBySchoolIdAndCompetitionId(schoolId, competitionId).orElse(null);
-        if (application != null){
-            return ParticipationApplicationDTO.from(application);
+        if (repository.existsBySchoolIdAndCompetitionId(schoolId, competitionId)){
+            return ParticipationApplicationDTO.from(repository.findBySchoolIdAndCompetitionId(schoolId, competitionId).orElseThrow(() -> {
+                return new ResourceNotFoundException("Заявка", 0);
+            }));
         }
         ParticipationApplication newApplication = repository.save(
                 ParticipationApplication.builder()
@@ -41,5 +42,10 @@ public class ParticipationApplicationService {
                         .school(schoolService.findOne(schoolId))
                         .build());
         return ParticipationApplicationDTO.from(newApplication);
+    }
+
+
+    public void delete(int id){
+        repository.delete(findOne(id));
     }
 }

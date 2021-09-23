@@ -103,7 +103,7 @@
                                                                         aria-label="Default select example"
                                                                         id="selectAthlete">
                                                                     <option selected>Выбрать спортсмена</option>
-                                                                    <#list athletes as athlete>
+                                                                    <#list school.athletes as athlete>
                                                                         <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                     </#list>
                                                                 </select>
@@ -145,7 +145,7 @@
                                                                     aria-label="Default select example"
                                                                     id="selectAthlete">
                                                                 <option selected>Выбрать спортсмена</option>
-                                                                <#list athletes as athlete>
+                                                                <#list school.athletes as athlete>
                                                                     <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                 </#list>
                                                             </select>
@@ -182,7 +182,7 @@
                                         aria-label="Default select example"
                                         id="selectCoach">
                                     <option selected>Выбрать тренера</option>
-                                    <#list coaches as coach>
+                                    <#list school.coaches as coach>
                                         <option value="${coach.id}">${coach.person.surname} ${coach.person.name} ${coach.person.middleName}</option>
                                     </#list>
                                 </select>
@@ -206,7 +206,7 @@
                                         aria-label="Default select example"
                                         id="selectJudge">
                                     <option selected>Выбрать судью</option>
-                                    <#list judges as judge>
+                                    <#list school.judges as judge>
                                         <option value="${judge.id}">${judge.person.surname} ${judge.person.name} ${judge.person.middleName}</option>
                                     </#list>
                                 </select>

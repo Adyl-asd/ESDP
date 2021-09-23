@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipationApplicationAthleteAddDTO {
-    @NotNull
-    private Integer applicationId;
+//    @NotNull
+//    private Integer applicationId;
 
     @NotNull
     private Integer athleteId;

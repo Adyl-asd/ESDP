@@ -60,3 +60,9 @@ $('#add-additional-judge-btn').on('click', function () {
 $(document).on('click', '.delete-additional-btn', function () {
     $(this).closest('li').remove()
 })
+
+$(".toggle-btn").click(function() {
+    $(this).closest('.card-body').find('.toggle-div').toggle(500)
+})
+
+

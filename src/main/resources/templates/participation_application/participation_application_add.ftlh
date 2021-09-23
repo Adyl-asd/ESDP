@@ -87,13 +87,13 @@
                                         </#if>
                                     </b></div>
                                 <ul class="list-group" id="athlete-ul">
-                                    <#if (a.teamChampionship!=0) && (a.maxTeams??)>
+                                    <#if (a.teamChampionship!=0) && (a.maxTeams??) && (a.discipline.participantsAmountMax??)>
                                         <#assign x=a.maxTeams>
                                         <#list 1..x as i>
                                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="ms-2 me-auto">
                                                     <div class="fw-bold">Команда №${i}</div>
-                                                    <#list 1..3 as j>
+                                                    <#list 1..a.discipline.participantsAmountMax as j>
                                                         <div class="row my-2">
                                                             <div class="col text-end">
                                                                 <label for="selectAthlete" class="mt-1">${j}.</label>
@@ -108,6 +108,24 @@
                                                                     </#list>
                                                                 </select>
                                                             </div>
+                                                            <#if (a.discipline.id == 4)>
+                                                                <div class="col-auto">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input first-type" type="checkbox" value="" id="first-type">
+                                                                        <label class="form-check-label" for="first-type">
+                                                                            1-й вид
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input second-type" type="checkbox" value="" id="second-type">
+                                                                        <label class="form-check-label" for="second-type">
+                                                                            2-й вид
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </#if>
                                                         </div>
                                                     </#list>
                                                 </div>

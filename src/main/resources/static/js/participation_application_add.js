@@ -65,4 +65,28 @@ $(".toggle-btn").click(function() {
     $(this).closest('.card-body').find('.toggle-div').toggle(500)
 })
 
+$(".first-type").on("click", function () {
+    let count = $(this).closest('.list-group-item').find('.first-type:checked').length;
+    if (count < 5) {  // we only want to allow 5 to be checked here.
+        $(this).closest('.list-group-item').find('.first-type').removeAttr("disabled");
+        // re-enable all checkboxes
+    } else {
+        $(this).closest('.list-group-item').find('.first-type').prop("disabled","disabled");
+        // disable all checkboxes
+        $(this).closest('.list-group-item').find('.first-type:checked').removeAttr("disabled");
+        // only enable the elements that are already checked.
+    }
+});
 
+$(".second-type").on("click", function () {
+    let count = $(this).closest('.list-group-item').find('.second-type:checked').length;
+    if (count < 5) {  // we only want to allow 3 to be checked here.
+        $(this).closest('.list-group-item').find('.second-type').removeAttr("disabled");
+        // re-enable all checkboxes
+    } else {
+        $(this).closest('.list-group-item').find('.second-type').prop("disabled","disabled");
+        // disable all checkboxes
+        $(this).closest('.list-group-item').find('.second-type:checked').removeAttr("disabled");
+        // only enable the elements that are already checked.
+    }
+});

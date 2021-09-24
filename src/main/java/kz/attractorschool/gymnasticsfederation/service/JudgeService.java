@@ -98,4 +98,8 @@ public class JudgeService {
         String format = words[words.length - 1];
         return format.equals("pdf");
     }
+
+    public List<Judge> allBySchoolIdAndDisciplineId(int schoolId, int disciplineId){
+        return repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+    }
 }

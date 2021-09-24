@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface JudgeRepository extends JpaRepository<Judge, Integer> {
-    List<Judge> findAllBySchoolId(Integer SchoolId);
+    List<Judge> findAllBySchoolId(Integer schoolId);
+    List<Judge> findAllBySchoolIdAndDisciplineId(Integer schoolId, Integer disciplineId);
 }

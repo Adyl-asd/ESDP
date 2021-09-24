@@ -8,6 +8,7 @@ import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationAth
 import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationAthleteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -47,5 +48,12 @@ public class ParticipationApplicationAthleteService {
                         .disciplineAge(agesService.findOne(dto.getDisciplineAgeId()))
                         .build());
         return applicationAthlete;
+    }
+
+    public void delete(int applicationId, int id){
+        ParticipationApplicationAthlete applicationAthlete = repository.findByIdAndApplicationId(applicationId, id).orElseThrow(() -> {
+            return new ResourceNotFoundException("Заявка", id);
+        });
+        repository.delete(applicationAthlete);
     }
 }

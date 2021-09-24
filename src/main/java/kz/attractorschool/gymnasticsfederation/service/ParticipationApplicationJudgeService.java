@@ -49,4 +49,11 @@ public class ParticipationApplicationJudgeService {
                         .build());
         return ParticipationApplicationJudgeDTO.from(applicationJudge);
     }
+
+    public void delete(int applicationId, int id){
+        ParticipationApplicationJudge applicationJudge = repository.findByIdAndApplicationId(applicationId, id).orElseThrow(() -> {
+            return new ResourceNotFoundException("Заявка", id);
+        });
+        repository.delete(applicationJudge);
+    }
 }

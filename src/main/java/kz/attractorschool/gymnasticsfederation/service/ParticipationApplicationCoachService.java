@@ -48,4 +48,11 @@ public class ParticipationApplicationCoachService {
                         .build());
         return ParticipationApplicationCoachDTO.from(applicationCoach);
     }
+
+    public void delete(int applicationId, int id){
+        ParticipationApplicationCoach applicationCoach = repository.findByIdAndApplicationId(applicationId, id).orElseThrow(() -> {
+            return new ResourceNotFoundException("Заявка", id);
+        });
+        repository.delete(applicationCoach);
+    }
 }

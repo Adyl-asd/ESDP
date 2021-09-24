@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ParticipationApplicationAthleteRepository extends JpaRepository<ParticipationApplicationAthlete, Integer> {
     boolean existsByApplicationIdAndAthleteIdAndDisciplineAgeId(int applicationId, int athleteId, int ageId);
     Optional<ParticipationApplicationAthlete> findByApplicationIdAndAthleteIdAndDisciplineAgeId(int applicationId, int athleteId, int ageId);
+    Optional<ParticipationApplicationAthlete> findByIdAndApplicationId(int id, int applicationId);
 }

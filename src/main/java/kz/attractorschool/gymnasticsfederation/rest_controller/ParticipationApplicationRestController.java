@@ -2,9 +2,6 @@ package kz.attractorschool.gymnasticsfederation.rest_controller;
 
 import kz.attractorschool.gymnasticsfederation.dto.*;
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationAthlete;
-import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationAthleteRepository;
-import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationCoachRepository;
-import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationJudgeRepository;
 import kz.attractorschool.gymnasticsfederation.service.ParticipationApplicationAthleteService;
 import kz.attractorschool.gymnasticsfederation.service.ParticipationApplicationCoachService;
 import kz.attractorschool.gymnasticsfederation.service.ParticipationApplicationJudgeService;
@@ -21,7 +18,6 @@ public class ParticipationApplicationRestController {
     private final ParticipationApplicationCoachService applicationCoachService;
     private final ParticipationApplicationAthleteService applicationAthleteService;
     private final ParticipationApplicationJudgeService applicationJudgeService;
-    private final ParticipationApplicationService applicationService;
 
     @PostMapping("/{id}/athletes")
     public ResponseEntity addAthlete(@PathVariable Integer id, ParticipationApplicationAthleteAddDTO addDTO){

@@ -40,6 +40,12 @@ public class ParticipationApplicationController {
         return "participation_application/participation_application_add";
     }
 
+    @PostMapping("/{id}")
+    public String delete(@PathVariable Integer competitionId,@PathVariable Integer id){
+        service.delete(id);
+        return "redirect:/competition/" + competitionId;
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     private String handleRNF(ResourceNotFoundException ex, Model model) {

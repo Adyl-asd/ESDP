@@ -44,7 +44,6 @@ public class ParticipationApplicationService {
         return ParticipationApplicationDTO.from(newApplication);
     }
 
-
     public void delete(int id){
         repository.delete(findOne(id));
     }

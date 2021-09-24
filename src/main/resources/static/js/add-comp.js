@@ -56,18 +56,18 @@ function update_comp() {
 $('#discipline').change(function () {
     let disciplineId = $(this).val()
     $.ajax({
-        url : `http://localhost:8080/api/competition/disciplines/${disciplineId}/`,
-        type : "GET",
-        success : function (result) {
+        url: `http://localhost:8080/api/competition/disciplines/${disciplineId}/`,
+        type: "GET",
+        success: function (result) {
             if (result.teamChampByDisciplineType === false) {
                 $("#newTeamChampionshipDiv").append($("#teamChampionshipDiv"))
             } else {
                 $("#oldTeamChampionshipDiv").append($("#teamChampionshipDiv"))
             }
             $.ajax({
-                url : `http://localhost:8080/api/competition/disciplines/types/${disciplineId}/`,
-                type : "GET",
-                success : function (disciplineTypes) {
+                url: `http://localhost:8080/api/competition/disciplines/types/${disciplineId}/`,
+                type: "GET",
+                success: function (disciplineTypes) {
                     $("#disciplineType").empty()
                     $("#disciplineType").append(`<option selected>Выберите дисциплину</option>`)
                     for (let i = 0; i < disciplineTypes.length; i++) {
@@ -82,9 +82,9 @@ $('#discipline').change(function () {
 $('#disciplineType').change(function () {
     let disciplineTypeId = $(this).val()
     $.ajax({
-        url : `http://localhost:8080/api/competition/disciplines/programs/${disciplineTypeId}`,
-        type : "GET",
-        success : function (competitionPrograms) {
+        url: `http://localhost:8080/api/competition/disciplines/programs/${disciplineTypeId}`,
+        type: "GET",
+        success: function (competitionPrograms) {
             $('#competitionProgramDiv').empty()
             $('#competitionProgramDiv').removeAttr("hidden")
             for (let i = 0; i < competitionPrograms.length; i++) {
@@ -104,9 +104,9 @@ $('#disciplineType').change(function () {
     })
 
     $.ajax({
-        url : `http://localhost:8080/api/competition/disciplines/ages/${disciplineTypeId}`,
-        type : "GET",
-        success : function (ageCategories) {
+        url: `http://localhost:8080/api/competition/disciplines/ages/${disciplineTypeId}`,
+        type: "GET",
+        success: function (ageCategories) {
             $('#ageCategoryDiv').empty()
             $('#ageCategoryDiv').removeAttr("hidden")
             let ageCategoryText;
@@ -115,13 +115,13 @@ $('#disciplineType').change(function () {
                     ageCategoryText = ageCategories[i].maxYear + " - " + ageCategories[i].minYear + " : " + ageCategories[i].rank.name
                 }
                 if (ageCategories[i].maxYear !== null && ageCategories[i].minYear === null && ageCategories[i].rank !== null) {
-                    ageCategoryText = "младше " + ageCategories[i].maxYear  + " : " + ageCategories[i].rank.name
+                    ageCategoryText = "младше " + ageCategories[i].maxYear + " : " + ageCategories[i].rank.name
                 }
                 if (ageCategories[i].maxYear !== null && ageCategories[i].minYear !== null && ageCategories[i].rank === null) {
                     ageCategoryText = ageCategories[i].maxYear + " - " + ageCategories[i].minYear
                 }
                 if (ageCategories[i].maxYear === null && ageCategories[i].minYear !== null && ageCategories[i].rank !== null) {
-                    ageCategoryText = "старше " + ageCategories[i].minYear  + " : " + ageCategories[i].rank.name
+                    ageCategoryText = "старше " + ageCategories[i].minYear + " : " + ageCategories[i].rank.name
                 }
                 if (ageCategories[i].maxYear === null && ageCategories[i].minYear !== null && ageCategories[i].rank === null) {
                     ageCategoryText = "старше " + ageCategories[i].minYear
@@ -144,8 +144,6 @@ $('#disciplineType').change(function () {
         }
     })
 })
-
-
 
 
 const typeAndProgramInput = $("#disciplineTypeAndProgramInput")
@@ -229,22 +227,27 @@ function save_program() {
     $.each($("input[name='disciplineTypeId']:checked"), function () {
         let programText = $(this).next('label').text()
         let programValue = $(this).val()
-        $($('.program-body')).eq(($('.program-body').length-1)).append(`<div>${programText}</div><input type="hidden" class="competitionProgramId" value="${programValue}">`)
+        $($('.program-body')).eq(($('.program-body').length - 1)).append(`<div>${programText}</div><input type="hidden" class="competitionProgramId" value="${programValue}">`)
     })
     let maxAthletesText
     let maxClassName
-    if (teamChampionship === 0) {
-        maxAthletesText = "спортсменов"
-        maxClassName = "maxAthletes"
-    } else {
+    // Захардкодил проверку на дисциплину, нужно исправить на запрос, проверяющий поле participantsAmountMax на null
+    if (disciplineTypeId === "4" || disciplineTypeId === "8" || disciplineTypeId === "9" ||
+        disciplineTypeId === "10" || disciplineTypeId === "11" || disciplineTypeId === "12" ||
+        disciplineTypeId === "13" || disciplineTypeId === "16" || disciplineTypeId === "17" ||
+        disciplineTypeId === "18" || disciplineTypeId === "19" || disciplineTypeId === "20") {
         maxAthletesText = "команд"
         maxClassName = "maxTeams"
+    } else {
+        maxAthletesText = "спортсменов"
+        maxClassName = "maxAthletes"
+
     }
 
     $.each($("input[name='ageCategory']:checked"), function () {
         let ageText = $(this).next('label').text()
         let ageValue = $(this).val()
-        $($('.age-body')).eq(($('.age-body').length-1)).append(`
+        $($('.age-body')).eq(($('.age-body').length - 1)).append(`
     <div class="row my-1">
         <div class="col-8">
             <div>${ageText}</div><input type="hidden" class="ageCategoryId" value="${ageValue}">
@@ -307,7 +310,6 @@ function send_form() {
         }
 
 
-
         for (let j = 0; j < ageCategoryId.length; j++) {
             let ageCategoryIdVal = ageCategoryId.eq(j).val()
             let maxTeamsVal = inputRowDiv.find('.maxTeams').eq(j).val()
@@ -323,12 +325,12 @@ function send_form() {
                 url: "http://localhost:8080/api/competition/disciplines/ages",
                 type: "POST",
                 data: {
-                    teamChampionship : teamChampionship,
+                    teamChampionship: teamChampionship,
                     competitionId: competitionId,
                     disciplineTypeId: disciplineTypeId,
                     ageCategoryId: ageCategoryIdVal,
-                    maxTeams : maxTeamsVal,
-                    maxAthletes : maxAthletesVal
+                    maxTeams: maxTeamsVal,
+                    maxAthletes: maxAthletesVal
                 }
             })
         }
@@ -336,7 +338,6 @@ function send_form() {
     }
     window.location.href = "http://localhost:8080/competitions";
 }
-
 
 
 function add_program() {

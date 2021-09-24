@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Integer> {
     List<Athlete> findAllBySchoolId(Integer id);
+    List<Athlete> findAllBySchoolIdAndDisciplineId(Integer schoolId, Integer disciplineId);
 }

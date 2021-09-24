@@ -1,3 +1,36 @@
+const disciplineId = $('#discipline-id')
+
+$('#select-school').change(function () {
+    let schoolId = $(this).val()
+    let athleteUl = $('.athlete-ul')
+    let athleteLi = $('.athletes-li')
+    let ageCategoryDiv = $('.age-category-div')
+    let selectAthlete = $('.select-athlete')
+    for (let i = 0; i < ageCategoryDiv.length; i++) {
+        let ageCategoryId = $(ageCategoryDiv).eq(i).find($('.age-category-id')).val()
+        for (let j = 0; j < $(ageCategoryDiv).eq(i).find(athleteLi).length; j++) {
+            $.ajax({
+                url : `http://localhost:8080/api/athlete/${ageCategoryId}`,
+                type : 'GET',
+                data : {
+                    id : ageCategoryId,
+                    schoolId : schoolId,
+                    disciplineId : disciplineId
+                },
+                success : function (athlete) {
+                    alert("хуйня")
+                    for (let k = 0; k < $(ageCategoryDiv).eq(i).find(athleteLi).eq(j).find(selectAthlete).length; k++) {
+                        $(ageCategoryDiv).eq(i).find(athleteLi).eq(j).find(selectAthlete).eq(k).append(`
+                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
+                        `)
+                    }
+                }
+            })
+        }
+
+    }
+})
+
 $('.add-additional-athlete-btn').on('click', function () {
     $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
     $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append(`
@@ -5,7 +38,7 @@ $('.add-additional-athlete-btn').on('click', function () {
                 <div class="ms-2 me-auto">
                     <div class="row">
                         <div class="col-auto">
-                            <select class="form-select" aria-label="Default select example" id="selectAthlete">
+                            <select class="form-select select-additional-athlete" aria-label="Default select example" id="selectAthlete">
                             <option selected>Выбрать спортсмена</option>
                             </select>
                         </div>

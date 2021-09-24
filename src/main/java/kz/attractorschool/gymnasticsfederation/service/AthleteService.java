@@ -36,8 +36,9 @@ public class AthleteService {
     private final RegistryFileRepository registryFileRepository;
     private final CoachService coachService;
     private final AthletesCoachesRepository athletesCoachesRepository;
+    private final AgeCategoryService ageCategoryService;
 
-    public List<Athlete> all(){
+    public List<Athlete> all() {
         List<Athlete> athletes = repository.findAll();
         return checkStatus(athletes);
     }
@@ -47,13 +48,64 @@ public class AthleteService {
         return checkStatus(athletes);
     }
 
-    public Athlete findOne(Integer id){
+    public List<Athlete> findAllBySchoolAndDisciplineAndAgeCategory(Integer schoolId, Integer disciplineId, Integer ageCategoryId) {
+        List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+        AgeCategory ageCategory = ageCategoryService.findOne(ageCategoryId);
+        List<Athlete> athletesFiltered = new ArrayList<>();
+        for (Athlete athlete : athletes) {
+
+            if (ageCategory.getRank() != null && ageCategory.getMaxYear() != null && ageCategory.getMinYear() != null) {
+                if (athlete.getRank() == ageCategory.getRank() && athlete.getPerson().getBirthday().getYear() < ageCategory.getMinYear() && athlete.getPerson().getBirthday().getYear() > ageCategory.getMaxYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() != null && ageCategory.getMaxYear() != null && ageCategory.getMinYear() == null) {
+                if (athlete.getRank() == ageCategory.getRank() && athlete.getPerson().getBirthday().getYear() > ageCategory.getMaxYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() != null && ageCategory.getMaxYear() == null && ageCategory.getMinYear() != null) {
+                if (athlete.getRank() == ageCategory.getRank() && athlete.getPerson().getBirthday().getYear() < ageCategory.getMinYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() == null && ageCategory.getMaxYear() != null && ageCategory.getMinYear() != null) {
+                if (athlete.getPerson().getBirthday().getYear() < ageCategory.getMinYear() && athlete.getPerson().getBirthday().getYear() > ageCategory.getMaxYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() != null && ageCategory.getMaxYear() == null && ageCategory.getMinYear() == null) {
+                if (athlete.getRank() == ageCategory.getRank()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() == null && ageCategory.getMaxYear() != null && ageCategory.getMinYear() == null) {
+                if (athlete.getPerson().getBirthday().getYear() > ageCategory.getMaxYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+
+            if (ageCategory.getRank() == null && ageCategory.getMaxYear() == null && ageCategory.getMinYear() != null) {
+                if (athlete.getPerson().getBirthday().getYear() < ageCategory.getMinYear()) {
+                    athletesFiltered.add(athlete);
+                }
+            }
+        }
+        return checkStatus(athletesFiltered);
+    }
+
+    public Athlete findOne(Integer id) {
         return repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Спортсмен", id);
         });
     }
 
-    public AthleteDTO getOne(Integer id){
+    public AthleteDTO getOne(Integer id) {
         return AthleteDTO.from(repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Спортсмен", id);
         }));
@@ -61,7 +113,7 @@ public class AthleteService {
 
     public AthleteDTO add(AthleteAddDTO athleteDTO, RegistryFile registryFile,
                           MedicalFile medicalFile, RankFile rankFile,
-                          DopingFile dopingFile){
+                          DopingFile dopingFile) {
         RegistryFile registry = registryFileRepository.save(registryFile);
         MedicalFile medical = medicalFileRepository.save(medicalFile);
         RankFile rankFile2 = rankFileRepository.save(rankFile);
@@ -87,14 +139,14 @@ public class AthleteService {
         return AthleteDTO.from(athlete);
     }
 
-    public String delete(Integer id){
+    public String delete(Integer id) {
         Athlete athlete = findOne(id);
         athlete.setDel(true);
         repository.save(athlete);
         return "ok";
     }
 
-    public AthleteDTO update(Integer id, AthleteUpdateDTO athleteDTO){
+    public AthleteDTO update(Integer id, AthleteUpdateDTO athleteDTO) {
         Athlete athlete = findOne(id);
         School school = schoolService.findOne(athleteDTO.getSchoolId());
         Rank rank = rankService.findOne(athleteDTO.getRankId());
@@ -108,55 +160,54 @@ public class AthleteService {
         return AthleteDTO.from(athlete);
     }
 
-    public Athlete updateFile(Integer id, RegistryFile registryFile){
+    public Athlete updateFile(Integer id, RegistryFile registryFile) {
         Athlete athlete = findOne(id);
         RegistryFile registry = registryFileRepository.save(registryFile);
         athlete.setRegistryFile(registry);
         return athlete;
     }
 
-    public Athlete updateFile(Integer id, MedicalFile medicalFile){
+    public Athlete updateFile(Integer id, MedicalFile medicalFile) {
         Athlete athlete = findOne(id);
         MedicalFile medical = medicalFileRepository.save(medicalFile);
         athlete.setMedicalFile(medical);
         return athlete;
     }
 
-    public Athlete updateFile(Integer id, RankFile rankFile){
+    public Athlete updateFile(Integer id, RankFile rankFile) {
         Athlete athlete = findOne(id);
         RankFile rankFile2 = rankFileRepository.save(rankFile);
         athlete.setRankFile(rankFile2);
         return athlete;
     }
 
-    public Athlete updateFile(Integer id, DopingFile dopingFile){
+    public Athlete updateFile(Integer id, DopingFile dopingFile) {
         Athlete athlete = findOne(id);
         DopingFile doping = dopingFileRepository.save(dopingFile);
         athlete.setDopingFile(doping);
         return athlete;
     }
 
-    public boolean isPdf(MultipartFile multipartFile){
+    public boolean isPdf(MultipartFile multipartFile) {
         String name = multipartFile.getOriginalFilename();
-        String [] words = name.split("\\.");
+        String[] words = name.split("\\.");
         String format = words[words.length - 1];
         return format.equals("pdf");
     }
 
-    public AthleteDTO confirm(Integer id){
+    public AthleteDTO confirm(Integer id) {
         Athlete athlete = findOne(id);
         athlete.setStatus(Status.АКТИВНЫЙ.toString());
         repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
 
-    public List<Athlete> checkStatus (List<Athlete> athletes){
+    public List<Athlete> checkStatus(List<Athlete> athletes) {
         for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getRegistryDate().plusYears(1).isBefore(LocalDate.now())){
+            if (athletes.get(i).getRegistryDate().plusYears(1).isBefore(LocalDate.now())) {
                 athletes.get(i).setStatus(Status.ИСТЕК.toString());
                 repository.save(athletes.get(i));
-            }
-            else if (athletes.get(i).getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
+            } else if (athletes.get(i).getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
                 athletes.get(i).setStatus(Status.НЕАКТИВНЫЙ.toString());
                 repository.save(athletes.get(i));
             }
@@ -164,12 +215,11 @@ public class AthleteService {
         return athletes;
     }
 
-    public AthleteDTO checkStatus (Athlete athlete){
+    public AthleteDTO checkStatus(Athlete athlete) {
         if (athlete.getRegistryDate().plusMonths(12).isBefore(LocalDate.now())) {
             athlete.setStatus(Status.ИСТЕК.toString());
             repository.save(athlete);
-        }
-        else if (athlete.getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
+        } else if (athlete.getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
             athlete.setStatus(Status.НЕАКТИВНЫЙ.toString());
             repository.save(athlete);
         }
@@ -177,7 +227,7 @@ public class AthleteService {
     }
 
     public AthleteDTO register(Integer id, AthleteRegisterDTO athleteDTO, MedicalFile medicalFile,
-                               RankFile rankFile, DopingFile dopingFile){
+                               RankFile rankFile, DopingFile dopingFile) {
         Athlete athlete = findOne(id);
         Rank rank = rankService.findOne(athleteDTO.getRankId());
         athlete.setRank(rank);
@@ -195,30 +245,30 @@ public class AthleteService {
         return AthleteDTO.from(athlete);
     }
 
-    public AthleteDTO addCoach(Integer id, Integer coachId){
+    public AthleteDTO addCoach(Integer id, Integer coachId) {
         Athlete athlete = findOne(id);
         Coach coach = coachService.findOne(coachId);
         athletesCoachesRepository.save(AthletesCoaches.builder()
-                        .athlete(athlete)
-                        .coach(coach)
-                        .school(athlete.getSchool())
+                .athlete(athlete)
+                .coach(coach)
+                .school(athlete.getSchool())
                 .build());
         return AthleteDTO.from(athlete);
     }
 
-    public List<Coach> coaches(Integer id){
+    public List<Coach> coaches(Integer id) {
         Athlete athlete = findOne(id);
         List<AthletesCoaches> coachesAthletes = athletesCoachesRepository.findAllByAthleteIdAndSchoolId(id, athlete.getSchool().getId());
         List<Coach> coaches = new ArrayList<>();
         for (int i = 0; i < coachesAthletes.size(); i++) {
-            if (coachesAthletes.get(i).getFinishDate() == null){
+            if (coachesAthletes.get(i).getFinishDate() == null) {
                 coaches.add(coachesAthletes.get(i).getCoach());
             }
         }
         return coaches;
     }
 
-    public List<AthletesCoaches> coachesHistory(Integer id){
+    public List<AthletesCoaches> coachesHistory(Integer id) {
         Athlete athlete = findOne(id);
         List<AthletesCoaches> coaches = new ArrayList<>();
         List<Coach> all = coaches(id);
@@ -228,10 +278,10 @@ public class AthleteService {
         return coaches;
     }
 
-    public AthleteDTO deleteCoach(Integer id, Integer coachId){
+    public AthleteDTO deleteCoach(Integer id, Integer coachId) {
         Athlete athlete = findOne(id);
         Coach coach = coachService.findOne(coachId);
-        AthletesCoaches athletesCoaches = athletesCoachesRepository.findByAthleteIdAndCoachIdAndSchoolId(id, coachId, athlete.getSchool().getId()).orElseThrow(()->{
+        AthletesCoaches athletesCoaches = athletesCoachesRepository.findByAthleteIdAndCoachIdAndSchoolId(id, coachId, athlete.getSchool().getId()).orElseThrow(() -> {
             return new ResourceNotFoundException("Запись о тренере и спортсмене", 0);
         });
         athletesCoaches.setFinishDate(LocalDate.now());
@@ -239,16 +289,16 @@ public class AthleteService {
         return AthleteDTO.from(athlete);
     }
 
-    public Set<Coach> universalCoaches(AthleteDTO athleteDTO){
+    public Set<Coach> universalCoaches(AthleteDTO athleteDTO) {
         Athlete athlete = findOne(athleteDTO.getId());
         List<Coach> coaches = coachService.getByDisciplineAndSchool(athleteDTO);
         Set<Coach> universalCoaches = new HashSet<>();
-        if (athlete.getCoaches().size() == 0){
+        if (athlete.getCoaches().size() == 0) {
             universalCoaches.addAll(coaches);
         }
         for (int i = 0; i < coaches.size(); i++) {
             for (int j = 0; j < athlete.getCoaches().size(); j++) {
-                if (!athlete.getCoaches().get(j).equals(coaches.get(i))){
+                if (!athlete.getCoaches().get(j).equals(coaches.get(i))) {
                     universalCoaches.add(coaches.get(i));
                 }
             }
@@ -256,7 +306,7 @@ public class AthleteService {
         return universalCoaches;
     }
 
-    private boolean isTeam(String result){
+    private boolean isTeam(String result) {
         return result.equals("да");
     }
 }

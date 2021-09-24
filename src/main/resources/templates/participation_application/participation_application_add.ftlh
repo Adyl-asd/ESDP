@@ -9,6 +9,7 @@
                 <h3>${competition.name}</h3>
                 <hr>
                 <h4>${competition.discipline.name}</h4>
+                <input type="hidden" value="${competition.discipline.id}" id="discipline-id">
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
@@ -47,7 +48,7 @@
                 </div>
                 <hr>
                 <div>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" id="select-school" aria-label="Default select example">
                         <option selected>Выберите школу</option>
                         <#list schools as school>
                             <option value="${school.id}">${school.name}</option>
@@ -72,36 +73,132 @@
                     <div class="toggle-div">
                         <#list ageCategories as a>
                             <#if a.discipline.id = disciplineType.discipline.id>
-                                <div class="my-3 fs-6"><b>
-                                        <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                            <input type="hidden"
-                                                   value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                                            : ${a.ageCategory.rank.name}
-                                        <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                            <input type="hidden"
-                                                   value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
-                                        <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                            <input type="hidden"
-                                                   value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
-                                        <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                            <input type="hidden"
-                                                   value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
-                                        <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                            <input type="hidden" value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear}
-                                        <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                            <input type="hidden" value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear}
-                                        <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                            <input type="hidden" value="${a.ageCategory.id}">${a.ageCategory.rank.name}
-                                        </#if>
-                                    </b></div>
-                                <ul class="list-group" id="athlete-ul">
-                                    <#if (a.maxTeams??) && (a.discipline.participantsAmountMax??)>
-                                        <#assign x=a.maxTeams>
-                                        <#list 1..x as i>
-                                            <li class="athletes-li list-group-item d-flex justify-content-between align-items-start">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Команда №${i}</div>
-                                                    <#list 1..a.discipline.participantsAmountMax as j>
+                                <div class="age-category-div">
+                                    <input type="hidden" value="${a.discipline.id}" class="discipline-type-id">
+                                    <div class="my-3 fs-6"><b>
+                                            <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                                : ${a.ageCategory.rank.name}
+                                            <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
+                                            <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                            <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
+                                            <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear}
+                                            <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear}
+                                            <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                <input type="hidden" class="age-category-id"
+                                                       value="${a.ageCategory.id}">${a.ageCategory.rank.name}
+                                            </#if>
+                                        </b>
+                                    </div>
+                                    <ul class="list-group athlete-ul" id="athlete-ul">
+                                        <#if (a.maxTeams??) && (a.discipline.participantsAmountMax??)>
+                                            <#assign x=a.maxTeams>
+                                            <#list 1..x as i>
+                                                <li class="athletes-li list-group-item d-flex justify-content-between align-items-start">
+                                                    <div class="ms-2 me-auto">
+                                                        <div class="fw-bold">Команда №${i}</div>
+                                                        <#list 1..a.discipline.participantsAmountMax as j>
+                                                            <div class="row my-2">
+                                                                <div class="col text-end">
+                                                                    <label for="selectAthlete" class="mt-1">${j}
+                                                                        .</label>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <select class="form-select select-athlete"
+                                                                            aria-label="Default select example"
+                                                                            id="selectAthlete">
+                                                                        <option selected>Выбрать спортсмена</option>
+                                                                        <#--                                                                    <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>-->
+                                                                        <#--                                                                        <#list athletes as athlete>-->
+                                                                        <#--                                                                            <#if (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>-->
+                                                                        <#--                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>-->
+                                                                        <#--                                                                            </#if>-->
+                                                                        <#--                                                                        </#list>-->
+                                                                        <#--                                                                    </#if>-->
+
+                                                                    </select>
+                                                                </div>
+                                                                <#if (a.discipline.id == 4)>
+                                                                    <div class="col-auto">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input first-type"
+                                                                                   type="checkbox" value=""
+                                                                                   id="first-type">
+                                                                            <label class="form-check-label"
+                                                                                   for="first-type">
+                                                                                1-й вид
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-auto">
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input second-type"
+                                                                                   type="checkbox" value=""
+                                                                                   id="second-type">
+                                                                            <label class="form-check-label"
+                                                                                   for="second-type">
+                                                                                2-й вид
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </#if>
+                                                            </div>
+                                                        </#list>
+                                                    </div>
+                                                </li>
+                                            </#list>
+                                        <#else>
+                                            <#if a.maxAthletes??>
+                                                <#assign y=a.maxAthletes>
+                                                <#list 1..y as j>
+                                                    <li class="athletes-li list-group-item d-flex justify-content-between align-items-start">
                                                         <div class="row my-2">
                                                             <div class="col text-end">
                                                                 <label for="selectAthlete" class="mt-1">${j}.</label>
@@ -111,147 +208,25 @@
                                                                         aria-label="Default select example"
                                                                         id="selectAthlete">
                                                                     <option selected>Выбрать спортсмена</option>
-                                                                    <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                        <#list athletes as athlete>
-                                                                            <#if (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                                <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                            </#if>
-                                                                        </#list>
-                                                                    </#if>
-
+                                                                    <#--                                                                <#list athletes as athlete>-->
+                                                                    <#--                                                                    <option value="${athlete.id}">${athlete.person.name}</option>-->
+                                                                    <#--                                                                </#list>-->
                                                                 </select>
                                                             </div>
-                                                            <#if (a.discipline.id == 4)>
-                                                                <div class="col-auto">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input first-type" type="checkbox" value="" id="first-type">
-                                                                        <label class="form-check-label" for="first-type">
-                                                                            1-й вид
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-auto">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input second-type" type="checkbox" value="" id="second-type">
-                                                                        <label class="form-check-label" for="second-type">
-                                                                            2-й вид
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </#if>
                                                         </div>
-                                                    </#list>
-                                                </div>
-                                            </li>
-                                        </#list>
-                                    <#else>
-                                        <#if a.maxAthletes??>
-                                            <#assign y=a.maxAthletes>
-                                            <#list 1..y as j>
-                                                <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="row my-2">
-                                                        <div class="col text-end">
-                                                            <label for="selectAthlete" class="mt-1">${j}.</label>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <select class="form-select select-athlete"
-                                                                    aria-label="Default select example"
-                                                                    id="selectAthlete">
-                                                                <option selected>Выбрать спортсмена</option>
-                                                                <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.minYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.maxYear) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
-                                                                    <#list athletes as athlete>
-                                                                        <#if (athlete.rank == a.ageCategory.rank) && (athlete.discipline.id == a.discipline.discipline.id)>
-                                                                            <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
-                                                                        </#if>
-                                                                    </#list>
-                                                                </#if>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </#list>
+                                                    </li>
+                                                </#list>
+                                            </#if>
                                         </#if>
-                                    </#if>
-                                </ul>
-                                <div class="additional-athletes-div my-3">
-                                    <b class="additional-athletes-text" hidden>Доп. спортсмены</b>
-                                    <ul class="list-group additional-athletes-ul">
-
                                     </ul>
-                                    <div>
-                                        <button class="btn btn-primary add-additional-athlete-btn">Добавить</button>
+                                    <div class="additional-athletes-div my-3">
+                                        <b class="additional-athletes-text" hidden>Доп. спортсмены</b>
+                                        <ul class="list-group additional-athletes-ul">
+
+                                        </ul>
+                                        <div>
+                                            <button class="btn btn-primary add-additional-athlete-btn">Добавить</button>
+                                        </div>
                                     </div>
                                 </div>
                             </#if>

@@ -15,6 +15,9 @@ public class ParticipationApplicationService {
     private final ParticipationApplicationRepository repository;
     private final SchoolService schoolService;
     private final CompetitionService competitionService;
+    private final ParticipationApplicationAthleteService applicationAthleteService;
+    private final ParticipationApplicationCoachService applicationCoachService;
+    private final ParticipationApplicationJudgeService applicationJudgeService;
 
     public List<ParticipationApplication> all(){
         return repository.findAll();
@@ -45,6 +48,10 @@ public class ParticipationApplicationService {
     }
 
     public void delete(int id){
+        ParticipationApplication application = findOne(id);
+        applicationAthleteService.delete(application.getApplicationAthletes());
+        applicationCoachService.delete(application.getApplicationCoaches());
+        applicationJudgeService.delete(application.getApplicationJudges());
         repository.delete(findOne(id));
     }
 }

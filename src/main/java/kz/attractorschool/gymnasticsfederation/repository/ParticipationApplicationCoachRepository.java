@@ -12,4 +12,5 @@ public interface ParticipationApplicationCoachRepository extends JpaRepository<P
     boolean existsByApplicationIdAndCoachId(int applicationId, int coachId);
     Optional<ParticipationApplicationCoach> findByApplicationIdAndCoachId(int applicationId, int coachId);
     Optional<ParticipationApplicationCoach> findByIdAndApplicationId(int id, int applicationId);
+    void deleteAllByApplicationId(int applicationId);
 }

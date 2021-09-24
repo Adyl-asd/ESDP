@@ -6,6 +6,7 @@ import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundExcepti
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplication;
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationAthlete;
 import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationAthleteRepository;
+import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ParticipationApplicationAthleteService {
     private final ParticipationApplicationAthleteRepository repository;
-    private final ParticipationApplicationService applicationService;
+    private final ParticipationApplicationRepository applicationRepository;
     private final AthleteService athleteService;
     private final CompetitionDisciplineAgesService agesService;
     private final DisciplineTypeService disciplineTypeService;
@@ -37,15 +38,17 @@ public class ParticipationApplicationAthleteService {
     }
 
     public ParticipationApplicationAthlete add(int applicationId, ParticipationApplicationAthleteAddDTO dto){
-        ParticipationApplication application = applicationService.findOne(applicationId);
+        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+            return new ResourceNotFoundException("Заявка", 0);
+        });
         if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
             return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
                 return new ResourceNotFoundException("Заявка", 0);
             });
         }
-        if (!isSameDiscipline(dto.getAthleteId(), application.getCompetition().getDiscipline().getId())){
-            return null;
-        }
+//        if (!isSameDiscipline(dto.getAthleteId(), application.getCompetition().getDiscipline().getId())){
+//            return null;
+//        }
         ParticipationApplicationAthlete applicationAthlete = repository.save(
                 ParticipationApplicationAthlete.builder()
                         .application(application)
@@ -61,6 +64,10 @@ public class ParticipationApplicationAthleteService {
             return new ResourceNotFoundException("Заявка", id);
         });
         repository.delete(applicationAthlete);
+    }
+
+    public void delete(List<ParticipationApplicationAthlete> applicationAthletes){
+        repository.deleteAll(applicationAthletes);
     }
 
     private boolean isSameDiscipline(int athleteId, int disciplineId){

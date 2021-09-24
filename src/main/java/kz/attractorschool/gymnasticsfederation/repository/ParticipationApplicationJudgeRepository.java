@@ -12,4 +12,5 @@ public interface ParticipationApplicationJudgeRepository extends JpaRepository<P
     boolean existsByApplicationIdAndJudgeId(int applicationId, int judgeId);
     Optional<ParticipationApplicationJudge> findByApplicationIdAndJudgeId(int applicationId, int judgeId);
     Optional<ParticipationApplicationJudge> findByIdAndApplicationId(int id, int applicationId);
+    void deleteAllByApplicationId(int applicationId);
 }

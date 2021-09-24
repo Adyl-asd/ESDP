@@ -11,4 +11,5 @@ public interface ParticipationApplicationAthleteRepository extends JpaRepository
     boolean existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(int applicationId, int athleteId, int ageId, int disciplineTypeId);
     Optional<ParticipationApplicationAthlete> findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(int applicationId, int athleteId, int ageId,int disciplineTypeId);
     Optional<ParticipationApplicationAthlete> findByIdAndApplicationId(int id, int applicationId);
+    void deleteAllByApplicationId(int applicationId);
 }

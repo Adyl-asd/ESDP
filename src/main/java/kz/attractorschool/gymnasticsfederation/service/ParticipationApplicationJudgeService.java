@@ -9,6 +9,7 @@ import kz.attractorschool.gymnasticsfederation.model.ParticipationApplication;
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationCoach;
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationJudge;
 import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationJudgeRepository;
+import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ParticipationApplicationJudgeService {
     private final ParticipationApplicationJudgeRepository repository;
-    private final ParticipationApplicationService applicationService;
+    private final ParticipationApplicationRepository applicationRepository;
     private final JudgeService judgeService;
 
     public List<ParticipationApplicationJudge> all(){
@@ -36,7 +37,9 @@ public class ParticipationApplicationJudgeService {
     }
 
     public ParticipationApplicationJudgeDTO add(int applicationId, ParticipationApplicationJudgeAddDTO dto){
-        ParticipationApplication application = applicationService.findOne(applicationId);
+        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+            return new ResourceNotFoundException("Заявка", 0);
+        });
         if (repository.existsByApplicationIdAndJudgeId(applicationId, dto.getJudgeId())){
             return ParticipationApplicationJudgeDTO.from(repository.findByApplicationIdAndJudgeId(applicationId, dto.getJudgeId()).orElseThrow(() -> {
                 return new ResourceNotFoundException("Заявка", 0);
@@ -55,5 +58,9 @@ public class ParticipationApplicationJudgeService {
             return new ResourceNotFoundException("Заявка", id);
         });
         repository.delete(applicationJudge);
+    }
+
+    public void delete(List<ParticipationApplicationJudge> applicationJudges){
+        repository.deleteAll(applicationJudges);
     }
 }

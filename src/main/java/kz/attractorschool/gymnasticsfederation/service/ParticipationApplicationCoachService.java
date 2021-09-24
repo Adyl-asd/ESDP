@@ -7,6 +7,7 @@ import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationAth
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationCoach;
 import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationJudge;
 import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationCoachRepository;
+import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ParticipationApplicationCoachService {
     private final ParticipationApplicationCoachRepository repository;
-    private final ParticipationApplicationService applicationService;
+    private final ParticipationApplicationRepository applicationRepository;
     private final CoachService coachService;
 
     public List<ParticipationApplicationCoach> all(){
@@ -35,7 +36,9 @@ public class ParticipationApplicationCoachService {
     }
 
     public ParticipationApplicationCoachDTO add(int applicationId, ParticipationApplicationCoachAddDTO dto){
-        ParticipationApplication application = applicationService.findOne(applicationId);
+        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+            return new ResourceNotFoundException("Заявка", 0);
+        });
         if (repository.existsByApplicationIdAndCoachId(applicationId, dto.getCoachId())){
             return ParticipationApplicationCoachDTO.from(repository.findByApplicationIdAndCoachId(applicationId, dto.getCoachId()).orElseThrow(() -> {
                 return new ResourceNotFoundException("Заявка", 0);
@@ -54,5 +57,9 @@ public class ParticipationApplicationCoachService {
             return new ResourceNotFoundException("Заявка", id);
         });
         repository.delete(applicationCoach);
+    }
+
+    public void delete(List<ParticipationApplicationCoach> applicationCoaches){
+        repository.deleteAll(applicationCoaches);
     }
 }

@@ -1,16 +1,16 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.ParticipationApplicationStatus;
 import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "participation_applications")
@@ -43,4 +43,26 @@ public class ParticipationApplication {
 
     @OneToOne
     private School school;
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "participation_applications_athletes", joinColumns = @JoinColumn(name = "application_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<ParticipationApplicationAthlete> applicationAthletes = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "participation_applications_coaches", joinColumns = @JoinColumn(name = "application_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<ParticipationApplicationCoach> applicationCoaches = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "participation_applications_judges", joinColumns = @JoinColumn(name = "application_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<ParticipationApplicationJudge> applicationJudges = new ArrayList<>();
+
 }

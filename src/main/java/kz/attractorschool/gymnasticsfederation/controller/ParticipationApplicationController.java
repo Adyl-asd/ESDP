@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
+import kz.attractorschool.gymnasticsfederation.dto.ParticipationApplicationAddDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;

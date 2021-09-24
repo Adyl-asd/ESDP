@@ -20,6 +20,7 @@ public class ParticipationApplicationAthleteService {
     private final AthleteService athleteService;
     private final CompetitionDisciplineAgesService agesService;
     private final DisciplineTypeService disciplineTypeService;
+    private final DisciplineService disciplineService;
 
     public List<ParticipationApplicationAthlete> all(){
         return repository.findAll();
@@ -37,10 +38,13 @@ public class ParticipationApplicationAthleteService {
 
     public ParticipationApplicationAthlete add(int applicationId, ParticipationApplicationAthleteAddDTO dto){
         ParticipationApplication application = applicationService.findOne(applicationId);
-        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId())){
-            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId()).orElseThrow(() -> {
+        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
+            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
                 return new ResourceNotFoundException("Заявка", 0);
             });
+        }
+        if (!isSameDiscipline(dto.getAthleteId(), application.getCompetition().getDiscipline().getId())){
+            return null;
         }
         ParticipationApplicationAthlete applicationAthlete = repository.save(
                 ParticipationApplicationAthlete.builder()
@@ -58,4 +62,23 @@ public class ParticipationApplicationAthleteService {
         });
         repository.delete(applicationAthlete);
     }
+
+    private boolean isSameDiscipline(int athleteId, int disciplineId){
+        return athleteService.getOne(athleteId).getDiscipline().getId() == disciplineId;
+    }
+
+    private boolean isCorrectAge(int maxAge, int minAge, int athleteId){
+        int year = athleteService.getOne(athleteId).getPerson().getBirthday().getYear();
+        return year <= maxAge && year >= minAge;
+    }
+
+    private boolean isCorrectAge(int maxAge, int athleteId){
+        int year = athleteService.getOne(athleteId).getPerson().getBirthday().getYear();
+        return year <= maxAge;
+    }
+
+//    private boolean isCorrectAge(int minAge, int athleteId){
+//        int year = athleteService.getOne(athleteId).getPerson().getBirthday().getYear();
+//        return year >= minAge;
+//    }
 }

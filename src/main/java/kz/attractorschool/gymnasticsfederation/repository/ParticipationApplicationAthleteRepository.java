@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ParticipationApplicationAthleteRepository extends JpaRepository<ParticipationApplicationAthlete, Integer> {
-    boolean existsByApplicationIdAndAthleteIdAndDisciplineAgeId(int applicationId, int athleteId, int ageId);
-    Optional<ParticipationApplicationAthlete> findByApplicationIdAndAthleteIdAndDisciplineAgeId(int applicationId, int athleteId, int ageId);
+    boolean existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(int applicationId, int athleteId, int ageId, int disciplineTypeId);
+    Optional<ParticipationApplicationAthlete> findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(int applicationId, int athleteId, int ageId,int disciplineTypeId);
     Optional<ParticipationApplicationAthlete> findByIdAndApplicationId(int id, int applicationId);
 }

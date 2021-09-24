@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/participation-application")
 @AllArgsConstructor
 public class ParticipationApplicationRestController {
@@ -20,9 +20,9 @@ public class ParticipationApplicationRestController {
     private final ParticipationApplicationJudgeService applicationJudgeService;
 
     @PostMapping("/{id}/athletes")
-    public ResponseEntity addAthlete(@PathVariable Integer id, ParticipationApplicationAthleteAddDTO addDTO){
+    public ParticipationApplicationAthlete addAthlete(@PathVariable Integer id, ParticipationApplicationAthleteAddDTO addDTO){
         ParticipationApplicationAthlete applicationAthlete = applicationAthleteService.add(id, addDTO);
-        return ResponseEntity.ok(applicationAthlete);
+        return applicationAthlete;
     }
 
     @DeleteMapping("/{applicationId}/athletes/{id}")

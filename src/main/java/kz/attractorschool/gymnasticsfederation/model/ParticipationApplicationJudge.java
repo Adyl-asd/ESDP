@@ -1,9 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -19,6 +17,8 @@ public class ParticipationApplicationJudge {
     private Integer id;
 
     @ManyToOne
+    @ToString.Exclude
+    @JsonBackReference
     private ParticipationApplication application;
 
     @ManyToOne

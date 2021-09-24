@@ -1,10 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -20,11 +18,19 @@ public class ParticipationApplicationAthlete {
     private Integer id;
 
     @ManyToOne
+    @ToString.Exclude
+    @JsonBackReference
     private ParticipationApplication application;
 
     @ManyToOne
+    @ToString.Exclude
     private Athlete athlete;
 
     @ManyToOne
+    @ToString.Exclude
     private CompetitionDisciplineAge disciplineAge;
+
+    @ManyToOne
+    @ToString.Exclude
+    private DisciplineType disciplineType;
 }

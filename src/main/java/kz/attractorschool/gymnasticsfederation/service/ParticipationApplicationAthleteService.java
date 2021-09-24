@@ -19,6 +19,7 @@ public class ParticipationApplicationAthleteService {
     private final ParticipationApplicationService applicationService;
     private final AthleteService athleteService;
     private final CompetitionDisciplineAgesService agesService;
+    private final DisciplineTypeService disciplineTypeService;
 
     public List<ParticipationApplicationAthlete> all(){
         return repository.findAll();
@@ -46,6 +47,7 @@ public class ParticipationApplicationAthleteService {
                         .application(application)
                         .athlete(athleteService.findOne(dto.getAthleteId()))
                         .disciplineAge(agesService.findOne(dto.getDisciplineAgeId()))
+                        .disciplineType(disciplineTypeService.findOne(dto.getDisciplineTypeId()))
                         .build());
         return applicationAthlete;
     }

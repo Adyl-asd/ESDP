@@ -40,10 +40,17 @@ public class ParticipationApplicationController {
         return "participation_application/participation_application_add";
     }
 
-    @PostMapping("/{id}")
-    public String delete(@PathVariable Integer competitionId,@PathVariable Integer id){
-        service.delete(id);
-        return "redirect:/competition/" + competitionId;
+    @GetMapping("/apply/{applicationId}")
+    public String getOne(@PathVariable Integer id,@PathVariable Integer applicationId, Model model){
+        model.addAttribute("competition", competitionService.findOne(id));
+        model.addAttribute("application", service.findOne(applicationId));
+        return "participation_application/participation_application";
+    }
+
+    @PostMapping("/apply/{applicationId}")
+    public String delete(@PathVariable Integer id,@PathVariable Integer applicationId){
+        service.delete(applicationId);
+        return "redirect:/competition/" + id;
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

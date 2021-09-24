@@ -19,4 +19,7 @@ public class ParticipationApplicationAthleteAddDTO {
 
     @NotNull
     private Integer disciplineAgeId;
+
+    @NotNull
+    private Integer disciplineTypeId;
 }

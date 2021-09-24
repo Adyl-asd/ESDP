@@ -23,6 +23,7 @@ public class ParticipationApplicationAthleteDTO {
     private ParticipationApplicationDTO application;
     private AthleteDTO athlete;
     private CompetitionDisciplineAgeDTO disciplineAge;
+    private DisciplineTypeDTO disciplineType;
 
     public static ParticipationApplicationAthleteDTO from(ParticipationApplicationAthlete applicationAthlete){
         return ParticipationApplicationAthleteDTO.builder()
@@ -30,6 +31,7 @@ public class ParticipationApplicationAthleteDTO {
                 .application(ParticipationApplicationDTO.from(applicationAthlete.getApplication()))
                 .athlete(AthleteDTO.from(applicationAthlete.getAthlete()))
                 .disciplineAge(CompetitionDisciplineAgeDTO.from(applicationAthlete.getDisciplineAge()))
+                .disciplineType(DisciplineTypeDTO.from(applicationAthlete.getDisciplineType()))
                 .build();
     }
 }

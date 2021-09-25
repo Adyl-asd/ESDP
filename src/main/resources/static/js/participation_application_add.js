@@ -18,7 +18,7 @@ $('#select-school').change(function () {
                     disciplineId : disciplineId
                 },
                 success : function (athlete) {
-                    alert("хуйня")
+                    console.log(athlete)
                     for (let k = 0; k < $(ageCategoryDiv).eq(i).find(athleteLi).eq(j).find(selectAthlete).length; k++) {
                         $(ageCategoryDiv).eq(i).find(athleteLi).eq(j).find(selectAthlete).eq(k).append(`
                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
@@ -32,23 +32,25 @@ $('#select-school').change(function () {
 })
 
 $('.add-additional-athlete-btn').on('click', function () {
-    $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
-    $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append(`
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="row">
-                        <div class="col-auto">
-                            <select class="form-select select-additional-athlete" aria-label="Default select example" id="selectAthlete">
-                            <option selected>Выбрать спортсмена</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-danger delete-additional-btn">Удалить</button>
-                        </div>
-                    </div>
-                </div>
-            </li>
-    `)
+    // $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
+    // $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append(`
+    //         <li class="list-group-item d-flex justify-content-between align-items-start">
+    //             <div class="ms-2 me-auto">
+    //                 <div class="row">
+    //                     <div class="col-auto">
+    //                         <select class="form-select select-additional-athlete" aria-label="Default select example" id="selectAthlete">
+    //                         <option selected>Выбрать спортсмена</option>
+    //                         </select>
+    //                     </div>
+    //                     <div class="col">
+    //                         <button class="btn btn-danger delete-additional-btn">Удалить</button>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </li>
+    // `)
+
+    $('.age-category-div').eq(1).clone().appendTo($('.test'))
 
 })
 

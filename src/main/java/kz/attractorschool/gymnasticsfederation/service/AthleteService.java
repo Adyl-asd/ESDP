@@ -48,6 +48,11 @@ public class AthleteService {
         return checkStatus(athletes);
     }
 
+    public List<Athlete> findAllBySchoolAndDisciplineId(Integer schoolId, Integer disciplineId) {
+        List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+        return checkStatus(athletes);
+    }
+
     public List<Athlete> findAllBySchoolAndDisciplineAndAgeCategory(Integer schoolId, Integer disciplineId, Integer ageCategoryId) {
         List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
         AgeCategory ageCategory = ageCategoryService.findOne(ageCategoryId);

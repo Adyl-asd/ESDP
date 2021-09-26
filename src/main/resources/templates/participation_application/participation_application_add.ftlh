@@ -40,6 +40,15 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
+                        <h6 class="mb-0">Уровень</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        ${competition.level}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
                         <h6 class="mb-0">Контактное лицо</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
@@ -256,7 +265,7 @@
                                                                                 <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                             </#if>
                                                                         </#list>
-                                                                    <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                                    <#elseif !a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                         <#list athletes as athlete>
                                                                             <#if (athlete.rank == a.ageCategory.rank)>
                                                                                 <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
@@ -330,7 +339,7 @@
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
-                                                                <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                                <#elseif !a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                     <#list athletesNational as athlete>
                                                                         <#if (athlete.rank == a.ageCategory.rank)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
@@ -357,7 +366,7 @@
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.rank == a.ageCategory.rank)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
@@ -368,7 +377,7 @@
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
@@ -379,7 +388,7 @@
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
@@ -390,7 +399,7 @@
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.person.birthday.getYear() > a.ageCategory.minYear)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
@@ -401,18 +410,18 @@
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
-                                                                <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
+                                                                <#elseif !a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                     <#list athletesNational as athlete>
                                                                         <#if (athlete.rank == a.ageCategory.rank)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>
                                                                     <#list athletesCity as athlete>
-                                                                        <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
+                                                                        <#if (athlete.rank == a.ageCategory.rank)>
                                                                             <option value="${athlete.id}">${athlete.person.surname} ${athlete.person.name} ${athlete.person.middleName}</option>
                                                                         </#if>
                                                                     </#list>

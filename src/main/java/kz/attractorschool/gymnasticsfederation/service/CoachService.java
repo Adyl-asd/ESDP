@@ -45,6 +45,10 @@ public class CoachService {
         return coachRepository.findAllBySchoolId(id);
     }
 
+    public List<Coach> allBySchoolAndDisciplineId(Integer schoolId, Integer disciplineId) {
+        return coachRepository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+    }
+
     public CoachDTO add(CoachAddDTO coachDTO, CoachCategoryFile coachCategoryFile) {
         CoachCategoryFile categoryFile = coachCategoryFileRepository.save(coachCategoryFile);
         CoachCategory category = coachCategoryService.findOne(coachDTO.getCategoryId());

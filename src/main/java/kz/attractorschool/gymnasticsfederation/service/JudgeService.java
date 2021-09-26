@@ -35,6 +35,10 @@ public class JudgeService {
         return repository.findAllBySchoolId(id);
     }
 
+    public List<Judge> allBySchoolAndDisciplineId(Integer schoolId, Integer disciplineId) {
+        return repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+    }
+
     public JudgeDTO getOne(Integer id){
         return JudgeDTO.from(repository.findById(id).orElseThrow(() -> {
             return new ResourceNotFoundException("Судья", id);

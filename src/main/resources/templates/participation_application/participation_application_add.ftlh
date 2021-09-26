@@ -440,12 +440,12 @@
             </div>
         </#list>
         <div class="card mb-3">
-            <div class="card-body">
+            <div class="card-body coaches-div">
                 <div class="fs-6"><b>Тренеры</b></div>
-                <ul class="list-group my-2">
-                    <li class="coach-select list-group-item d-flex justify-content-between align-items-start">
+                <ul class="coaches-ul list-group my-2">
+                    <li class="coach-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
-                            <div class="col">
+                            <div class="col-auto">
                                 <select class="form-select"
                                         aria-label="Default select example"
                                         id="selectCoach">
@@ -458,18 +458,16 @@
                         </div>
                     </li>
                 </ul>
-                <div>
-                    <button class="btn btn-primary" id="add-additional-coach-btn">Добавить</button>
-                </div>
+                <button class="btn btn-primary" id="add-additional-coach-btn">Добавить</button>
             </div>
         </div>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body judges-div">
                 <div class="fs-6"><b>Судьи</b></div>
-                <ul class="list-group">
-                    <li class="judge-select list-group-item d-flex justify-content-between align-items-start">
+                <ul class="judges-ul list-group">
+                    <li class="judge-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
-                            <div class="col">
+                            <div class="col-auto">
                                 <select class="form-select"
                                         aria-label="Default select example"
                                         id="selectJudge">

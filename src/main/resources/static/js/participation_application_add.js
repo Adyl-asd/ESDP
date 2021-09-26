@@ -50,40 +50,24 @@ $(document).on('click', '.delete-additional-athlete-btn', function () {
 })
 
 $('#add-additional-coach-btn').on('click', function () {
-    $(this).closest('.card-body').find('.list-group').append(`
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="me-auto">
-                <div class="row">
-                    <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example" id="selectAthlete">
-                            <option selected>Выбрать тренера</option>
-                        </select>
-                    </div>
-                        <div class="col">
-                        <button class="btn btn-danger delete-additional-btn">Удалить</button>
-                    </div>
-                </div>
-            </div>
-        </li>
+    $(this).closest('.coaches-div').find('.coaches-ul').append($(this).closest('.coaches-div').find('.coach-li').eq(0).clone())
+    $(this).closest('.coaches-div').find('.coach-li').eq($(this).closest('.coaches-div').find('.coach-li').length-1).find('.row').append(`
+        <div class="col">
+            <button class="btn btn-danger delete-additional-btn">
+                Удалить
+            </button>
+        </div>
     `)
 })
 
 $('#add-additional-judge-btn').on('click', function () {
-    $(this).closest('.card-body').find('.list-group').append(`
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="me-auto">
-                <div class="row">
-                    <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example" id="selectAthlete">
-                            <option selected>Выбрать судью</option>
-                        </select>
-                    </div>
-                        <div class="col">
-                        <button class="btn btn-danger delete-additional-btn">Удалить</button>
-                    </div>
-                </div>
-            </div>
-        </li>
+    $(this).closest('.judges-div').find('.judges-ul').append($(this).closest('.judges-div').find('.judge-li').eq(0).clone())
+    $(this).closest('.judges-div').find('.judge-li').eq($(this).closest('.judges-div').find('.judge-li').length-1).find('.row').append(`
+        <div class="col">
+            <button class="btn btn-danger delete-additional-btn">
+                Удалить
+            </button>
+        </div>
     `)
 })
 

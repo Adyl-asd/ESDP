@@ -32,26 +32,21 @@ $('#select-school').change(function () {
 })
 
 $('.add-additional-athlete-btn').on('click', function () {
-    // $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
-    // $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append(`
-    //         <li class="list-group-item d-flex justify-content-between align-items-start">
-    //             <div class="ms-2 me-auto">
-    //                 <div class="row">
-    //                     <div class="col-auto">
-    //                         <select class="form-select select-additional-athlete" aria-label="Default select example" id="selectAthlete">
-    //                         <option selected>Выбрать спортсмена</option>
-    //                         </select>
-    //                     </div>
-    //                     <div class="col">
-    //                         <button class="btn btn-danger delete-additional-btn">Удалить</button>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    // `)
+    if (!$(this).closest('.additional-athletes-div').find('.additional-athletes-ul').is(':visible')) {
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').removeAttr('hidden')
+    } else {
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append($(this).closest('.additional-athletes-div').find('.athletes-li').eq(0).clone())
+    }
+})
 
-    $('.age-category-div').eq(1).clone().appendTo($('.test'))
-
+$(document).on('click', '.delete-additional-athlete-btn', function () {
+    if ($(this).closest('.additional-athletes-div').find('.athletes-li').length > 1) {
+        $(this).closest('.athletes-li').remove()
+    } else {
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-text').prop('hidden', true)
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').prop('hidden', true)
+    }
 })
 
 $('#add-additional-coach-btn').on('click', function () {

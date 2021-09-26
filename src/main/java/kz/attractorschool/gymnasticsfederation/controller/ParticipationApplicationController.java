@@ -37,6 +37,8 @@ public class ParticipationApplicationController {
         // После реализации функционала авторизации, нужно будет добавить логику на хранение id школы в пользователе и изменить запись ниже
         model.addAttribute("schools", schoolService.all());
         model.addAttribute("athletes", athleteService.findAllBySchoolAndDisciplineId(schoolId, competition.getDiscipline().getId()));
+        model.addAttribute("athletesCity", athleteService.findAllBySchoolAndDisciplineAndCityTeam(schoolId, competition.getDiscipline().getId()));
+        model.addAttribute("athletesNational", athleteService.findAllBySchoolAndDisciplineAndNationalTeam(schoolId, competition.getDiscipline().getId()));
         model.addAttribute("coaches", coachService.allBySchoolAndDisciplineId(schoolId, competition.getDiscipline().getId()));
         model.addAttribute("judges", judgeService.allBySchoolAndDisciplineId(schoolId, competition.getDiscipline().getId()));
         service.add(2, id);

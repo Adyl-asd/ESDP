@@ -53,6 +53,28 @@ public class AthleteService {
         return checkStatus(athletes);
     }
 
+    public List<Athlete> findAllBySchoolAndDisciplineAndCityTeam(Integer schoolId, Integer disciplineId) {
+        List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+        List<Athlete> athletesCity = new ArrayList<>();
+        for (Athlete athlete : athletes) {
+            if (athlete.isCityTeam()) {
+                athletesCity.add(athlete);
+            }
+        }
+        return checkStatus(athletesCity);
+    }
+
+    public List<Athlete> findAllBySchoolAndDisciplineAndNationalTeam(Integer schoolId, Integer disciplineId) {
+        List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
+        List<Athlete> athletesCity = new ArrayList<>();
+        for (Athlete athlete : athletes) {
+            if (athlete.isNationalTeam()) {
+                athletesCity.add(athlete);
+            }
+        }
+        return checkStatus(athletesCity);
+    }
+
     public List<Athlete> findAllBySchoolAndDisciplineAndAgeCategory(Integer schoolId, Integer disciplineId, Integer ageCategoryId) {
         List<Athlete> athletes = repository.findAllBySchoolIdAndDisciplineId(schoolId, disciplineId);
         AgeCategory ageCategory = ageCategoryService.findOne(ageCategoryId);

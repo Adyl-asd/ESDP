@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
 
+import kz.attractorschool.gymnasticsfederation.dto.DisciplineAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.DisciplineDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.Discipline;
@@ -32,7 +33,7 @@ public class DisciplineService {
         return DisciplineDTO.from(findOne(id));
     }
 
-    public DisciplineDTO add(DisciplineDTO disciplineDTO){
+    public DisciplineDTO add(DisciplineAddDTO disciplineDTO){
         Discipline discipline = repository.save(Discipline.builder()
                 .name(disciplineDTO.getName())
                 .build());
@@ -46,7 +47,7 @@ public class DisciplineService {
         return "ok";
     }
 
-    public DisciplineDTO update(DisciplineDTO disciplineDTO, Integer id){
+    public DisciplineDTO update(DisciplineAddDTO disciplineDTO, Integer id){
         Discipline discipline = findOne(id);
         discipline.setName(disciplineDTO.getName());
         repository.save(discipline);

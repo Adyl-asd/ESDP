@@ -4,7 +4,10 @@ import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundExcepti
 import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,7 @@ public class CompetitionController {
     private final CompetitionDisciplineAgesService competitionDisciplineAgesService;
     private final CompetitionDisciplineProgramsService competitionDisciplineProgramsService;
     private final DisciplineTypeService disciplineTypeService;
+    private final StorageService storageService;
 
     @GetMapping
     public String all(Model model){
@@ -45,11 +49,27 @@ public class CompetitionController {
         return "redirect:/competitions/" + id;
     }
 
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id){
+        service.delete(id);
+        return "redirect:/competitions";
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     private String handleRNF(ResourceNotFoundException ex, Model model) {
         model.addAttribute("resource", ex.getResource());
         model.addAttribute("id", ex.getId());
         return "exception/resource-not-found";
+    }
+
+    @GetMapping("/file/{filename:.+}")
+    public ResponseEntity<Resource> getFilePic(@PathVariable String filename) {
+        {
+            Resource file = storageService.loadAsResource(filename);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=\"" + file.getFilename() + "\"")
+                    .body(file);
+        }
     }
 }

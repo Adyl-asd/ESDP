@@ -20,7 +20,7 @@ public class DisciplineController {
     private final DisciplineService service;
 
     @GetMapping
-    public String getCategoryList(Model model){
+    public String all(Model model){
         model.addAttribute("disciplines", service.all());
         return "disciplines/disciplines";
     }

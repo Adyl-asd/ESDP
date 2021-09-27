@@ -22,13 +22,29 @@
                     ${competition.startDate} - ${competition.finishDate}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3 fs-6">
+                    Крайний срок подачи заявки
+                </div>
+                <div class="col-9 fs-6">
+                    ${competition.participationDate}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 fs-6">
+                    Уровень
+                </div>
+                <div class="col-9 fs-6">
+                    ${competition.level}
+                </div>
+            </div>
             <hr>
             <div class="row">
                 <div class="col-3 fs-6">
                     Место проведения:
                 </div>
                 <div class="col-9 fs-6">
-                    ${competition.country}, ${competition.areaName}, ${competition.city}
+                    ${competition.country}, ${competition.city}
                 </div>
             </div>
             <hr>
@@ -37,7 +53,7 @@
                     Адрес:
                 </div>
                 <div class="col-9 fs-6">
-                    ${competition.address}
+                    ${competition.address}, ${competition.areaName}
                 </div>
             </div>
             <hr>
@@ -57,6 +73,14 @@
                     ${competition.status}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3 fs-6">
+                    Положение:
+                </div>
+                <div class="col-9 fs-6">
+                    <a href="/competitions/file/${competition.competitionPositionFile.filePath}">Скачать</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -72,24 +96,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <#list disciplines as d>
-                        <tr>
-                        <#list competitionPrograms as cp>
-                            <#if d.name == cp.discipline.name>
-                                <tr>
-                                    <td class="fs-6">
-                                        ${d.name}
-                                    </td>
-                                    <td>
-                                        <div class="fs-6">
-                                            ${cp.competitionProgram.name}
-                                        </div>
-                                    </td>
-                                </tr>
-                            </#if>
+                        <#list disciplines as d>
+                            <tr>
+                                <td class="fs-6">${d.name}</td>
+                                <td class="fs-6"></td>
+                                <#list competitionPrograms as cp>
+                                    <#if d.name == cp.discipline.name>
+                                        <tr>
+                                            <td class="fs-6"></td>
+                                            <td>
+                                                <div class="fs-6">
+                                                    ${cp.competitionProgram.name}
+                                                </div>
+                                        </td>
+                                        </tr>
+                                    </#if>
+                                </#list>
+                            </tr>
                         </#list>
-                    </#list>
-                    </tr>
                     </tbody>
                 </table>
                 <table class="table text-center text-capitalize table-bordered mt-3 tables-flex-35">
@@ -131,6 +155,10 @@
                     <button class="btn btn-primary" type="submit">Подтвердить заявку</button>
                 </form>
             </#if>
+            <a href="/competitions/${competition.id}/update" class="btn btn-primary">Изменить</a>
+            <form action="/competitions/${competition.id}/delete" method="post">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+            </form>
         </div>
     </div>
 

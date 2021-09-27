@@ -1,12 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
 import kz.attractorschool.gymnasticsfederation.dto.RankDTO;
-import kz.attractorschool.gymnasticsfederation.dto.SchoolDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
-import kz.attractorschool.gymnasticsfederation.model.Federation;
 import kz.attractorschool.gymnasticsfederation.model.Rank;
-import kz.attractorschool.gymnasticsfederation.model.School;
 import kz.attractorschool.gymnasticsfederation.repository.RankRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

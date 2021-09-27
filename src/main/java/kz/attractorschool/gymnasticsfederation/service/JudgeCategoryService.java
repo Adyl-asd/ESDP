@@ -1,6 +1,5 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.dto.CoachCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.dto.JudgeCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.CoachCategory;

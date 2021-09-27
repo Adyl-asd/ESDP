@@ -20,7 +20,7 @@ public class JudgeCategoryController {
     private final JudgeCategoryService service;
 
     @GetMapping
-    public String getCategoryList(Model model){
+    public String all(Model model){
         model.addAttribute("categories", service.all());
         return "judge_category/judge_categories";
     }

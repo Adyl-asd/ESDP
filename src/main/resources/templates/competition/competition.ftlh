@@ -49,6 +49,14 @@
                     ${competition.contact} (${competition.phone})
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3 fs-6">
+                    Статус:
+                </div>
+                <div class="col-9 fs-6">
+                    ${competition.status}
+                </div>
+            </div>
         </div>
     </div>
     <div class="card">
@@ -99,7 +107,7 @@
                                             #{cd.ageCategory.maxYear} - #{cd.ageCategory.minYear}
                                             : ${cd.ageCategory.rank.name}
                                         <#elseif cd.ageCategory.maxYear?? && !cd.ageCategory.minYear?? && cd.ageCategory.rank??>
-                                            #{cd.ageCategory.maxYear} : #{cd.ageCategory.rank.name}
+                                            #{cd.ageCategory.maxYear} : ${cd.ageCategory.rank.name}
                                         <#elseif cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && !cd.ageCategory.rank??>
                                             #{cd.ageCategory.maxYear} - #{cd.ageCategory.minYear}
                                         <#elseif !cd.ageCategory.maxYear?? && cd.ageCategory.minYear?? && cd.ageCategory.rank??>
@@ -118,8 +126,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="btn btn-primary">Подтвердить заявку</div>
-
+            <#if competition.status == "На_рассмотрении">
+                <form action="/competitions/${competition.id}/confirm" method="post">
+                    <button class="btn btn-primary" type="submit">Подтвердить заявку</button>
+                </form>
+            </#if>
         </div>
     </div>
 

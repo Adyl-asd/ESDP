@@ -1,8 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.enumm;
 
 public enum CompetitionStatus {
-    CREATED("Создано"), UNDER_CONSIDERATION("На_рассмотрении"),
-    CONFIRMED("Подтверждено"), COMPLETED("Завершено");
+    UNDER_CONSIDERATION("На_рассмотрении"), CONFIRMED("Подтверждено"), COMPLETED("Завершено");
 
     private final String name;
 

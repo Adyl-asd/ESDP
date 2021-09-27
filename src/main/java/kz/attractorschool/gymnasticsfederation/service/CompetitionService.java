@@ -5,6 +5,7 @@ import kz.attractorschool.gymnasticsfederation.dto.CompetitionAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CompetitionUpdateDTO;
 import kz.attractorschool.gymnasticsfederation.enumm.CompetitionLevel;
+import kz.attractorschool.gymnasticsfederation.enumm.CompetitionStatus;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.CompetitionPositionFile;
 import kz.attractorschool.gymnasticsfederation.model.Competition;
@@ -109,5 +110,10 @@ public class CompetitionService {
         return format.equals("pdf");
     }
 
-
+    public CompetitionDTO confirm(int id){
+        Competition competition = findOne(id);
+        competition.setStatus(CompetitionStatus.CONFIRMED.getName());
+        competitionRepository.save(competition);
+        return CompetitionDTO.from(competition);
+    }
 }

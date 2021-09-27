@@ -39,6 +39,12 @@ public class CompetitionController {
         return "competition/competition";
     }
 
+    @PostMapping("/{id}/confirm")
+    public String confirm(@PathVariable Integer id){
+        service.confirm(id);
+        return "redirect:/competitions/" + id;
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     private String handleRNF(ResourceNotFoundException ex, Model model) {

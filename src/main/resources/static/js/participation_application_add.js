@@ -104,3 +104,32 @@ $(".second-type").on("click", function () {
         // only enable the elements that are already checked.
     }
 });
+
+$('#send-application-btn').on('click', function () {
+    let disciplineTypeId = $('.discipline-type-id')
+    let applicationId = $('#application-id').val()
+    let competitionId = $('#competition-id').val()
+    for (let i = 0; i < disciplineTypeId.length; i++) {
+        let disciplineTypeIdInputValue = $(disciplineTypeId).eq(i).val()
+        let disciplineTypeDiv = $(disciplineTypeId).eq(i).closest('.discipline-type-div')
+        let ageCategoryDivs = disciplineTypeDiv.find('.age-category-div')
+        for (let j = 0; j < ageCategoryDivs.length; j++) {
+            let ageCategoryId = ageCategoryDivs.eq(j).find('.age-category-id').val()
+            let athletesLi = ageCategoryDivs.eq(j).find('.athletes-li')
+            for (let k = 0; k < athletesLi.length; k++) {
+                let athleteId = athletesLi.eq(k).find('.select-athlete').val()
+                console.log(athletesLi.eq(k).find('.select-athlete').val())
+                $.ajax({
+                    url : "http://localhost:8080/api/participation-application/athlete",
+                    type : "POST",
+                    data : {
+                        applicationId : applicationId,
+                        athleteId : athleteId,
+                        disciplineAgeId : ageCategoryId,
+                        disciplineTypeId : disciplineTypeIdInputValue
+                    }
+                })
+            }
+        }
+    }
+})

@@ -19,11 +19,11 @@ public class ParticipationApplicationRestController {
     private final ParticipationApplicationAthleteService applicationAthleteService;
     private final ParticipationApplicationJudgeService applicationJudgeService;
 
-    @PostMapping("/{id}/athletes")
-    public ParticipationApplicationAthlete addAthlete(@PathVariable Integer id, ParticipationApplicationAthleteAddDTO addDTO){
-        ParticipationApplicationAthlete applicationAthlete = applicationAthleteService.add(id, addDTO);
-        return applicationAthlete;
-    }
+//    @PostMapping("/{id}/athletes")
+//    public ParticipationApplicationAthlete addAthlete(@PathVariable Integer id, ParticipationApplicationAthleteAddDTO addDTO){
+//        ParticipationApplicationAthlete applicationAthlete = applicationAthleteService.add(id, addDTO);
+//        return applicationAthlete;
+//    }
 
     @DeleteMapping("/{applicationId}/athletes/{id}")
     public ResponseEntity deleteAthleteApplication(@PathVariable Integer applicationId, @PathVariable Integer id){

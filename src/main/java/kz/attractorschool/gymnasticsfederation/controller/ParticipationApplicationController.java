@@ -41,7 +41,7 @@ public class ParticipationApplicationController {
         model.addAttribute("athletesNational", athleteService.findAllBySchoolAndDisciplineAndNationalTeam(schoolId, competition.getDiscipline().getId()));
         model.addAttribute("coaches", coachService.allBySchoolAndDisciplineId(schoolId, competition.getDiscipline().getId()));
         model.addAttribute("judges", judgeService.allBySchoolAndDisciplineId(schoolId, competition.getDiscipline().getId()));
-        service.add(2, id);
+        model.addAttribute("application", service.add(schoolId, id));
         return "participation_application/participation_application_add";
     }
 

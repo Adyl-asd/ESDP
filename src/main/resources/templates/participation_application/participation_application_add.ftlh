@@ -2,7 +2,7 @@
 <#import "../partials/main.ftlh" as main/>
 
 <@main.renderWith title="Подать заявку на участие в соревновании" scripts=["js/participation_application_add.js"]>
-
+${application.getId()}
     <div class="container">
         <div class="card my-3">
             <div class="card-body">
@@ -67,11 +67,12 @@
             </div>
         </div>
         <#list disciplineTypes as disciplineType>
-            <div class="card mb-3">
+            <div class="discipline-type-div card mb-3">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <h5>${disciplineType.discipline.name}</h5>
+                            <input type="hidden" value="${disciplineType.discipline.id}" class="discipline-type-id">
                         </div>
                         <div class="col">
                             <button class="toggle-btn btn btn-primary">Свернуть</button>
@@ -83,7 +84,6 @@
                         <#list ageCategories as a>
                             <#if a.discipline.id = disciplineType.discipline.id>
                                 <div class="age-category-div">
-                                    <input type="hidden" value="${a.discipline.id}" class="discipline-type-id">
                                     <div class="my-3 fs-6"><b>
                                             <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
@@ -127,7 +127,7 @@
                                                                     <select class="form-select select-athlete"
                                                                             aria-label="Default select example"
                                                                             id="selectAthlete">
-                                                                        <option selected>Выбрать спортсмена</option>
+                                                                        <option>Выбрать спортсмена</option>
                                                                         <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                             <#list athletes as athlete>
                                                                                 <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
@@ -228,7 +228,7 @@
                                                                 <select class="form-select select-athlete"
                                                                         aria-label="Default select example"
                                                                         id="selectAthlete">
-                                                                    <option selected>Выбрать спортсмена</option>
+                                                                    <option>Выбрать спортсмена</option>
                                                                     <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                         <#list athletes as athlete>
                                                                             <#if (athlete.person.birthday.getYear() < a.ageCategory.maxYear) && (athlete.person.birthday.getYear() > a.ageCategory.minYear) && (athlete.rank == a.ageCategory.rank)>
@@ -301,7 +301,7 @@
                                                     <div class="col-auto">
                                                         <select class="form-select select-athlete-additional"
                                                                 aria-label="Default select example">
-                                                            <option selected>Выбрать спортсмена</option>
+                                                            <option>Выбрать спортсмена</option>
                                                             <#if competition.level == "Республиканский">
                                                                 <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                                     <#list athletesNational as athlete>
@@ -458,7 +458,7 @@
                                 <select class="form-select"
                                         aria-label="Default select example"
                                         id="selectCoach">
-                                    <option selected>Выбрать тренера</option>
+                                    <option>Выбрать тренера</option>
                                     <#list coaches as coach>
                                         <option value="${coach.id}">${coach.person.surname} ${coach.person.name} ${coach.person.middleName}</option>
                                     </#list>
@@ -480,7 +480,7 @@
                                 <select class="form-select"
                                         aria-label="Default select example"
                                         id="selectJudge">
-                                    <option selected>Выбрать судью</option>
+                                    <option>Выбрать судью</option>
                                     <#list judges as judge>
                                         <option value="${judge.id}">${judge.person.surname} ${judge.person.name} ${judge.person.middleName}</option>
                                     </#list>
@@ -494,7 +494,9 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary">Отправить заявку</button>
+        <input type="hidden" value="${competition.id}" id="competition-id">
+        <input type="hidden" value="${application.id}" id="application-id">
+        <button class="btn btn-primary" id="send-application-btn">Отправить заявку</button>
         <button onclick="topFunction()" id="scroll-btn" class="btn btn-primary" title="Go to top">Top</button>
     </div>
 

@@ -37,12 +37,12 @@ public class ParticipationApplicationAthleteService {
         return ParticipationApplicationAthleteDTO.from(findOne(id));
     }
 
-    public ParticipationApplicationAthlete add(int applicationId, ParticipationApplicationAthleteAddDTO dto){
-        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+    public ParticipationApplicationAthlete add(ParticipationApplicationAthleteAddDTO dto){
+        ParticipationApplication application = applicationRepository.findById(dto.getApplicationId()).orElseThrow(() ->{
             return new ResourceNotFoundException("Заявка", 0);
         });
-        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
-            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(applicationId, dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
+        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
+            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
                 return new ResourceNotFoundException("Заявка", 0);
             });
         }

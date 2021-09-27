@@ -4,6 +4,9 @@ import kz.attractorschool.gymnasticsfederation.dto.*;
 import kz.attractorschool.gymnasticsfederation.files.*;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,7 @@ public class CoachController {
     private final DisciplineService disciplineService;
     private final PersonService personService;
     private final FileSystemStorageService fileSystemStorageService;
+    private final StorageService storageService;
 
     @GetMapping
     public String add(Model model) {
@@ -57,7 +61,7 @@ public class CoachController {
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id,
                       Model model) {
-        model.addAttribute("coach", coachService.findOne(id));
+        model.addAttribute("coach", coachService.getOne(id));
         return "coach/coach";
     }
 
@@ -105,5 +109,15 @@ public class CoachController {
 
        CoachDTO coachDTO = coachService.update(id, coachUpdateDTO);
         return "redirect:/coach/" + coachDTO.getId();
+    }
+
+    @GetMapping("/file/{filename:.+}")
+    public ResponseEntity<Resource> getFilePic(@PathVariable String filename) {
+        {
+            Resource file = storageService.loadAsResource(filename);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=\"" + file.getFilename() + "\"")
+                    .body(file);
+        }
     }
 }

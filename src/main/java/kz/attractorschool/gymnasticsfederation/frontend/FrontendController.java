@@ -35,14 +35,6 @@ public class  FrontendController {
         return "index";
     }
 
-//    @GetMapping("/disciplines")
-//    public String getDisciplines(Model model) {
-//        List<Discipline> disciplines = disciplineService.all();
-//        model.addAttribute("disciplines", disciplines);
-//        return "disciplines/disciplines";
-//    }
-
-
     @GetMapping("/athletes")
     public String getAthletes(Model model) {
         List<Athlete> athletes = athleteService.all();

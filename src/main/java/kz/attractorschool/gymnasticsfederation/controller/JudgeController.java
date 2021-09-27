@@ -7,7 +7,10 @@ import kz.attractorschool.gymnasticsfederation.files.*;
 import kz.attractorschool.gymnasticsfederation.model.Judge;
 import kz.attractorschool.gymnasticsfederation.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,7 @@ public class JudgeController {
     private final DisciplineService disciplineService;
     private final PersonService personService;
     private final FileSystemStorageService fileSystemStorageService;
+    private final StorageService storageService;
 
     @GetMapping("/all")
     public String all(Model model){
@@ -129,5 +133,15 @@ public class JudgeController {
         model.addAttribute("message", ex.getMessage());
         model.addAttribute("cause", ex.getCause());
         return "exception/empty_file";
+    }
+
+    @GetMapping("/file/{filename:.+}")
+    public ResponseEntity<Resource> getFilePic(@PathVariable String filename) {
+        {
+            Resource file = storageService.loadAsResource(filename);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=\"" + file.getFilename() + "\"")
+                    .body(file);
+        }
     }
 }

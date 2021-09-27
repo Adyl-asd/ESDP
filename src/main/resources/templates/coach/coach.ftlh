@@ -61,7 +61,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение категории спортсмена</a>
+                                    <a href="/coach/file/${coach.categoryFile}" class="link-dark">Подтверждение категории тренера</a>
                                 </h6>
                             </li>
                         </ul>

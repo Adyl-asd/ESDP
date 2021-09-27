@@ -2,10 +2,7 @@ package kz.attractorschool.gymnasticsfederation.files;
 
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.model.Athlete;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class RankFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +24,4 @@ public class RankFile {
     public RankFile(String filePath) {
         this.filePath = filePath;
     }
-
 }

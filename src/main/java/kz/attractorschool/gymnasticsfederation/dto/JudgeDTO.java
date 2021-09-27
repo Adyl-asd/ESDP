@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
+import kz.attractorschool.gymnasticsfederation.files.JudgeCategoryFile;
 import kz.attractorschool.gymnasticsfederation.model.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class JudgeDTO {
     @ToString.Exclude
     private JudgeCategoryDTO category;
     private boolean isDel = false;
+    private String categoryFile;
 
     public static JudgeDTO from(Judge judge){
         return JudgeDTO.builder()
@@ -28,6 +30,7 @@ public class JudgeDTO {
                 .registryNumber(judge.getRegistryNumber())
                 .discipline(DisciplineDTO.from(judge.getDiscipline()))
                 .category(JudgeCategoryDTO.from(judge.getCategory()))
+                .categoryFile(judge.getCategoryFile().getFilePath())
                 .build();
     }
 }

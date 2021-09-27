@@ -64,22 +64,22 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение регистрации спортсмена</a>
+                                    <a href="/athlete/file/${athlete.registryFile}" class="link-dark">Подтверждение регистрации спортсмена</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Прохождение медосмотра</a>
+                                    <a href="/athlete/file/${athlete.medicalFile}" class="link-dark">Прохождение медосмотра</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Прохождение допинга</a>
+                                    <a href="/athlete/file/${athlete.dopingFile}" class="link-dark">Прохождение допинга</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение разряда спортсмена</a>
+                                    <a href="/athlete/file/${athlete.rankFile}" class="link-dark">Подтверждение разряда спортсмена</a>
                                 </h6>
                             </li>
                         </ul>

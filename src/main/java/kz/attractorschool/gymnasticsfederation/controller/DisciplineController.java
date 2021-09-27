@@ -1,6 +1,5 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
-import kz.attractorschool.gymnasticsfederation.dto.DisciplineAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.DisciplineDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.service.DisciplineService;
@@ -27,7 +26,7 @@ public class DisciplineController {
     }
 
     @PostMapping
-    public String add(@Valid DisciplineAddDTO disciplineDTO,
+    public String add(@Valid DisciplineDTO disciplineDTO,
                       BindingResult bindingResult,
                       RedirectAttributes attributes){
         attributes.addFlashAttribute("disciplineDTO", disciplineDTO);
@@ -53,7 +52,7 @@ public class DisciplineController {
 
     @PostMapping("/{id}/update")
     public String update(@PathVariable Integer id,
-                         @Valid DisciplineAddDTO disciplineDTO,
+                         @Valid DisciplineDTO disciplineDTO,
                          BindingResult bindingResult,
                          RedirectAttributes attributes){
         attributes.addFlashAttribute("disciplineDTO", disciplineDTO);

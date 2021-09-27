@@ -16,7 +16,11 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class DisciplineDTO {
     private Integer id;
+
+    @NotNull
+    @Size(min = 1, message = "Вы ввели пустое значение")
     private String name;
+
     private boolean isDel;
 
     public static DisciplineDTO from(Discipline discipline){

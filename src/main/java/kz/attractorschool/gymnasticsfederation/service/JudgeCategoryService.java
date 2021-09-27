@@ -1,7 +1,5 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.dto.CoachCategoryDTO;
-import kz.attractorschool.gymnasticsfederation.dto.JudgeCategoryAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.JudgeCategoryDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.model.CoachCategory;
@@ -32,7 +30,7 @@ public class JudgeCategoryService {
         return JudgeCategoryDTO.from(findOne(id));
     }
 
-    public JudgeCategoryDTO add(JudgeCategoryAddDTO judgeCategoryDTO){
+    public JudgeCategoryDTO add(JudgeCategoryDTO judgeCategoryDTO){
         JudgeCategory judgeCategory = repository.save(JudgeCategory.builder()
                 .name(judgeCategoryDTO.getName())
                 .build());
@@ -46,7 +44,7 @@ public class JudgeCategoryService {
         return "ok";
     }
 
-    public JudgeCategoryDTO update(JudgeCategoryAddDTO judgeCategoryDTO, Integer id){
+    public JudgeCategoryDTO update(JudgeCategoryDTO judgeCategoryDTO, Integer id){
         JudgeCategory judgeCategory = findOne(id);
         judgeCategory.setName(judgeCategoryDTO.getName());
         repository.save(judgeCategory);

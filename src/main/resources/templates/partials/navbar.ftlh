@@ -46,7 +46,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/coach/all">Список тренеров</a></li>
                             <li><a class="dropdown-item" href="/coach">Добавить тренера</a></li>
-                            <li><a class="dropdown-item" href="/coaches/categories">Категории тренеров</a></li>
+                            <li><a class="dropdown-item" href="/coach_categories">Категории тренеров</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -56,7 +56,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/judge/all">Список судей</a></li>
                             <li><a class="dropdown-item" href="/judge">Добавить судей</a></li>
-                            <li><a class="dropdown-item" href="/judges/categories">Категории судей</a></li>
+                            <li><a class="dropdown-item" href="/judge_categories">Категории судей</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

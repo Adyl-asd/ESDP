@@ -26,13 +26,7 @@
                         <th scope="row">${c.id}</th>
                         <td>${c.name}</td>
                         <#--Форма для изменения текущей категории-->
-                        <td>
-                            <form action="/coach_categories/${c.id}/update" method="post">
-                                <button class="btn btn-primary">
-                                    Изменить
-                                </button>
-                            </form>
-                        </td>
+                        <td><a href="coach_categories/${c.id}/update" class="btn btn-primary">Изменить</a></td>
                         <#--Форма удаления текущей категории-->
                         <td>
                             <form action="/coach_categories/${c.id}/delete" method="post">

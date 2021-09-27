@@ -17,11 +17,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class JudgeCategoryDTO {
     private Integer id;
-
-    @NotBlank
-    @Size(min = 1, message = "Вы ввели пустое значение")
     private String name;
-
     private boolean isDel;
 
     public static JudgeCategoryDTO from(JudgeCategory judgeCategory){

@@ -3,10 +3,11 @@
 <@main.renderWith title="Категории судей">
     <div class="container">
         <#--Форма для добавления новой категории-->
-        <form action="" method="post">
+        <form action="/judge_categories" method="post">
             <div class="mb-3">
-                <label for="categoryNameInput" class="form-label fs-4">Название новой категории</label>
-                <input type="number" name="number" class="form-control" id="categoryNameInput">
+                <label for="categoryNameInput" class="form-label fs-4">Название новой категории
+                </label>
+                <input type="text" name="name" class="form-control" id="categoryNameInput">
             </div>
             <button type="submit" class="btn btn-primary">Добавить</button>
         </form>
@@ -24,14 +25,10 @@
                 <#if c.isDel() == false>
                 <tr>
                     <th scope="row">${c.id}</th>
-                    <td>${c.number}</td>
+                    <th scope="row">${c.name}</th>
                     <#--Форма для изменения текущей категории-->
                     <td>
-                        <form action="/judge_categories/${c.id}/update" method="post">
-                            <button class="btn btn-primary">
-                                Изменить
-                            </button>
-                        </form>
+                        <a href="/judge_categories/${c.id}/update" class="btn btn-primary">Изменить</a>
                     </td>
                     <#--Форма удаления текущей категории-->
                     <td>

@@ -46,6 +46,7 @@
                         <th scope="col">Город</th>
                         <th scope="col">Вид спорта</th>
                         <th scope="col">Срок подачи заявки</th>
+                        <th scope="col">Положение</th>
                         <th scope="col">Просмотр</th>
                         <th scope="col">Подать</th>
                     </tr>
@@ -53,13 +54,14 @@
                     <tbody>
                     <#list competitions as c>
                         <#if !c.isDel()>
-                            <tr class='clickable-row' data-href='/competitions/${c.id}'>
+                            <tr>
                                 <th scope="row">${c.name}</th>
                                 <td>${c.startDate}</td>
                                 <td>${c.finishDate}</td>
                                 <td>${c.city}</td>
                                 <td>${c.discipline.name}</td>
                                 <td>${c.participationDate}</td>
+                                <td><a href="/competitions/file/${c.competitionPositionFile.filePath}" class="btn btn-primary">Положение</a></td>
                                 <td><a href="/competitions/${c.id}"><div class="btn btn-primary">Просмотр</div></a></td>
                                 <td><a href="/competition/${c.id}/apply"><div class="btn btn-primary">Подать</div></a></td>
                             </tr>

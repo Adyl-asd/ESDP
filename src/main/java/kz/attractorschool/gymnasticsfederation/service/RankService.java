@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
+import kz.attractorschool.gymnasticsfederation.dto.RankAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.RankDTO;
 import kz.attractorschool.gymnasticsfederation.dto.SchoolDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
@@ -32,7 +33,7 @@ public class RankService {
         return RankDTO.from(findOne(id));
     }
 
-    public RankDTO add(RankDTO rankDTO){
+    public RankDTO add(RankAddDTO rankDTO){
         Rank rank = repository.save(Rank.builder()
                 .name(rankDTO.getName())
                 .build());
@@ -46,7 +47,7 @@ public class RankService {
         return "ok";
     }
 
-    public RankDTO update(RankDTO rankDTO, Integer id){
+    public RankDTO update(RankAddDTO rankDTO, Integer id){
         Rank rank = findOne(id);
         rank.setName(rankDTO.getName());
         repository.save(rank);

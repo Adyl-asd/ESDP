@@ -42,26 +42,6 @@ public class  FrontendController {
 //        return "disciplines/disciplines";
 //    }
 
-    @GetMapping("/judges/categories")
-    public String getJudgeCategories(Model model) {
-        List<JudgeCategory> categories = judgeCategoryService.all();
-        model.addAttribute("categories", categories);
-        return "judge_category/judge_categories";
-    }
-
-    @GetMapping("/coaches/categories")
-    public String getCoachCategories(Model model) {
-        List<CoachCategory> categories = coachCategoryService.all();
-        model.addAttribute("categories", categories);
-        return "coach_category/coach_categories";
-    }
-
-    @GetMapping("/athletes/ranks")
-    public String getRanks(Model model) {
-        List<Rank> ranks = rankService.all();
-        model.addAttribute("ranks", ranks);
-        return "athlete_rank/ranks";
-    }
 
     @GetMapping("/athletes")
     public String getAthletes(Model model) {

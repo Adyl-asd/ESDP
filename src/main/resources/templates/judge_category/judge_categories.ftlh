@@ -24,12 +24,10 @@
             <#list categories as c>
                 <#if c.isDel() == false>
                 <tr>
-                    <th scope="row">${c.id}</th>
+                    <th scope="row">${c?counter}</th>
                     <th scope="row">${c.name}</th>
                     <#--Форма для изменения текущей категории-->
-                    <td>
-                        <a href="/judge_categories/${c.id}/update" class="btn btn-primary">Изменить</a>
-                    </td>
+                    <td><a href="/judge_categories/${c.id}/update" class="btn btn-primary">Изменить</a></td>
                     <#--Форма удаления текущей категории-->
                     <td>
                         <form action="/judge_categories/${c.id}/delete" method="post">

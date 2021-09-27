@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/athletes">Список спортсменов</a></li>
                             <li><a class="dropdown-item" href="/athlete">Добавить спортсмена</a></li>
-                            <li><a class="dropdown-item" href="/athletes/ranks">Разряды спортсменов</a></li>
+                            <li><a class="dropdown-item" href="/ranks">Разряды спортсменов</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

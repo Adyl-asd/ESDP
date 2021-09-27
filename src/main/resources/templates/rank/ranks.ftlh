@@ -26,13 +26,7 @@
                         <th scope="row">${r?counter}</th>
                         <td>${r.name}</td>
                         <#--Форма для изменения текущего разряда-->
-                        <td>
-                            <form action="/ranks/${r.id}/update" method="post">
-                                <button class="btn btn-primary">
-                                    Изменить
-                                </button>
-                            </form>
-                        </td>
+                        <td><a href="/ranks/${r.id}/update">Изменить</a></td>
                         <#--Форма удаления текущего разряда-->
                         <td>
                             <form action="/ranks/${r.id}/delete" method="post">

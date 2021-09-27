@@ -3,7 +3,6 @@ package kz.attractorschool.gymnasticsfederation.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.enumm.ParticipationApplicationStatus;
-import kz.attractorschool.gymnasticsfederation.repository.ParticipationApplicationRepository;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,7 +35,7 @@ public class ParticipationApplication {
     @Column
     @NotNull
     @Builder.Default
-    private String status = ParticipationApplicationStatus.СОЗДАНА.name();
+    private String status = ParticipationApplicationStatus.CREATED.name();
 
     @ManyToOne
     private Competition competition;

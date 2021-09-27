@@ -224,7 +224,7 @@ public class AthleteService {
 
     public AthleteDTO confirm(Integer id) {
         Athlete athlete = findOne(id);
-        athlete.setStatus(Status.АКТИВНЫЙ.toString());
+        athlete.setStatus(Status.ACTIVE.getName());
         repository.save(athlete);
         return AthleteDTO.from(athlete);
     }
@@ -232,10 +232,10 @@ public class AthleteService {
     public List<Athlete> checkStatus(List<Athlete> athletes) {
         for (int i = 0; i < athletes.size(); i++) {
             if (athletes.get(i).getRegistryDate().plusYears(1).isBefore(LocalDate.now())) {
-                athletes.get(i).setStatus(Status.ИСТЕК.toString());
+                athletes.get(i).setStatus(Status.EXPIRED.getName());
                 repository.save(athletes.get(i));
             } else if (athletes.get(i).getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
-                athletes.get(i).setStatus(Status.НЕАКТИВНЫЙ.toString());
+                athletes.get(i).setStatus(Status.INACTIVE.getName());
                 repository.save(athletes.get(i));
             }
         }
@@ -244,10 +244,10 @@ public class AthleteService {
 
     public AthleteDTO checkStatus(Athlete athlete) {
         if (athlete.getRegistryDate().plusMonths(12).isBefore(LocalDate.now())) {
-            athlete.setStatus(Status.ИСТЕК.toString());
+            athlete.setStatus(Status.EXPIRED.getName());
             repository.save(athlete);
         } else if (athlete.getRegistryDate().plusMonths(14).isBefore(LocalDate.now())) {
-            athlete.setStatus(Status.НЕАКТИВНЫЙ.toString());
+            athlete.setStatus(Status.INACTIVE.getName());
             repository.save(athlete);
         }
         return AthleteDTO.from(athlete);
@@ -268,6 +268,7 @@ public class AthleteService {
         athlete.setDopingFile(doping);
         athlete.setMedicalFile(medical);
         athlete.setRankFile(rankFile2);
+        athlete.setStatus(Status.UNDER_CONSIDERATION.getName());
         repository.save(athlete);
         return AthleteDTO.from(athlete);
     }

@@ -55,7 +55,7 @@ public class Athlete {
     @Column
     @NotNull
     @Builder.Default
-    private String status = Status.НА_РАССМОТРЕНИИ.toString();
+    private String status = Status.UNDER_CONSIDERATION.getName();
 
     @Column
     @NotNull

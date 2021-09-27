@@ -31,5 +31,5 @@ public class AthleteRegisterDTO {
     private Integer rankId;
 
     @Builder.Default
-    private String status = Status.НА_РАССМОТРЕНИИ.toString();
+    private String status = Status.UNDER_CONSIDERATION.getName();
 }

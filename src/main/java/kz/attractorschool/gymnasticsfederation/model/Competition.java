@@ -86,7 +86,7 @@ public class Competition {
     @Column
     @NotNull
     @Builder.Default
-    private String status = CompetitionStatus.СОЗДАНО.name();
+    private String status = CompetitionStatus.CREATED.name();
 
     @OneToOne
     @ToString.Exclude

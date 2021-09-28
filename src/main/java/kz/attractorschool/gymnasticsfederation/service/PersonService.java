@@ -1,9 +1,11 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
+import kz.attractorschool.gymnasticsfederation.dto.PersonSearchDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
 import kz.attractorschool.gymnasticsfederation.model.Person;
+import kz.attractorschool.gymnasticsfederation.model.QPerson;
 import kz.attractorschool.gymnasticsfederation.repository.PersonPhotoRepository;
 import kz.attractorschool.gymnasticsfederation.repository.PersonRepository;
 import lombok.AllArgsConstructor;
@@ -105,5 +107,21 @@ public class PersonService {
 
     public boolean isUnique(String iin){
         return repository.existsByIin(iin);
+    }
+
+//    public List<Person> search(PersonSearchDTO dto){
+//        List<Person> all = repository.findAll();
+//        return all.stream().filter(p -> p.getCity().toUpperCase().contains(dto.getCity().toUpperCase()))
+////                .filter(p -> p.getIin().contains(dto.getIin()))
+//                .filter(p -> p.getName().contains(dto.getName()))
+////                .filter(p -> p.getSurname().contains(dto.getSurname()))
+//                .collect(Collectors.toList());
+//    }
+
+    public Iterable search(PersonSearchDTO dto){
+        QPerson person = QPerson.person;
+        return repository.findAll(person.name.contains(dto.getName()).andAnyOf(person.surname.contains(dto.getSurname())
+                .andAnyOf(person.iin.contains(dto.getIin()).andAnyOf(person.city.contains(dto.getCity())))));
+
     }
 }

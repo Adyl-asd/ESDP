@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.controller;
 
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
+import kz.attractorschool.gymnasticsfederation.dto.PersonSearchDTO;
 import kz.attractorschool.gymnasticsfederation.pdf_exporter.AthletePdfExporter;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
@@ -57,6 +58,12 @@ public class PersonController {
         fileSystemStorageService.store(file);
         PersonDTO dto = service.add(newFile, personDTO);
         return "redirect:/person/" + dto.getId();
+    }
+
+    @GetMapping("/all")
+    public String all(PersonSearchDTO dto, Model model){
+        model.addAttribute("persons", service.search(dto));
+        return "person/all";
     }
 
     @GetMapping("/{id}")

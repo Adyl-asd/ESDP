@@ -1,9 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.service;
 
-import kz.attractorschool.gymnasticsfederation.dto.AthleteAddDTO;
-import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
-import kz.attractorschool.gymnasticsfederation.dto.AthleteRegisterDTO;
-import kz.attractorschool.gymnasticsfederation.dto.AthleteUpdateDTO;
+import kz.attractorschool.gymnasticsfederation.dto.*;
 import kz.attractorschool.gymnasticsfederation.enumm.Status;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.files.DopingFile;
@@ -21,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 @Service
 @AllArgsConstructor
@@ -337,4 +335,6 @@ public class AthleteService {
     private boolean isTeam(String result) {
         return result.equals("да");
     }
+
+
 }

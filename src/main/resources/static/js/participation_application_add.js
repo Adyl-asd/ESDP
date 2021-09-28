@@ -36,13 +36,13 @@ $('.add-additional-athlete-btn').on('click', function () {
         $(this).closest('.additional-athletes-div').find('.additional-athletes-text').removeAttr('hidden')
         $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').removeAttr('hidden')
     } else {
-        $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append($(this).closest('.additional-athletes-div').find('.athletes-li').eq(0).clone())
+        $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').append($(this).closest('.additional-athletes-div').find('.additional-athletes-li').eq(0).clone())
     }
 })
 
 $(document).on('click', '.delete-additional-athlete-btn', function () {
-    if ($(this).closest('.additional-athletes-div').find('.athletes-li').length > 1) {
-        $(this).closest('.athletes-li').remove()
+    if ($(this).closest('.additional-athletes-div').find('.additional-athletes-li').length > 1) {
+        $(this).closest('.additional-athletes-li').remove()
     } else {
         $(this).closest('.additional-athletes-div').find('.additional-athletes-text').prop('hidden', true)
         $(this).closest('.additional-athletes-div').find('.additional-athletes-ul').prop('hidden', true)
@@ -111,25 +111,55 @@ $('#send-application-btn').on('click', function () {
     let competitionId = $('#competition-id').val()
     for (let i = 0; i < disciplineTypeId.length; i++) {
         let disciplineTypeIdInputValue = $(disciplineTypeId).eq(i).val()
+        console.log("discipline type = " + disciplineTypeIdInputValue)
         let disciplineTypeDiv = $(disciplineTypeId).eq(i).closest('.discipline-type-div')
         let ageCategoryDivs = disciplineTypeDiv.find('.age-category-div')
         for (let j = 0; j < ageCategoryDivs.length; j++) {
             let ageCategoryId = ageCategoryDivs.eq(j).find('.age-category-id').val()
+            console.log("age category id = " + ageCategoryId)
+            let athletesTeamLi = ageCategoryDivs.eq(j).find('.athletes-team-li')
             let athletesLi = ageCategoryDivs.eq(j).find('.athletes-li')
-            for (let k = 0; k < athletesLi.length; k++) {
-                let athleteId = athletesLi.eq(k).find('.select-athlete').val()
-                console.log(athletesLi.eq(k).find('.select-athlete').val())
-                $.ajax({
-                    url : "http://localhost:8080/api/participation-application/athlete",
-                    type : "POST",
-                    data : {
-                        applicationId : applicationId,
-                        athleteId : athleteId,
-                        disciplineAgeId : ageCategoryId,
-                        disciplineTypeId : disciplineTypeIdInputValue
+            let teamNumber
+            if (athletesTeamLi.length) {
+                for (let k = 0; k < athletesTeamLi.length; k++) {
+                    let athletesDiv = athletesTeamLi.eq(k).find('.athletes-div')
+                    teamNumber = k+1
+                    console.log("team number = " + teamNumber)
+                    for (let l = 0; l < athletesDiv.length; l++) {
+                        let teamAthleteId = athletesDiv.eq(l).find('.select-athlete').val()
+                        console.log("team athlete id = " + teamAthleteId)
+                        $.ajax({
+                            url : "http://localhost:8080/api/participation-application/athlete",
+                            type : "POST",
+                            data : {
+                                applicationId : applicationId,
+                                athleteId : teamAthleteId,
+                                disciplineAgeId : ageCategoryId,
+                                disciplineTypeId : disciplineTypeIdInputValue,
+                                teamNumber : teamNumber
+                            }
+                        })
                     }
-                })
+                }
+            } else {
+                for (let k = 0; k < athletesLi.length; k++) {
+                    let athleteId = athletesLi.eq(k).find('.select-athlete').val()
+                    teamNumber = 0
+                    console.log("team athlete id = " + athleteId)
+                    $.ajax({
+                        url : "http://localhost:8080/api/participation-application/athlete",
+                        type : "POST",
+                        data : {
+                            applicationId : applicationId,
+                            athleteId : athleteId,
+                            disciplineAgeId : ageCategoryId,
+                            disciplineTypeId : disciplineTypeIdInputValue,
+                            teamNumber : teamNumber
+                        }
+                    })
+                }
             }
+
         }
     }
 })

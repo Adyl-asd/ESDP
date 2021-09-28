@@ -41,11 +41,15 @@ public class ParticipationApplicationAthleteService {
         ParticipationApplication application = applicationRepository.findById(dto.getApplicationId()).orElseThrow(() ->{
             return new ResourceNotFoundException("Заявка", 0);
         });
-        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
-            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
-                return new ResourceNotFoundException("Заявка", 0);
-            });
-        }
+
+        // Проверка ниже по какой-то причине ломает пост запрос на странице подачи заявки на участие
+
+//        if (repository.existsByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId())){
+//            return repository.findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(dto.getApplicationId(), dto.getAthleteId(), dto.getDisciplineAgeId(), dto.getDisciplineTypeId() ).orElseThrow(() -> {
+//                return new ResourceNotFoundException("Заявка", 0);
+//            });
+//        }
+
 //        if (!isSameDiscipline(dto.getAthleteId(), application.getCompetition().getDiscipline().getId())){
 //            return null;
 //        }
@@ -55,6 +59,7 @@ public class ParticipationApplicationAthleteService {
                         .athlete(athleteService.findOne(dto.getAthleteId()))
                         .disciplineAge(agesService.findOne(dto.getDisciplineAgeId()))
                         .disciplineType(disciplineTypeService.findOne(dto.getDisciplineTypeId()))
+                        .teamNumber(dto.getTeamNumber())
                         .build());
         return applicationAthlete;
     }

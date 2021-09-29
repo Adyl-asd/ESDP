@@ -87,26 +87,26 @@ ${application.getId()}
                                     <div class="my-3 fs-6"><b>
                                             <#if a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                                       value="${a.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
                                                 : ${a.ageCategory.rank.name}
                                             <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
+                                                       value="${a.id}">Младше ${a.ageCategory.maxYear} : ${a.ageCategory.rank.name}
                                             <#elseif a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
+                                                       value="${a.id}">${a.ageCategory.maxYear} - ${a.ageCategory.minYear}
                                             <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
+                                                       value="${a.id}">Старше ${a.ageCategory.minYear} : ${a.ageCategory.rank.name}
                                             <#elseif !a.ageCategory.maxYear?? && a.ageCategory.minYear?? && !a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">Старше ${a.ageCategory.minYear}
+                                                       value="${a.id}">Старше ${a.ageCategory.minYear}
                                             <#elseif a.ageCategory.maxYear?? && !a.ageCategory.minYear?? && !a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">Младше ${a.ageCategory.maxYear}
+                                                       value="${a.id}">Младше ${a.ageCategory.maxYear}
                                             <#elseif !a.ageCategory.maxYear?? !&& a.ageCategory.minYear?? && a.ageCategory.rank??>
                                                 <input type="hidden" class="age-category-id"
-                                                       value="${a.ageCategory.id}">${a.ageCategory.rank.name}
+                                                       value="${a.id}">${a.ageCategory.rank.name}
                                             </#if>
                                         </b>
                                     </div>
@@ -114,7 +114,7 @@ ${application.getId()}
                                         <#if (a.maxTeams??) && (a.discipline.participantsAmountMax??)>
                                             <#assign x=a.maxTeams>
                                             <#list 1..x as i>
-                                                <li class="athletes-li list-group-item d-flex justify-content-between align-items-start">
+                                                <li class="athletes-team-li list-group-item d-flex justify-content-between align-items-start">
                                                     <div class="ms-2 me-auto">
                                                         <div class="fw-bold">Команда №${i}</div>
                                                         <#list 1..a.discipline.participantsAmountMax as j>
@@ -123,7 +123,7 @@ ${application.getId()}
                                                                     <label for="selectAthlete" class="mt-1">${j}
                                                                         .</label>
                                                                 </div>
-                                                                <div class="col-auto">
+                                                                <div class="athletes-div col-auto">
                                                                     <select class="form-select select-athlete"
                                                                             aria-label="Default select example"
                                                                             id="selectAthlete">
@@ -296,7 +296,7 @@ ${application.getId()}
                                     <div class="additional-athletes-div my-3">
                                         <b class="additional-athletes-text" hidden>Доп. спортсмены</b>
                                         <ul class="list-group additional-athletes-ul" hidden>
-                                            <li class="athletes-li list-group-item d-flex justify-content-between align-items-start">
+                                            <li class="additional-athletes-li list-group-item d-flex justify-content-between align-items-start">
                                                 <div class="row my-2">
                                                     <div class="col-auto">
                                                         <select class="form-select select-athlete-additional"

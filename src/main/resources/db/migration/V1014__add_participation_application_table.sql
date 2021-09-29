@@ -16,6 +16,7 @@ CREATE TABLE `participation_applications_athletes`(
     `athlete_id` INT NOT NULL REFERENCES  `athletes`(`id`),
     `discipline_age_id` INT NOT NULL REFERENCES `competitions_discipline_ages`(`id`),
     `discipline_type_id` INT NOT NULL REFERENCES `discipline_types`(`id`),
+    `team_number` INT NOT NULL,
     PRIMARY KEY (`id`)
 );
 

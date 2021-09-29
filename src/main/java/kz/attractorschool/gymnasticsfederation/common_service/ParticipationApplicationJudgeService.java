@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.common_service;
 
+import kz.attractorschool.gymnasticsfederation.common_data.entity.ParticipationApplicationCoach;
 import kz.attractorschool.gymnasticsfederation.dto.ParticipationApplicationJudgeAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.ParticipationApplicationJudgeDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
@@ -31,6 +32,10 @@ public class ParticipationApplicationJudgeService {
 
     public ParticipationApplicationJudgeDTO getOne(Integer id){
         return ParticipationApplicationJudgeDTO.from(findOne(id));
+    }
+
+    public List<ParticipationApplicationJudge> allByApplicationId(Integer id) {
+        return repository.findAllByApplicationId(id);
     }
 
     public ParticipationApplicationJudgeDTO add(ParticipationApplicationJudgeAddDTO dto){

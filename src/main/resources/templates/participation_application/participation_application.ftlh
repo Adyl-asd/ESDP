@@ -140,20 +140,15 @@
             <div class="card-body coaches-div">
                 <div class="fs-6"><b>Тренеры</b></div>
                 <ul class="coaches-ul list-group my-2">
+                    <#list coaches as c>
                     <li class="coach-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
                             <div class="col-auto">
-                                <select class="form-select select-coach"
-                                        aria-label="Default select example"
-                                        id="selectCoach">
-                                    <option>Выбрать тренера</option>
-                                    <#--                                    <#list coaches as coach>-->
-                                    <#--                                        <option value="${coach.id}">${coach.person.surname} ${coach.person.name} ${coach.person.middleName}</option>-->
-                                    <#--                                    </#list>-->
-                                </select>
+                                ${c.coach.person.surname} ${c.coach.person.name} ${c.coach.person.middleName}
                             </div>
                         </div>
                     </li>
+                    </#list>
                 </ul>
                 <button class="btn btn-primary" id="add-additional-coach-btn">Добавить</button>
             </div>
@@ -162,20 +157,15 @@
             <div class="card-body judges-div">
                 <div class="fs-6"><b>Судьи</b></div>
                 <ul class="judges-ul list-group">
+                    <#list judges as j>
                     <li class="judge-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
                             <div class="col-auto">
-                                <select class="select-judge form-select"
-                                        aria-label="Default select example"
-                                        id="selectJudge">
-                                    <option>Выбрать судью</option>
-                                    <#--                                    <#list judges as judge>-->
-                                    <#--                                        <option value="${judge.id}">${judge.person.surname} ${judge.person.name} ${judge.person.middleName}</option>-->
-                                    <#--                                    </#list>-->
-                                </select>
+                                ${j.judge.person.surname} ${j.judge.person.name} ${j.judge.person.middleName}
                             </div>
                         </div>
                     </li>
+                    </#list>
                 </ul>
                 <div>
                     <button class="btn btn-primary" id="add-additional-judge-btn">Добавить</button>

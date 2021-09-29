@@ -57,6 +57,8 @@ public class ParticipationApplicationController {
         model.addAttribute("schools", schoolService.all());
         model.addAttribute("application", service.findOne(applicationId));
         model.addAttribute("athletes", applicationAthleteService.allByApplicationId(applicationId));
+        model.addAttribute("coaches", applicationCoachService.allByApplicationId(applicationId));
+        model.addAttribute("judges", applicationJudgeService.allByApplicationId(applicationId));
         return "participation_application/participation_application";
     }
 

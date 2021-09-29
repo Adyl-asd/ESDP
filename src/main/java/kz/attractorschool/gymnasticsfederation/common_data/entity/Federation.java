@@ -1,9 +1,12 @@
 package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "federations")
@@ -49,7 +52,10 @@ public class Federation {
     @Builder.Default
     private boolean isDel = false;
 
-//    @ToString.Exclude
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "federation")
-//    List<School> schools;
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "schools", joinColumns = @JoinColumn(name = "federation_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    List<School> schools = new ArrayList<>();
 }

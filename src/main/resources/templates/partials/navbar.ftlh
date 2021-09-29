@@ -77,6 +77,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/federation">Добавить федерацию</a></li>
+                            <li><a class="dropdown-item" href="/federation/all">Федерации</a></li>
                         </ul>
                     </li>
                 </ul>

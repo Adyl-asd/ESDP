@@ -39,8 +39,7 @@ public class FederationController {
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
-        model.addAttribute("federation", service.getOne(id));
-//        model.addAttribute("schools", service.findOne(id).getSchools());
+        model.addAttribute("federation", service.findOne(id));
         return "federation/federation";
     }
 
@@ -48,6 +47,12 @@ public class FederationController {
     public String delete(@PathVariable Integer id){
         service.delete(id);
         return "redirect:/federation";
+    }
+
+    @GetMapping("/all")
+    public String all(Model model){
+        model.addAttribute("federations", service.all());
+        return "federation/federations";
     }
 
     @GetMapping("/{id}/update")

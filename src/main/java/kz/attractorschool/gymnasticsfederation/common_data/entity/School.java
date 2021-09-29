@@ -1,5 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -49,6 +50,7 @@ public class School {
 
     @ToString.Exclude
     @ManyToOne
+    @JsonBackReference
     private Federation federation;
 
     @Column

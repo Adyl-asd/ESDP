@@ -1,8 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.AgeCategory;
-import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
-import kz.attractorschool.gymnasticsfederation.model.Rank;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.AgeCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

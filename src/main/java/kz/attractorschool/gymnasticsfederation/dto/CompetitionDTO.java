@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Competition;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Competition;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

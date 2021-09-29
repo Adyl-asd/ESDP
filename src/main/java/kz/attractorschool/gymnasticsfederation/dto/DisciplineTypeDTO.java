@@ -1,7 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.DisciplineType;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.DisciplineType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

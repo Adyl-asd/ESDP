@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.CompetitionDiscipline;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.CompetitionDiscipline;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

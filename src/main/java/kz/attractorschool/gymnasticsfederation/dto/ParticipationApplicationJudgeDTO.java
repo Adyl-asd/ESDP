@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationJudge;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.ParticipationApplicationJudge;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

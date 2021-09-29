@@ -1,9 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.CompetitionDisciplineAge;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.CompetitionDisciplineAge;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 @Data

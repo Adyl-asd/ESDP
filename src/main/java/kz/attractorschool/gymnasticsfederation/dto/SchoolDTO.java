@@ -2,7 +2,7 @@ package kz.attractorschool.gymnasticsfederation.dto;
 
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.School;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.School;
 import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;

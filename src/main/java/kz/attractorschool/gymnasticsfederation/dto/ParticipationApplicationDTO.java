@@ -1,16 +1,11 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.Competition;
-import kz.attractorschool.gymnasticsfederation.model.ParticipationApplication;
-import kz.attractorschool.gymnasticsfederation.model.School;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.ParticipationApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data

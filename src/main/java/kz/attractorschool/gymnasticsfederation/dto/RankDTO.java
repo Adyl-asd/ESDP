@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Rank;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Rank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

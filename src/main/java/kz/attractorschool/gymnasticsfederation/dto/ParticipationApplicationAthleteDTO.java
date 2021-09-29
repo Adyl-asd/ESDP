@@ -1,18 +1,10 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Athlete;
-import kz.attractorschool.gymnasticsfederation.model.CompetitionDisciplineAge;
-import kz.attractorschool.gymnasticsfederation.model.ParticipationApplication;
-import kz.attractorschool.gymnasticsfederation.model.ParticipationApplicationAthlete;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.ParticipationApplicationAthlete;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Data
 @Builder

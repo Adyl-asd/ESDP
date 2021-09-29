@@ -1,7 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.files.JudgeCategoryFile;
-import kz.attractorschool.gymnasticsfederation.model.*;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Judge;
 import lombok.*;
 
 @Data

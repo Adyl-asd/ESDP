@@ -1,10 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.files.DopingFile;
-import kz.attractorschool.gymnasticsfederation.files.MedicalFile;
-import kz.attractorschool.gymnasticsfederation.files.RankFile;
-import kz.attractorschool.gymnasticsfederation.files.RegistryFile;
-import kz.attractorschool.gymnasticsfederation.model.Athlete;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Athlete;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

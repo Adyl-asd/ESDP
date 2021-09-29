@@ -1,7 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.files.CoachCategoryFile;
-import kz.attractorschool.gymnasticsfederation.model.Coach;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Coach;
 import lombok.*;
 
 import java.util.List;

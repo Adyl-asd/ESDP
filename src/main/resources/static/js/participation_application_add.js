@@ -152,7 +152,7 @@ $('#send-application-btn').on('click', function () {
                             applicationId : applicationId,
                             athleteId : athleteId,
                             disciplineAgeId : ageCategoryId,
-                            disciplinesTypeId : disciplineTypeIdInputValue,
+                            disciplineTypeId : disciplineTypeIdInputValue,
                             teamNumber : teamNumber
                         }
                     })

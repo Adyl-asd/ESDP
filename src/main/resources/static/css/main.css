@@ -1639,4 +1639,13 @@ section {
     margin-left: 25px;
 }
 
+.str{
+    display: flex;
+    justify-content: space-between;
+}
+
+.str-column{
+    display: flex;
+    flex-direction: column;
+}
 

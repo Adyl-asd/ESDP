@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class GymnasticsFederationApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(GymnasticsFederationApplication.class, args);
     }

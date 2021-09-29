@@ -67,6 +67,7 @@
                             Школы
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/school/all">Школы</a></li>
                             <li><a class="dropdown-item" href="/school">Добавить школу</a></li>
                         </ul>
                     </li>

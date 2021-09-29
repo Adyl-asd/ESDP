@@ -43,8 +43,14 @@ public class SchoolController {
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model){
-        model.addAttribute("school", service.getOne(id));
+        model.addAttribute("school", service.findOne(id));
         return "school/school";
+    }
+
+    @GetMapping("/all")
+    public String all(Model model){
+        model.addAttribute("schools", service.all());
+        return "school/all";
     }
 
     @PostMapping("/{id}")

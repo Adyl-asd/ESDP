@@ -78,4 +78,18 @@ public class School {
     @ToString.Exclude
     @Builder.Default
     private List<Judge> judges = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "competitions", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<Competition> competitions = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany
+    @JoinTable(name = "participation_applications", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    private List<ParticipationApplication> applications = new ArrayList<>();
 }

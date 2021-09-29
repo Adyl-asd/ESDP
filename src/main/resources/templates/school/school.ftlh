@@ -102,6 +102,41 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row gutters-sm">
+                        <div class="col mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="d-flex align-items-center mb-3">Информация о соревнованиях</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12 text-secondary str">
+                                            <div>
+                                                <h4>Соревнования</h4>
+                                                <div class="str-column">
+                                                    <#list school.competitions as c>
+                                                        <#if c.isDel() == false>
+                                                            <p><a href="/competitions/${c.id}">${c.name}</a></p>
+                                                        </#if>
+                                                    </#list>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4>Заявки</h4>
+                                                <div class="str-column">
+                                                    <#list school.applications as a>
+                                                        <#if a.isDel() == false>
+                                                            <p><a href="/competition/${a.competition.id}/all/${a.id}">Заявка на ${a.competition.name}</a></p>
+                                                        </#if>
+                                                    </#list>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

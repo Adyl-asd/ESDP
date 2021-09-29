@@ -109,25 +109,25 @@ $('#send-application-btn').on('click', function () {
     let disciplineTypeId = $('.discipline-type-id')
     let applicationId = $('#application-id').val()
     let competitionId = $('#competition-id').val()
+
+    // Пост запрос на добавление спортсменов
     for (let i = 0; i < disciplineTypeId.length; i++) {
         let disciplineTypeIdInputValue = $(disciplineTypeId).eq(i).val()
-        console.log("discipline type = " + disciplineTypeIdInputValue)
         let disciplineTypeDiv = $(disciplineTypeId).eq(i).closest('.discipline-type-div')
         let ageCategoryDivs = disciplineTypeDiv.find('.age-category-div')
         for (let j = 0; j < ageCategoryDivs.length; j++) {
             let ageCategoryId = ageCategoryDivs.eq(j).find('.age-category-id').val()
-            console.log("age category id = " + ageCategoryId)
             let athletesTeamLi = ageCategoryDivs.eq(j).find('.athletes-team-li')
             let athletesLi = ageCategoryDivs.eq(j).find('.athletes-li')
+            let additionalAthletesDiv = ageCategoryDivs.eq(j).find('.additional-athletes-div')
+            // teamNumber: 0 - нет команды, -1 - доп. спорстмен, остальные положительные числа - номер команды
             let teamNumber
             if (athletesTeamLi.length) {
                 for (let k = 0; k < athletesTeamLi.length; k++) {
                     let athletesDiv = athletesTeamLi.eq(k).find('.athletes-div')
                     teamNumber = k+1
-                    console.log("team number = " + teamNumber)
                     for (let l = 0; l < athletesDiv.length; l++) {
                         let teamAthleteId = athletesDiv.eq(l).find('.select-athlete').val()
-                        console.log("team athlete id = " + teamAthleteId)
                         $.ajax({
                             url : "http://localhost:8080/api/participation-application/athlete",
                             type : "POST",
@@ -145,13 +145,31 @@ $('#send-application-btn').on('click', function () {
                 for (let k = 0; k < athletesLi.length; k++) {
                     let athleteId = athletesLi.eq(k).find('.select-athlete').val()
                     teamNumber = 0
-                    console.log("team athlete id = " + athleteId)
                     $.ajax({
                         url : "http://localhost:8080/api/participation-application/athlete",
                         type : "POST",
                         data : {
                             applicationId : applicationId,
                             athleteId : athleteId,
+                            disciplineAgeId : ageCategoryId,
+                            disciplinesTypeId : disciplineTypeIdInputValue,
+                            teamNumber : teamNumber
+                        }
+                    })
+                }
+            }
+
+            if (additionalAthletesDiv.find('.additional-athletes-ul').is(':visible')) {
+                let additionalAthleteLi = additionalAthletesDiv.eq(j).find('.additional-athletes-li')
+                for (let k = 0; k < additionalAthleteLi.length; k++) {
+                    let additionalAthleteId = additionalAthleteLi.eq(k).find('.select-athlete-additional').val()
+                    teamNumber = -1
+                    $.ajax({
+                        url : "http://localhost:8080/api/participation-application/athlete",
+                        type : "POST",
+                        data : {
+                            applicationId : applicationId,
+                            athleteId : additionalAthleteId,
                             disciplineAgeId : ageCategoryId,
                             disciplineTypeId : disciplineTypeIdInputValue,
                             teamNumber : teamNumber
@@ -161,5 +179,35 @@ $('#send-application-btn').on('click', function () {
             }
 
         }
+    }
+
+    // Пост запрос на добавление тренеров
+    const coachesDiv = $('.coaches-div')
+    let coachLi = coachesDiv.find('.coach-li')
+    for (let i = 0; i < coachLi.length; i++) {
+        let coachId = coachLi.eq(i).find('.select-coach').val()
+        $.ajax({
+            url : "http://localhost:8080/api/participation-application/coach",
+            type : "POST",
+            data : {
+                applicationId : applicationId,
+                coachId : coachId,
+            }
+        })
+    }
+
+    // Пост запрос на добавление судей
+    const judgesDiv = $('.judges-div')
+    let judgeLi = judgesDiv.find('.judge-li')
+    for (let i = 0; i < judgeLi.length; i++) {
+        let judgeId = judgeLi.eq(i).find('.select-judge').val()
+        $.ajax({
+            url : "http://localhost:8080/api/participation-application/judge",
+            type : "POST",
+            data : {
+                applicationId : applicationId,
+                judgeId : judgeId,
+            }
+        })
     }
 })

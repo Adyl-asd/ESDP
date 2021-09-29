@@ -2,7 +2,7 @@
 <#import "../partials/main.ftlh" as main/>
 
 <@main.renderWith title="Подать заявку на участие в соревновании" scripts=["js/participation_application_add.js"]>
-${application.getId()}
+    ${application.getId()}
     <div class="container">
         <div class="card my-3">
             <div class="card-body">
@@ -455,7 +455,7 @@ ${application.getId()}
                     <li class="coach-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
                             <div class="col-auto">
-                                <select class="form-select"
+                                <select class="form-select select-coach"
                                         aria-label="Default select example"
                                         id="selectCoach">
                                     <option>Выбрать тренера</option>
@@ -477,7 +477,7 @@ ${application.getId()}
                     <li class="judge-li list-group-item d-flex justify-content-between align-items-start">
                         <div class="row my-2">
                             <div class="col-auto">
-                                <select class="form-select"
+                                <select class="select-judge form-select"
                                         aria-label="Default select example"
                                         id="selectJudge">
                                     <option>Выбрать судью</option>

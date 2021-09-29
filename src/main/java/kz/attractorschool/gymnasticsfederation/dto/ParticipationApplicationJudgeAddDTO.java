@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipationApplicationJudgeAddDTO {
-//    @NotNull
-//    private Integer applicationId;
+    @NotNull
+    private Integer applicationId;
 
     @NotNull
     private Integer judgeId;

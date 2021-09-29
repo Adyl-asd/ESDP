@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/participation-application")
+@RequestMapping("v")
 @AllArgsConstructor
 public class ParticipationApplicationRestController {
     private final ParticipationApplicationCoachService applicationCoachService;
@@ -28,11 +28,11 @@ public class ParticipationApplicationRestController {
         return ResponseEntity.ok("Заявка удалена");
     }
 
-    @PostMapping("/{id}/coaches")
-    public ResponseEntity addCoach(@PathVariable Integer id, ParticipationApplicationCoachAddDTO addDTO) {
-        ParticipationApplicationCoachDTO applicationCoach = applicationCoachService.add(id, addDTO);
-        return ResponseEntity.ok(applicationCoach);
-    }
+//    @PostMapping("/{id}/coaches")
+//    public ResponseEntity addCoach(@PathVariable Integer id, ParticipationApplicationCoachAddDTO addDTO) {
+//        ParticipationApplicationCoachDTO applicationCoach = applicationCoachService.add(id, addDTO);
+//        return ResponseEntity.ok(applicationCoach);
+//    }
 
     @DeleteMapping("/{applicationId}/coaches/{id}")
     public ResponseEntity deleteCoachApplication(@PathVariable Integer applicationId, @PathVariable Integer id) {
@@ -40,11 +40,11 @@ public class ParticipationApplicationRestController {
         return ResponseEntity.ok("Заявка удалена");
     }
 
-    @PostMapping("/{id}/judges")
-    public ParticipationApplicationJudgeDTO addJudge(@PathVariable Integer id, ParticipationApplicationJudgeAddDTO addDTO) {
-        ParticipationApplicationJudgeDTO applicationJudge = applicationJudgeService.add(id, addDTO);
-        return applicationJudge;
-    }
+//    @PostMapping("/{id}/judges")
+//    public ParticipationApplicationJudgeDTO addJudge(@PathVariable Integer id, ParticipationApplicationJudgeAddDTO addDTO) {
+//        ParticipationApplicationJudgeDTO applicationJudge = applicationJudgeService.add(id, addDTO);
+//        return applicationJudge;
+//    }
 
     @DeleteMapping("/{applicationId}/judges/{id}")
     public ResponseEntity deleteJudgeApplication(@PathVariable Integer applicationId, @PathVariable Integer id) {

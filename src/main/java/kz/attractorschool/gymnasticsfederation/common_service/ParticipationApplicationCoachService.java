@@ -32,15 +32,15 @@ public class ParticipationApplicationCoachService {
         return ParticipationApplicationCoachDTO.from(findOne(id));
     }
 
-    public ParticipationApplicationCoachDTO add(int applicationId, ParticipationApplicationCoachAddDTO dto){
-        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+    public ParticipationApplicationCoachDTO add(ParticipationApplicationCoachAddDTO dto){
+        ParticipationApplication application = applicationRepository.findById(dto.getApplicationId()).orElseThrow(() ->{
             return new ResourceNotFoundException("Заявка", 0);
         });
-        if (repository.existsByApplicationIdAndCoachId(applicationId, dto.getCoachId())){
-            return ParticipationApplicationCoachDTO.from(repository.findByApplicationIdAndCoachId(applicationId, dto.getCoachId()).orElseThrow(() -> {
-                return new ResourceNotFoundException("Заявка", 0);
-            }));
-        }
+//        if (repository.existsByApplicationIdAndCoachId(dto.getApplicationId(), dto.getCoachId())){
+//            return ParticipationApplicationCoachDTO.from(repository.findByApplicationIdAndCoachId(dto.getApplicationId(), dto.getCoachId()).orElseThrow(() -> {
+//                return new ResourceNotFoundException("Заявка", 0);
+//            }));
+//        }
         ParticipationApplicationCoach applicationCoach = repository.save(
                 ParticipationApplicationCoach.builder()
                         .application(application)

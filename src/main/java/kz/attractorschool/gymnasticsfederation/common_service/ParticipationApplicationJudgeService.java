@@ -33,15 +33,15 @@ public class ParticipationApplicationJudgeService {
         return ParticipationApplicationJudgeDTO.from(findOne(id));
     }
 
-    public ParticipationApplicationJudgeDTO add(int applicationId, ParticipationApplicationJudgeAddDTO dto){
-        ParticipationApplication application = applicationRepository.findById(applicationId).orElseThrow(() ->{
+    public ParticipationApplicationJudgeDTO add(ParticipationApplicationJudgeAddDTO dto){
+        ParticipationApplication application = applicationRepository.findById(dto.getApplicationId()).orElseThrow(() ->{
             return new ResourceNotFoundException("Заявка", 0);
         });
-        if (repository.existsByApplicationIdAndJudgeId(applicationId, dto.getJudgeId())){
-            return ParticipationApplicationJudgeDTO.from(repository.findByApplicationIdAndJudgeId(applicationId, dto.getJudgeId()).orElseThrow(() -> {
-                return new ResourceNotFoundException("Заявка", 0);
-            }));
-        }
+//        if (repository.existsByApplicationIdAndJudgeId(dto.getApplicationId(), dto.getJudgeId())){
+//            return ParticipationApplicationJudgeDTO.from(repository.findByApplicationIdAndJudgeId(dto.getApplicationId(), dto.getJudgeId()).orElseThrow(() -> {
+//                return new ResourceNotFoundException("Заявка", 0);
+//            }));
+//        }
         ParticipationApplicationJudge applicationJudge = repository.save(
                 ParticipationApplicationJudge.builder()
                         .application(application)

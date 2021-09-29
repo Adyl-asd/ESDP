@@ -33,6 +33,10 @@ public class ParticipationApplicationService {
         return ParticipationApplicationDTO.from(findOne(id));
     }
 
+    public List<ParticipationApplication> allByCompetitionId(Integer id) {
+        return repository.findAllByCompetitionId(id);
+    }
+
     public ParticipationApplicationDTO add(int schoolId, int competitionId){
         if (repository.existsBySchoolIdAndCompetitionId(schoolId, competitionId)){
             return ParticipationApplicationDTO.from(repository.findBySchoolIdAndCompetitionId(schoolId, competitionId).orElseThrow(() -> {
@@ -46,6 +50,7 @@ public class ParticipationApplicationService {
                         .build());
         return ParticipationApplicationDTO.from(newApplication);
     }
+
 
     public void delete(int id){
         ParticipationApplication application = findOne(id);

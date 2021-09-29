@@ -36,6 +36,10 @@ public class ParticipationApplicationAthleteService {
         return ParticipationApplicationAthleteDTO.from(findOne(id));
     }
 
+    public List<ParticipationApplicationAthlete> allByApplicationId(Integer id) {
+        return repository.findAllByApplicationId(id);
+    }
+
     public ParticipationApplicationAthlete add(ParticipationApplicationAthleteAddDTO dto){
         ParticipationApplication application = applicationRepository.findById(dto.getApplicationId()).orElseThrow(() ->{
             return new ResourceNotFoundException("Заявка", 0);

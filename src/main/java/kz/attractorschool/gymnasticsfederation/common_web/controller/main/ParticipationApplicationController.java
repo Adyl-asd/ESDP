@@ -23,6 +23,9 @@ public class ParticipationApplicationController {
     private final JudgeService judgeService;
     private final SchoolService schoolService;
     private final ParticipationApplicationService service;
+    private final ParticipationApplicationAthleteService applicationAthleteService;
+    private final ParticipationApplicationCoachService applicationCoachService;
+    private final ParticipationApplicationJudgeService applicationJudgeService;
 
     @GetMapping("/apply")
     public String getApplicationForm(@PathVariable Integer id,
@@ -44,11 +47,24 @@ public class ParticipationApplicationController {
         return "participation_application/participation_application_add";
     }
 
-    @GetMapping("/apply/{applicationId}")
+    @GetMapping("/all/{applicationId}")
     public String getOne(@PathVariable Integer id,@PathVariable Integer applicationId, Model model){
         model.addAttribute("competition", competitionService.findOne(id));
+        model.addAttribute("disciplineTypes", competitionDisciplineService.findByCompetitionId(id));
+        model.addAttribute("ageCategories", competitionDisciplineAgesService.findByCompetitionId(id));
+        model.addAttribute("programs", competitionDisciplineProgramsService.findByCompetitionId(id));
+        // После реализации функционала авторизации, нужно будет добавить логику на хранение id школы в пользователе и изменить запись ниже
+        model.addAttribute("schools", schoolService.all());
         model.addAttribute("application", service.findOne(applicationId));
+        model.addAttribute("athletes", applicationAthleteService.allByApplicationId(applicationId));
         return "participation_application/participation_application";
+    }
+
+    @GetMapping("/all")
+    public String all(@PathVariable Integer id, Model model) {
+        model.addAttribute("applications", service.allByCompetitionId(id));
+        model.addAttribute("competition", competitionService.findOne(id));
+        return "participation_application/participation_applications";
     }
 
     @PostMapping("/apply/{applicationId}")

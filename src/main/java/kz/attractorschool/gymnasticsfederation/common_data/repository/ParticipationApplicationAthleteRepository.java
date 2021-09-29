@@ -4,6 +4,7 @@ import kz.attractorschool.gymnasticsfederation.common_data.entity.ParticipationA
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -12,4 +13,5 @@ public interface ParticipationApplicationAthleteRepository extends JpaRepository
     Optional<ParticipationApplicationAthlete> findByApplicationIdAndAthleteIdAndDisciplineAgeIdAndDisciplineTypeId(int applicationId, int athleteId, int ageId,int disciplineTypeId);
     Optional<ParticipationApplicationAthlete> findByIdAndApplicationId(int id, int applicationId);
     void deleteAllByApplicationId(int applicationId);
+    List<ParticipationApplicationAthlete> findAllByApplicationId(Integer id);
 }

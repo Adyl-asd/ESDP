@@ -78,7 +78,12 @@
                     Положение:
                 </div>
                 <div class="col-9 fs-6">
-                    <a href="/competitions/file/${competition.competitionPositionFile.filePath}">Скачать</a>
+                    <a class="btn btn-primary" href="/competitions/file/${competition.competitionPositionFile.filePath}">Скачать</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col fs-6">
+                    <a class="btn btn-primary" href="/competition/${competition.id}/all">Просмотр заявок на участие</a>
                 </div>
             </div>
         </div>

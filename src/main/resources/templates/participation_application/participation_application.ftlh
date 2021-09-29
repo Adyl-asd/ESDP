@@ -1,7 +1,7 @@
 <#--Код для вставки основного шаблона в страницу-->
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Заявка на участие">
+<@main.renderWith title="Заявка на участие" scripts=["js/participation_application_add.js"]>
     <div class="container">
         <div class="card my-3">
             <div class="card-body">
@@ -174,7 +174,7 @@
         </div>
         <input type="hidden" value="${competition.id}" id="competition-id">
         <input type="hidden" value="${application.id}" id="application-id">
-        <button class="btn btn-primary" id="send-application-btn">Отправить заявку</button>
+        <button class="btn btn-primary" id="send-application-btn">Подтвердить заявку</button>
         <button onclick="topFunction()" id="scroll-btn" class="btn btn-primary" title="Go to top">Top</button>
     </div>
 

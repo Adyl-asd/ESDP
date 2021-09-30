@@ -192,7 +192,7 @@
                                         </div>
                                         <#if athlete.isNationalTeam()>
                                             <div class="col-sm-9 text-secondary">
-                                                ${athlete.rank.name}
+                                                <h6 class="mb-0">Член национальной сборной</h6>
                                             </div>
                                         <#elseif athlete.isCityTeam()>
                                             <div class="col-sm-9 text-secondary">
@@ -225,10 +225,12 @@
                                         <div class="col-sm-9 text-secondary">
                                             <#if coaches??>
                                                 <#list coaches as c>
-                                                    <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
-                                                    <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
-                                                        <button class="btn btn-danger mt-1">Удалить тренера</button>
-                                                    </form>
+                                                    <#if !c.isDel()>
+                                                        <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
+                                                        <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
+                                                            <button class="btn btn-danger mt-1">Удалить тренера</button>
+                                                        </form>
+                                                    </#if>
                                                 </#list>
                                             </#if>
                                             <a href="/athlete/${athlete.id}/coach"><div class="btn btn-primary">Добавить тренера</div></a>

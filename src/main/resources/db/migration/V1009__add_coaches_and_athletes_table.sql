@@ -7,6 +7,7 @@ CREATE TABLE `athletes_coaches`(
     `school_id` INT NOT NULL REFERENCES `schools` (`id`),
     `register_date` DATE NOT NULL,
     `finish_date` DATE,
+    `is_del` boolean NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_trainers` FOREIGN KEY (`coach_id`) REFERENCES `coaches` (`id`),
     CONSTRAINT `fk_sportsmans` FOREIGN KEY (`athlete_id`) REFERENCES `athletes` (`id`)

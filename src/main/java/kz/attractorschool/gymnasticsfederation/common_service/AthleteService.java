@@ -310,21 +310,22 @@ public class AthleteService {
             return new ResourceNotFoundException("Запись о тренере и спортсмене", 0);
         });
         athletesCoaches.setFinishDate(LocalDate.now());
+        athletesCoaches.setDel(true);
         athletesCoachesRepository.save(athletesCoaches);
         return AthleteDTO.from(athlete);
     }
 
-    public Set<Coach> universalCoaches(AthleteDTO athleteDTO) {
+    public List<Coach> universalCoaches(AthleteDTO athleteDTO) {
         Athlete athlete = findOne(athleteDTO.getId());
         List<Coach> coaches = coachService.getByDisciplineAndSchool(athleteDTO);
-        Set<Coach> universalCoaches = new HashSet<>();
-        if (athlete.getCoaches().size() == 0) {
-            universalCoaches.addAll(coaches);
-        }
-        for (int i = 0; i < coaches.size(); i++) {
-            for (int j = 0; j < athlete.getCoaches().size(); j++) {
-                if (!athlete.getCoaches().get(j).equals(coaches.get(i))) {
-                    universalCoaches.add(coaches.get(i));
+        List<Coach> athleteCoaches = athlete.getCoaches();
+        List<Coach> universalCoaches = new ArrayList<>(coaches);
+        if (athleteCoaches.size() > 0) {
+            for (int j = 0; j < athleteCoaches.size(); j++) {
+                for (int i = 0; i < coaches.size(); i++) {
+                    if (athleteCoaches.get(j).getId().equals(coaches.get(i).getId())) {
+                        universalCoaches.remove(coaches.get(i));
+                    }
                 }
             }
         }
@@ -333,6 +334,21 @@ public class AthleteService {
 
     private boolean isTeam(String result) {
         return result.equals("да");
+    }
+
+    public List<Coach> presentCoaches(Integer id){
+        Athlete athlete = findOne(id);
+        List<Coach> coaches = athlete.getCoaches();
+        List<AthletesCoaches> athletesCoaches = athletesCoachesRepository.findAllByAthleteId(id);
+        List<Coach> presentCoaches = new ArrayList<>();
+        for (int i = 0; i < coaches.size(); i++) {
+            for (int j = 0; j < athletesCoaches.size(); j++) {
+                if (coaches.get(i) == athletesCoaches.get(j).getCoach() && !athletesCoaches.get(j).isDel()){
+                    presentCoaches.add(coaches.get(i));
+                }
+            }
+        }
+        return presentCoaches;
     }
 
 

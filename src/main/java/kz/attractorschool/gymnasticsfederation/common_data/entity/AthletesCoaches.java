@@ -39,4 +39,8 @@ public class AthletesCoaches {
 
     @Column
     private LocalDate finishDate;
+
+    @Column
+    @Builder.Default
+    private boolean isDel = false;
 }

@@ -1,5 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.common_service;
 
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Discipline;
+import kz.attractorschool.gymnasticsfederation.common_data.repository.GenderRepository;
+import kz.attractorschool.gymnasticsfederation.dto.DisciplineTypeAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.DisciplineTypeDTO;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.DisciplineType;
 import kz.attractorschool.gymnasticsfederation.common_data.repository.DisciplineTypeRepository;
@@ -12,28 +15,51 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class DisciplineTypeService {
-
-    DisciplineTypeRepository disciplineTypeRepository;
+    private final DisciplineService disciplineService;
+    private final DisciplineTypeRepository repository;
+    private final GenderRepository genderRepository;
 
     public List<DisciplineType> all(){
-        return disciplineTypeRepository.findAll();
+        return repository.findAll();
     }
 
     public DisciplineType findOne(int id){
-        return disciplineTypeRepository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow();
     }
 
     public DisciplineTypeDTO getOne(int id){
-        var disciplineType = disciplineTypeRepository.findById(id).orElseThrow();
+        var disciplineType = repository.findById(id).orElseThrow();
         return DisciplineTypeDTO.from(disciplineType);
     }
 
     public List<DisciplineType> getAllByDisciplineId(int id) {
-        return disciplineTypeRepository.findAllByDisciplineId(id);
+        return repository.findAllByDisciplineId(id);
     }
 
     public List<DisciplineTypeDTO> getDisciplineTypesByDisciplineId(int id){
-        return disciplineTypeRepository.findAllByDisciplineId(id).stream().map(DisciplineTypeDTO::from).collect(Collectors.toList());
+        return repository.findAllByDisciplineId(id).stream().map(DisciplineTypeDTO::from).collect(Collectors.toList());
     }
 
+    public DisciplineTypeDTO add(DisciplineTypeAddDTO dto){
+        Discipline discipline = disciplineService.findOne(dto.getDisciplineId());
+        DisciplineType disciplineType = repository.save(DisciplineType.builder()
+                        .name(dto.getName())
+                        .discipline(discipline)
+                        .gender(genderRepository.findByName(dto.getGender()))
+                        .build());
+        if (dto.getParticipantsAmountMax() != null){
+            disciplineType.setParticipantsAmountMax(dto.getParticipantsAmountMax());
+        }
+        else if(dto.getParticipantsAmountMin() != null){
+            disciplineType.setParticipantsAmountMin(dto.getParticipantsAmountMin());
+        }
+        return DisciplineTypeDTO.from(disciplineType);
+    }
+
+    public DisciplineType delete(int id){
+        DisciplineType disciplineType = findOne(id);
+        disciplineType.setDel(true);
+        repository.save(disciplineType);
+        return disciplineType;
+    }
 }

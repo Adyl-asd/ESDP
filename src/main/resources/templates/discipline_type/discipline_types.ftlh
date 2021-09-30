@@ -1,6 +1,6 @@
 <#import "../partials/main.ftlh" as main/>
 
-<@main.renderWith title="Виды спорта">
+<@main.renderWith title="Дисциплины">
     <div class="container">
         <#--Форма для добавления новой дисциплины-->
         <div class="card my-3">

@@ -25,7 +25,7 @@
                             Персона
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/persons">Список персон</a></li>
+                            <li><a class="dropdown-item" href="/person/all">Список персон</a></li>
                             <li><a class="dropdown-item" href="/person">Добавить персону</a></li>
                         </ul>
                     </li>
@@ -60,7 +60,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/disciplines">Дисциплины</a>
+                        <a class="nav-link" href="/disciplines">Вид спорта</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

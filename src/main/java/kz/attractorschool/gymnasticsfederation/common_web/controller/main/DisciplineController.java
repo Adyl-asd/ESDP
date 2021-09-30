@@ -25,6 +25,12 @@ public class DisciplineController {
         return "disciplines/disciplines";
     }
 
+    @GetMapping("/{id}")
+    public String getOne(@PathVariable Integer id, Model model){
+        model.addAttribute("discipline", service.findOne(id));
+        return "disciplines/discipline";
+    }
+
     @PostMapping
     public String add(@Valid DisciplineDTO disciplineDTO,
                       BindingResult bindingResult,

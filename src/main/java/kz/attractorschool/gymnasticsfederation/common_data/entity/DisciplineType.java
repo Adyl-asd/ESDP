@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -40,13 +41,17 @@ public class DisciplineType {
     @ToString.Exclude
     private Discipline discipline;
 
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    @OneToMany
+    @JoinTable(name = "competition_programs", joinColumns = @JoinColumn(name = "discipline_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @ToString.Exclude
-    private List<CompetitionProgram> programs;
+    @Builder.Default
+    @JsonManagedReference
+    private List<CompetitionProgram> programs = new ArrayList<>( );
 
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discipline")
+    @OneToMany
+    @JoinTable(name = "age_categories", joinColumns = @JoinColumn(name = "discipline_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @ToString.Exclude
-    private List<AgeCategory> ageCategories;
+    @Builder.Default
+    @JsonManagedReference
+    List<AgeCategory> ageCategories = new ArrayList<>();
 }

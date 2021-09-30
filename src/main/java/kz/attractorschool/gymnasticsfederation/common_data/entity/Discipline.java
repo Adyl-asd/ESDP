@@ -1,9 +1,12 @@
 package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "disciplines")
@@ -30,8 +33,10 @@ public class Discipline {
     @Builder.Default
     private boolean isDel = false;
 
-//    @OneToMany(mappedBy = "discipline", fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    @Builder.Default
-//    List<DisciplineType> disciplineTypes = new ArrayList<>();
+    @OneToMany
+    @JoinTable(name = "discipline_types", joinColumns = @JoinColumn(name = "discipline_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    @ToString.Exclude
+    @Builder.Default
+    @JsonManagedReference
+    List<DisciplineType> disciplineTypes = new ArrayList<>();
 }

@@ -54,6 +54,7 @@
 
         <button type="submit" class="btn btn-primary mt-1">Изменить</button>
     </form>
+        <a href="/judge/${judge.id}/update" class="btn btn-secondary mt-1">Отменить</a>
     </div>
 
     <#if errors??>

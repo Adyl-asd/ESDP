@@ -11,5 +11,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Изменить</button>
         </form>
+        <a href="/judge_categories/${category.id}/update" class="btn btn-secondary mt-1">Отменить</a>
     </div>
 </@main.renderWith>

@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,12 +22,15 @@ public class AthletesCoaches {
     private Integer id;
 
     @OneToOne
+    @JsonBackReference
     private Athlete athlete;
 
     @OneToOne
+    @JsonBackReference
     private Coach coach;
 
     @OneToOne
+    @JsonBackReference
     private School school;
 
     @Column

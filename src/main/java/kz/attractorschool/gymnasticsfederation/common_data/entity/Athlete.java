@@ -2,6 +2,7 @@ package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.common_data.enumiration.Status;
 import lombok.*;
@@ -14,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -87,9 +89,12 @@ public class Athlete {
     @Builder.Default
     private boolean isDel = false;
 
-    @ManyToMany
+    @JsonManagedReference
+    @OneToMany
+    @ToString.Exclude
+    @Builder.Default
     @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "athlete_id"), inverseJoinColumns = @JoinColumn(name = "coach_id"))
-    private List<Coach> coaches;
+    private List<Coach> coaches = new ArrayList<>();
 
     //гос награды?
 }

@@ -1,11 +1,13 @@
 package kz.attractorschool.gymnasticsfederation.common_data.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.files.CoachCategoryFile;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -49,8 +51,10 @@ public class Coach {
     @Builder.Default
     private boolean isDel = false;
 
+    @JsonManagedReference
+    @OneToMany
     @ToString.Exclude
-    @ManyToMany
+    @Builder.Default
     @JoinTable(name = "athletes_coaches", joinColumns = @JoinColumn(name = "coach_id"), inverseJoinColumns = @JoinColumn(name = "athlete_id"))
-    private List<Athlete> athletes;
+    private List<Athlete> athletes = new ArrayList<>();
 }

@@ -222,14 +222,17 @@
 <#--                                                </form>-->
 <#--                                            </#list>-->
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-12 text-secondary">
                                             <#if coaches??>
                                                 <#list coaches as c>
                                                     <#if !c.isDel()>
-                                                        <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
-                                                        <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
-                                                            <button class="btn btn-danger mt-1">Удалить тренера</button>
-                                                        </form>
+                                                        <div class="str">
+                                                            <a href="/coach/${c.coach.id}">${c.coach.person.name} ${c.coach.person.surname}</a>
+                                                            <p>${c.registerDate} - <#if c.finishDate??>${c.finishDate}</#if></p>
+                                                            <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
+                                                                <button class="btn btn-danger mt-1">Удалить тренера</button>
+                                                            </form>
+                                                        </div>
                                                     </#if>
                                                 </#list>
                                             </#if>

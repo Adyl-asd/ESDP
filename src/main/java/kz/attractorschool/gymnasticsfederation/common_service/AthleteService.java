@@ -336,20 +336,23 @@ public class AthleteService {
         return result.equals("да");
     }
 
-    public List<Coach> presentCoaches(Integer id){
+    public List<AthletesCoaches> presentCoaches(Integer id){
         Athlete athlete = findOne(id);
         List<Coach> coaches = athlete.getCoaches();
         List<AthletesCoaches> athletesCoaches = athletesCoachesRepository.findAllByAthleteId(id);
-        List<Coach> presentCoaches = new ArrayList<>();
+        List<AthletesCoaches> presentCoaches = new ArrayList<>();
         for (int i = 0; i < coaches.size(); i++) {
             for (int j = 0; j < athletesCoaches.size(); j++) {
                 if (coaches.get(i) == athletesCoaches.get(j).getCoach() && !athletesCoaches.get(j).isDel()){
-                    presentCoaches.add(coaches.get(i));
+                    presentCoaches.add(aboutCoaches(id, coaches.get(i).getId(), athlete.getSchool().getId()));
                 }
             }
         }
         return presentCoaches;
     }
 
+    public AthletesCoaches aboutCoaches(int athleteId, int coachId, int schoolId){
+        return athletesCoachesRepository.findByAthleteIdAndCoachIdAndSchoolId(athleteId, coachId, schoolId).orElseThrow();
+    }
 
 }

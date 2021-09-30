@@ -1,6 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.common_web.controller.main;
 
+import kz.attractorschool.gymnasticsfederation.common_data.specification.SearchModel;
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
+import kz.attractorschool.gymnasticsfederation.dto.PersonFilter;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.files.PersonPhoto;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.Person;
@@ -9,6 +11,8 @@ import kz.attractorschool.gymnasticsfederation.common_service.PersonService;
 import kz.attractorschool.gymnasticsfederation.common_service.StorageService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -28,6 +34,7 @@ public class PersonController {
     private final PersonService service;
     private final FileSystemStorageService fileSystemStorageService;
     private final StorageService storageService;
+    List<PersonDTO> personDTOS;
 
     @GetMapping
     public String add() {
@@ -52,7 +59,16 @@ public class PersonController {
         return "redirect:/person/" + dto.getId();
     }
 
-
+    @GetMapping("/all")
+    public String persons(Model model){
+        if (personDTOS.size() == 0){
+            model.addAttribute("persons", service.all());
+        }
+        else{
+            model.addAttribute("persons", personDTOS);
+        }
+        return "person/all";
+    }
 
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id, Model model) {
@@ -93,6 +109,14 @@ public class PersonController {
         }
         service.update(personDTO, id);
         return "redirect:/person/" + id;
+    }
+
+    @PostMapping("/persons")
+    public String all(@RequestBody SearchModel<PersonFilter> searchModel, Model model) {
+        Page<Person> persons = service.search(searchModel);
+        List<PersonDTO> models = persons.stream().map(PersonDTO::from).collect(Collectors.toList());
+        personDTOS = models;
+        return "redirect:/person/all";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

@@ -1,6 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.common_service;
 
 import kz.attractorschool.gymnasticsfederation.common_data.entity.*;
+import kz.attractorschool.gymnasticsfederation.common_data.repository.AthletesCoachesRepository;
 import kz.attractorschool.gymnasticsfederation.dto.AthleteDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CoachAddDTO;
 import kz.attractorschool.gymnasticsfederation.dto.CoachDTO;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +26,7 @@ public class CoachService {
     private final DisciplineService disciplineService;
     private final CoachCategoryService coachCategoryService;
     private final CoachCategoryFileRepository coachCategoryFileRepository;
+    private final AthletesCoachesRepository athletesCoachesRepository;
 
     public List<Coach> all() {
         return coachRepository.findAll();

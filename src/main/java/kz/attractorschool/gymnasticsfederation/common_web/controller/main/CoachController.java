@@ -61,7 +61,8 @@ public class CoachController {
     @GetMapping("/{id}")
     public String one(@PathVariable Integer id,
                       Model model) {
-        model.addAttribute("coach", coachService.getOne(id));
+        model.addAttribute("coach", coachService.findOne(id));
+        System.out.println(coachService.findOne(id).getAthletes().size());
         return "coach/coach";
     }
 

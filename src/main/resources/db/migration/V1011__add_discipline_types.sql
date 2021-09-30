@@ -98,7 +98,7 @@ values (2008, 3, 1),
        (2010, 4, 1);
 
 #спорт гимнастика жен
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
 values (2009, 2011, 5, 1),
        (2010, 2013, 6, 1),
        (2012, 2014, 7, 1);
@@ -108,14 +108,14 @@ insert into `age_categories` (min_year, rank_id, discipline_id)
 values (2005, 3, 2);
 
 #спорт гимнастика муж
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
 values (2004, 2007, 4, 2),
        (2006, 2009, 5, 2),
        (2008, 2011, 6, 2),
        (2010, 2012, 7, 2);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2006, 2013, 3),
        (2006, 2013, 4);
 
@@ -125,7 +125,7 @@ values (2005, 3, 3),
        (2005, 3, 4);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
 values (2006, 2008, 4, 3),
        (2006, 2008, 4, 4);
 
@@ -142,7 +142,7 @@ values (2009, 5),
        (2009, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2007, 2008, 5),
        (2007, 2008, 6),
        (2007, 2008, 7),
@@ -185,7 +185,7 @@ values (2009, 9),
        (2009, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2003, 2009, 9),
        (2003, 2009, 10),
        (2003, 2009, 11),
@@ -208,7 +208,7 @@ values (2002, 14),
        (2002, 20);
 
 #аэроб гимн
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2003, 2005, 14),
        (2003, 2005, 15),
        (2003, 2005, 16),

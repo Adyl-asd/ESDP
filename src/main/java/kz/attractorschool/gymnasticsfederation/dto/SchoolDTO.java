@@ -19,7 +19,7 @@ public class SchoolDTO {
     private Integer id;
 
     @NotNull
-    @Size(min = 10, message = "Введите полное название школы")
+    @Size(min = 7, message = "Введите полное название школы")
     private String name;
 
     @Column
@@ -40,7 +40,7 @@ public class SchoolDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 10, message = "Введите полный адрес")
+    @Size(min = 7, message = "Введите полный адрес")
     private String address;
 
     @NotNull

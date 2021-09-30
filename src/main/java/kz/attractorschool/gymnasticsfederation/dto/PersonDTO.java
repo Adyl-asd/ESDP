@@ -50,7 +50,7 @@ public class PersonDTO {
 
     @NotNull
     @org.hibernate.validator.constraints.NotBlank
-    @Size(min = 10, message = "Вы ввели слишком короткий адрес")
+    @Size(min = 5, message = "Вы ввели слишком короткий адрес")
     private String address;
 
     @NotNull

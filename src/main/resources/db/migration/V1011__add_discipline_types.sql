@@ -38,27 +38,27 @@ VALUES ('Мужской'),
        ('Смешанный');
 
 #спортивная гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Спортивная гимнастика женщины', 1),
-       ('Спортивная гимнастика мужчины', 1);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Спортивная гимнастика женщины', 1, 2),
+       ('Спортивная гимнастика мужчины', 1, 1);
 
 #худ гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Индивидуальная программа', 2);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Индивидуальная программа', 2, 2);
 
 #худ гимнастика
-insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max)
-values ('Групповые упражнения', 2, 5, 6);
+insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)
+values ('Групповые упражнения', 2, 5, 6, 2);
 
 #батут гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Индивидуальные прыжки на батуте', 5),
-       ('Прыжки на акробатической дорожке', 5),
-       ('Прыжки на двойном минитрампе', 5);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Индивидуальные прыжки на батуте', 5, 3),
+       ('Прыжки на акробатической дорожке', 5, 3),
+       ('Прыжки на двойном минитрампе', 5, 2);
 
 #батут гимнастика
-insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max)
-values ('Синхронные прыжки на батуте', 5, 2, 2);
+insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)
+values ('Синхронные прыжки на батуте', 5, 2, 2, 3);
 
 #спорт акробатика
 insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)

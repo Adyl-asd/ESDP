@@ -27,7 +27,7 @@
                                     <a href="/discipline_type/add" class="btn btn-primary">Добавить дисциплину</a>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-12 text-secondary str">
+                                        <div class="col-sm-12 text-secondary">
                                             <div>
                                                 <div class="str-column">
                                                     <#list discipline.disciplineTypes as d>
@@ -43,8 +43,8 @@
                                                                     </button>
                                                                 </form>
                                                             </div>
-                                                            <div class="str str-border">
-                                                                <div>
+                                                            <div class="str">
+                                                                <div class="str-table">
                                                                     <h4>Возрастные категории</h4>
                                                                     <#list d.ageCategories as cd>
                                                                         <#if !cd.isDel()>
@@ -68,7 +68,7 @@
                                                                     </#list>
                                                                     <a href="/disciplines/${discipline.id}/type/${d.id}/add_ages" class="btn btn-primary">Добавить возрастную категорию</a>
                                                                 </div>
-                                                                <div>
+                                                                <div class= "str-table">
                                                                     <h4>Соревновательные программы</h4>
                                                                     <#list d.programs as p>
                                                                         <p>${p.name}</p>

@@ -59,8 +59,13 @@
                             <li><a class="dropdown-item" href="/judge_categories">Категории судей</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/disciplines">Вид спорта</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="/disciplines">Виды спорта</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/disciplines">Виды спорта</a></li>
+                            <li><a class="dropdown-item" href="/discipline_type/all">Дисциплины</a></li>
+                            <li><a class="dropdown-item" href="/discipline_type/add">Добавить дисциплину</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

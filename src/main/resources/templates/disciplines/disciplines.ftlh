@@ -29,10 +29,9 @@
                     <tbody>
                     <#list disciplines as d>
                         <#if !d.isDel()>
-                            <tr>
+                            <tr class='clickable-row' data-href='/disciplines/${d.id}'>
                                 <th scope="row">${d.id}</th>
                                 <td>${d.name}</td>
-                                <#--Форма для изменения текущей дисциплины-->
                                 <td><a href="/disciplines/${d.id}/update" class="btn btn-primary">Изменить</a></td>
                                 <#--Форма удаления текущей дисциплины-->
                                 <td>

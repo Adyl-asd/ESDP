@@ -24,6 +24,13 @@ public class DisciplineTypeController {
     private final DisciplineTypeService service;
     private final DisciplineService disciplineService;
 
+    @GetMapping("/all")
+    public String all(Model model){
+        model.addAttribute("discipline_types", service.all());
+        model.addAttribute("disciplines", disciplineService.all());
+        return "discipline_type/discipline_types";
+    }
+
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("disciplines", disciplineService.all());
@@ -40,12 +47,19 @@ public class DisciplineTypeController {
             return "redirect:/discipline_type/add";
         }
         DisciplineTypeDTO typeDTO = service.add(dto);
-        return "redirect:/disciplines" + dto.getDisciplineId();
+        return "redirect:/discipline_type/" + typeDTO.getId();
     }
 
     @PostMapping("/{id}")
     public String delete(@PathVariable Integer id){
         DisciplineType disciplineType = service.delete(id);
-        return "redirect:/disciplines/" + disciplineType.getDiscipline().getId();
+        return "redirect:/discipline_type/all";
     }
+
+    @GetMapping("/{id}")
+    public String getOne(@PathVariable Integer id, Model model){
+        model.addAttribute("discipline_type", service.findOne(id));
+        return "discipline_type/discipline_type";
+    }
+
 }

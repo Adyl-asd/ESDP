@@ -3,6 +3,31 @@
 <@main.renderWith title="Соревновательные программы">
     <div class="container">
         <h1>Соревновательные программы</h1>
+
+        <div class="card my-3">
+            <div class="card-body">
+                <form class="row g-3" id="filter">
+                    <div class="col-md-5">
+                        <label for="inputName" class="form-label"></label>
+                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Наименование">
+                    </div>
+                    <#--Нужно добавить список городов-->
+                    <div class="col-md-4">
+                        <label for="discipline" class="form-label fs-4"></label>
+                        <select name="disciplineId" class="form-select" id="discipline">
+                            <option selected>Выберите дисциплину</option>
+                            <#list disciplines as d>
+                                <option value="${d.id}">${d.name}</option>
+                            </#list>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary mb-2">Поиск</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="card">
             <div class="card-body">
                 <table class="table">

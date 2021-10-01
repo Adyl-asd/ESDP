@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 public class DisciplineDTO {
     private Integer id;
 
+    private boolean isTeamChampByDisciplineType;
+
     @NotNull
     @Size(min = 1, message = "Вы ввели пустое значение")
     private String name;
@@ -26,6 +28,7 @@ public class DisciplineDTO {
         return DisciplineDTO.builder()
                 .id(discipline.getId())
                 .name(discipline.getName())
+                .isTeamChampByDisciplineType(discipline.isTeamChampByDisciplineType())
                 .isDel(discipline.isDel())
                 .build();
     }

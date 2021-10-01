@@ -229,9 +229,7 @@ CREATE TABLE `competition_programs`
     `id`                 INT auto_increment NOT NULL,
     `name`               varchar(128)       NOT NULL,
     `is_del`             boolean default false,
-    `age_category_id`    int references `age_categories` (`id`),
     `discipline_id` integer references `discipline_types` (`id`),
-    `type`               varchar(127),
     PRIMARY KEY (`id`)
 );
 

@@ -2,6 +2,7 @@
 
 <@main.renderWith title="Дисциплины">
     <div class="container">
+        <h1>Дисциплины</h1>
         <div class="card">
             <div class="card-body">
                 <table class="table">

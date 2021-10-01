@@ -5,6 +5,7 @@ import kz.attractorschool.gymnasticsfederation.dto.CompetitionDisciplineDTO;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.Discipline;
 import kz.attractorschool.gymnasticsfederation.common_service.CompetitionDisciplineService;
 import kz.attractorschool.gymnasticsfederation.common_service.DisciplineService;
+import kz.attractorschool.gymnasticsfederation.dto.DisciplineDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,8 @@ public class CompetitionDisciplineRestController {
     }
 
     @GetMapping("/{id}")
-    public Discipline one(@PathVariable Integer id) {
-        return disciplineService.findOne(id);
+    public DisciplineDTO one(@PathVariable Integer id) {
+        return disciplineService.getOne(id);
     }
 
     @PostMapping

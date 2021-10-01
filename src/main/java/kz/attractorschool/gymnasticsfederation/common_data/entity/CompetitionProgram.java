@@ -6,7 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Table(name = "competition_programs")
 @Entity
 @AllArgsConstructor
@@ -26,15 +27,8 @@ public class CompetitionProgram {
     @Builder.Default
     private boolean isDel = false;
 
-    @ManyToOne
-    @ToString.Exclude
-    private AgeCategory ageCategory;
-
     @JsonBackReference
     @ManyToOne
     @ToString.Exclude
     private DisciplineType discipline;
-
-    @Column
-    private String type;
 }

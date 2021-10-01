@@ -7,7 +7,7 @@ function next_step() {
     var formData = new FormData(document.getElementById('first-form'))
 
     $.ajax({
-        url: "http://localhost:8080/api/competition",
+        url: "http://localhost:8080/persons",
         type: "POST",
         data: formData,
         processData: false,

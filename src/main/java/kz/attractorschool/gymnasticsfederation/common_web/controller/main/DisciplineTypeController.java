@@ -62,4 +62,24 @@ public class DisciplineTypeController {
         return "discipline_type/discipline_type";
     }
 
+    @GetMapping("/{id}/update")
+    public String update(@PathVariable Integer id, Model model){
+        model.addAttribute("discipline_type", service.getOne(id));
+        model.addAttribute("disciplines", disciplineService.all());
+        return "discipline_type/discipline_type_update";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable Integer id, DisciplineTypeAddDTO dto,
+                         BindingResult result,
+                         RedirectAttributes attributes) {
+        attributes.addFlashAttribute("dto", dto);
+        if (result.hasFieldErrors()) {
+            attributes.addFlashAttribute("errors", result.getFieldErrors());
+            return "redirect:/discipline_type/" + id + "/update";
+        }
+        service.update(id, dto);
+        return "redirect:/discipline_type/" + id;
+    }
+
 }

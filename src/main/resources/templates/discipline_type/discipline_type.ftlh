@@ -17,6 +17,8 @@
                                     <#if discipline_type.participantsAmountMax??>
                                         <p>Максимальное количество участников: ${discipline_type.participantsAmountMax}</p>
                                     </#if>
+                                    <p>Вид спорта: ${discipline_type.discipline.name}</p>
+                                    <a href="/discipline_type/${discipline_type.id}/update" class="btn btn-primary">Внести изменения</a>
                                     <form action="/discipline_type/${discipline_type.id}" method="post">
                                         <button class="btn btn-danger mt-1">Удалить дисциплину</button>
                                     </form>

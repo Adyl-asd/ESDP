@@ -62,4 +62,18 @@ public class DisciplineTypeService {
         repository.save(disciplineType);
         return disciplineType;
     }
+
+    public DisciplineTypeDTO update(int id, DisciplineTypeAddDTO dto){
+        DisciplineType disciplineType = findOne(id);
+        disciplineType.setDiscipline(disciplineService.findOne(dto.getDisciplineId()));
+        disciplineType.setGender(genderRepository.findByName(dto.getGender()));
+        if(dto.getParticipantsAmountMin() != null){
+            disciplineType.setParticipantsAmountMin(dto.getParticipantsAmountMin());
+        }
+        else if (dto.getParticipantsAmountMax() != null){
+            disciplineType.setParticipantsAmountMax(dto.getParticipantsAmountMax());
+        }
+        repository.save(disciplineType);
+        return DisciplineTypeDTO.from(disciplineType);
+    }
 }

@@ -1,7 +1,9 @@
 package kz.attractorschool.gymnasticsfederation.common_service;
 
+import kz.attractorschool.gymnasticsfederation.common_data.entity.QPerson;
 import kz.attractorschool.gymnasticsfederation.dto.PersonDTO;
 import kz.attractorschool.gymnasticsfederation.dto.PersonFilter;
+import kz.attractorschool.gymnasticsfederation.dto.search.PersonSearchDTO;
 import kz.attractorschool.gymnasticsfederation.exception.ResourceNotFoundException;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.files.PersonPhoto;
 import kz.attractorschool.gymnasticsfederation.common_data.entity.Person;
@@ -126,6 +128,44 @@ public class PersonService {
 
         Specification<Person> specification = this.specification.createSpecification(searchModel.getFilter(), searchModel.getSort());
         return repository.findAll(specification, searchModel.getPagination().getPageRequest());
+    }
+
+
+    public Iterable search(PersonSearchDTO dto){
+        QPerson person = QPerson.person;
+        if (!isNull(dto.getName())){
+            if (isNull(dto.getSurname()) && isNull(dto.getIin()) && isNull(dto.getCity())){
+                return repository.findAll(person.name.toUpperCase().contains(dto.getName().toUpperCase()));
+            }
+            else if(isNull(dto.getCity()) && isNull(dto.getIin())){
+                return repository.findAll(person.name.toUpperCase().contains(dto.getName().toUpperCase())
+                        .andAnyOf(person.surname.toUpperCase().contains(dto.getSurname().toUpperCase())));
+            }
+            else if(isNull(dto.getIin())){
+                return repository.findAll(person.name.toUpperCase().contains(dto.getName().toUpperCase())
+                        .andAnyOf(person.surname.toUpperCase().contains(dto.getSurname().toUpperCase())
+                                .andAnyOf(person.city.toUpperCase().contains(dto.getCity().toUpperCase()))));
+            }
+        }
+
+        else if(isNull(dto.getName()) && isNull(dto.getIin()) && isNull(dto.getCity())){
+            return repository.findAll(person.surname.toUpperCase().contains(dto.getSurname().toUpperCase()));
+        }
+        else if(isNull(dto.getName()) && isNull(dto.getSurname()) && isNull(dto.getCity())){
+            return repository.findAll(person.iin.toUpperCase().contains(dto.getIin().toUpperCase()));
+        }
+        else if(isNull(dto.getName()) && isNull(dto.getSurname()) && isNull(dto.getIin())){
+            return repository.findAll(person.city.toUpperCase().contains(dto.getCity().toUpperCase()));
+        }
+        else if(isNull(dto.getName()) && isNull(dto.getSurname()) && isNull(dto.getIin()) && isNull(dto.getCity())){
+            return repository.findAll(person.name.toUpperCase().contains(dto.getName().toUpperCase())
+                    .andAnyOf(person.surname.toUpperCase().contains(dto.getSurname().toUpperCase())
+                            .andAnyOf(person.city.toUpperCase().contains(dto.getCity().toUpperCase())))
+                    .andAnyOf(person.iin.toUpperCase().contains(dto.getIin().toUpperCase())));
+        }
+        return repository.findAll(person.name.contains(dto.getName()).andAnyOf(person.surname.contains(dto.getSurname())
+                .andAnyOf(person.iin.contains(dto.getIin()).andAnyOf(person.city.contains(dto.getCity())))));
+
     }
 
     private boolean isNull(String predicate){

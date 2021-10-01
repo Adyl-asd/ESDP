@@ -2,8 +2,6 @@
 
 <@main.renderWith title="Соревновательные программы">
     <div class="container">
-        <h1>Соревновательные программы</h1>
-
         <div class="card my-3">
             <div class="card-body">
                 <form class="row g-3" id="filter">
@@ -28,6 +26,8 @@
             </div>
         </div>
 
+        <h1>Соревновательные программы</h1>
+        <a href="/competition_program" class="btn btn-primary">Добавить соревновательную программу</a>
         <div class="card">
             <div class="card-body">
                 <table class="table">

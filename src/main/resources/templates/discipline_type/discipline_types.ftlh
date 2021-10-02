@@ -3,6 +3,7 @@
 <@main.renderWith title="Дисциплины">
     <div class="container">
         <h1>Дисциплины</h1>
+        <a class="btn btn-primary" href="/discipline_type/add">Добавить дисциплину</a>
         <div class="card">
             <div class="card-body">
                 <table class="table">

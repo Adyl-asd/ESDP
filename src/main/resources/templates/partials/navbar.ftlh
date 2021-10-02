@@ -64,9 +64,8 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/disciplines">Виды спорта</a></li>
                             <li><a class="dropdown-item" href="/discipline_type/all">Дисциплины</a></li>
-                            <li><a class="dropdown-item" href="/discipline_type/add">Добавить дисциплину</a></li>
                             <li><a class="dropdown-item" href="/competition_program/all">Соревновательные программы</a></li>
-                            <li><a class="dropdown-item" href="/competition_program">Добавить соревновательную программу</a></li>
+                            <li><a class="dropdown-item" href="/age_category/all">Возрастные категории</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

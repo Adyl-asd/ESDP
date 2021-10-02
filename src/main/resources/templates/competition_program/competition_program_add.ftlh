@@ -37,4 +37,10 @@
         </div>
     </div>
 
+    <#if errors??>
+        <#list errors as e>
+            <h2>$${e.field} - ${e.defaultMessage!'__no message__'}</h2>
+        </#list>
+    </#if>
+
 </@main.renderWith>

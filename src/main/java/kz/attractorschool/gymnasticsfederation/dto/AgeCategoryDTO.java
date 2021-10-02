@@ -40,4 +40,52 @@ public class AgeCategoryDTO {
                 .rank(RankDTO.from(ageCategory.getRank()))
                 .build();
     }
+
+    public static AgeCategoryDTO fromWithoutRank(AgeCategory ageCategory) {
+        return builder()
+                .id(ageCategory.getId())
+                .minYear(ageCategory.getMinYear())
+                .maxYear(ageCategory.getMaxYear())
+                .isDel(ageCategory.isDel())
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
+                .build();
+    }
+
+    public static AgeCategoryDTO fromWithoutRankAndMaxYear(AgeCategory ageCategory) {
+        return builder()
+                .id(ageCategory.getId())
+                .minYear(ageCategory.getMinYear())
+                .isDel(ageCategory.isDel())
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
+                .build();
+    }
+
+    public static AgeCategoryDTO fromWithoutRankAndMinYear(AgeCategory ageCategory) {
+        return builder()
+                .id(ageCategory.getId())
+                .maxYear(ageCategory.getMaxYear())
+                .isDel(ageCategory.isDel())
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
+                .build();
+    }
+
+    public static AgeCategoryDTO fromWithoutMinYear(AgeCategory ageCategory) {
+        return builder()
+                .id(ageCategory.getId())
+                .maxYear(ageCategory.getMaxYear())
+                .isDel(ageCategory.isDel())
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
+                .rank(RankDTO.from(ageCategory.getRank()))
+                .build();
+    }
+
+    public static AgeCategoryDTO fromWithoutMaxYear(AgeCategory ageCategory) {
+        return builder()
+                .id(ageCategory.getId())
+                .minYear(ageCategory.getMinYear())
+                .isDel(ageCategory.isDel())
+                .disciplineType(DisciplineTypeDTO.from(ageCategory.getDiscipline()))
+                .rank(RankDTO.from(ageCategory.getRank()))
+                .build();
+    }
 }

@@ -25,7 +25,7 @@
                             Персона
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/persons">Список персон</a></li>
+                            <li><a class="dropdown-item" href="/person/all">Список персон</a></li>
                             <li><a class="dropdown-item" href="/person">Добавить персону</a></li>
                         </ul>
                     </li>
@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/athletes">Список спортсменов</a></li>
                             <li><a class="dropdown-item" href="/athlete">Добавить спортсмена</a></li>
-                            <li><a class="dropdown-item" href="/athletes/ranks">Разряды спортсменов</a></li>
+                            <li><a class="dropdown-item" href="/ranks">Разряды спортсменов</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -46,7 +46,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/coach/all">Список тренеров</a></li>
                             <li><a class="dropdown-item" href="/coach">Добавить тренера</a></li>
-                            <li><a class="dropdown-item" href="/coaches/categories">Категории тренеров</a></li>
+                            <li><a class="dropdown-item" href="/coach_categories">Категории тренеров</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -56,17 +56,24 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/judge/all">Список судей</a></li>
                             <li><a class="dropdown-item" href="/judge">Добавить судей</a></li>
-                            <li><a class="dropdown-item" href="/judges/categories">Категории судей</a></li>
+                            <li><a class="dropdown-item" href="/judge_categories">Категории судей</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/disciplines">Дисциплины</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="/disciplines">Виды спорта</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/disciplines">Виды спорта</a></li>
+                            <li><a class="dropdown-item" href="/discipline_type/all">Дисциплины</a></li>
+                            <li><a class="dropdown-item" href="/competition_program/all">Соревновательные программы</a></li>
+                            <li><a class="dropdown-item" href="/age_category/all">Возрастные категории</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Школы
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/school/all">Школы</a></li>
                             <li><a class="dropdown-item" href="/school">Добавить школу</a></li>
                         </ul>
                     </li>
@@ -76,6 +83,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/federation">Добавить федерацию</a></li>
+                            <li><a class="dropdown-item" href="/federation/all">Федерации</a></li>
                         </ul>
                     </li>
                 </ul>

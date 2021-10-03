@@ -1,7 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.enumm.Status;
+import kz.attractorschool.gymnasticsfederation.common_data.enumiration.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +31,5 @@ public class AthleteRegisterDTO {
     private Integer rankId;
 
     @Builder.Default
-    private String status = Status.НА_РАССМОТРЕНИИ.toString();
+    private String status = Status.UNDER_CONSIDERATION.getName();
 }

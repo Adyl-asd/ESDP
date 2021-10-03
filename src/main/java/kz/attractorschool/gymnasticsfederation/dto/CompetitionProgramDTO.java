@@ -1,7 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.CompetitionProgram;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.CompetitionProgram;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,17 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompetitionProgramDTO {
-
     private Integer id;
-
-    @NotNull
     private String name;
-
-    @NotNull
     private boolean isDel = false;
-
-    private String type;
-
     private DisciplineTypeDTO disciplineType;
 
     public static CompetitionProgramDTO from(CompetitionProgram competitionProgram) {
@@ -32,7 +23,6 @@ public class CompetitionProgramDTO {
                 .id(competitionProgram.getId())
                 .name(competitionProgram.getName())
                 .isDel(competitionProgram.isDel())
-                .type(competitionProgram.getType())
                 .disciplineType(DisciplineTypeDTO.from(competitionProgram.getDiscipline()))
                 .build();
     }

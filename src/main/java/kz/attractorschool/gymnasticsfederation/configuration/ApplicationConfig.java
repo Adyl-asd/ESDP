@@ -2,7 +2,7 @@ package kz.attractorschool.gymnasticsfederation.configuration;
 
 
 
-import kz.attractorschool.gymnasticsfederation.service.StorageService;
+import kz.attractorschool.gymnasticsfederation.common_service.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

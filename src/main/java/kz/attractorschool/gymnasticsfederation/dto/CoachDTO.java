@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Coach;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Coach;
 import lombok.*;
 
 import java.util.List;
@@ -32,6 +32,8 @@ public class CoachDTO {
     @ToString.Exclude
     private List<AthleteDTO> athletes;
 
+    private String categoryFile;
+
     public static CoachDTO from(Coach coach) {
         return CoachDTO.builder()
                 .id(coach.getId())
@@ -41,6 +43,7 @@ public class CoachDTO {
                 .category(CoachCategoryDTO.from(coach.getCategory()))
                 .discipline(DisciplineDTO.from(coach.getDiscipline()))
                 .isDel(coach.isDel())
+                .categoryFile(coach.getCategoryFile().getFilePath())
                 .build();
     }
 

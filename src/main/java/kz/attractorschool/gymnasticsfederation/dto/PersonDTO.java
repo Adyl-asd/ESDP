@@ -1,8 +1,8 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.files.PersonPhoto;
-import kz.attractorschool.gymnasticsfederation.model.Person;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.files.PersonPhoto;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,7 +50,7 @@ public class PersonDTO {
 
     @NotNull
     @org.hibernate.validator.constraints.NotBlank
-    @Size(min = 10, message = "Вы ввели слишком короткий адрес")
+    @Size(min = 5, message = "Вы ввели слишком короткий адрес")
     private String address;
 
     @NotNull

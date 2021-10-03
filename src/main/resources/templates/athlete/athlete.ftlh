@@ -1,6 +1,7 @@
 <#import "../partials/main.ftlh" as main/>
 
 <@main.renderWith title="${athlete.person.name}" styles=["css/athlete.css"]>
+
     <div class="container">
         <div class="main-body">
 
@@ -19,6 +20,7 @@
 
                                     <a href="/athlete/${athlete.id}/update" class="btn btn-primary">Изменить
                                         профиль спортсмена</a>
+                                    <a href="/athlete/${athlete.id}/export" class="btn btn-primary mt-2">Данные в ПДФ</a>
 
                                     <form action="/athlete/${athlete.id}" method="post">
                                         <button class="btn btn-danger mt-1">Удалить спортсмена</button>
@@ -62,22 +64,22 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение регистрации спортсмена</a>
+                                    <a href="/athlete/file/${athlete.registryFile}" class="link-dark">Подтверждение регистрации спортсмена</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Прохождение медосмотра</a>
+                                    <a href="/athlete/file/${athlete.medicalFile}" class="link-dark">Прохождение медосмотра</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Прохождение допинга</a>
+                                    <a href="/athlete/file/${athlete.dopingFile}" class="link-dark">Прохождение допинга</a>
                                 </h6>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение разряда спортсмена</a>
+                                    <a href="/athlete/file/${athlete.rankFile}" class="link-dark">Подтверждение разряда спортсмена</a>
                                 </h6>
                             </li>
                         </ul>
@@ -190,7 +192,7 @@
                                         </div>
                                         <#if athlete.isNationalTeam()>
                                             <div class="col-sm-9 text-secondary">
-                                                ${athlete.rank.name}
+                                                <h6 class="mb-0">Член национальной сборной</h6>
                                             </div>
                                         <#elseif athlete.isCityTeam()>
                                             <div class="col-sm-9 text-secondary">
@@ -220,13 +222,18 @@
 <#--                                                </form>-->
 <#--                                            </#list>-->
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-12 text-secondary">
                                             <#if coaches??>
                                                 <#list coaches as c>
-                                                    <a href="/coach/${c.id}">${c.person.name} ${c.person.surname}</a>
-                                                    <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
-                                                        <button class="btn btn-danger mt-1">Удалить тренера</button>
-                                                    </form>
+                                                    <#if !c.isDel()>
+                                                        <div class="str">
+                                                            <a href="/coach/${c.coach.id}">${c.coach.person.name} ${c.coach.person.surname}</a>
+                                                            <p>${c.registerDate} - <#if c.finishDate??>${c.finishDate}</#if></p>
+                                                            <form action="/athlete/${athlete.id}/coach/${c.id}/delete" method="post">
+                                                                <button class="btn btn-danger mt-1">Удалить тренера</button>
+                                                            </form>
+                                                        </div>
+                                                    </#if>
                                                 </#list>
                                             </#if>
                                             <a href="/athlete/${athlete.id}/coach"><div class="btn btn-primary">Добавить тренера</div></a>
@@ -269,14 +276,12 @@
             </div>
 
             <#--Метод для подвтерждения регистрации спортсмена-->
-            <#if athlete.status == "НА_РАССМОТРЕНИИ">
+            <#if athlete.status == "На_рассмотрении">
                 <form action="/athlete/${athlete.id}/confirm" method="post">
                     <button type="submit" class="btn btn-primary mt-1">Подтвердить регистрацию</button>
                 </form>
-            <#elseif athlete.status == "ИСТЕК" || athlete.status == "НЕАКТИВНЫЙ">
-                <form action="/athlete/${athlete.id}/register" method="post">
-                    <button type="submit" class="btn btn-primary mt-1">Продлить регистрацию</button>
-                </form>
+            <#elseif athlete.status == "Истек" || athlete.status == "Неактивный">
+                <a href="/athlete/${athlete.id}/register"><button type="button" class="btn btn-primary mt-1">Продлить регистрацию</button></a>
             </#if>
 
         </div>

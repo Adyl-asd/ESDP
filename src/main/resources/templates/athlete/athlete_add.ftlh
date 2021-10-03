@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-4">
                 <label for="registryDate" class="form-label fs-4">Дата регистрации спортсмена</label>
-                <input type="date" name="registryDate" value="test" class="form-control" id="registryDate">
+                <input type="date" name="registryDate" class="form-control" id="registryDate">
             </div>
             <div class="col">
                 <label for="registryFile" class="form-label fs-4">Файл подтверждения регистрации спортсмена</label>

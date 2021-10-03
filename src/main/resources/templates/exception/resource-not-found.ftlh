@@ -1,13 +1,11 @@
-<#--<#import "base.ftlh" as base>-->
-<#--<#assign custom_css>-->
-<#--    <link rel="stylesheet" href="/css/categories.css">-->
-<#--</#assign>-->
+<#import "../partials/main.ftlh" as main/>
 
-<#--<@base.layout custom_css=custom_css>-->
-    <#if resource??>
-        <h1>${resource} с id ${id} не найден(-а)</h1>
-    <#elseif forbidden??>
-        <h1>${forbidden}</h1>
-    </#if>
-    <a href="/login" class="menu-link">Логин</a>
-<#--</@base.layout>-->
+<@main.renderWith title="Страница не найдена">
+    <div class="container">
+        <#if resource??>
+            <h1 class="exception">${resource} с id ${id} не найден(-а, -о)</h1>
+        <#elseif forbidden??>
+            <h1 class="exception">${forbidden}</h1>
+        </#if>
+    </div>
+</@main.renderWith>

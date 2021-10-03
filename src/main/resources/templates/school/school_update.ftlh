@@ -32,6 +32,7 @@
     </label>
     <button type="submit">Изменить</button>
 </form>
+<a href="/school/${school.id}/update" class="btn btn-secondary mt-1">Отменить</a>
 <#if errors??>
     <#list errors as e>
         <h2>${e}</h2>

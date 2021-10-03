@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Competition;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Competition;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +18,8 @@ public class CompetitionDTO {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate finishDate;
+    private LocalDate participationDate;
+    private String level;
     private String country;
     private String city;
     private String address;
@@ -35,6 +37,8 @@ public class CompetitionDTO {
                 .name(competition.getName())
                 .startDate(competition.getStartDate())
                 .finishDate(competition.getFinishDate())
+                .participationDate(competition.getParticipationDate())
+                .level(competition.getLevel())
                 .country(competition.getCountry())
                 .city(competition.getCity())
                 .address(competition.getAddress())

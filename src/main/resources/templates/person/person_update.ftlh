@@ -85,6 +85,7 @@
 
                     <button type="submit" class="btn btn-primary">Изменить</button>
                 </form>
+                <a href="/person/${person.id}/update" class="btn btn-secondary mt-1">Отменить</a>
             </div>
         </div>
 

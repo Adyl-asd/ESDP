@@ -38,27 +38,27 @@ VALUES ('Мужской'),
        ('Смешанный');
 
 #спортивная гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Спортивная гимнастика женщины', 1),
-       ('Спортивная гимнастика мужчины', 1);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Спортивная гимнастика женщины', 1, 2),
+       ('Спортивная гимнастика мужчины', 1, 1);
 
 #худ гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Индивидуальная программа', 2);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Индивидуальная программа', 2, 2);
 
 #худ гимнастика
-insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max)
-values ('Групповые упражнения', 2, 5, 6);
+insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)
+values ('Групповые упражнения', 2, 5, 6, 2);
 
 #батут гимнастика
-insert into `discipline_types` (name, discipline_id)
-values ('Индивидуальные прыжки на батуте', 5),
-       ('Прыжки на акробатической дорожке', 5),
-       ('Прыжки на двойном минитрампе', 5);
+insert into `discipline_types` (name, discipline_id, gender_id)
+values ('Индивидуальные прыжки на батуте', 5, 3),
+       ('Прыжки на акробатической дорожке', 5, 3),
+       ('Прыжки на двойном минитрампе', 5, 2);
 
 #батут гимнастика
-insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max)
-values ('Синхронные прыжки на батуте', 5, 2, 2);
+insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)
+values ('Синхронные прыжки на батуте', 5, 2, 2, 3);
 
 #спорт акробатика
 insert into `discipline_types` (name, discipline_id, participants_amount_min, participants_amount_max, gender_id)
@@ -98,7 +98,7 @@ values (2008, 3, 1),
        (2010, 4, 1);
 
 #спорт гимнастика жен
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
 values (2009, 2011, 5, 1),
        (2010, 2013, 6, 1),
        (2012, 2014, 7, 1);
@@ -108,14 +108,14 @@ insert into `age_categories` (min_year, rank_id, discipline_id)
 values (2005, 3, 2);
 
 #спорт гимнастика муж
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
-values (2007, 2004, 4, 2),
-       (2009, 2006, 5, 2),
-       (2011, 2008, 6, 2),
-       (2012, 2010, 7, 2);
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
+values (2004, 2007, 4, 2),
+       (2006, 2009, 5, 2),
+       (2008, 2011, 6, 2),
+       (2010, 2012, 7, 2);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2006, 2013, 3),
        (2006, 2013, 4);
 
@@ -125,9 +125,9 @@ values (2005, 3, 3),
        (2005, 3, 4);
 
 #худ инд и групп
-insert into `age_categories` (min_year, max_year, rank_id, discipline_id)
-values (2008, 2006, 4, 3),
-       (2008, 2006, 4, 4);
+insert into `age_categories` (max_year, min_year, rank_id, discipline_id)
+values (2006, 2008, 4, 3),
+       (2006, 2008, 4, 4);
 
 #худ инд и групп
 insert into `age_categories` (max_year, rank_id, discipline_id)
@@ -142,19 +142,19 @@ values (2009, 5),
        (2009, 8);
 
 #батут гимн
-insert into `age_categories` (min_year, max_year, discipline_id)
-values (2008, 2007, 5),
-       (2008, 2007, 6),
-       (2008, 2007, 7),
-       (2008, 2007, 8),
-       (2006, 2005, 5),
-       (2006, 2005, 6),
-       (2006, 2005, 7),
-       (2006, 2005, 8),
-       (2004, 2000, 5),
-       (2004, 2000, 6),
-       (2004, 2000, 7),
-       (2004, 2000, 8);
+insert into `age_categories` (max_year, min_year, discipline_id)
+values (2007, 2008, 5),
+       (2007, 2008, 6),
+       (2007, 2008, 7),
+       (2007, 2008, 8),
+       (2005, 2006, 5),
+       (2005, 2006, 6),
+       (2005, 2006, 7),
+       (2005, 2006, 8),
+       (2000, 2004, 5),
+       (2000, 2004, 6),
+       (2000, 2004, 7),
+       (2000, 2004, 8);
 
 #батут гимн
 insert into `age_categories` (min_year, discipline_id)
@@ -185,17 +185,17 @@ values (2009, 9),
        (2009, 13);
 
 #спорт акроб
-insert into `age_categories` (min_year, max_year, discipline_id)
-values (2009, 2003, 9),
-       (2009, 2003, 10),
-       (2009, 2003, 11),
-       (2009, 2003, 12),
-       (2009, 2003, 13),
-       (2008, 2002, 9),
-       (2008, 2002, 10),
-       (2008, 2002, 11),
-       (2008, 2002, 12),
-       (2008, 2002, 13);
+insert into `age_categories` (max_year, min_year, discipline_id)
+values (2003, 2009, 9),
+       (2003, 2009, 10),
+       (2003, 2009, 11),
+       (2003, 2009, 12),
+       (2003, 2009, 13),
+       (2002, 2008, 9),
+       (2002, 2008, 10),
+       (2002, 2008, 11),
+       (2002, 2008, 12),
+       (2002, 2008, 13);
 
 #аэроб гимн
 insert into `age_categories` (min_year, discipline_id)
@@ -208,7 +208,7 @@ values (2002, 14),
        (2002, 20);
 
 #аэроб гимн
-insert into `age_categories` (min_year, max_year, discipline_id)
+insert into `age_categories` (max_year, min_year, discipline_id)
 values (2003, 2005, 14),
        (2003, 2005, 15),
        (2003, 2005, 16),
@@ -229,9 +229,7 @@ CREATE TABLE `competition_programs`
     `id`                 INT auto_increment NOT NULL,
     `name`               varchar(128)       NOT NULL,
     `is_del`             boolean default false,
-    `age_category_id`    int references `age_categories` (`id`),
     `discipline_id` integer references `discipline_types` (`id`),
-    `type`               varchar(127),
     PRIMARY KEY (`id`)
 );
 

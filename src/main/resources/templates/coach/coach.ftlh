@@ -61,7 +61,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <a href="#" class="link-dark">Подтверждение категории спортсмена</a>
+                                    <a href="/coach/file/${coach.categoryFile}" class="link-dark">Подтверждение категории тренера</a>
                                 </h6>
                             </li>
                         </ul>
@@ -108,7 +108,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Место учебы/работы</h6>
+                                    <h6 class="mb-0">Образование</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     ${coach.person.education}
@@ -164,46 +164,17 @@
                                     <h5 class="d-flex align-items-center mb-3">Информация о тренируемых</h5>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Дата начала - дата окончания</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            ФИО спортсмена, ФИО спортсмена, ФИО спортсмена
-                                        </div>
+                                        <#list coach.athletes as a>
+                                            <div class="col-sm-9 text-secondary">
+                                                <a href="/athlete/${a.id}">${a.person.surname} ${a.person.name}</a>
+                                            </div>
+                                        </#list>
                                     </div>
                                     <hr>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row gutters-sm">
-                        <div class="col mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="d-flex align-items-center mb-3">Результаты, достигнутые на
-                                        соревнованиях</h5>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <h6 class="mb-0">Дата</h6>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <h6 class="mb-0">Место проведения</h6>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            Название соревнования
-                                        </div>
-                                        <div class="col-sm-4">
-                                            Результат
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
-import kz.attractorschool.gymnasticsfederation.model.Athlete;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Athlete;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +27,10 @@ public class AthleteDTO {
     private boolean isDel;
     private boolean isNationalTeam;
     private boolean isCityTeam;
-
+    private String medicalFile;
+    private String dopingFile;
+    private String registryFile;
+    private String rankFile;
 
     public static AthleteDTO from(Athlete athlete){
         return AthleteDTO.builder()
@@ -42,6 +45,10 @@ public class AthleteDTO {
                 .isDel(athlete.isDel())
                 .isCityTeam(athlete.isCityTeam())
                 .isNationalTeam(athlete.isNationalTeam())
+                .medicalFile(athlete.getMedicalFile().getFilePath())
+                .dopingFile(athlete.getDopingFile().getFilePath())
+                .registryFile(athlete.getRegistryFile().getFilePath())
+                .rankFile(athlete.getRankFile().getFilePath())
                 .build();
     }
 }

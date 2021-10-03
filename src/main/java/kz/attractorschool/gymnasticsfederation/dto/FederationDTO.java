@@ -1,7 +1,7 @@
 package kz.attractorschool.gymnasticsfederation.dto;
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.Federation;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.Federation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class FederationDTO {
     private String name;
 
     @NotNull
-    @Size(min = 7, message = "Ведите ФИО директора")
+    @Size(min = 5, message = "Ведите ФИО директора")
     private String director;
 
     //      скорее всего, после создания будут заменены юзером
@@ -38,7 +38,7 @@ public class FederationDTO {
     @NotNull
     private String password;
 
-    @Size(min = 10, message = "Введите полный адрес")
+    @Size(min = 5, message = "Введите полный адрес")
     @NotNull
     private String address;
 

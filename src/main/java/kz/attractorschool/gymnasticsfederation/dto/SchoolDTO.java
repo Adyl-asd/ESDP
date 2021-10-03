@@ -2,7 +2,7 @@ package kz.attractorschool.gymnasticsfederation.dto;
 
 
 import com.sun.istack.NotNull;
-import kz.attractorschool.gymnasticsfederation.model.School;
+import kz.attractorschool.gymnasticsfederation.common_data.entity.School;
 import lombok.*;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -19,7 +19,7 @@ public class SchoolDTO {
     private Integer id;
 
     @NotNull
-    @Size(min = 10, message = "Введите полное название школы")
+    @Size(min = 7, message = "Введите полное название школы")
     private String name;
 
     @Column
@@ -40,7 +40,7 @@ public class SchoolDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 10, message = "Введите полный адрес")
+    @Size(min = 7, message = "Введите полный адрес")
     private String address;
 
     @NotNull

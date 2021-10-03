@@ -54,11 +54,12 @@
 
         <button type="submit" class="btn btn-primary mt-1">Изменить</button>
     </form>
+        <a href="/coach/${coach.id}/update" class="btn btn-secondary mt-1">Отменить</a>
     </div>
 
     <#if errors??>
         <#list errors as e>
-            <h2>${fieldError.field} - ${fieldError.defaultMessage!'-- no message --'}</h2>
+            <h2>${e.field} - ${e.defaultMessage!'-- no message --'}</h2>
         </#list>
     <#elseif filesError??>
         <h2>${filesError}</h2>

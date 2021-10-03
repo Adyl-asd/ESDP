@@ -129,7 +129,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>src/main/java/kz/attractorschool/gymnasticsfederation/GymnasticsFederationApplication.java</mainClass>
+                            <mainClass>GymnasticsFederationApplication.java</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

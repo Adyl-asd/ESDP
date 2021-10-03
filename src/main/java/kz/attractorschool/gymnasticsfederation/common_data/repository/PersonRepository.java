@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 
-public interface PersonRepository extends JpaRepository <Person, Integer>, QuerydslPredicateExecutor<Person>, JpaSpecificationExecutor<Person> {
+public interface PersonRepository extends JpaRepository <Person, Integer> {
     boolean existsByIin(String iin);
 }

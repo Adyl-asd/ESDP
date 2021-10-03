@@ -112,8 +112,8 @@ public class PersonController {
     }
 
     @PostMapping("/persons")
-    public String all(@RequestBody SearchModel<PersonFilter> searchModel, Model model) {
-        Page<Person> persons = service.search(searchModel);
+    public String all() {
+        List<Person> persons = service.all();
         List<PersonDTO> models = persons.stream().map(PersonDTO::from).collect(Collectors.toList());
         personDTOS = models;
         return "redirect:/person/all";

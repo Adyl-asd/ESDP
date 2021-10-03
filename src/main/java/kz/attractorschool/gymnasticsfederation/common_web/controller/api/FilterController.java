@@ -21,12 +21,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FilterController {
 
-    private final PersonService personService;
-
-    @PostMapping("/persons")
-    public Page<PersonDTO> all(@RequestBody SearchModel<PersonFilter> searchModel) {
-        Page<Person> persons = personService.search(searchModel);
-        List<PersonDTO> models = persons.stream().map(PersonDTO::from).collect(Collectors.toList());
-        return new PageImpl<>(models, persons.getPageable(), persons.getTotalElements());
-    }
+//    private final PersonService personService;
+//
+//    @PostMapping("/persons")
+//    public void all() {
+//        List<Person> persons = personService.all();
+//        List<PersonDTO> models = persons.stream().map(PersonDTO::from).collect(Collectors.toList());
+//        return new p;
+//    }
 }
